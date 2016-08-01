@@ -1,0 +1,45 @@
+<LinearLayout android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="horizontal">
+        <com.github.siyamed.shapeimageview.CircularImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ava"
+            app:siBorderWidth="2dp"
+            app:siBorderColor="#ddd"
+            android:layout_margin="5dp"
+            android:id="@+id/img1"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="25dp">
+            <TextView
+                android:id="@+id/musician_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="The Black Adams"
+                android:textColor="@color/colorTextDark"
+                android:paddingTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp" />
+            <TextView
+                android:id="@+id/musician_fee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorTextDark"
+                android:layout_marginTop="10dp"
+                android:text="Rp. 200.000 / Hours" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>

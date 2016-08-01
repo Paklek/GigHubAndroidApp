@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="city_prompt">Choose A City</string>
+    <string-array name="city_array">
+        <item>Aceh Barat</item>
+        <item>Aceh Barat Daya</item>
+        <item>Aceh Besar</item>
+        <item>Aceh Jaya</item>
+        <item>Aceh Selatan</item>
+        <item>Aceh Singkil</item>
+        <item>Aceh Tamiang</item>
+        <item>Aceh Tengah</item>
+        <item>Aceh Tenggara</item>
+        <item>Aceh Timur</item>
+        <item>Aceh Utara</item>
+    </string-array>
+</resources>

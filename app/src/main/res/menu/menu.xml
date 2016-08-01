@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--<group android:id="@+id/group">-->
+        <!--<item android:id="@+id/group_item1"-->
+            <!--android:onClick="onGroupItemClick"-->
+            <!--android:title="Register" />-->
+        <!--<item android:id="@+id/group_item2"-->
+            <!--android:onClick="onGroupItemClick"-->
+            <!--android:title="About" />-->
+    <!--</group>-->
+
+    <item android:id="@+id/action_register"
+        android:title="Register"
+        app:showAsAction="never" />
+    <item android:id="@+id/action_sign_in"
+        android:title="@string/sign_in"
+        app:showAsAction="never"/>
+    <!--<item android:id="@+id/action_about"-->
+        <!--android:title="About"-->
+        <!--app:showAsAction="never"/>-->
+    <item android:id="@+id/action_booking_list"
+        android:title="Booking List"
+        android:icon="@drawable/ic_book_white_24dp"
+        app:showAsAction="ifRoom"/>
+    <item android:id="@+id/action_account"
+        android:title="Account"
+        android:icon="@drawable/ic_person_white_24dp"
+        app:showAsAction="never"/>
+    <item android:id="@+id/action_create_musician"
+        android:title="@string/create_musician"
+        android:icon="@drawable/ic_person_add_white_24dp"
+        app:showAsAction="ifRoom"/>
+</menu>

@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">Gig Hub</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="state_spinner">Choose A State</string>
+    <string name="city_spinner">Choose City</string>
+    <string name="welcome">Welcome to GigHub</string>
+    <string name="welcome2">Discover and booking musicians in your town</string>
+    <string name="discover">DISCOVER</string>
+    <string name="are_you_manager">Are you manager or musician?</string>
+    <string name="join">JOIN</string>
+    <string name="already_have">Already have an Account?</string>
+    <string name="sign_in"> Sign In</string>
+    <string name="create_a_gighub">Create a GigHub Account</string>
+    <string name="i_agree">I agree to terms and conditions</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_register">Register</string>
+    <string name="all_right">&#169; 2016 GigHub Inc.</string>
+    <string name="all_right2">All Rights reserved.</string>
+    <string name="where_is_event">Where is event will be play?</string>
+    <string name="when_is_event">When is event will be play?</string>
+    <string name="starting_time">Starting time and duration?</string>
+    <string name="send_req">Send Request</string>
+    <string name="profile">PROFILE</string>
+    <string name="gig_money">GIG MONEY</string>
+    <string name="manager">MANAGER</string>
+    <string name="about">ABOUT US</string>
+    <string name="term_of">TERM OF SERVICE</string>
+    <string name="logout">LOGOUT</string>
+    <string name="create_musician_profile">Create Musician Profile</string>
+    <string name="upload_cover_image">Upload Cover Image</string>
+    <string name="musician_name">Musician Name</string>
+    <string name="hourly_rate">Hourly Rate</string>
+    <string name="solo">Solo</string>
+    <string name="group">Group</string>
+    <string name="musician_type">Musician Type (Role) : </string>
+    <string name="next">Next</string>
+    <string name="complete_musician">Complete Musician Profile</string>
+    <string name="your_gig_money">Your Gig Money</string>
+    <string name="rp">Rp. 0</string>
+    <string name="withdrawal">Withdrawal</string>
+    <string name="information">Informations</string>
+    <string name="create_musician">Create Musician</string>
+    <string name="submit">Submit</string>
+    <string name="gig_request">Gig Request</string>
+</resources>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.gighub.app">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.NoActionBar">
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCnr-Sxlgu9soj-V9u4xaoP1kDEy3ULW3A"/>
+
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar.Child">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.activity.IntroActivity" />
+        <activity
+            android:name=".ui.activity.SearchResultActivity"
+            android:parentActivityName=".ui.activity.MainActivity" />
+        <activity android:name=".ui.activity.MusicianActivity" />
+        <activity android:name=".ui.activity.SpinnerActivity" />
+        <activity android:name=".ui.activity.RegisterActivity" />
+        <activity android:name=".ui.activity.AboutActivity" />
+        <activity android:name=".ui.activity.SignInActivity" />
+        <activity
+            android:name=".ui.activity.BookMusicianActivity"
+            android:parentActivityName=".ui.activity.MusicianActivity" />
+        <activity android:name=".ui.activity.GigActivity" />
+        <activity android:name=".ui.activity.AccountActivity" />
+        <activity android:name=".ui.activity.CreateMusicianProfileActivity" />
+        <activity android:name=".ui.activity.BookingListActivity" />
+        <activity
+            android:name=".ui.activity.GigMoneyActivity"
+            android:parentActivityName=".ui.activity.AccountActivity" />
+        <activity
+            android:name=".ui.activity.ManagerActivity"
+            android:parentActivityName=".ui.activity.AccountActivity" />
+        <activity
+            android:name=".ui.activity.ProfileActivity"
+            android:parentActivityName=".ui.activity.AccountActivity" />
+        <activity android:name=".ui.activity.CompleteMusicianProfileActivity" />
+        <activity android:name=".ui.activity.BookingDetailsActivity" />
+        <activity android:name=".ui.activity.ViewMapGig"></activity>
+    </application>
+
+</manifest>
