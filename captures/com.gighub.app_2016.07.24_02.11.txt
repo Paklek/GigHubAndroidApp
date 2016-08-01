@@ -1,0 +1,33 @@
+Activity Resolver Table:
+  Non-Data Actions:
+      android.intent.action.MAIN:
+        3318a834 com.gighub.app/.ui.activity.MainActivity filter 12d12fc2
+          Action: "android.intent.action.MAIN"
+          Category: "android.intent.category.LAUNCHER"
+
+Key Set Manager:
+  [com.gighub.app]
+      Signing KeySets: 18
+
+Packages:
+  Package [com.gighub.app] (10f7a65d):
+    userId=10190 gids=[]
+    pkg=Package{37105bd2 com.gighub.app}
+    codePath=/data/app/com.gighub.app-1
+    resourcePath=/data/app/com.gighub.app-1
+    legacyNativeLibraryDir=/data/app/com.gighub.app-1/lib
+    primaryCpuAbi=null
+    secondaryCpuAbi=null
+    versionCode=1 targetSdk=23
+    versionName=1.0
+    applicationInfo=ApplicationInfo{45d44a3 com.gighub.app}
+    flags=[ DEBUGGABLE HAS_CODE ALLOW_CLEAR_USER_DATA ALLOW_BACKUP ]
+    dataDir=/data/data/com.gighub.app
+    supportsScreens=[small, medium, large, xlarge, resizeable, anyDensity]
+    timeStamp=2016-07-24 00:22:17
+    firstInstallTime=2016-07-23 23:25:14
+    lastUpdateTime=2016-07-24 00:22:18
+    signatures=PackageSignatures{3fb213a0 [2e8d4b59]}
+    permissionsFixed=true haveGids=true installStatus=1
+    pkgFlags=[ DEBUGGABLE HAS_CODE ALLOW_CLEAR_USER_DATA ALLOW_BACKUP ]
+    User 0:  installed=true hidden=false stopped=false notLaunched=false enabled=0
