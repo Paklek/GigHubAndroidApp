@@ -47,7 +47,8 @@
             android:text="@string/withdrawal"
             android:layout_marginTop="30dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button_border2"/>
     </LinearLayout>
 
 </LinearLayout>

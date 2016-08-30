@@ -133,11 +133,11 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <android.support.v7.widget.AppCompatButton
+                    <Button
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="date"
-                        android:background="@color/colorAccent1"
+                        android:background="@drawable/button_border2"
                         android:elevation="4dp"/>
                 </android.support.design.widget.TextInputLayout>
 
@@ -179,6 +179,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/button_border2"
                 android:text="@string/send_req"/>
         </LinearLayout>
     </ScrollView>

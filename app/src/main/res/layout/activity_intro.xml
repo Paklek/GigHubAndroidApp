@@ -9,13 +9,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="#cc0000"
+    android:background="@drawable/bg_home"
     tools:context="com.gighub.app.ui.activity.IntroActivity">
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/logo_v1"
+        android:src="@drawable/logo_v2"
         android:layout_gravity="center|center_vertical"
         android:layout_marginBottom="75dp"/>
     <TextView
@@ -38,7 +38,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/btnDiscover"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/discover"/>
+        android:text="@string/discover"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"
+        android:background="@drawable/button_border" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -62,6 +65,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/btnJoin"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"
+        android:background="@drawable/button_border"
         android:text="@string/join"/>
 
     <LinearLayout
@@ -76,12 +82,14 @@
         android:textAlignment="center"
         android:textColor="#ffffff"/>
     <TextView
-        android:id="@+id/tv_signIn"
+        android:layout_marginLeft="5dp"
+        android:id="@+id/tv_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/sign_in"
+        android:text="@string/login"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:textAllCaps="true"
         android:textAlignment="center"
         android:textColor="#ffffff" />
 </LinearLayout>

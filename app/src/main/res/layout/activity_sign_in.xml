@@ -9,20 +9,27 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/bg_home"
     tools:context="com.gighub.app.ui.activity.SignInActivity">
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/logo_v1"
+        android:src="@drawable/logo_v2"
         android:layout_gravity="center|center_vertical"
         android:layout_marginBottom="75dp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login As Organizer"
+        android:textAllCaps="true"
+        android:textColor="@color/colorAccent"/>
     <android.support.design.widget.TextInputLayout
+        android:elevation="4dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColorHint="@color/colorAccent">
-    <android.support.design.widget.TextInputEditText
+    <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/colorAccent"
@@ -31,10 +38,11 @@
         android:hint="Email"/>
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
+        android:elevation="4dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColorHint="@color/colorAccent">
-        <android.support.design.widget.TextInputEditText
+        <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorAccent"
@@ -50,13 +58,20 @@
         android:layout_marginTop="20dp"
         android:gravity="right">
         <Button
+            android:elevation="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginRight="10px"
+            android:background="@color/primaryButton2"
             android:text="Cancel"/>
         <Button
+            android:elevation="4dp"
             android:id="@+id/btn_signIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:background="@color/primaryButton"
             android:text="@string/sign_in"/>
     </LinearLayout>
 

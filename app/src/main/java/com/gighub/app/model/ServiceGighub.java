@@ -12,4 +12,7 @@ import retrofit2.http.Path;
 public interface ServiceGighub {
     @GET("users")
     Call<UserResponse> loadUser();
+
+    @GET("musicians")
+    Call<MusicianResponse> loadMusicians();
 }

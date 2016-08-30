@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.gighub.app.R;
 import com.gighub.app.model.DataObject;
+import com.gighub.app.model.MusicianModel;
 import com.gighub.app.model.UserModel;
 import com.gighub.app.ui.activity.GigActivity;
 
@@ -27,7 +28,7 @@ public class ListDiscoverGigAdapter extends RecyclerView.Adapter<ListDiscoverGig
     private static String LOG_TAG = "ListDiscoverGigAdapter";
     private ArrayList<DataObject> mDataset;
     private static MyClickListener myClickListener;
-    private List<UserModel> mDaftarUser;
+    private List<MusicianModel> mDaftarMusician;
     public static Context mContext;
 
     public static class DataObjectHolder extends RecyclerView.ViewHolder
@@ -57,8 +58,8 @@ public class ListDiscoverGigAdapter extends RecyclerView.Adapter<ListDiscoverGig
         this.myClickListener = myClickListener;
     }
 
-    public ListDiscoverGigAdapter(List<UserModel> data) {
-        mDaftarUser = data;
+    public ListDiscoverGigAdapter(List<MusicianModel> data) {
+        mDaftarMusician = data;
     }
 
     @Override
@@ -73,8 +74,8 @@ public class ListDiscoverGigAdapter extends RecyclerView.Adapter<ListDiscoverGig
 
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
-        holder.label_name.setText(mDaftarUser.get(position).getFirst_name());
-        holder.musicianDate.setText(mDaftarUser.get(position).getEmail());
+        holder.label_name.setText(mDaftarMusician.get(position).getName());
+        holder.musicianDate.setText(mDaftarMusician.get(position).getDescriptions());
         holder.frameGig.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,7 +98,7 @@ public class ListDiscoverGigAdapter extends RecyclerView.Adapter<ListDiscoverGig
 
     @Override
     public int getItemCount() {
-        return mDaftarUser.size();
+        return mDaftarMusician.size();
     }
 
     public interface MyClickListener {

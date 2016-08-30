@@ -3,6 +3,8 @@ package com.gighub.app.ui.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.gighub.app.R;
+
 public class RegisterAsOrganizerActivity extends AppCompatActivity {
 
     @Override

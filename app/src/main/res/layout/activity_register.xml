@@ -4,18 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.gighub.app.ui.activity.RegisterActivity"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/bg_home"
     android:gravity="center"
     android:orientation="vertical">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/create_a_gighub"
+        android:text="@string/reg_as_organizer"
         android:textSize="30sp"
         android:textStyle="bold"
         android:textAlignment="center"
         android:textColor="@color/colorAccent"/>
     <LinearLayout
+        android:elevation="4dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -98,6 +99,7 @@
         android:orientation="horizontal"
         android:gravity="center">
 
+
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -113,6 +115,8 @@
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="25dp"
+        android:textStyle="bold"
+        android:background="@color/primaryButton"
         android:text="REGISTER"/>
 
 </LinearLayout>

@@ -12,24 +12,24 @@
     <!--</group>-->
 
     <item android:id="@+id/action_register"
-        android:title="Register"
+        android:title="@string/register"
         app:showAsAction="never" />
-    <item android:id="@+id/action_sign_in"
-        android:title="@string/sign_in"
+    <item android:id="@+id/action_login"
+        android:title="@string/login"
         app:showAsAction="never"/>
     <!--<item android:id="@+id/action_about"-->
         <!--android:title="About"-->
         <!--app:showAsAction="never"/>-->
     <item android:id="@+id/action_booking_list"
-        android:title="Booking List"
+        android:title="@string/booking_list"
         android:icon="@drawable/ic_book_white_24dp"
         app:showAsAction="ifRoom"/>
     <item android:id="@+id/action_account"
-        android:title="Account"
+        android:title="@string/account"
         android:icon="@drawable/ic_person_white_24dp"
         app:showAsAction="never"/>
-    <item android:id="@+id/action_create_musician"
-        android:title="@string/create_musician"
-        android:icon="@drawable/ic_person_add_white_24dp"
-        app:showAsAction="ifRoom"/>
+    <!--<item android:id="@+id/action_create_musician"-->
+        <!--android:title="@string/create_musician"-->
+        <!--android:icon="@drawable/ic_person_add_white_24dp"-->
+        <!--app:showAsAction="ifRoom"/>-->
 </menu>

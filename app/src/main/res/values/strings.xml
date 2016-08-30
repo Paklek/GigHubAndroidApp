@@ -44,4 +44,16 @@
     <string name="create_musician">Create Musician</string>
     <string name="submit">Submit</string>
     <string name="gig_request">Gig Request</string>
+    <string name="reg_as_organizer">Register As Organizer</string>
+    <string name="reg_as_musician">Register As Musician</string>
+    <string name="or">or</string>
+    <string name="login_as_organizer">Login As Organizer</string>
+    <string name="login_as_musician">Login As Musician</string>
+    <string name="register">Register</string>
+    <string name="login">login</string>
+    <string name="cancel">cancel</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="account">Account</string>
+    <string name="booking_list">Booking List</string>
 </resources>

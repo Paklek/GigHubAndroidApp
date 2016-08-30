@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 import com.gighub.app.R;
 import com.gighub.app.model.DataObject;
+import com.gighub.app.model.MusicianModel;
+import com.gighub.app.model.MusicianResponse;
 import com.gighub.app.model.RetrofitService;
 import com.gighub.app.model.ServiceGighub;
 import com.gighub.app.model.UserModel;
@@ -52,8 +54,8 @@ public class DiscoverGigFragment extends Fragment {
         // Required empty public constructor
     }
 
-    List<UserModel> daftarUser = new ArrayList<UserModel>();
-
+//    List<UserModel> daftarUser = new ArrayList<UserModel>();
+    List<MusicianModel> mDaftarMusician = new ArrayList<MusicianModel>();
     TextView twName;
 
 
@@ -75,17 +77,17 @@ public class DiscoverGigFragment extends Fragment {
 
 //        ServiceGighub serviceGighub = retrofit.create(ServiceGighub.class);
 //        Call<UserResponse> call = serviceGighub.loadUser();
-        RetrofitService.getInstance().getApi().loadUser().enqueue(new Callback<UserResponse>() {
+        RetrofitService.getInstance().getApi().loadMusicians().enqueue(new Callback<MusicianResponse>() {
             @Override
-            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+            public void onResponse(Call<MusicianResponse> call, Response<MusicianResponse> response) {
                 if(response.body().getError()==0){
-                    daftarUser = response.body().getUsers();
-                    mAdapter = new ListDiscoverGigAdapter(daftarUser);
+                    mDaftarMusician = response.body().getMusicians();
+                    mAdapter = new ListDiscoverGigAdapter(mDaftarMusician);
                     mRecyclerView.setAdapter(mAdapter);
                     String tmp = "";
-                    for(int i =0 ;i<daftarUser.size();i++)
+                    for(int i =0 ;i<mDaftarMusician.size();i++)
                     {
-                        tmp += String.format(""+ daftarUser.get(i).getFirst_name().toString());
+                        tmp += String.format(""+ mDaftarMusician.get(i).getName().toString());
                     }
 
 
@@ -93,7 +95,7 @@ public class DiscoverGigFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<UserResponse> call, Throwable t) {
+            public void onFailure(Call<MusicianResponse> call, Throwable t) {
                 Toast.makeText(mContext,"Error"+t.getMessage(),Toast.LENGTH_SHORT).show();
 //                Log.e("-:failure",t.getMessage());
             }
@@ -131,14 +133,14 @@ public class DiscoverGigFragment extends Fragment {
 //        });
     }
 
-    private ArrayList<DataObject> getDataSet() {
-        ArrayList results = new ArrayList<DataObject>();
-        for (int index = 0; index < 20; index++) {
-            DataObject obj = new DataObject("Some Primary Text " + index,
-                    "Secondary " + index);
-            results.add(index, obj);
-        }
-        return results;
-    }
+//    private ArrayList<DataObject> getDataSet() {
+//        ArrayList results = new ArrayList<DataObject>();
+//        for (int index = 0; index < 20; index++) {
+//            DataObject obj = new DataObject("Some Primary Text " + index,
+//                    "Secondary " + index);
+//            results.add(index, obj);
+//        }
+//        return results;
+//    }
 
 }

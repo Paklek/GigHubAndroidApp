@@ -1,6 +1,7 @@
 package com.gighub.app.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,7 +15,7 @@ public class IntroActivity extends AppCompatActivity {
 
     private SessionManager session;
     private Button btn_discover,btn_join;
-    private TextView tv_sign_in;
+    private TextView tv_login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +26,9 @@ public class IntroActivity extends AppCompatActivity {
 
         btn_discover = (Button) findViewById(R.id.btnDiscover);
         btn_join = (Button)findViewById(R.id.btnJoin);
-        tv_sign_in = (TextView) findViewById(R.id.tv_signIn);
+        tv_login = (TextView) findViewById(R.id.tv_login);
+
+        tv_login.setPaintFlags(tv_login.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
 
         btn_discover.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,16 +43,16 @@ public class IntroActivity extends AppCompatActivity {
         btn_join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                Intent intent = new Intent(getApplicationContext(), JoinAsActivity.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
         });
-        tv_sign_in.setOnClickListener(new View.OnClickListener() {
+        tv_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                Intent intent = new Intent(getApplicationContext(), LoginAsActivity.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
         });

@@ -1,3 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
 
+    <item
+        jar="C:\Users\user\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.8.0\5ea7af56cc7c567ed9856d99efb30740e9b17ff\okio-1.8.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="05ea7af56cc7c567ed9856d99efb30740e9b17ff">
+        <dex dex="D:\SKRIPSI\PAKLEK BACKUP\SKRIPSI\GigHub2\app\build\intermediates\pre-dexed\debug\okio-1.8.0_a37a80f4648c480c2fd8febcd3a4bbad77a695da.jar" />
+    </item>
+    <item
+        jar="C:\Users\user\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.3.0\2b802460eea20f8f2ad9c08c74e0f14718e88aa9\okhttp-3.3.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="2b802460eea20f8f2ad9c08c74e0f14718e88aa9">
+        <dex dex="D:\SKRIPSI\PAKLEK BACKUP\SKRIPSI\GigHub2\app\build\intermediates\pre-dexed\debug\okhttp-3.3.0_5b0dfb1c7f23309c284726b7b11e796d12764cbd.jar" />
+    </item>
+    <item
+        jar="D:\SKRIPSI\PAKLEK BACKUP\SKRIPSI\GigHub2\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="8e673cdfadd8f2d98fdb2fda2285c30f6e449782">
+        <dex dex="D:\SKRIPSI\PAKLEK BACKUP\SKRIPSI\GigHub2\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-basement-8.4.0_b658ef3278d3749fe910d2503c501ab3eca4cae2.jar" />
+    </item>
+    <item
+        jar="D:\SOFTWARE\Android Studio\sdk\extras\android\m2repository\com\android\support\support-annotations\23.3.0\support-annotations-23.3.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="db7791d75a07fef9844d06236c1c59ba7bf6997c">
+        <dex dex="D:\SKRIPSI\PAKLEK BACKUP\SKRIPSI\GigHub2\app\build\intermediates\pre-dexed\debug\support-annotations-23.3.0_e30f42175293044a99221143426f24fb6f7acc4a.jar" />
+    </item>
+    <item
+        jar="D:\SKRIPSI\PAKLEK BACKUP\SKRIPSI\GigHub2\app\build\intermediates\exploded-aar\com.android.support\design\23.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="f0001e71cea6ae432a00021c6f727f5ef0f3d27e">
+        <dex dex="D:\SKRIPSI\PAKLEK BACKUP\SKRIPSI\GigHub2\app\build\intermediates\pre-dexed\debug\com.android.support-design-23.3.0_31eed5ca4b206ad3e69ef95a073e6a841ef88293.jar" />
+    </item>
+    <item
+        jar="D:\SKRIPSI\PAKLEK BACKUP\SKRIPSI\GigHub2\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="a0b5d60246cd9d4f3f2443611b3b4c25265840b5">
+        <dex dex="D:\SKRIPSI\PAKLEK BACKUP\SKRIPSI\GigHub2\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-23.3.0_b6b96853fccacf8f89157d87231a76033da02add.jar" />
+    </item>
+    <item
+        jar="D:\SKRIPSI\PAKLEK BACKUP\SKRIPSI\GigHub2\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="23be6993826b8fd88bbc8d14928bb3b8960d3d4e">
+        <dex dex="D:\SKRIPSI\PAKLEK BACKUP\SKRIPSI\GigHub2\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-23.3.0_84f4f9de525f33d9245a2723ab6779dcf8eb0282.jar" />
+    </item>
+    <item
+        jar="D:\SKRIPSI\PAKLEK BACKUP\SKRIPSI\GigHub2\app\build\intermediates\exploded-aar\com.github.siyamed\android-shape-imageview\0.9.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="ee07783aa59eefdeacc107abf472f45f60272302">
+        <dex dex="D:\SKRIPSI\PAKLEK BACKUP\SKRIPSI\GigHub2\app\build\intermediates\pre-dexed\debug\com.github.siyamed-android-shape-imageview-0.9.3_b0b2d6813502dd637569b17656c26f73fd573715.jar" />
+    </item>
+    <item
+        jar="D:\SKRIPSI\PAKLEK BACKUP\SKRIPSI\GigHub2\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="1b8e03daaa43fb0a4cd57e378167c2fd70454c1e">
+        <dex dex="D:\SKRIPSI\PAKLEK BACKUP\SKRIPSI\GigHub2\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.3.0_8bf3c634d4b91ce5d2be28e0630ac22f34cfb99b.jar" />
+    </item>
+    <item
+        jar="D:\SKRIPSI\PAKLEK BACKUP\SKRIPSI\GigHub2\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\jars\libs\internal_impl-23.3.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="4da5a4d697d32497c6f85567a5112e62fdfd0676">
+        <dex dex="D:\SKRIPSI\PAKLEK BACKUP\SKRIPSI\GigHub2\app\build\intermediates\pre-dexed\debug\internal_impl-23.3.0_7ba5e8d00ffbe48db54b4084398b926c314d176b.jar" />
+    </item>
+    <item
+        jar="C:\Program Files\Android\Android Studio1\gradle\m2repository\net\sf\kxml\kxml2\2.3.0\kxml2-2.3.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="ccbc77a5fd907ef863c29f3596c6f54ffa4e9442">
+        <dex dex="D:\SKRIPSI\PAKLEK BACKUP\SKRIPSI\GigHub2\app\build\intermediates\pre-dexed\debug\kxml2-2.3.0_e583ef940c9189e830b59a82b2ab56db01d69fda.jar" />
+    </item>
+    <item
+        jar="D:\SKRIPSI\PAKLEK BACKUP\SKRIPSI\GigHub2\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="debf30ce0a7560396b6235edef77e447006454c2">
+        <dex dex="D:\SKRIPSI\PAKLEK BACKUP\SKRIPSI\GigHub2\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-23.3.0_37e5ffa99769b631e629588c4e43fba53149f0ed.jar" />
+    </item>
+    <item
+        jar="C:\Users\user\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.7\751f548c85fa49f330cecbb1875893f971b33c4e\gson-2.7.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="751f548c85fa49f330cecbb1875893f971b33c4e">
+        <dex dex="D:\SKRIPSI\PAKLEK BACKUP\SKRIPSI\GigHub2\app\build\intermediates\pre-dexed\debug\gson-2.7_026658e7d34d00d2914c79312e3528e2bb459332.jar" />
+    </item>
+    <item
+        jar="D:\SKRIPSI\PAKLEK BACKUP\SKRIPSI\GigHub2\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="8a034dd16c0dfd75fe86c52c2cd581592acc684a">
+        <dex dex="D:\SKRIPSI\PAKLEK BACKUP\SKRIPSI\GigHub2\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.3.0_b10d7f55e0c0c5e1e22baae400f364b4bd3ec13c.jar" />
+    </item>
+    <item
+        jar="D:\SKRIPSI\PAKLEK BACKUP\SKRIPSI\GigHub2\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\23.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="82ce13fd19cdfde0e392f03c27edeba8d4333648">
+        <dex dex="D:\SKRIPSI\PAKLEK BACKUP\SKRIPSI\GigHub2\app\build\intermediates\pre-dexed\debug\com.android.support-cardview-v7-23.3.0_551ee6d60f095d8c56eb52eab53268e325c14191.jar" />
+    </item>
+    <item
+        jar="C:\Users\user\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\retrofit\2.1.0\2de7cd8b95b7021b1d597f049bcb422055119f2c\retrofit-2.1.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="2de7cd8b95b7021b1d597f049bcb422055119f2c">
+        <dex dex="D:\SKRIPSI\PAKLEK BACKUP\SKRIPSI\GigHub2\app\build\intermediates\pre-dexed\debug\retrofit-2.1.0_ff5f7d473555044c33b7798b022967447b0bbc07.jar" />
+    </item>
+    <item
+        jar="D:\SKRIPSI\PAKLEK BACKUP\SKRIPSI\GigHub2\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="04de44f90606c77f3b28cf44861f306290505aac">
+        <dex dex="D:\SKRIPSI\PAKLEK BACKUP\SKRIPSI\GigHub2\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-maps-8.4.0_bd99b66edc7c0731bb5a534472b383aed1ab07b7.jar" />
+    </item>
+    <item
+        jar="C:\Users\user\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\converter-gson\2.1.0\aa557d71ead91cbf26e0c316a0f593d168303309\converter-gson-2.1.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="aa557d71ead91cbf26e0c316a0f593d168303309">
+        <dex dex="D:\SKRIPSI\PAKLEK BACKUP\SKRIPSI\GigHub2\app\build\intermediates\pre-dexed\debug\converter-gson-2.1.0_33214bfc4c74f4a248eb1326ccc193a2dc07a8f8.jar" />
+    </item>
+    <item
+        jar="D:\SKRIPSI\PAKLEK BACKUP\SKRIPSI\GigHub2\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="fef2b3e4b6b1b0e5fe7b69fa137a5fa55a3182ab">
+        <dex dex="D:\SKRIPSI\PAKLEK BACKUP\SKRIPSI\GigHub2\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-base-8.4.0_6258314ccf0a94b15c87e0c9fab7a251bb1886f2.jar" />
+    </item>
+
+</items>

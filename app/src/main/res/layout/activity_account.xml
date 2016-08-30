@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    android:background="@color/colorPrimary"
+    android:background="@color/primary"
     tools:context="com.gighub.app.ui.activity.AccountActivity">
 
     <Button
@@ -17,6 +17,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
+        android:background="@drawable/button_border"
+        android:textColor="@color/colorAccent"
         android:text="@string/profile"/>
 
     <Button
@@ -25,6 +27,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
+        android:background="@drawable/button_border"
+        android:textColor="@color/colorAccent"
         android:text="@string/gig_money"/>
 
     <Button
@@ -33,6 +37,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
+        android:background="@drawable/button_border"
+        android:textColor="@color/colorAccent"
         android:text="@string/manager"/>
 
     <Button
@@ -41,6 +47,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
+        android:background="@drawable/button_border"
+        android:textColor="@color/colorAccent"
         android:text="@string/about"/>
 
     <Button
@@ -48,6 +56,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
+        android:background="@drawable/button_border"
+        android:textColor="@color/colorAccent"
         android:text="@string/term_of"/>
 
     <LinearLayout
@@ -58,6 +68,8 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/button_border"
+            android:textColor="@color/colorAccent"
             android:text="@string/logout" />
     </LinearLayout>
 </LinearLayout>

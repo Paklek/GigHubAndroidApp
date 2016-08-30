@@ -71,13 +71,13 @@ public class ManagerActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_register:
                 // User chose the "Settings" item, show the app settings UI...
-                Intent intent = new Intent(getApplicationContext(),RegisterActivity.class);
+                Intent intent = new Intent(getApplicationContext(),JoinAsActivity.class);
                 startActivity(intent);
                 return true;
 
-            case R.id.action_sign_in:
+            case R.id.action_login:
                 // User chose the "Settings" item, show the app settings UI...
-                Intent intent1 = new Intent(getApplicationContext(),SignInActivity.class);
+                Intent intent1 = new Intent(getApplicationContext(),LoginAsActivity.class);
                 startActivity(intent1);
                 return true;
 

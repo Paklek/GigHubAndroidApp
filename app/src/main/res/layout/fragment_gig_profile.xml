@@ -15,6 +15,7 @@
         android:id="@+id/btn_view_map"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_border2"
         android:text="View In Map"/>
 
 </LinearLayout>
