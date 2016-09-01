@@ -32,5 +32,5 @@ public interface ServiceGighub {
     Call<ResponseUser> sendLoginDataOrganizer(@Body Map<String, String> loginData);
 
     @POST("api/musician/login")
-    Call<ResponseUser> sendLoginDataMusician(@Body Map<String,String> loginData);
+    Call<ResponseMusician> sendLoginDataMusician(@Body Map<String,String> loginData);
 }

@@ -75,7 +75,7 @@ public class ListDiscoverGigAdapter extends RecyclerView.Adapter<ListDiscoverGig
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
         holder.label_name.setText(mDaftarMusician.get(position).getName());
-        holder.musicianDate.setText(mDaftarMusician.get(position).getDescriptions());
+        holder.musicianDate.setText(mDaftarMusician.get(position).getDeskripsi());
         holder.frameGig.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

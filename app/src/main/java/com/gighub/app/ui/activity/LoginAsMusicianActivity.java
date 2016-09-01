@@ -10,11 +10,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.gighub.app.R;
+import com.gighub.app.model.ResponseMusician;
 import com.gighub.app.model.ResponseUser;
 import com.gighub.app.model.ServiceGighub;
 import com.gighub.app.util.BuildUrl;
 import com.gighub.app.util.SessionManager;
 import com.gighub.app.util.StaticString;
+import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,6 +34,7 @@ public class LoginAsMusicianActivity extends AppCompatActivity {
     private SessionManager session;
 
     public static final String PESANLOG = "pesanlog";
+    public static final String FIRST_NAME = "fname";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,13 +64,13 @@ public class LoginAsMusicianActivity extends AppCompatActivity {
         loginData.put("email",editTextEmailLoginMsc.getText().toString());
         loginData.put("password",editTextPasswordLoginMsc.getText().toString());
 
-        buildUrl.serviceGighub.sendLoginDataMusician(loginData).enqueue(new Callback<ResponseUser>() {
+        buildUrl.serviceGighub.sendLoginDataMusician(loginData).enqueue(new Callback<ResponseMusician>() {
             @Override
-            public void onResponse(Call<ResponseUser> call, Response<ResponseUser> response) {
+            public void onResponse(Call<ResponseMusician> call, Response<ResponseMusician> response) {
                 if(response.code()==200){
                     if(response.body().getError()==0){
                         session = new SessionManager(getApplicationContext());
-                        session.createLoginSession(response.body().getUser());
+                        session.createLoginSession(new Gson().toJson(response.body().getMusician()),"msc");
                         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                         Log.d(PESANLOG,""+response.body().getMessage()+" error: "+response.body().getError());
                         Toast.makeText(LoginAsMusicianActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
@@ -79,8 +82,8 @@ public class LoginAsMusicianActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ResponseUser> call, Throwable t) {
-                Log.d(PESANLOG,""+t.getMessage());
+            public void onFailure(Call<ResponseMusician> call, Throwable t) {
+
             }
         });
     }

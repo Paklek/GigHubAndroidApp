@@ -67,7 +67,7 @@ public class LoginAsOrganizerActivity extends AppCompatActivity {
          if(response.code()==200) {
              if (response.body().getError() == 0) {
                  session = new SessionManager(getApplicationContext());
-                 session.createLoginSession(response.body().getUser());
+                 session.createLoginSession(new Gson().toJson(response.body().getUser()),"org");
                  Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                  Log.d(PESANLOG, "" + response.body().getMessage());
                  Log.d(PESANLOG, "" + response.code());

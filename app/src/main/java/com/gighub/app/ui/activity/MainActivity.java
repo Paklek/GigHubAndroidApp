@@ -28,7 +28,9 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private String name;
 
+    public static final String FIRST_NAME = "fname";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,18 @@ public class MainActivity extends AppCompatActivity {
         if(session.isSkipIntroStatus()){
 
             toolbar = (Toolbar)findViewById(R.id.toolbar);
-            toolbar.setTitle("Gig Hub - Discover");
+            if(session.isLoggedIn()){
+                if(session.checkUserType().equals("org")){
+                    name = session.getUserDetails().getFirst_name();
+                }
+                else if(session.checkUserType().equals("msc")){
+                    name = session.getMusicianDetails().getName();
+                }
+                toolbar.setTitle("GigHub - "+name);
+            }
+            else {
+                toolbar.setTitle("Gig Hub - Discover");
+            }
             setSupportActionBar(toolbar);
             // my_child_toolbar is defined in the layout file
 
