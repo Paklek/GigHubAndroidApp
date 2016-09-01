@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.gighub.app.R;
 import com.gighub.app.model.Response;
 import com.gighub.app.model.ServiceGighub;
+import com.gighub.app.util.BuildUrl;
 import com.gighub.app.util.SessionManager;
 
 import java.util.HashMap;
@@ -57,19 +58,15 @@ public class RegisterAsOrganizerActivity extends AppCompatActivity {
     private void insertOrganizer(){
         session = new SessionManager(getApplicationContext());
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.108.49.230/Gighub-master/public/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        ServiceGighub serviceGighub = retrofit.create(ServiceGighub.class);
+        BuildUrl buildUrl = new BuildUrl();
+        buildUrl.buildBaseUrl();
 
         dataO.put("first_name",editTextFirstNameRegisterOrg.getText().toString());
         dataO.put("last_name",editTextLastNameRegisterOrg.getText().toString());
         dataO.put("email",editTextEmailRegisterOrg.getText().toString());
         dataO.put("password",editTextPasswordRegisterOrg.getText().toString());
 
-        serviceGighub.insertOrganizer(dataO).enqueue(new Callback<Response>() {
+        buildUrl.serviceGighub.insertOrganizer(dataO).enqueue(new Callback<Response>() {
             @Override
             public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
                 if (response.code() == 200) {

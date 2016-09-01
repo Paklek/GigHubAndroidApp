@@ -13,6 +13,7 @@ import com.gighub.app.R;
 import com.gighub.app.model.Response;
 import com.gighub.app.model.ResponseUser;
 import com.gighub.app.model.ServiceGighub;
+import com.gighub.app.util.BuildUrl;
 import com.gighub.app.util.SessionManager;
 import com.google.gson.Gson;
 
@@ -54,17 +55,13 @@ public class LoginAsOrganizerActivity extends AppCompatActivity {
 
     private void sendLoginDataOrganizer(){
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.108.49.230/Gighub-master/public/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        ServiceGighub serviceGighub = retrofit.create(ServiceGighub.class);
+        BuildUrl buildUrl = new BuildUrl();
+        buildUrl.buildBaseUrl();
 
         loginData.put("email", editTextEmailLoginOrg.getText().toString());
         loginData.put("password", editTextPasswordLoginOrg.getText().toString());
 
-        serviceGighub.sendLoginDataOrganizer(loginData).enqueue(new Callback<ResponseUser>() {
+        buildUrl.serviceGighub.sendLoginDataOrganizer(loginData).enqueue(new Callback<ResponseUser>() {
             @Override
             public void onResponse(Call<ResponseUser> call, retrofit2.Response<ResponseUser> response) {
          if(response.code()==200) {

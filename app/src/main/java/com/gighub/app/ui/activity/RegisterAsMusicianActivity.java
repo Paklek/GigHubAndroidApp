@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.gighub.app.R;
 import com.gighub.app.model.Response;
 import com.gighub.app.model.ServiceGighub;
+import com.gighub.app.util.BuildUrl;
 import com.gighub.app.util.SessionManager;
 
 import java.io.BufferedReader;
@@ -59,18 +60,14 @@ public class RegisterAsMusicianActivity extends AppCompatActivity {
     private void insertMusician(){
         session = new SessionManager(getApplicationContext());
 
-        Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("http://10.108.49.230/Gighub-master/public/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        BuildUrl buildUrl = new BuildUrl();
+        buildUrl.buildBaseUrl();
 
-        ServiceGighub serviceGighub = retrofit.create(ServiceGighub.class);
-        
         dataM.put("name",editTextNameRegister.getText().toString());
         dataM.put("email",editTextEmailRegister.getText().toString());
         dataM.put("password",editTextPasswordRegister.getText().toString());
 
-        serviceGighub.insertMusician(dataM).enqueue(new Callback<Response>() {
+        buildUrl.serviceGighub.insertMusician(dataM).enqueue(new Callback<Response>() {
             @Override
             public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
                 if (response.code() == 200) {

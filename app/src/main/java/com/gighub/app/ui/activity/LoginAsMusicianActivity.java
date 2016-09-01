@@ -12,7 +12,9 @@ import android.widget.Toast;
 import com.gighub.app.R;
 import com.gighub.app.model.ResponseUser;
 import com.gighub.app.model.ServiceGighub;
+import com.gighub.app.util.BuildUrl;
 import com.gighub.app.util.SessionManager;
+import com.gighub.app.util.StaticString;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -52,17 +54,14 @@ public class LoginAsMusicianActivity extends AppCompatActivity {
     Map<String, String> loginData = new HashMap<>();
 
     private void sendLoginDataMusician(){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.108.49.230/Gighub-master/public/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        ServiceGighub serviceGighub = retrofit.create(ServiceGighub.class);
-
+//        Build URL
+        BuildUrl buildUrl = new BuildUrl();
+        buildUrl.buildBaseUrl();
+//        --------------
         loginData.put("email",editTextEmailLoginMsc.getText().toString());
         loginData.put("password",editTextPasswordLoginMsc.getText().toString());
 
-        serviceGighub.sendLoginDataMusician(loginData).enqueue(new Callback<ResponseUser>() {
+        buildUrl.serviceGighub.sendLoginDataMusician(loginData).enqueue(new Callback<ResponseUser>() {
             @Override
             public void onResponse(Call<ResponseUser> call, Response<ResponseUser> response) {
                 if(response.code()==200){
