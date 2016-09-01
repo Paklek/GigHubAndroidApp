@@ -39,12 +39,12 @@ public class RegisterAsMusicianActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_as_musician);
 
-        editTextNameRegister = (EditText)findViewById(R.id.txt_name_musician_register);
-        editTextEmailRegister = (EditText)findViewById(R.id.txt_email_musician_register);
-        editTextPasswordRegister = (EditText)findViewById(R.id.txt_password_musician_register);
-        editTextConfirmationPasswordRegister = (EditText)findViewById(R.id.txt_confirmationpassword_musician_register);
+        editTextNameRegister = (EditText)findViewById(R.id.et_name_register_msc);
+        editTextEmailRegister = (EditText)findViewById(R.id.et_email_register_msc);
+        editTextPasswordRegister = (EditText)findViewById(R.id.et_password_register_msc);
+        editTextConfirmationPasswordRegister = (EditText)findViewById(R.id.et_confirmation_password_register_msc);
 
-        buttonRegister = (Button)findViewById(R.id.btn_register_musician_register);
+        buttonRegister = (Button)findViewById(R.id.btn_register_register_msc);
 
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,30 +54,18 @@ public class RegisterAsMusicianActivity extends AppCompatActivity {
         });
     }
 
-    public EditText getEditTextNameRegister() {
-        return editTextNameRegister;
-    }
-
-    public EditText getEditTextEmailRegister() {
-        return editTextEmailRegister;
-    }
-
-    public EditText getEditTextPasswordRegister() {
-        return editTextPasswordRegister;
-    }
-
     Map<String,String> dataM = new HashMap<>();
 
     private void insertMusician(){
         session = new SessionManager(getApplicationContext());
 
         Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("http://10.108.73.40/Gighub-master/public/")
+            .baseUrl("http://10.108.49.230/Gighub-master/public/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         ServiceGighub serviceGighub = retrofit.create(ServiceGighub.class);
-
+        
         dataM.put("name",editTextNameRegister.getText().toString());
         dataM.put("email",editTextEmailRegister.getText().toString());
         dataM.put("password",editTextPasswordRegister.getText().toString());

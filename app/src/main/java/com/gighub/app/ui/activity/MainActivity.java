@@ -80,6 +80,12 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
+
+        if(session.isLoggedIn()){
+            menu.getItem(0).setVisible(false);
+            menu.getItem(1).setVisible(false);
+        }
+
         return true;
     }
 

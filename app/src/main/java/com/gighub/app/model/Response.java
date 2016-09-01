@@ -5,16 +5,9 @@ package com.gighub.app.model;
  */
 public class Response {
 
-    private String status;
+    private String message;
+
     private int error;
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
     public int getError() {
         return error;
@@ -22,5 +15,13 @@ public class Response {
 
     public void setError(int error) {
         this.error = error;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

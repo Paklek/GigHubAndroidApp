@@ -26,7 +26,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/colorAccent">
-            <android.support.design.widget.TextInputEditText
+            <EditText
+                android:id="@+id/et_first_name_register_org"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/colorAccent"
@@ -38,7 +39,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/colorAccent">
-            <android.support.design.widget.TextInputEditText
+            <EditText
+                android:id="@+id/et_last_name_register_org"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/colorAccent"
@@ -49,7 +51,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/colorAccent">
-            <android.support.design.widget.TextInputEditText
+            <EditText
+                android:id="@+id/et_email_register_org"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/colorAccent"
@@ -61,7 +64,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="#FFFFFF">
-            <android.support.design.widget.TextInputEditText
+            <EditText
+                android:id="@+id/et_password_register_org"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/colorAccent"
@@ -73,7 +77,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="#FFFFFF">
-            <android.support.design.widget.TextInputEditText
+            <EditText
+                android:id="@+id/et_confirmation_password_register_org"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/colorAccent"
@@ -90,6 +95,7 @@
 
 
         <CheckBox
+            android:id="@+id/cbx_agree_termcondition"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:buttonTint="@color/colorAccent"
@@ -105,7 +111,7 @@
         android:layout_marginTop="20dp"
         android:gravity="end">
         <Button
-            android:id="@+id/btnCancelOrganizerRegister"
+            android:id="@+id/btn_cancel_register_org"
             android:elevation="4dp"
             android:textColor="@color/colorAccent"
             android:layout_width="wrap_content"
@@ -118,7 +124,7 @@
         <Button
             android:textColor="@color/colorAccent"
             android:elevation="4dp"
-            android:id="@+id/btnRegisterOrganizerRegister"
+            android:id="@+id/btn_register_register_org"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"

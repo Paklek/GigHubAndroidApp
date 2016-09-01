@@ -22,6 +22,15 @@ public interface ServiceGighub {
     @GET("musicians")
     Call<MusicianResponse> loadMusicians();
 
-    @POST("api/musicians")
+    @POST("api/musician/register")
     Call <Response> insertMusician(@Body Map<String, String> dataMusisi);
+
+    @POST("api/organizer/register")
+    Call<Response> insertOrganizer(@Body Map<String, String> dataOrganizer);
+
+    @POST("api/organizer/login")
+    Call<ResponseUser> sendLoginDataOrganizer(@Body Map<String, String> loginData);
+
+    @POST("api/musician/login")
+    Call<ResponseUser> sendLoginDataMusician(@Body Map<String,String> loginData);
 }

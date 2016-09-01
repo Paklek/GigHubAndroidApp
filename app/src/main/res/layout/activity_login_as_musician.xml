@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:textColorHint="@color/colorAccent">
         <EditText
-            android:id="@+id/editTextEmailMusicianLogin"
+            android:id="@+id/et_email_login_msc"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorAccent"
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:textColorHint="@color/colorAccent">
         <EditText
-            android:id="@+id/editTextPasswordMusicianLogin"
+            android:id="@+id/et_password_login_msc"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/colorAccent"
@@ -60,7 +60,7 @@
         android:layout_marginTop="20dp"
         android:gravity="end">
         <Button
-            android:id="@+id/btnCancelMusicianLogin"
+            android:id="@+id/btn_cancel_login_msc"
             android:elevation="4dp"
             android:textColor="@color/colorAccent"
             android:layout_width="wrap_content"
@@ -71,9 +71,9 @@
             android:background="@drawable/button_border"
             android:text="@string/cancel"/>
         <Button
+            android:id="@+id/btn_login_login_msc"
             android:textColor="@color/colorAccent"
             android:elevation="4dp"
-            android:id="@+id/btnLoginMusicianLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
