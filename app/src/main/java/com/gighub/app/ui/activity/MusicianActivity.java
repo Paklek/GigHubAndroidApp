@@ -22,9 +22,9 @@ import com.gighub.app.ui.fragment.MusicianReviewFragment;
 
 public class MusicianActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
+    private Toolbar mToolbar;
+    private TabLayout mTabLayout;
+    private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,16 +32,16 @@ public class MusicianActivity extends AppCompatActivity {
         setContentView(R.layout.activity_musician);
 
 
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
-        toolbar.setTitle("Musician");
-        setSupportActionBar(toolbar);
+        mToolbar = (Toolbar)findViewById(R.id.toolbar);
+        mToolbar.setTitle("Musician");
+        setSupportActionBar(mToolbar);
 //            getSupportActionBar().setDisplayHomeAsUpEnabled(true); -- Tombol Back
 
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
+        mViewPager = (ViewPager) findViewById(R.id.viewpager);
+        setupViewPager(mViewPager);
 
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
+        mTabLayout = (TabLayout) findViewById(R.id.tabs);
+        mTabLayout.setupWithViewPager(mViewPager);
 
 
 

@@ -27,9 +27,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginAsOrganizerActivity extends AppCompatActivity {
 
-    private EditText editTextEmailLoginOrg, editTextPasswordLoginOrg;
-    private Button btnCancelLoginOrg, btnLoginLoginOrg;
-    private SessionManager session;
+    private EditText mEditTextEmailLoginOrg, mEditTextPasswordLoginOrg;
+    private Button mBtnCancelLoginOrg, mBtnLoginLoginOrg;
+    private SessionManager mSession;
 
     public final static String PESANLOG ="pesanlog";
 
@@ -38,12 +38,12 @@ public class LoginAsOrganizerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_as_organizer);
 
-        editTextEmailLoginOrg = (EditText)findViewById(R.id.et_email_login_org);
-        editTextPasswordLoginOrg = (EditText)findViewById(R.id.et_password_login_org);
-        btnCancelLoginOrg = (Button)findViewById(R.id.btn_cancel_login_org);
-        btnLoginLoginOrg = (Button)findViewById(R.id.btn_login_login_org);
+        mEditTextEmailLoginOrg = (EditText)findViewById(R.id.et_email_login_org);
+        mEditTextPasswordLoginOrg = (EditText)findViewById(R.id.et_password_login_org);
+        mBtnCancelLoginOrg = (Button)findViewById(R.id.btn_cancel_login_org);
+        mBtnLoginLoginOrg = (Button)findViewById(R.id.btn_login_login_org);
 
-        btnLoginLoginOrg.setOnClickListener(new View.OnClickListener() {
+        mBtnLoginLoginOrg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendLoginDataOrganizer();
@@ -58,21 +58,21 @@ public class LoginAsOrganizerActivity extends AppCompatActivity {
         BuildUrl buildUrl = new BuildUrl();
         buildUrl.buildBaseUrl();
 
-        loginData.put("email", editTextEmailLoginOrg.getText().toString());
-        loginData.put("password", editTextPasswordLoginOrg.getText().toString());
+        loginData.put("email", mEditTextEmailLoginOrg.getText().toString());
+        loginData.put("password", mEditTextPasswordLoginOrg.getText().toString());
 
         buildUrl.serviceGighub.sendLoginDataOrganizer(loginData).enqueue(new Callback<ResponseUser>() {
             @Override
             public void onResponse(Call<ResponseUser> call, retrofit2.Response<ResponseUser> response) {
          if(response.code()==200) {
              if (response.body().getError() == 0) {
-                 session = new SessionManager(getApplicationContext());
-                 session.createLoginSession(new Gson().toJson(response.body().getUser()),"org");
+                 mSession = new SessionManager(getApplicationContext());
+                 mSession.createLoginSession(new Gson().toJson(response.body().getUser()),"org");
                  Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                  Log.d(PESANLOG, "" + response.body().getMessage());
                  Log.d(PESANLOG, "" + response.code());
                  Toast.makeText(LoginAsOrganizerActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
-                 session.SkipIntro();
+                 mSession.SkipIntro();
                  startActivity(intent);
              }
          }

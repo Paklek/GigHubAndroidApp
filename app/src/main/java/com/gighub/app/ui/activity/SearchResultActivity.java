@@ -14,25 +14,33 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.gighub.app.R;
+import com.gighub.app.model.Genre;
+import com.gighub.app.model.MusicianModel;
 import com.gighub.app.ui.adapter.ListSearchResultAdapter;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SearchResultActivity extends AppCompatActivity {
 
-    ListView lv;
+    ListView mListView;
     Context context;
-    ArrayList arrayList;
     private Toolbar toolbar;
+    private MusicianModel mMusician;
+    private String mNameMusician;
+    private List<MusicianModel> mListMusician ;
 
-    public static int[] listImages = {R.drawable.ava, R.drawable.ava,R.drawable.ava,R.drawable.ava,R.drawable.ava,R.drawable.ava,R.drawable.ava};
-    public static String[] listNama = {"Nama Musisi1","Nama Musisi2","Nama Musisi3","Nama Musisi4","Nama Musisi5","Nama Musisi6","Nama Musisi7"};
+//    public static int[] listImages = {R.drawable.ava, R.drawable.ava,R.drawable.ava,R.drawable.ava,R.drawable.ava,R.drawable.ava,R.drawable.ava};
+//    public static String[] listNama = {"Nama Musisi1","Nama Musisi2","Nama Musisi3","Nama Musisi4","Nama Musisi5","Nama Musisi6","Nama Musisi7"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
-
+        mListMusician = new ArrayList<MusicianModel>();
         context = this;
 //        getSupportActionBar().setHomeButtonEnabled(true);
         toolbar = (Toolbar)findViewById(R.id.toolbar);
@@ -40,21 +48,19 @@ public class SearchResultActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Intent i = new Intent(getApplicationContext(), SearchResultActivity.class);
-        lv = (ListView)findViewById(R.id.lv_search);
-//        ArrayAdapter<String> testAdapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,listNama);
-//        lv.setAdapter(testAdapter);
-        lv.setAdapter(new ListSearchResultAdapter(getApplicationContext(),listNama,listImages ));
-//        context.startActivity(i);
-
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//        Intent i = new Intent(getApplicationContext(), SearchResultActivity.class);
+          Intent i = getIntent();
+        Type typeListMusician = new TypeToken<List<MusicianModel>>(){}.getType();
+        mListMusician = new Gson().fromJson(i.getStringExtra("search"),typeListMusician);
+        mListView = (ListView)findViewById(R.id.lv_search);
+        mListView.setAdapter(new ListSearchResultAdapter(getApplicationContext(),mListMusician ));
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getApplicationContext(),MusicianActivity.class);
                 startActivity(intent);
             }
         });
-
     }
 
     @Override

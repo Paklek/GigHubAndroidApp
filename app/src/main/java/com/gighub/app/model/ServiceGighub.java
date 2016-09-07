@@ -11,6 +11,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by Paklek on 7/30/2016.
@@ -33,4 +34,10 @@ public interface ServiceGighub {
 
     @POST("api/musician/login")
     Call<ResponseMusician> sendLoginDataMusician(@Body Map<String,String> loginData);
+
+    @GET("api/musician/genres")
+    Call<ResponseCallGenre> loadMusicianGenre();
+
+    @GET("api/musician/search")
+    Call<MusicianResponse> getSearchMusician(@Query("kota") String kota);
 }

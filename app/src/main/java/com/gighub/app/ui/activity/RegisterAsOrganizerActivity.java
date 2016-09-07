@@ -25,9 +25,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegisterAsOrganizerActivity extends AppCompatActivity {
 
-    private EditText editTextFirstNameRegisterOrg, editTextLastNameRegisterOrg, editTextEmailRegisterOrg, editTextPasswordRegisterOrg,editTextConfirmationPasswordOrg;
-    private Button btnRegisterRegisterOrg, btnCancelRegisterOrg;
-    private SessionManager session;
+    private EditText mEditTextFirstNameRegisterOrg, mEditTextLastNameRegisterOrg, mEditTextEmailRegisterOrg, mEditTextPasswordRegisterOrg,mEditTextConfirmationPasswordOrg;
+    private Button mButtonRegisterRegisterOrg, mButtonCancelRegisterOrg;
+    private SessionManager mSession;
 
     public static final String PESANLOG = "pesanlog";
 
@@ -36,16 +36,16 @@ public class RegisterAsOrganizerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_as_organizer);
 
-        editTextFirstNameRegisterOrg = (EditText)findViewById(R.id.et_first_name_register_org);
-        editTextLastNameRegisterOrg = (EditText)findViewById(R.id.et_last_name_register_org);
-        editTextEmailRegisterOrg = (EditText)findViewById(R.id.et_email_register_org);
-        editTextPasswordRegisterOrg = (EditText)findViewById(R.id.et_password_register_org);
-        editTextConfirmationPasswordOrg = (EditText)findViewById(R.id.et_confirmation_password_register_org);
+        mEditTextFirstNameRegisterOrg = (EditText)findViewById(R.id.et_first_name_register_org);
+        mEditTextLastNameRegisterOrg = (EditText)findViewById(R.id.et_last_name_register_org);
+        mEditTextEmailRegisterOrg = (EditText)findViewById(R.id.et_email_register_org);
+        mEditTextPasswordRegisterOrg = (EditText)findViewById(R.id.et_password_register_org);
+        mEditTextConfirmationPasswordOrg = (EditText)findViewById(R.id.et_confirmation_password_register_org);
 
-        btnCancelRegisterOrg = (Button)findViewById(R.id.btn_cancel_register_org);
-        btnRegisterRegisterOrg = (Button)findViewById(R.id.btn_register_register_org);
+        mButtonCancelRegisterOrg = (Button)findViewById(R.id.btn_cancel_register_org);
+        mButtonRegisterRegisterOrg = (Button)findViewById(R.id.btn_register_register_org);
 
-        btnRegisterRegisterOrg.setOnClickListener(new View.OnClickListener() {
+        mButtonRegisterRegisterOrg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 insertOrganizer();
@@ -56,21 +56,21 @@ public class RegisterAsOrganizerActivity extends AppCompatActivity {
     Map<String, String> dataO = new HashMap<>();
 
     private void insertOrganizer(){
-        session = new SessionManager(getApplicationContext());
+        mSession = new SessionManager(getApplicationContext());
 
         BuildUrl buildUrl = new BuildUrl();
         buildUrl.buildBaseUrl();
 
-        dataO.put("first_name",editTextFirstNameRegisterOrg.getText().toString());
-        dataO.put("last_name",editTextLastNameRegisterOrg.getText().toString());
-        dataO.put("email",editTextEmailRegisterOrg.getText().toString());
-        dataO.put("password",editTextPasswordRegisterOrg.getText().toString());
+        dataO.put("first_name",mEditTextFirstNameRegisterOrg.getText().toString());
+        dataO.put("last_name",mEditTextLastNameRegisterOrg.getText().toString());
+        dataO.put("email",mEditTextEmailRegisterOrg.getText().toString());
+        dataO.put("password",mEditTextPasswordRegisterOrg.getText().toString());
 
         buildUrl.serviceGighub.insertOrganizer(dataO).enqueue(new Callback<Response>() {
             @Override
             public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
                 if (response.code() == 200) {
-                    session.SkipIntro();
+                    mSession.SkipIntro();
                     Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     Toast.makeText(RegisterAsOrganizerActivity.this, "Berhasil Register", Toast.LENGTH_LONG).show();

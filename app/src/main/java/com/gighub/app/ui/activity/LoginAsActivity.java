@@ -10,17 +10,17 @@ import com.gighub.app.R;
 
 public class LoginAsActivity extends AppCompatActivity {
 
-    private Button loginAsOrg, loginAsMsc;
+    private Button mBtnLoginAsOrg, mBtnLoginAsMsc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_as);
 
-        loginAsOrg = (Button)findViewById(R.id.btn_login_as_org);
-        loginAsMsc = (Button)findViewById(R.id.btn_login_as_msc);
+        mBtnLoginAsOrg = (Button)findViewById(R.id.btn_login_as_org);
+        mBtnLoginAsMsc = (Button)findViewById(R.id.btn_login_as_msc);
 
-        loginAsOrg.setOnClickListener(new View.OnClickListener() {
+        mBtnLoginAsOrg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),LoginAsOrganizerActivity.class);
@@ -28,7 +28,7 @@ public class LoginAsActivity extends AppCompatActivity {
             }
         });
 
-        loginAsMsc.setOnClickListener(new View.OnClickListener() {
+        mBtnLoginAsMsc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),LoginAsMusicianActivity.class);

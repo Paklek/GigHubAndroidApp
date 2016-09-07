@@ -11,26 +11,27 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gighub.app.R;
+import com.gighub.app.model.MusicianModel;
 import com.gighub.app.ui.activity.MusicianActivity;
 import com.gighub.app.ui.activity.SearchResultActivity;
 import com.github.siyamed.shapeimageview.CircularImageView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Paklek on 6/12/2016.
  */
 public class ListSearchResultAdapter extends BaseAdapter {
-    String[] result;
     Context context;
-
-    int [] imageId;
+    private List<MusicianModel> mListMusician;
 
     private static LayoutInflater inflater=null;
 
-    public ListSearchResultAdapter(Context context, String[] nama, int[] image)
+    public ListSearchResultAdapter(Context context, List<MusicianModel> mListMusician)
     {
-        this.result = nama;
+       this.mListMusician = mListMusician;
         this.context = context;
-        this.imageId = image;
         inflater = (LayoutInflater)context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
     }
     @Override
@@ -41,7 +42,7 @@ public class ListSearchResultAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         // TODO Auto-generated method stub
-        return result.length;
+        return mListMusician.size();
     }
     @Override
     public Object getItem(int position) {
@@ -51,7 +52,7 @@ public class ListSearchResultAdapter extends BaseAdapter {
 
     public class Holder
     {
-        TextView tv;
+        TextView mTextViewName, mTextViewHarga;
         CircularImageView img;
     }
 
@@ -60,14 +61,14 @@ public class ListSearchResultAdapter extends BaseAdapter {
         // TODO Auto-generated method stub
         Holder holder=new Holder();
 
-        TextView tv;
-        CircularImageView img;
         final View rowView;
         rowView = inflater.inflate(R.layout.lv_musician_result,null);
-        holder.tv=(TextView) rowView.findViewById(R.id.musician_name);
+        holder.mTextViewName=(TextView) rowView.findViewById(R.id.musician_name);
+        holder.mTextViewHarga = (TextView)rowView.findViewById(R.id.musician_fee);
         holder.img=(CircularImageView) rowView.findViewById(R.id.img1);
-        holder.tv.setText(result[position]);
-        holder.img.setImageResource(imageId[position]);
+        holder.mTextViewName.setText(mListMusician.get(position).getName());
+        holder.mTextViewHarga.setText(mListMusician.get(position).getHarga_sewa());
+//        holder.img.setImageResource(imageId[position]);
 //        rowView.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {

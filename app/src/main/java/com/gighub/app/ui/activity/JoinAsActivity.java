@@ -10,17 +10,17 @@ import com.gighub.app.R;
 
 public class JoinAsActivity extends AppCompatActivity {
 
-    private Button btnRegAsOrg, btnRegAsMsc;
+    private Button mBtnRegAsOrg, mBtnRegAsMsc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join_as);
 
-        btnRegAsOrg = (Button)findViewById(R.id.btn_reg_as_org);
-        btnRegAsMsc = (Button)findViewById(R.id.btn_reg_as_msc);
+        mBtnRegAsOrg = (Button)findViewById(R.id.btn_reg_as_org);
+        mBtnRegAsMsc = (Button)findViewById(R.id.btn_reg_as_msc);
 
-        btnRegAsOrg.setOnClickListener(new View.OnClickListener() {
+        mBtnRegAsOrg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),RegisterAsOrganizerActivity.class);
@@ -28,7 +28,7 @@ public class JoinAsActivity extends AppCompatActivity {
             }
         });
 
-        btnRegAsMsc.setOnClickListener(new View.OnClickListener() {
+        mBtnRegAsMsc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),RegisterAsMusicianActivity.class);

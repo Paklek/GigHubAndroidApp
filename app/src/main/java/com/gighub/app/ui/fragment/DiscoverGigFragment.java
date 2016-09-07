@@ -77,29 +77,29 @@ public class DiscoverGigFragment extends Fragment {
 
 //        ServiceGighub serviceGighub = retrofit.create(ServiceGighub.class);
 //        Call<UserResponse> call = serviceGighub.loadUser();
-        RetrofitService.getInstance().getApi().loadMusicians().enqueue(new Callback<MusicianResponse>() {
-            @Override
-            public void onResponse(Call<MusicianResponse> call, Response<MusicianResponse> response) {
-                if(response.body().getError()==0){
-                    mDaftarMusician = response.body().getMusicians();
-                    mAdapter = new ListDiscoverGigAdapter(mDaftarMusician);
-                    mRecyclerView.setAdapter(mAdapter);
-                    String tmp = "";
-                    for(int i =0 ;i<mDaftarMusician.size();i++)
-                    {
-                        tmp += String.format(""+ mDaftarMusician.get(i).getName().toString());
-                    }
-
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<MusicianResponse> call, Throwable t) {
-                Toast.makeText(mContext,"Error"+t.getMessage(),Toast.LENGTH_SHORT).show();
-//                Log.e("-:failure",t.getMessage());
-            }
-        });
+//        RetrofitService.getInstance().getApi().loadMusicians().enqueue(new Callback<MusicianResponse>() {
+//            @Override
+//            public void onResponse(Call<MusicianResponse> call, Response<MusicianResponse> response) {
+//                if(response.body().getError()==0){
+//                    mDaftarMusician = response.body().getMusicians();
+//                    mAdapter = new ListDiscoverGigAdapter(mDaftarMusician);
+//                    mRecyclerView.setAdapter(mAdapter);
+//                    String tmp = "";
+//                    for(int i =0 ;i<mDaftarMusician.size();i++)
+//                    {
+//                        tmp += String.format(""+ mDaftarMusician.get(i).getName().toString());
+//                    }
+//
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<MusicianResponse> call, Throwable t) {
+//                Toast.makeText(mContext,"Error"+t.getMessage(),Toast.LENGTH_SHORT).show();
+////                Log.e("-:failure",t.getMessage());
+//            }
+//        });
 
 
         img_gig = (ImageView)view.findViewById(R.id.btn_imgGig);

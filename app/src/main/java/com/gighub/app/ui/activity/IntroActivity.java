@@ -13,34 +13,34 @@ import com.gighub.app.util.SessionManager;
 
 public class IntroActivity extends AppCompatActivity {
 
-    private SessionManager session;
-    private Button btn_discover,btn_join;
-    private TextView tv_login;
+    private SessionManager mSession;
+    private Button mBtnDiscover,mBtnJoin;
+    private TextView mTextViewLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
-        session = new SessionManager(getApplicationContext());
+        mSession = new SessionManager(getApplicationContext());
 
-        btn_discover = (Button) findViewById(R.id.btnDiscover);
-        btn_join = (Button)findViewById(R.id.btnJoin);
-        tv_login = (TextView) findViewById(R.id.tv_login);
+        mBtnDiscover = (Button) findViewById(R.id.btnDiscover);
+        mBtnJoin = (Button)findViewById(R.id.btnJoin);
+        mTextViewLogin = (TextView) findViewById(R.id.tv_login);
 
-        tv_login.setPaintFlags(tv_login.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+        mTextViewLogin.setPaintFlags(mTextViewLogin.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
 
-        btn_discover.setOnClickListener(new View.OnClickListener() {
+        mBtnDiscover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                session.SkipIntro();
+                mSession.SkipIntro();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
         });
 
-        btn_join.setOnClickListener(new View.OnClickListener() {
+        mBtnJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), JoinAsActivity.class);
@@ -48,7 +48,7 @@ public class IntroActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        tv_login.setOnClickListener(new View.OnClickListener() {
+        mTextViewLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), LoginAsActivity.class);

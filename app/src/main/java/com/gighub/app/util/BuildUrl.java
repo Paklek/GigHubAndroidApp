@@ -12,7 +12,7 @@ public class BuildUrl {
     public ServiceGighub serviceGighub;
     public void buildBaseUrl(){
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.100/Gighub-master/public/")
+                .baseUrl("http://192.168.167.51/Gighub-master/public/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         serviceGighub = retrofit.create(ServiceGighub.class);

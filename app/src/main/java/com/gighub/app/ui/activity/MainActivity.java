@@ -24,11 +24,11 @@ import com.gighub.app.util.SessionManager;
 
 public class MainActivity extends AppCompatActivity {
 
-    private SessionManager session;
-    private Toolbar toolbar;
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
-    private String name;
+    private SessionManager mSession;
+    private Toolbar mToolbar;
+    private TabLayout mTabLayout;
+    private ViewPager mViewPager;
+    private String mName;
 
     public static final String FIRST_NAME = "fname";
 
@@ -37,26 +37,26 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        session = new SessionManager(getApplicationContext());
+        mSession = new SessionManager(getApplicationContext());
 
-        session.getSkipIntroStatus();
+        mSession.getSkipIntroStatus();
 
-        if(session.isSkipIntroStatus()){
+        if(mSession.isSkipIntroStatus()){
 
-            toolbar = (Toolbar)findViewById(R.id.toolbar);
-            if(session.isLoggedIn()){
-                if(session.checkUserType().equals("org")){
-                    name = session.getUserDetails().getFirst_name();
+            mToolbar = (Toolbar)findViewById(R.id.toolbar);
+            if(mSession.isLoggedIn()){
+                if(mSession.checkUserType().equals("org")){
+                    mName = mSession.getUserDetails().getFirst_name();
                 }
-                else if(session.checkUserType().equals("msc")){
-                    name = session.getMusicianDetails().getName();
+                else if(mSession.checkUserType().equals("msc")){
+                    mName = mSession.getMusicianDetails().getName();
                 }
-                toolbar.setTitle("GigHub - "+name);
+                mToolbar.setTitle("GigHub - "+mName);
             }
             else {
-                toolbar.setTitle("Gig Hub - Discover");
+                mToolbar.setTitle("Gig Hub - Discover");
             }
-            setSupportActionBar(toolbar);
+            setSupportActionBar(mToolbar);
             // my_child_toolbar is defined in the layout file
 
 //            setSupportActionBar(toolbar);
@@ -68,11 +68,11 @@ public class MainActivity extends AppCompatActivity {
 //            ab.setDisplayHomeAsUpEnabled(true);
 //            getSupportActionBar().setDisplayHomeAsUpEnabled(true); -- Tombol Back
 
-            viewPager = (ViewPager) findViewById(R.id.viewpager);
-            setupViewPager(viewPager);
+            mViewPager = (ViewPager) findViewById(R.id.viewpager);
+            setupViewPager(mViewPager);
 
-            tabLayout = (TabLayout) findViewById(R.id.tabs);
-            tabLayout.setupWithViewPager(viewPager);
+            mTabLayout = (TabLayout) findViewById(R.id.tabs);
+            mTabLayout.setupWithViewPager(mViewPager);
 
 
         }
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
 
-        if(session.isLoggedIn()){
+        if(mSession.isLoggedIn()){
             menu.getItem(0).setVisible(false);
             menu.getItem(1).setVisible(false);
         }

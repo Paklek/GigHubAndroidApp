@@ -28,10 +28,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegisterAsMusicianActivity extends AppCompatActivity {
 
-    private EditText editTextNameRegister, editTextEmailRegister, editTextPasswordRegister, editTextConfirmationPasswordRegister;
+    private EditText mEditTextNameRegister, mEditTextEmailRegister, mEditTextPasswordRegister, mEditTextConfirmationPasswordRegister;
 
-    private Button buttonRegister;
-    private SessionManager session;
+    private Button mButtonRegister;
+    private SessionManager mSession;
 
     public static final String PESANLOG = "pesanlog";
 
@@ -40,14 +40,14 @@ public class RegisterAsMusicianActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_as_musician);
 
-        editTextNameRegister = (EditText)findViewById(R.id.et_name_register_msc);
-        editTextEmailRegister = (EditText)findViewById(R.id.et_email_register_msc);
-        editTextPasswordRegister = (EditText)findViewById(R.id.et_password_register_msc);
-        editTextConfirmationPasswordRegister = (EditText)findViewById(R.id.et_confirmation_password_register_msc);
+        mEditTextNameRegister = (EditText)findViewById(R.id.et_name_register_msc);
+        mEditTextEmailRegister = (EditText)findViewById(R.id.et_email_register_msc);
+        mEditTextPasswordRegister = (EditText)findViewById(R.id.et_password_register_msc);
+        mEditTextConfirmationPasswordRegister = (EditText)findViewById(R.id.et_confirmation_password_register_msc);
 
-        buttonRegister = (Button)findViewById(R.id.btn_register_register_msc);
+        mButtonRegister = (Button)findViewById(R.id.btn_register_register_msc);
 
-        buttonRegister.setOnClickListener(new View.OnClickListener() {
+        mButtonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 insertMusician();
@@ -58,20 +58,20 @@ public class RegisterAsMusicianActivity extends AppCompatActivity {
     Map<String,String> dataM = new HashMap<>();
 
     private void insertMusician(){
-        session = new SessionManager(getApplicationContext());
+        mSession = new SessionManager(getApplicationContext());
 
         BuildUrl buildUrl = new BuildUrl();
         buildUrl.buildBaseUrl();
 
-        dataM.put("name",editTextNameRegister.getText().toString());
-        dataM.put("email",editTextEmailRegister.getText().toString());
-        dataM.put("password",editTextPasswordRegister.getText().toString());
+        dataM.put("name",mEditTextNameRegister.getText().toString());
+        dataM.put("email",mEditTextEmailRegister.getText().toString());
+        dataM.put("password",mEditTextPasswordRegister.getText().toString());
 
         buildUrl.serviceGighub.insertMusician(dataM).enqueue(new Callback<Response>() {
             @Override
             public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
                 if (response.code() == 200) {
-                    session.SkipIntro();
+                    mSession.SkipIntro();
                     Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     Toast.makeText(RegisterAsMusicianActivity.this, "Berhasil Register", Toast.LENGTH_LONG).show();

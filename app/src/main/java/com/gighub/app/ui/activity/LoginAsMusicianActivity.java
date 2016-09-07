@@ -29,9 +29,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginAsMusicianActivity extends AppCompatActivity {
 
-    private EditText editTextEmailLoginMsc, editTextPasswordLoginMsc;
-    private Button btnCancelLoginMsc, btnLoginLoginMsc;
-    private SessionManager session;
+    private EditText mEditTextEmailLoginMsc, mEditTextPasswordLoginMsc;
+    private Button mBtnCancelLoginMsc, mBtnLoginLoginMsc;
+    private SessionManager mSession;
 
     public static final String PESANLOG = "pesanlog";
     public static final String FIRST_NAME = "fname";
@@ -41,13 +41,13 @@ public class LoginAsMusicianActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_as_musician);
 
-        editTextEmailLoginMsc = (EditText)findViewById(R.id.et_email_login_msc);
-        editTextPasswordLoginMsc = (EditText)findViewById(R.id.et_password_login_msc);
+        mEditTextEmailLoginMsc = (EditText)findViewById(R.id.et_email_login_msc);
+        mEditTextPasswordLoginMsc = (EditText)findViewById(R.id.et_password_login_msc);
 
-        btnCancelLoginMsc = (Button)findViewById(R.id.btn_cancel_login_msc);
-        btnLoginLoginMsc = (Button)findViewById(R.id.btn_login_login_msc);
+        mBtnCancelLoginMsc = (Button)findViewById(R.id.btn_cancel_login_msc);
+        mBtnLoginLoginMsc = (Button)findViewById(R.id.btn_login_login_msc);
 
-        btnLoginLoginMsc.setOnClickListener(new View.OnClickListener() {
+        mBtnLoginLoginMsc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendLoginDataMusician();
@@ -61,20 +61,20 @@ public class LoginAsMusicianActivity extends AppCompatActivity {
         BuildUrl buildUrl = new BuildUrl();
         buildUrl.buildBaseUrl();
 //        --------------
-        loginData.put("email",editTextEmailLoginMsc.getText().toString());
-        loginData.put("password",editTextPasswordLoginMsc.getText().toString());
+        loginData.put("email",mEditTextEmailLoginMsc.getText().toString());
+        loginData.put("password",mEditTextPasswordLoginMsc.getText().toString());
 
         buildUrl.serviceGighub.sendLoginDataMusician(loginData).enqueue(new Callback<ResponseMusician>() {
             @Override
             public void onResponse(Call<ResponseMusician> call, Response<ResponseMusician> response) {
                 if(response.code()==200){
                     if(response.body().getError()==0){
-                        session = new SessionManager(getApplicationContext());
-                        session.createLoginSession(new Gson().toJson(response.body().getMusician()),"msc");
+                        mSession = new SessionManager(getApplicationContext());
+                        mSession.createLoginSession(new Gson().toJson(response.body().getMusician()),"msc");
                         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                         Log.d(PESANLOG,""+response.body().getMessage()+" error: "+response.body().getError());
                         Toast.makeText(LoginAsMusicianActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
-                        session.SkipIntro();
+                        mSession.SkipIntro();
                         startActivity(intent);
                     }
                 }
