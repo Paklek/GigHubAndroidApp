@@ -17,28 +17,28 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCnr-Sxlgu9soj-V9u4xaoP1kDEy3ULW3A" />
-        
-        <activity android:name=".ui.activity.SplashActivity"
+
+        <activity
+            android:name=".ui.activity.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.activity.MainActivity" />
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
 
-        <activity android:name=".ui.activity.MainActivity"/>
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- </intent-filter> -->
         <activity android:name=".ui.activity.IntroActivity" />
         <activity
             android:name=".ui.activity.SearchResultActivity"
             android:parentActivityName=".ui.activity.MainActivity" />
         <activity android:name=".ui.activity.MusicianActivity" />
-        <activity android:name=".ui.activity.SpinnerActivity" />
-        <activity android:name=".ui.activity.RegisterActivity" />
         <activity android:name=".ui.activity.AboutActivity" />
         <activity android:name=".ui.activity.SignInActivity" />
         <activity
@@ -46,7 +46,6 @@
             android:parentActivityName=".ui.activity.MusicianActivity" />
         <activity android:name=".ui.activity.GigActivity" />
         <activity android:name=".ui.activity.AccountActivity" />
-        <activity android:name=".ui.activity.CreateMusicianProfileActivity" />
         <activity android:name=".ui.activity.BookingListActivity" />
         <activity
             android:name=".ui.activity.GigMoneyActivity"
@@ -60,12 +59,13 @@
         <activity android:name=".ui.activity.CompleteMusicianProfileActivity" />
         <activity android:name=".ui.activity.BookingDetailsActivity" />
         <activity android:name=".ui.activity.ViewMapGig" />
-        <activity android:name=".ui.activity.JoinAsActivity" />
+        <activity android:name=".ui.activity.RegisterAsActivity" />
         <activity android:name=".ui.activity.RegisterAsOrganizerActivity" />
         <activity android:name=".ui.activity.RegisterAsMusicianActivity" />
         <activity android:name=".ui.activity.LoginAsOrganizerActivity" />
         <activity android:name=".ui.activity.LoginAsMusicianActivity" />
         <activity android:name=".ui.activity.LoginAsActivity" />
+        <activity android:name=".ui.activity.AddBandActivity"></activity>
     </application>
 
 </manifest>

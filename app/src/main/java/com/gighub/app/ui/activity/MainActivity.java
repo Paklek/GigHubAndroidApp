@@ -3,18 +3,12 @@ package com.gighub.app.ui.activity;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 
 import com.gighub.app.R;
 import com.gighub.app.ui.adapter.MainViewPagerAdapter;
@@ -107,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_register:
                 // User chose the "Settings" item, show the app settings UI...
-                Intent intent = new Intent(getApplicationContext(),JoinAsActivity.class);
+                Intent intent = new Intent(getApplicationContext(),RegisterAsActivity.class);
                 startActivity(intent);
                 return true;
 

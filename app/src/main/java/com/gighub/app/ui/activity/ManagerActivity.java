@@ -12,11 +12,8 @@ import android.view.MenuItem;
 
 import com.gighub.app.R;
 import com.gighub.app.ui.adapter.MainViewPagerAdapter;
-import com.gighub.app.ui.fragment.CompletedBookingListFragment;
 import com.gighub.app.ui.fragment.ManagerApprovalFragment;
 import com.gighub.app.ui.fragment.ManagerWaitingFragment;
-import com.gighub.app.ui.fragment.OnProccessBookingListFragment;
-import com.gighub.app.ui.fragment.RequestBookingListFragment;
 
 public class ManagerActivity extends AppCompatActivity {
     private Toolbar toolbar;
@@ -71,7 +68,7 @@ public class ManagerActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_register:
                 // User chose the "Settings" item, show the app settings UI...
-                Intent intent = new Intent(getApplicationContext(),JoinAsActivity.class);
+                Intent intent = new Intent(getApplicationContext(),RegisterAsActivity.class);
                 startActivity(intent);
                 return true;
 

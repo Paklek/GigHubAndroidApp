@@ -23,16 +23,16 @@ import java.util.List;
  * Created by Paklek on 6/12/2016.
  */
 public class ListSearchResultAdapter extends BaseAdapter {
-    Context context;
+    Context mContext;
     private List<MusicianModel> mListMusician;
 
     private static LayoutInflater inflater=null;
 
-    public ListSearchResultAdapter(Context context, List<MusicianModel> mListMusician)
+    public ListSearchResultAdapter(Context mContext, List<MusicianModel> mListMusician)
     {
        this.mListMusician = mListMusician;
-        this.context = context;
-        inflater = (LayoutInflater)context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        this.mContext = mContext;
+        inflater = (LayoutInflater)mContext.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
     }
     @Override
     public long getItemId(int position) {
@@ -73,8 +73,8 @@ public class ListSearchResultAdapter extends BaseAdapter {
 //            @Override
 //            public void onClick(View v) {
 //                // TODO Auto-generated method stub
-//                Toast.makeText(context, "You Clicked "+result[position], Toast.LENGTH_LONG).show();
-//                Intent i = new Intent(context, MusicianActivity.class);
+//                Toast.makeText(mContext, "You Clicked "+result[position], Toast.LENGTH_LONG).show();
+//                Intent i = new Intent(mContext, MusicianActivity.class);
 //                rowView.getContext().startActivity(i);
 //
 //            }

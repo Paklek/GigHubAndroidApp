@@ -13,7 +13,7 @@ import com.gighub.app.util.SessionManager;
 
 public class AccountActivity extends AppCompatActivity {
 
-    private Button mBtnGigMoney, mBtnManager, mBtnProfile, mBtnAboutUs,mBtnLogout;
+    private Button mButtonGigMoney, mButtonProfile, mButtonAboutUs,mButtonLogout;
     private SessionManager mSession;
 
     public static final String PESANLOG ="pesanlog";
@@ -23,13 +23,12 @@ public class AccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
 
-        mBtnProfile = (Button)findViewById(R.id.btn_profile) ;
-//        mBtnGigMoney = (Button)findViewById(R.id.btn_gig_money);
-//        mBtnManager = (Button)findViewById(R.id.btn_manager);
-        mBtnAboutUs = (Button)findViewById(R.id.btn_about_us);
-        mBtnLogout = (Button)findViewById(R.id.btn_logout);
+        mButtonProfile = (Button)findViewById(R.id.btn_profile) ;
+//        mButtonGigMoney = (Button)findViewById(R.id.btn_gig_money);
+        mButtonAboutUs = (Button)findViewById(R.id.btn_about_us);
+        mButtonLogout = (Button)findViewById(R.id.btn_logout);
 
-        mBtnProfile.setOnClickListener(new View.OnClickListener() {
+        mButtonProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent _intent = new Intent(getApplicationContext(),ProfileActivity.class);
@@ -37,23 +36,16 @@ public class AccountActivity extends AppCompatActivity {
             }
         });
 
-//        mBtnGigMoney.setOnClickListener(new View.OnClickListener() {
+//        mButtonGigMoney.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
 //                Intent _intent = new Intent(getApplicationContext(),GigMoneyActivity.class);
 //                startActivity(_intent);
 //            }
 //        });
+        
 
-//        mBtnManager.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent _intent = new Intent(getApplicationContext(),ManagerActivity.class);
-//                startActivity(_intent);
-//            }
-//        });
-
-        mBtnAboutUs.setOnClickListener(new View.OnClickListener() {
+        mButtonAboutUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent _intent = new Intent(getApplicationContext(),AboutActivity.class);
@@ -61,7 +53,7 @@ public class AccountActivity extends AppCompatActivity {
             }
         });
 
-        mBtnLogout.setOnClickListener(new View.OnClickListener() {
+        mButtonLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 logout();

@@ -249,7 +249,7 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
                 "Tebing Tinggi"
             },
             {
-                    "Yogyakarta"
+                "Yogyakarta"
             }};
 
     public DiscoverMusicianFragment() {

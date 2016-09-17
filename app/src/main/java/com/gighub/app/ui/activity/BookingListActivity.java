@@ -13,16 +13,13 @@ import android.view.MenuItem;
 import com.gighub.app.R;
 import com.gighub.app.ui.adapter.MainViewPagerAdapter;
 import com.gighub.app.ui.fragment.CompletedBookingListFragment;
-import com.gighub.app.ui.fragment.DiscoverGigFragment;
-import com.gighub.app.ui.fragment.DiscoverMusicianFragment;
 import com.gighub.app.ui.fragment.OnProccessBookingListFragment;
 import com.gighub.app.ui.fragment.RequestBookingListFragment;
-import com.gighub.app.util.SessionManager;
 
 public class BookingListActivity extends AppCompatActivity {
-    private Toolbar toolbar;
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
+    private Toolbar mToolbar;
+    private TabLayout mTabLayout;
+    private ViewPager mViewPager;
 
 
     @Override
@@ -30,34 +27,34 @@ public class BookingListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-            toolbar = (Toolbar)findViewById(R.id.toolbar);
-            toolbar.setTitle("BOOKING LIST");
-            setSupportActionBar(toolbar);
-            // my_child_toolbar is defined in the layout file
+            mToolbar = (Toolbar)findViewById(R.id.toolbar);
+            mToolbar.setTitle("BOOKING LIST");
+            setSupportActionBar(mToolbar);
+            // my_child_mToolbar is defined in the layout file
 
-//            setSupportActionBar(toolbar);
+//            setSupportActionBar(mToolbar);
 
-            // Get a support ActionBar corresponding to this toolbar
+            // Get a support ActionBar corresponding to this mToolbar
 //            ActionBar ab = getSupportActionBar();
 
             // Enable the Up button
 //            ab.setDisplayHomeAsUpEnabled(true);
 //            getSupportActionBar().setDisplayHomeAsUpEnabled(true); -- Tombol Back
 
-            viewPager = (ViewPager) findViewById(R.id.viewpager);
-            setupViewPager(viewPager);
+            mViewPager = (ViewPager) findViewById(R.id.viewpager);
+            setupViewPager(mViewPager);
 
-            tabLayout = (TabLayout) findViewById(R.id.tabs);
-            tabLayout.setupWithViewPager(viewPager);
+            mTabLayout = (TabLayout) findViewById(R.id.tabs);
+            mTabLayout.setupWithViewPager(mViewPager);
 
     }
 
-    private void setupViewPager(ViewPager viewPager) {
+    private void setupViewPager(ViewPager mViewPager) {
         MainViewPagerAdapter adapter = new MainViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new RequestBookingListFragment(), "REQUEST");
         adapter.addFragment(new OnProccessBookingListFragment(), "ON PROCCESS");
         adapter.addFragment(new CompletedBookingListFragment(), "COMPLETED");
-        viewPager.setAdapter(adapter);
+        mViewPager.setAdapter(adapter);
     }
 
 
@@ -73,7 +70,7 @@ public class BookingListActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_register:
                 // User chose the "Settings" item, show the app settings UI...
-                Intent intent = new Intent(getApplicationContext(),JoinAsActivity.class);
+                Intent intent = new Intent(getApplicationContext(),RegisterAsActivity.class);
                 startActivity(intent);
                 return true;
 

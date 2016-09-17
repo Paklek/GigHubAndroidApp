@@ -27,7 +27,7 @@ import java.util.List;
 public class SearchResultActivity extends AppCompatActivity {
 
     ListView mListView;
-    Context context;
+    Context mContext;
     private Toolbar toolbar;
     private MusicianModel mMusician;
     private String mNameMusician;
@@ -41,7 +41,7 @@ public class SearchResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
         mListMusician = new ArrayList<MusicianModel>();
-        context = this;
+        mContext = this;
 //        getSupportActionBar().setHomeButtonEnabled(true);
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         toolbar.setTitle("Search Result");

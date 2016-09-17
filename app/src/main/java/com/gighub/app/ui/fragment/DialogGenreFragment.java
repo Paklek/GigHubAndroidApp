@@ -39,13 +39,13 @@ import retrofit2.Response;
  */
 public class DialogGenreFragment extends DialogFragment {
 
-    private RecyclerView mRVGenreDialog;
+    private RecyclerView mRecyclerViewGenreDialog;
 
-    private List<Genre> genres;
-    private Button btnSelecttion;
+    private List<Genre> mListGenre;
+    private Button mButtonSelection;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    private ListGenreAdapter listGenreAdapter;
+    private ListGenreAdapter mListGenreAdapter;
 
     public DialogGenreFragment() {
         // Required empty public constructor
@@ -66,18 +66,18 @@ public class DialogGenreFragment extends DialogFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dialog_genre, container, false);
         // Inflate the layout for this fragment
-        btnSelecttion = (Button)view.findViewById(R.id.btn_genre_select);
-        genres = new ArrayList<Genre>();
+        mButtonSelection = (Button)view.findViewById(R.id.btn_genre_select);
+        mListGenre = new ArrayList<Genre>();
 
         mLayoutManager = new LinearLayoutManager(getActivity());
-        mRVGenreDialog = (RecyclerView)view.findViewById(R.id.rv_genre);
+        mRecyclerViewGenreDialog = (RecyclerView)view.findViewById(R.id.rv_genre);
 
-        listGenreAdapter = new ListGenreAdapter(genres);
+        mListGenreAdapter = new ListGenreAdapter(mListGenre);
 
-        mRVGenreDialog.setHasFixedSize(true);
-        mRVGenreDialog.setLayoutManager(mLayoutManager);
-        mRVGenreDialog.setAdapter(listGenreAdapter);
-        mRVGenreDialog.getAdapter().notifyDataSetChanged();
+        mRecyclerViewGenreDialog.setHasFixedSize(true);
+        mRecyclerViewGenreDialog.setLayoutManager(mLayoutManager);
+        mRecyclerViewGenreDialog.setAdapter(mListGenreAdapter);
+        mRecyclerViewGenreDialog.getAdapter().notifyDataSetChanged();
 
         BuildUrl buildUrl = new BuildUrl();
         buildUrl.buildBaseUrl();
@@ -87,13 +87,13 @@ public class DialogGenreFragment extends DialogFragment {
                 Log.d("data log",response.code()+ new Gson().toJson(response.body().getGenreList()));
                 if(response.code()==200){
                     if(response.body().getError()==0){
-                        genres = response.body().getGenreList();
-                        listGenreAdapter = new ListGenreAdapter(genres);
+                        mListGenre = response.body().getGenreList();
+                        mListGenreAdapter = new ListGenreAdapter(mListGenre);
 
-                        mRVGenreDialog.setHasFixedSize(true);
-                        mRVGenreDialog.setLayoutManager(mLayoutManager);
-                        mRVGenreDialog.setAdapter(listGenreAdapter);
-                        mRVGenreDialog.getAdapter().notifyDataSetChanged();
+                        mRecyclerViewGenreDialog.setHasFixedSize(true);
+                        mRecyclerViewGenreDialog.setLayoutManager(mLayoutManager);
+                        mRecyclerViewGenreDialog.setAdapter(mListGenreAdapter);
+                        mRecyclerViewGenreDialog.getAdapter().notifyDataSetChanged();
                     }
                 }
             }
@@ -111,13 +111,13 @@ public class DialogGenreFragment extends DialogFragment {
 //                Log.d("data log",response.code()+ new Gson().toJson(response.body().getGenreList()));
 //                if(response.code()==200){
 //                    if(response.body().getError()==0){
-//                        genres = response.body().getGenreList();
-//                        listGenreAdapter = new ListGenreAdapter(genres);
+//                        mListGenre = response.body().getGenreList();
+//                        mListGenreAdapter = new ListGenreAdapter(mListGenre);
 //
-//                        mRVGenreDialog.setHasFixedSize(true);
-//                        mRVGenreDialog.setLayoutManager(mLayoutManager);
-//                        mRVGenreDialog.setAdapter(listGenreAdapter);
-//                        mRVGenreDialog.getAdapter().notifyDataSetChanged();
+//                        mRecyclerViewGenreDialog.setHasFixedSize(true);
+//                        mRecyclerViewGenreDialog.setLayoutManager(mLayoutManager);
+//                        mRecyclerViewGenreDialog.setAdapter(mListGenreAdapter);
+//                        mRecyclerViewGenreDialog.getAdapter().notifyDataSetChanged();
 //                    }
 //                }
 //            }
@@ -128,7 +128,7 @@ public class DialogGenreFragment extends DialogFragment {
 //            }
 //        });
 
-        btnSelecttion.setOnClickListener(new View.OnClickListener() {
+        mButtonSelection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendResult(DiscoverMusicianFragment.REQCODE);
@@ -158,8 +158,8 @@ public class DialogGenreFragment extends DialogFragment {
 
     public void sendResult(int reqCode){
         Intent intent = new Intent();
-        intent.putExtra("kirim",new Gson().toJson(genres));
-        Log.d("Data Log", new Gson().toJson(genres));
+        intent.putExtra("kirim",new Gson().toJson(mListGenre));
+        Log.d("Data Log", new Gson().toJson(mListGenre));
         getTargetFragment().onActivityResult(getTargetRequestCode(),reqCode,intent);
     }
 }

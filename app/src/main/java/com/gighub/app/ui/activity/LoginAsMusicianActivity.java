@@ -29,8 +29,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginAsMusicianActivity extends AppCompatActivity {
 
-    private EditText mEditTextEmailLoginMsc, mEditTextPasswordLoginMsc;
-    private Button mBtnCancelLoginMsc, mBtnLoginLoginMsc;
+    private EditText mEditTextEmailLoginMusician, mEditTextPasswordLoginMusician;
+    private Button mButtonCancelLoginMusician, mButtonLoginLoginMusician;
     private SessionManager mSession;
 
     public static final String PESANLOG = "pesanlog";
@@ -41,13 +41,13 @@ public class LoginAsMusicianActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_as_musician);
 
-        mEditTextEmailLoginMsc = (EditText)findViewById(R.id.et_email_login_msc);
-        mEditTextPasswordLoginMsc = (EditText)findViewById(R.id.et_password_login_msc);
+        mEditTextEmailLoginMusician = (EditText)findViewById(R.id.et_email_login_msc);
+        mEditTextPasswordLoginMusician = (EditText)findViewById(R.id.et_password_login_msc);
 
-        mBtnCancelLoginMsc = (Button)findViewById(R.id.btn_cancel_login_msc);
-        mBtnLoginLoginMsc = (Button)findViewById(R.id.btn_login_login_msc);
+        mButtonCancelLoginMusician = (Button)findViewById(R.id.btn_cancel_login_msc);
+        mButtonLoginLoginMusician = (Button)findViewById(R.id.btn_login_login_msc);
 
-        mBtnLoginLoginMsc.setOnClickListener(new View.OnClickListener() {
+        mButtonLoginLoginMusician.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendLoginDataMusician();
@@ -61,8 +61,8 @@ public class LoginAsMusicianActivity extends AppCompatActivity {
         BuildUrl buildUrl = new BuildUrl();
         buildUrl.buildBaseUrl();
 //        --------------
-        loginData.put("email",mEditTextEmailLoginMsc.getText().toString());
-        loginData.put("password",mEditTextPasswordLoginMsc.getText().toString());
+        loginData.put("email",mEditTextEmailLoginMusician.getText().toString());
+        loginData.put("password",mEditTextPasswordLoginMusician.getText().toString());
 
         buildUrl.serviceGighub.sendLoginDataMusician(loginData).enqueue(new Callback<ResponseMusician>() {
             @Override

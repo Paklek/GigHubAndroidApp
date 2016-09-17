@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@drawable/bg_home"
     android:gravity="center"
-    tools:context="com.gighub.app.ui.activity.JoinAsActivity">
+    tools:context=".ui.activity.RegisterAsActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

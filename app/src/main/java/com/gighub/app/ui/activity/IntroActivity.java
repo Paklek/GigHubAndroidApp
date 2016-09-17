@@ -14,7 +14,7 @@ import com.gighub.app.util.SessionManager;
 public class IntroActivity extends AppCompatActivity {
 
     private SessionManager mSession;
-    private Button mBtnDiscover,mBtnJoin;
+    private Button mButtonDiscover,mButtonJoin;
     private TextView mTextViewLogin;
 
     @Override
@@ -24,13 +24,13 @@ public class IntroActivity extends AppCompatActivity {
 
         mSession = new SessionManager(getApplicationContext());
 
-        mBtnDiscover = (Button) findViewById(R.id.btnDiscover);
-        mBtnJoin = (Button)findViewById(R.id.btnJoin);
+        mButtonDiscover = (Button) findViewById(R.id.btnDiscover);
+        mButtonJoin = (Button)findViewById(R.id.btnJoin);
         mTextViewLogin = (TextView) findViewById(R.id.tv_login);
 
         mTextViewLogin.setPaintFlags(mTextViewLogin.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
 
-        mBtnDiscover.setOnClickListener(new View.OnClickListener() {
+        mButtonDiscover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mSession.SkipIntro();
@@ -40,10 +40,10 @@ public class IntroActivity extends AppCompatActivity {
             }
         });
 
-        mBtnJoin.setOnClickListener(new View.OnClickListener() {
+        mButtonJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), JoinAsActivity.class);
+                Intent intent = new Intent(getApplicationContext(), RegisterAsActivity.class);
 //                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }

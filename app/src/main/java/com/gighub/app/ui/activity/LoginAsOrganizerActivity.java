@@ -27,8 +27,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginAsOrganizerActivity extends AppCompatActivity {
 
-    private EditText mEditTextEmailLoginOrg, mEditTextPasswordLoginOrg;
-    private Button mBtnCancelLoginOrg, mBtnLoginLoginOrg;
+    private EditText mEditTextEmailLoginOrganizer, mEditTextPasswordLoginOrganizer;
+    private Button mButtonCancelLoginOrganizer, mButtonLoginLoginOrganizer;
     private SessionManager mSession;
 
     public final static String PESANLOG ="pesanlog";
@@ -38,12 +38,12 @@ public class LoginAsOrganizerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_as_organizer);
 
-        mEditTextEmailLoginOrg = (EditText)findViewById(R.id.et_email_login_org);
-        mEditTextPasswordLoginOrg = (EditText)findViewById(R.id.et_password_login_org);
-        mBtnCancelLoginOrg = (Button)findViewById(R.id.btn_cancel_login_org);
-        mBtnLoginLoginOrg = (Button)findViewById(R.id.btn_login_login_org);
+        mEditTextEmailLoginOrganizer = (EditText)findViewById(R.id.et_email_login_org);
+        mEditTextPasswordLoginOrganizer = (EditText)findViewById(R.id.et_password_login_org);
+        mButtonCancelLoginOrganizer = (Button)findViewById(R.id.btn_cancel_login_org);
+        mButtonLoginLoginOrganizer = (Button)findViewById(R.id.btn_login_login_org);
 
-        mBtnLoginLoginOrg.setOnClickListener(new View.OnClickListener() {
+        mButtonLoginLoginOrganizer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendLoginDataOrganizer();
@@ -58,8 +58,8 @@ public class LoginAsOrganizerActivity extends AppCompatActivity {
         BuildUrl buildUrl = new BuildUrl();
         buildUrl.buildBaseUrl();
 
-        loginData.put("email", mEditTextEmailLoginOrg.getText().toString());
-        loginData.put("password", mEditTextPasswordLoginOrg.getText().toString());
+        loginData.put("email", mEditTextEmailLoginOrganizer.getText().toString());
+        loginData.put("password", mEditTextPasswordLoginOrganizer.getText().toString());
 
         buildUrl.serviceGighub.sendLoginDataOrganizer(loginData).enqueue(new Callback<ResponseUser>() {
             @Override

@@ -8,16 +8,16 @@ import com.gighub.app.R;
 
 public class GigMoneyActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
+    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gig_money);
 
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
-        toolbar.setTitle("Gig Money");
-        setSupportActionBar(toolbar);
+        mToolbar = (Toolbar)findViewById(R.id.toolbar);
+        mToolbar.setTitle("Gig Money");
+        setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

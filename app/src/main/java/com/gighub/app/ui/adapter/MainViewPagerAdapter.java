@@ -14,30 +14,30 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter {
 
 
 
-    private final List<Fragment> mFragmentList = new ArrayList<>();
-    private final List<String> mFragmentTitleList = new ArrayList<>();
+    private final List<Fragment> mListFragment = new ArrayList<>();
+    private final List<String> mListFragmentTitle = new ArrayList<>();
     public MainViewPagerAdapter(FragmentManager fm) {
         super(fm);
     }
 
     @Override
     public Fragment getItem(int position) {
-        return mFragmentList.get(position);
+        return mListFragment.get(position);
     }
 
     @Override
     public int getCount() {
-        return mFragmentList.size();
+        return mListFragment.size();
     }
 
     public void addFragment(Fragment fragment, String title) {
-        mFragmentList.add(fragment);
-        mFragmentTitleList.add(title);
+        mListFragment.add(fragment);
+        mListFragmentTitle.add(title);
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return mFragmentTitleList.get(position);
+        return mListFragmentTitle.get(position);
     }
 
 }

@@ -14,44 +14,38 @@ import com.gighub.app.R;
 import com.gighub.app.ui.adapter.MainViewPagerAdapter;
 import com.gighub.app.ui.fragment.GigProfileFragment;
 import com.gighub.app.ui.fragment.GigUpcomingFragment;
-import com.gighub.app.ui.fragment.MusicianMusicFragment;
-import com.gighub.app.ui.fragment.MusicianProfileFragment;
-import com.gighub.app.ui.fragment.MusicianReviewFragment;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.OnMapReadyCallback;
 
 public class GigActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
+    private Toolbar mToolbar;
+    private TabLayout mTabLayout;
+    private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gig);
 
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
-        toolbar.setTitle("Gig");
-        setSupportActionBar(toolbar);
+        mToolbar = (Toolbar)findViewById(R.id.toolbar);
+        mToolbar.setTitle("Gig");
+        setSupportActionBar(mToolbar);
 //            getSupportActionBar().setDisplayHomeAsUpEnabled(true); -- Tombol Back
 
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
+        mViewPager = (ViewPager) findViewById(R.id.viewpager);
+        setupViewPager(mViewPager);
 
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
+        mTabLayout = (TabLayout) findViewById(R.id.tabs);
+        mTabLayout.setupWithViewPager(mViewPager);
 
 
 
     }
 
-    private void setupViewPager(ViewPager viewPager) {
+    private void setupViewPager(ViewPager mViewPager) {
         MainViewPagerAdapter adapter = new MainViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new GigProfileFragment(), "PROFILE");
         adapter.addFragment(new GigUpcomingFragment(), "UPCOMING");
-        viewPager.setAdapter(adapter);
+        mViewPager.setAdapter(adapter);
     }
 
     @Override
@@ -65,7 +59,7 @@ public class GigActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_register:
                 // User chose the "Settings" item, show the app settings UI...
-                Intent intent = new Intent(getApplicationContext(),JoinAsActivity.class);
+                Intent intent = new Intent(getApplicationContext(),RegisterAsActivity.class);
                 startActivity(intent);
                 return true;
 

@@ -9,13 +9,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 
 import com.gighub.app.R;
 import com.gighub.app.ui.adapter.MainViewPagerAdapter;
-import com.gighub.app.ui.fragment.DiscoverGigFragment;
-import com.gighub.app.ui.fragment.DiscoverMusicianFragment;
 import com.gighub.app.ui.fragment.MusicianMusicFragment;
 import com.gighub.app.ui.fragment.MusicianProfileFragment;
 import com.gighub.app.ui.fragment.MusicianReviewFragment;
@@ -66,7 +62,7 @@ public class MusicianActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_register:
                 // User chose the "Settings" item, show the app settings UI...
-                Intent intent = new Intent(getApplicationContext(),JoinAsActivity.class);
+                Intent intent = new Intent(getApplicationContext(),RegisterAsActivity.class);
                 startActivity(intent);
                 return true;
 

@@ -20,10 +20,10 @@ import java.util.List;
  * Created by user on 05/09/2016.
  */
 public class ListGenreAdapter extends RecyclerView.Adapter<ListGenreAdapter.ListGenreViewHolder> {
-    private List<Genre> genreList;
+    private List<Genre> mListGenre;
 
     public ListGenreAdapter(List<Genre> genres){
-        this.genreList = genres;
+        this.mListGenre = genres;
         Log.d("adapter","Aku dibuat");
         Log.d("adapter",new Gson().toJson(genres));
     }
@@ -38,18 +38,18 @@ public class ListGenreAdapter extends RecyclerView.Adapter<ListGenreAdapter.List
 
     @Override
     public void onBindViewHolder(ListGenreViewHolder holder, final int position) {
-        holder.cbxGenre.setChecked(genreList.get(position).getSelected());
-        holder.tvGenre.setText(genreList.get(position).getGenre_name());
+        holder.cbxGenre.setChecked(mListGenre.get(position).getSelected());
+        holder.tvGenre.setText(mListGenre.get(position).getGenre_name());
 
         Log.d("adapter","Aku dilihat");
         holder.cbxGenre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(genreList.get(position).getSelected()) {
-                    genreList.get(position).setSelected(false);
+                if(mListGenre.get(position).getSelected()) {
+                    mListGenre.get(position).setSelected(false);
                 }
                 else {
-                    genreList.get(position).setSelected(true);
+                    mListGenre.get(position).setSelected(true);
                 }
             }
         });
@@ -59,7 +59,7 @@ public class ListGenreAdapter extends RecyclerView.Adapter<ListGenreAdapter.List
     public int getItemCount() {
 
         Log.d("adapter","Aku dihitung");
-        return genreList.size();
+        return mListGenre.size();
 
     }
 
