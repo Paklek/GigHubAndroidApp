@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.gighub.app.model.GenreMusician;
 import com.gighub.app.model.MusicianModel;
+import com.gighub.app.model.Musicians;
 import com.gighub.app.model.UserModel;
 import com.gighub.app.ui.activity.IntroActivity;
 import com.gighub.app.ui.activity.LoginAsActivity;
@@ -86,6 +88,17 @@ public class SessionManager {
     }
     public MusicianModel getMusicianDetails(){
         MusicianModel tmp = new Gson().fromJson(mPreferences.getString(KEY_PREF_USER_DATA,null),MusicianModel.class);
+        Log.d(PESANLOG,mPreferences.getString(KEY_PREF_USER_DATA,null));
+        return tmp;
+    }
+    public Musicians getMusicians(){
+        Musicians tmp = new Gson().fromJson(mPreferences.getString(KEY_PREF_USER_DATA,null),Musicians.class);
+        Log.d(PESANLOG,mPreferences.getString(KEY_PREF_USER_DATA,null));
+        return tmp;
+    }
+
+    public GenreMusician getGenreMusician(){
+        GenreMusician tmp = new Gson().fromJson(mPreferences.getString(KEY_PREF_USER_DATA,null),GenreMusician.class);
         Log.d(PESANLOG,mPreferences.getString(KEY_PREF_USER_DATA,null));
         return tmp;
     }

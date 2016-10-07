@@ -26,12 +26,16 @@ import android.widget.Toast;
 
 import com.gighub.app.R;
 import com.gighub.app.model.Genre;
+import com.gighub.app.model.MResponse;
 import com.gighub.app.model.MusicianModel;
 import com.gighub.app.model.MusicianResponse;
+import com.gighub.app.model.Musicians;
 import com.gighub.app.model.ResponseMusician;
+import com.gighub.app.model.SearchResultResponse;
 import com.gighub.app.ui.activity.MainActivity;
 import com.gighub.app.ui.activity.SearchResultActivity;
 import com.gighub.app.util.BuildUrl;
+import com.gighub.app.util.StaticString;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -55,11 +59,14 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
     private EditText mEditTextSelectGenre;
     Spinner mSpinner1;
     Spinner mSpinner2;
-    private String[] mListProvinsi ={"Aceh", "Bali", "Banten", "Bengkulu", "Gorontalo", "Jakarta", "Jambi", "Jawa Barat", "Jawa Tengah", "Jawa Timur", "Kalimantan Barat", "Kalimantan Selatan", "Kalimantan Tengah", "Kalimantan Timur", "Kalimantan Utara", "Kepulauan Bangka Belitung", "Kepulauan Riau", "Lampung", "Maluku", "Maluku Utara", "Nusa Tenggara Barat", "Nusa Tenggara Timur", "Papua", "Papua Barat", "Riau", "Sulawesi Barat", "Sulawesi Selatan", "Sulawesi Tengah", "Sulawesi Tenggara", "Sulawesi Utara", "Sumatera Barat", "Sumatera Selatan", "Sumatera Utara", "Yogyakarta"};
+    private String[] mListProvinsi ={"-", "Aceh", "Bali", "Banten", "Bengkulu", "Gorontalo", "Jakarta", "Jambi", "Jawa Barat", "Jawa Tengah", "Jawa Timur", "Kalimantan Barat", "Kalimantan Selatan", "Kalimantan Tengah", "Kalimantan Timur", "Kalimantan Utara", "Kepulauan Bangka Belitung", "Kepulauan Riau", "Lampung", "Maluku", "Maluku Utara", "Nusa Tenggara Barat", "Nusa Tenggara Timur", "Papua", "Papua Barat", "Riau", "Sulawesi Barat", "Sulawesi Selatan", "Sulawesi Tengah", "Sulawesi Tenggara", "Sulawesi Utara", "Sumatera Barat", "Sumatera Selatan", "Sumatera Utara", "Yogyakarta"};
 
     public final static int REQCODE = 1000;
 
     private String mListKota[][]={
+            {
+                "-"
+            },
             {
                 "-",
                 "Banda Aceh",
@@ -378,28 +385,86 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
 
         mKotaSearch = mSpinner2.getSelectedItem().toString();
 
-        Log.d("=","jghjgjhghj");
-        buildUrl.serviceGighub.getSearchMusician(mKotaSearch).enqueue(new Callback<MusicianResponse>() {
-            @Override
-            public void onResponse(Call<MusicianResponse> call, Response<MusicianResponse> response) {
-                Intent i = new Intent(getActivity(),SearchResultActivity.class);
-                Log.d("=",response.code()+"");
-                if(response.code()==200){
-                    if(response.body().getError()==0){
-                        i.putExtra("search",new Gson().toJson(response.body().getMusicians()));
-                        Log.d("apa",mKotaSearch);
-                        Log.d("response",new Gson().toJson(response.body()));
-                        startActivity(i);
-                    }
-                }
-                startActivity(i);
-            }
+        Log.d("=","GetSearchMusician");
+        if(mKotaSearch.equals("-")){
+//            buildUrl.serviceGighub.loadMusicians().enqueue(new Callback<MusicianResponse>() {
+//                @Override
+//                public void onResponse(Call<MusicianResponse> call, Response<MusicianResponse> response) {
+//                    Intent i = new Intent(getActivity(),SearchResultActivity.class);
+//                    Log.d("=",response.code()+"");
+//                    Log.d("=",mKotaSearch);
+//                    if(response.code()==200){
+//                        if(response.body().getError()==0){
+//                            i.putExtra("search",new Gson().toJson(response.body().getMusicians()));
+//                            Log.d("kirim kota",mKotaSearch);
+//                            Log.d("response",new Gson().toJson(response.body()));
+////                            Log.d("musisi",new Gson().toJson(response.raw()));
+//                            startActivity(i);
+//                        }
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(Call<MusicianResponse> call, Throwable t) {
+//
+//                }
+//            });
 
-            @Override
-            public void onFailure(Call<MusicianResponse> call, Throwable t) {
-                Log.d("response", t.getMessage());
-                Toast.makeText(mContext,"Connection Fail. Check Your Connection",Toast.LENGTH_LONG).show();
-            }
-        });
+//            buildUrl.serviceGighub.sendLogin()
+
+
+            buildUrl.serviceGighub.getSearchAllMusician().enqueue(new Callback<SearchResultResponse>() {
+                @Override
+                public void onResponse(Call<SearchResultResponse> call, Response<SearchResultResponse> response) {
+                    Intent i = new Intent(getActivity(),SearchResultActivity.class);
+                    Log.d("=",response.code()+"");
+                    if(response.code()==200){
+                        if(response.body().getError()==0){
+                            i.putExtra("search",new Gson().toJson(response.body().getMusicians()));
+                            Log.d("kirim kota",mKotaSearch);
+                            Log.d("response",new Gson().toJson(response.body()));
+//                            Log.d("musisi",new Gson().toJson(response.raw()));
+                            startActivity(i);
+                        }
+                    }
+                    Log.d("response",new Gson().toJson(response.body()));
+                }
+
+                @Override
+                public void onFailure(Call<SearchResultResponse> call, Throwable t) {
+
+                }
+            });
+
+
+
+
+        }
+        if(!mKotaSearch.equals("-")) {
+            buildUrl.serviceGighub.getSearchMusician(mKotaSearch).enqueue(new Callback<SearchResultResponse>() {
+                @Override
+                public void onResponse(Call<SearchResultResponse> call, Response<SearchResultResponse> response) {
+                    Intent i = new Intent(getActivity(),SearchResultActivity.class);
+                    Log.d("=",response.code()+"");
+                    if(response.code()==200){
+                        if(response.body().getError()==0){
+                            i.putExtra("search",new Gson().toJson(response.body().getMusicians()));
+                            Log.d("kirim kota",mKotaSearch);
+                            Log.d("response",new Gson().toJson(response.body()));
+//                            Log.d("musisi",new Gson().toJson(response.raw()));
+                            startActivity(i);
+                        }
+                    }
+                    Log.d("response",new Gson().toJson(response.body()));
+                }
+
+                @Override
+                public void onFailure(Call<SearchResultResponse> call, Throwable t) {
+                    Log.d("response", t.getMessage());
+                    Toast.makeText(mContext,"Connection Fail. Check Your Connection",Toast.LENGTH_LONG).show();
+                }
+            });
+
+        }
     }
 }

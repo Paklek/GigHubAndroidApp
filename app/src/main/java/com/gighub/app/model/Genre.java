@@ -6,6 +6,7 @@ package com.gighub.app.model;
 public class Genre {
 
     private String id;
+    private String genre_name;
     private Boolean isSelected =false;
 
     public String getGenre_name() {
@@ -15,8 +16,6 @@ public class Genre {
     public void setGenre_name(String genre_name) {
         this.genre_name = genre_name;
     }
-
-    private String genre_name;
     public Boolean getSelected() {
         return isSelected;
     }

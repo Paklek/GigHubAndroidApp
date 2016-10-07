@@ -15,6 +15,8 @@ public class AccountActivity extends AppCompatActivity {
 
     private Button mButtonGigMoney, mButtonProfile, mButtonAboutUs,mButtonLogout;
     private SessionManager mSession;
+    private View mViewButtonLogout, mViewButtonProfile, mViewButtonGigMoney, mViewButtonManager;
+    private String mName;
 
     public static final String PESANLOG ="pesanlog";
 
@@ -22,11 +24,31 @@ public class AccountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
+        mSession = new SessionManager(getApplicationContext());
+
+        Intent intent = getIntent();
+
+        if(mSession.isLoggedIn()){
+            if(mSession.checkUserType().equals("org")){
+                mName = mSession.getUserDetails().getFirst_name();
+            }
+            else if(mSession.checkUserType().equals("msc")){
+                mName = mSession.getMusicianDetails().getName();
+            }
+
+        }
+
+
+        mViewButtonLogout = (View)findViewById(R.id.btn_logout);
+        mViewButtonProfile = (View)findViewById(R.id.btn_profile);
+        mViewButtonGigMoney = (View)findViewById(R.id.btn_gig_money);
+        mViewButtonManager = (View)findViewById(R.id.btn_manager);
 
         mButtonProfile = (Button)findViewById(R.id.btn_profile) ;
 //        mButtonGigMoney = (Button)findViewById(R.id.btn_gig_money);
         mButtonAboutUs = (Button)findViewById(R.id.btn_about_us);
         mButtonLogout = (Button)findViewById(R.id.btn_logout);
+
 
         mButtonProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +74,14 @@ public class AccountActivity extends AppCompatActivity {
                 startActivity(_intent);
             }
         });
+
+        if(!mSession.isLoggedIn()){
+//            View view = (View)findViewById(R.id.btn_logout);
+            mButtonLogout.setVisibility(mViewButtonLogout.GONE);
+            mButtonProfile.setVisibility(mViewButtonProfile.GONE);
+            mViewButtonGigMoney.setVisibility(mViewButtonGigMoney.GONE);
+            mViewButtonManager.setVisibility(mViewButtonManager.GONE);
+        }
 
         mButtonLogout.setOnClickListener(new View.OnClickListener() {
             @Override

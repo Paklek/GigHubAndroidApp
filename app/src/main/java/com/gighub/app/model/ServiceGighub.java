@@ -1,5 +1,7 @@
 package com.gighub.app.model;
 
+import com.gighub.app.util.StaticString;
+
 import java.util.List;
 import java.util.Map;
 
@@ -20,24 +22,45 @@ public interface ServiceGighub {
     @GET("users")
     Call<UserResponse> loadUser();
 
-    @GET("musicians")
+    @GET(StaticString.ROUTE_ALL_GIGS)
+    Call<GigResponse> loadGig();
+
+    @GET(StaticString.ROUTE_ALL_MUSICIANS)
     Call<MusicianResponse> loadMusicians();
 
-    @POST("api/musician/register")
+    @POST(StaticString.ROUTE_REGISTER_MUSICIAN)
     Call <Response> insertMusician(@Body Map<String, String> dataMusisi);
 
-    @POST("api/organizer/register")
+    @POST(StaticString.ROUTE_REGISTER_ORGANIZER)
     Call<Response> insertOrganizer(@Body Map<String, String> dataOrganizer);
 
-    @POST("api/organizer/login")
+    @POST(StaticString.ROUTE_LOGIN_ORGANIZER)
     Call<ResponseUser> sendLoginDataOrganizer(@Body Map<String, String> loginData);
 
-    @POST("api/musician/login")
+    @POST(StaticString.ROUTE_LOGIN_MUSICIAN)
     Call<ResponseMusician> sendLoginDataMusician(@Body Map<String,String> loginData);
 
-    @GET("api/musician/genres")
+//
+    @POST(StaticString.ROUTE_LOGIN_MUSICIAN)
+    Call<MResponse> sendLogin(@Body Map<String,String> loginData);
+//
+
+    @POST(StaticString.ROUTE_UPDATE_PROFILE_MUSICIAN)
+    Call<ResponseMusician> sendProfileUpdateDataMusician(@Body Map<String, String> profileUpdateData);
+
+    @GET(StaticString.ROUTE_ALL_GENRES)
     Call<ResponseCallGenre> loadMusicianGenre();
 
-    @GET("api/musician/search")
-    Call<MusicianResponse> getSearchMusician(@Query("kota") String kota);
+    @GET(StaticString.ROUTE_SEARCH_MUSICIANS)
+    Call<SearchResultResponse> getSearchMusician(@Query("kota") String kota);
+
+    @GET(StaticString.ROUTE_SEARCH_MUSICIANS)
+    Call<SearchResultResponse> getSearchAllMusician();
+
+    @POST(StaticString.ROUTE_CREATE_MUSICIAN_BAND)
+    Call<GrupBandResponse> sendInsertDataBand(@Body Map<String, String> insertDataBand);
+
+    @GET(StaticString.ROUTE_BANDS)
+    Call<GroupBandsResponse> getDataBand();
+
 }

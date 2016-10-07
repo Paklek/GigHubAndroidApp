@@ -17,7 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
-                android:src="@drawable/ava"
+                android:src="@android:drawable/ic_menu_gallery"
+                android:background="@drawable/transparent_dark"
                 android:id="@+id/btn_imgGig"
                 android:layout_width="match_parent"
                 android:scaleType="centerCrop"
@@ -25,9 +26,13 @@
                 android:layout_height="200dp"
                 android:textAlignment="center"/>
             <TextView
+                android:id="@+id/tv_namagig_discovergig"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nama Gig"
+                android:text="nama gig"
+                android:textStyle="bold"
+                android:textColor="@color/colorAccent"
+                android:textSize="30dp"
                 android:layout_gravity="center"/>
         </FrameLayout>
 
@@ -44,7 +49,7 @@
                 android:layout_column="0"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:src="@drawable/ava"
+                android:src="@drawable/ic_person_black_48dp"
                 app:siBorderWidth="2dp"
                 app:siBorderColor="#ddd"
                 android:layout_margin="5dp"/>

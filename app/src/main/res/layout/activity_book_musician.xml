@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fillViewport="true">
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -27,9 +32,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -55,7 +58,7 @@
                     android:layout_margin="5dp"
                     android:id="@+id/img1"/>
                 <TextView
-                    android:id="@+id/musician_name"
+                    android:id="@+id/tv_musician_name_bookingmusicianactivity"
                     android:layout_column="1"
                     android:layout_row="0"
                     android:layout_width="wrap_content"
@@ -63,7 +66,7 @@
                     android:text="The Black Adams"
                     android:layout_marginLeft="10dp"/>
                 <TextView
-                    android:id="@+id/musician_fee"
+                    android:id="@+id/tv_harga_sewa_bookmusicianactivity"
                     android:layout_column="1"
                     android:layout_row="1"
                     android:layout_columnSpan="2"
@@ -73,7 +76,7 @@
                     android:text="Rp. 200.000 / Hours"
                     />
                 <TextView
-                    android:id="@+id/musician_genres"
+                    android:id="@+id/tv_genre_bookmusicianactivity"
                     android:layout_column="1"
                     android:layout_row="2"
                     android:layout_width="wrap_content"
@@ -90,16 +93,27 @@
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/activity_vertical_margin"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="25dp">
+                android:layout_marginTop="10dp">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/where_is_event"/>
+
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <android.support.design.widget.TextInputEditText
+                    <EditText
+                        android:id="@+id/tv_nama_acara_bookmusicianactivity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Location Name"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/tv_location_bookmusicianactivity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Location"/>
@@ -108,12 +122,24 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <android.support.design.widget.TextInputEditText
+                    <EditText
+                        android:id="@+id/tv_location_details_bookmusicianactivity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Details"/>
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical"-->
+                <!--android:paddingBottom="@dimen/activity_vertical_margin"-->
+                <!--android:paddingLeft="@dimen/activity_horizontal_margin"-->
+                <!--android:paddingRight="@dimen/activity_horizontal_margin"-->
+                <!--android:paddingTop="@dimen/activity_vertical_margin">-->
+
+            <!--</LinearLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -125,15 +151,17 @@
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/activity_vertical_margin">
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/when_is_event"/>
+                    android:text="Start (Date and Time)"
+                    android:layout_marginBottom="10dp"/>
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp">
                     <Button
+                        android:id="@+id/btn_date_waktu_mulai_bookmusicianactivity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="date"
@@ -141,47 +169,65 @@
                         android:elevation="4dp"/>
                 </android.support.design.widget.TextInputLayout>
 
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="25dp"
-                android:paddingBottom="@dimen/activity_vertical_margin"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_vertical_margin">
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <Button
+                        android:id="@+id/btn_time_waktu_mulai_bookmusicianactivity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="date"
+                        android:background="@drawable/button_border2"
+                        android:hint="Done Time"
+                        android:elevation="4dp"/>
+                </android.support.design.widget.TextInputLayout>
+
+
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/starting_time"/>
+                    android:layout_marginTop="25dp"
+                    android:text="Finish (Date and Time)"
+                    android:layout_marginBottom="10dp"/>
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <android.support.design.widget.TextInputEditText
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp">
+                    <Button
+                        android:id="@+id/btn_date_waktu_selesai_bookmusicianactivity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="19.00"/>
+                        android:text="date"
+                        android:background="@drawable/button_border2"
+                        android:elevation="4dp"/>
                 </android.support.design.widget.TextInputLayout>
+
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <android.support.design.widget.TextInputEditText
+                    <Button
+                        android:id="@+id/btn_time_waktu_selesai_bookmusicianactivity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="3 Hours"/>
+                        android:text="date"
+                        android:background="@drawable/button_border2"
+                        android:hint="Done Time"
+                        android:elevation="4dp"/>
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
             <Button
+                android:id="@+id/btn_send_request_bookmusicianAcivity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="15dp"
                 android:background="@drawable/button_border2"
                 android:text="@string/send_req"/>
         </LinearLayout>
-    </ScrollView>
+
 
 </android.support.design.widget.CoordinatorLayout>
+</ScrollView>

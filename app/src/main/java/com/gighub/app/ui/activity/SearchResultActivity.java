@@ -16,6 +16,7 @@ import android.widget.ListView;
 import com.gighub.app.R;
 import com.gighub.app.model.Genre;
 import com.gighub.app.model.MusicianModel;
+import com.gighub.app.model.SearchResultModel;
 import com.gighub.app.ui.adapter.ListSearchResultAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -31,7 +32,9 @@ public class SearchResultActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private MusicianModel mMusician;
     private String mNameMusician;
-    private List<MusicianModel> mListMusician ;
+    private int pos=0;
+//    private List<MusicianModel> mListMusician ;
+    private List<SearchResultModel> mSearchResult;
 
 //    public static int[] listImages = {R.drawable.ava, R.drawable.ava,R.drawable.ava,R.drawable.ava,R.drawable.ava,R.drawable.ava,R.drawable.ava};
 //    public static String[] listNama = {"Nama Musisi1","Nama Musisi2","Nama Musisi3","Nama Musisi4","Nama Musisi5","Nama Musisi6","Nama Musisi7"};
@@ -40,7 +43,8 @@ public class SearchResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
-        mListMusician = new ArrayList<MusicianModel>();
+//        mListMusician = new ArrayList<MusicianModel>();
+        mSearchResult = new ArrayList<SearchResultModel>();
         mContext = this;
 //        getSupportActionBar().setHomeButtonEnabled(true);
         toolbar = (Toolbar)findViewById(R.id.toolbar);
@@ -50,14 +54,26 @@ public class SearchResultActivity extends AppCompatActivity {
 
 //        Intent i = new Intent(getApplicationContext(), SearchResultActivity.class);
           Intent i = getIntent();
-        Type typeListMusician = new TypeToken<List<MusicianModel>>(){}.getType();
-        mListMusician = new Gson().fromJson(i.getStringExtra("search"),typeListMusician);
+//        final Type typeListMusician = new TypeToken<List<MusicianModel>>(){}.getType();
+//        mListMusician = new Gson().fromJson(i.getStringExtra("search"),typeListMusician);
+        final Type type = new TypeToken<List<SearchResultModel>>(){}.getType();
+        mSearchResult = new Gson().fromJson(i.getStringExtra("search"),type);
+
         mListView = (ListView)findViewById(R.id.lv_search);
-        mListView.setAdapter(new ListSearchResultAdapter(getApplicationContext(),mListMusician ));
+        mListView.setAdapter(new ListSearchResultAdapter(getApplicationContext(),mSearchResult ));
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getApplicationContext(),MusicianActivity.class);
+                intent.putExtra("name",mSearchResult.get(position).getName());
+                intent.putExtra("deskripsi",mSearchResult.get(position).getDeskripsi());
+                intent.putExtra("genre",mSearchResult.get(position).getGenrenya());
+                intent.putExtra("harga_sewa",mSearchResult.get(position).getHarga_sewa());
+                intent.putExtra("kota",mSearchResult.get(position).getKota());
+//                pos = position;
+                intent.putExtra("posisi",position);
+                Log.d("pos",""+position);
+                Log.d("response",""+mSearchResult.get(position).getDeskripsi());
                 startActivity(intent);
             }
         });

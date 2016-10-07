@@ -11,10 +11,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gighub.app.R;
+import com.gighub.app.model.MusicianGenreModel;
 import com.gighub.app.model.MusicianModel;
+import com.gighub.app.model.SearchResultModel;
 import com.gighub.app.ui.activity.MusicianActivity;
 import com.gighub.app.ui.activity.SearchResultActivity;
 import com.github.siyamed.shapeimageview.CircularImageView;
+import com.google.gson.Gson;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +30,14 @@ import java.util.List;
 public class ListSearchResultAdapter extends BaseAdapter {
     Context mContext;
     private List<MusicianModel> mListMusician;
+    private List<SearchResultModel> mSearchResultModel;
 
     private static LayoutInflater inflater=null;
 
-    public ListSearchResultAdapter(Context mContext, List<MusicianModel> mListMusician)
+    public ListSearchResultAdapter(Context mContext, List<SearchResultModel> mSearchResultModel)
     {
-       this.mListMusician = mListMusician;
+//       this.mListMusician = mListMusician;
+        this.mSearchResultModel = mSearchResultModel;
         this.mContext = mContext;
         inflater = (LayoutInflater)mContext.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
     }
@@ -42,7 +49,7 @@ public class ListSearchResultAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         // TODO Auto-generated method stub
-        return mListMusician.size();
+        return mSearchResultModel.size();
     }
     @Override
     public Object getItem(int position) {
@@ -52,7 +59,7 @@ public class ListSearchResultAdapter extends BaseAdapter {
 
     public class Holder
     {
-        TextView mTextViewName, mTextViewHarga;
+        TextView mTextViewName, mTextViewHarga, mTextViewMusicianGenres, mTextViewDeskripsi;
         CircularImageView img;
     }
 
@@ -66,9 +73,28 @@ public class ListSearchResultAdapter extends BaseAdapter {
         holder.mTextViewName=(TextView) rowView.findViewById(R.id.musician_name);
         holder.mTextViewHarga = (TextView)rowView.findViewById(R.id.musician_fee);
         holder.img=(CircularImageView) rowView.findViewById(R.id.img1);
-        holder.mTextViewName.setText(mListMusician.get(position).getName());
-        holder.mTextViewHarga.setText(mListMusician.get(position).getHarga_sewa());
-//        holder.img.setImageResource(imageId[position]);
+        holder.mTextViewMusicianGenres = (TextView)rowView.findViewById(R.id.musician_genres);
+//        holder.mTextViewDeskripsi = (TextView)rowView.findViewById(R.id.musician_genres);
+
+        holder.mTextViewName.setText(mSearchResultModel.get(position).getName());
+//        holder.mTextViewName.setText(mListMusicianGenre.get(position).getMusician().getName());
+        holder.mTextViewHarga.setText(mSearchResultModel.get(position).getHarga_sewa());
+        holder.mTextViewMusicianGenres.setText(mSearchResultModel.get(position).getGenrenya());
+//        holder.mTextViewHarga.setText(mListMusicianGenre.get(position).getMusician().getHarga_sewa());
+//        String g ="";
+//        for(int i =0;i<mSearchResultModel.size();i++){
+//
+//            for (int j =0;j<i;j++) {
+//                if (mSearchResultModel.get(getViewTypeCount()).getId() > 1) {
+//                    g += " " + mSearchResultModel.get(position).getGenre_name();
+//                    holder.mTextViewMusicianGenres.setText(""+g);
+//                }
+//            }
+//            g="";
+//        }
+
+
+//        holder.img.setImageResource(mListMusician.get(position).getPhoto());
 //        rowView.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {

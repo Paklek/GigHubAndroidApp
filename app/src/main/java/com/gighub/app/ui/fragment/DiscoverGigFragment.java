@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 import com.gighub.app.R;
 import com.gighub.app.model.DataObject;
+import com.gighub.app.model.Gig;
+import com.gighub.app.model.GigResponse;
 import com.gighub.app.model.MusicianModel;
 import com.gighub.app.model.MusicianResponse;
 import com.gighub.app.model.RetrofitService;
@@ -28,6 +30,7 @@ import com.gighub.app.model.UserResponse;
 import com.gighub.app.ui.activity.BookMusicianActivity;
 import com.gighub.app.ui.activity.GigActivity;
 import com.gighub.app.ui.adapter.ListDiscoverGigAdapter;
+import com.gighub.app.util.BuildUrl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +58,8 @@ public class DiscoverGigFragment extends Fragment {
     }
 
 //    List<UserModel> daftarUser = new ArrayList<UserModel>();
-    List<MusicianModel> mDaftarMusician = new ArrayList<MusicianModel>();
+//    List<MusicianModel> mDaftarMusician = new ArrayList<MusicianModel>();
+    List<Gig> mGig = new ArrayList<Gig>();
     TextView twName;
 
 
@@ -69,6 +73,36 @@ public class DiscoverGigFragment extends Fragment {
 
         mContext = getContext();
         twName = (TextView)view.findViewById(R.id.musician_name);
+
+        BuildUrl buildUrl = new BuildUrl();
+        buildUrl.buildBaseUrl();
+
+        Call<GigResponse> call = buildUrl.serviceGighub.loadGig();
+
+        buildUrl.serviceGighub.loadGig().enqueue(new Callback<GigResponse>() {
+            @Override
+            public void onResponse(Call<GigResponse> call, Response<GigResponse> response) {
+                if(response.body().getError()==0){
+                    mGig = response.body().getGigs();
+                    mAdapter = new ListDiscoverGigAdapter(mGig);
+                    mRecyclerView.setAdapter(mAdapter);
+                    String tmp = "";
+                    for(int i =0 ;i<mGig.size();i++)
+                    {
+                        tmp += String.format(""+ mGig.get(i).getNama_gig());
+                    }
+
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<GigResponse> call, Throwable t) {
+                Toast.makeText(mContext,"Error"+t.getCause(),Toast.LENGTH_SHORT).show();
+                Log.e("-:failure",t.getMessage());
+            }
+        });
 
 //        Retrofit retrofit = new Retrofit.Builder()
 //                .baseUrl("http://192.168.43.152:81/gighub2/public/api/")

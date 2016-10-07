@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.gighub.app.R;
 import com.gighub.app.model.DataObject;
+import com.gighub.app.model.Gig;
 import com.gighub.app.model.MusicianModel;
 import com.gighub.app.model.UserModel;
 import com.gighub.app.ui.activity.GigActivity;
@@ -28,18 +29,19 @@ public class ListDiscoverGigAdapter extends RecyclerView.Adapter<ListDiscoverGig
     private static String LOG_TAG = "ListDiscoverGigAdapter";
     private ArrayList<DataObject> mDataset;
     private static MyClickListener myClickListener;
-    private List<MusicianModel> mDaftarMusician;
+//    private List<MusicianModel> mDaftarMusician;
+    private List<Gig> mGig;
     public static Context mContext;
 
     public static class DataObjectHolder extends RecyclerView.ViewHolder
             implements View
             .OnClickListener {
-        TextView label_name;
-        TextView musicianDate;
+        TextView label_name, musicianDate, mTextViewNamaGig;
         FrameLayout frameGig;
 
         public DataObjectHolder(View itemView) {
             super(itemView);
+            mTextViewNamaGig = (TextView)itemView.findViewById(R.id.tv_namagig_discovergig);
             label_name = (TextView) itemView.findViewById(R.id.musician_name);
             musicianDate = (TextView) itemView.findViewById(R.id.musician_gig_date);
             frameGig = (FrameLayout)itemView.findViewById(R.id.frame_gig);
@@ -58,8 +60,16 @@ public class ListDiscoverGigAdapter extends RecyclerView.Adapter<ListDiscoverGig
         this.myClickListener = myClickListener;
     }
 
-    public ListDiscoverGigAdapter(List<MusicianModel> data) {
-        mDaftarMusician = data;
+//    public ListDiscoverGigAdapter(List<MusicianModel> data) {
+//        mDaftarMusician = data;
+//    }
+
+    public ListDiscoverGigAdapter(List<Gig> data){
+        mGig = data;
+    }
+
+    public List<Gig> getmGig() {
+        return mGig;
     }
 
     @Override
@@ -74,8 +84,9 @@ public class ListDiscoverGigAdapter extends RecyclerView.Adapter<ListDiscoverGig
 
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
-        holder.label_name.setText(mDaftarMusician.get(position).getName());
-        holder.musicianDate.setText(mDaftarMusician.get(position).getDeskripsi());
+        holder.mTextViewNamaGig.setText(mGig.get(position).getNama_gig());
+        holder.label_name.setText(mGig.get(position).getLokasi());
+        holder.musicianDate.setText(mGig.get(position).getTanggal_mulai());
         holder.frameGig.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +109,7 @@ public class ListDiscoverGigAdapter extends RecyclerView.Adapter<ListDiscoverGig
 
     @Override
     public int getItemCount() {
-        return mDaftarMusician.size();
+        return mGig.size();
     }
 
     public interface MyClickListener {

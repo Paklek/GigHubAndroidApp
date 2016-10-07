@@ -23,6 +23,7 @@ import com.gighub.app.R;
 import com.gighub.app.model.Genre;
 import com.gighub.app.model.ResponseCallGenre;
 import com.gighub.app.model.RetrofitService;
+import com.gighub.app.ui.activity.CreateBandActivity;
 import com.gighub.app.ui.adapter.ListGenreAdapter;
 import com.gighub.app.util.BuildUrl;
 import com.google.gson.Gson;
@@ -132,6 +133,7 @@ public class DialogGenreFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 sendResult(DiscoverMusicianFragment.REQCODE);
+
                 getDialog().dismiss();
             }
         });
@@ -162,4 +164,10 @@ public class DialogGenreFragment extends DialogFragment {
         Log.d("Data Log", new Gson().toJson(mListGenre));
         getTargetFragment().onActivityResult(getTargetRequestCode(),reqCode,intent);
     }
+
+//    public void sendResultActivity(int REQQODE){
+//        Intent intent = new Intent();
+//        intent.putExtra("kirim",new Gson().toJson(mListGenre));
+//        getFragmentManager();
+//    }
 }

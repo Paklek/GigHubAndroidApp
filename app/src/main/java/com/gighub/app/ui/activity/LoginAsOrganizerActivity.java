@@ -1,5 +1,6 @@
 package com.gighub.app.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ public class LoginAsOrganizerActivity extends AppCompatActivity {
     private EditText mEditTextEmailLoginOrganizer, mEditTextPasswordLoginOrganizer;
     private Button mButtonCancelLoginOrganizer, mButtonLoginLoginOrganizer;
     private SessionManager mSession;
+    private Context mContext;
 
     public final static String PESANLOG ="pesanlog";
 
@@ -37,6 +39,8 @@ public class LoginAsOrganizerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_as_organizer);
+
+        mContext = getApplicationContext();
 
         mEditTextEmailLoginOrganizer = (EditText)findViewById(R.id.et_email_login_org);
         mEditTextPasswordLoginOrganizer = (EditText)findViewById(R.id.et_password_login_org);
@@ -64,18 +68,19 @@ public class LoginAsOrganizerActivity extends AppCompatActivity {
         buildUrl.serviceGighub.sendLoginDataOrganizer(loginData).enqueue(new Callback<ResponseUser>() {
             @Override
             public void onResponse(Call<ResponseUser> call, retrofit2.Response<ResponseUser> response) {
-         if(response.code()==200) {
-             if (response.body().getError() == 0) {
-                 mSession = new SessionManager(getApplicationContext());
-                 mSession.createLoginSession(new Gson().toJson(response.body().getUser()),"org");
-                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                 Log.d(PESANLOG, "" + response.body().getMessage());
-                 Log.d(PESANLOG, "" + response.code());
-                 Toast.makeText(LoginAsOrganizerActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
-                 mSession.SkipIntro();
-                 startActivity(intent);
-             }
-         }
+                 if(response.code()==200) {
+                     if (response.body().getError() == 0) {
+                         mSession = new SessionManager(getApplicationContext());
+                         mSession.createLoginSession(new Gson().toJson(response.body().getUser()),"org");
+                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                         Log.d(PESANLOG, "" + response.body().getMessage());
+                         Log.d(PESANLOG, "" + response.code());
+                         Toast.makeText(LoginAsOrganizerActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                         mSession.SkipIntro();
+                         mContext.startActivity(intent);
+                     }
+                 }
                 Log.d(PESANLOG,""+response.body().getMessage());
                 Log.d(PESANLOG,""+response.code());
             }

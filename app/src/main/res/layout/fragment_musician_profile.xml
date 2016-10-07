@@ -45,6 +45,7 @@
                     android:layout_column="0"
                     android:text="Genre " />
                 <TextView
+                    android:id="@+id/tv_musician_genres"
                     android:layout_column="1"
                     android:text=": Punk, Rock, Jazz " />
             </TableRow>
@@ -55,10 +56,11 @@
                 <TextView
                     android:layout_gravity="right"
                     android:layout_column="0"
-                    android:text="Personil " />
+                    android:text="Descriptions " />
                 <TextView
+                    android:id="@+id/tv_musician_descriptions"
                     android:layout_column="1"
-                    android:text=": Fahru, Fahmi, Ridho, Safru " />
+                    android:text="" />
             </TableRow>
 
         </TableLayout>
@@ -73,6 +75,7 @@
             android:gravity="center"/>
 
         <Button
+            android:id="@+id/btn_book_request_musicianprofile"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_width="match_parent"

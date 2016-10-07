@@ -24,7 +24,7 @@ public class ListGenreAdapter extends RecyclerView.Adapter<ListGenreAdapter.List
 
     public ListGenreAdapter(List<Genre> genres){
         this.mListGenre = genres;
-        Log.d("adapter","Aku dibuat");
+        Log.d("adapter","genre created");
         Log.d("adapter",new Gson().toJson(genres));
     }
 
@@ -32,16 +32,16 @@ public class ListGenreAdapter extends RecyclerView.Adapter<ListGenreAdapter.List
     public ListGenreViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cv_genre,parent,false);
 
-        Log.d("adapter","Aku dipanggil");
+        Log.d("adapter","genre called");
         return new ListGenreViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ListGenreViewHolder holder, final int position) {
         holder.cbxGenre.setChecked(mListGenre.get(position).getSelected());
-        holder.tvGenre.setText(mListGenre.get(position).getGenre_name());
+        holder.cbxGenre.setText(mListGenre.get(position).getGenre_name());
 
-        Log.d("adapter","Aku dilihat");
+        Log.d("adapter","Genre dilihat");
         holder.cbxGenre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,20 +58,20 @@ public class ListGenreAdapter extends RecyclerView.Adapter<ListGenreAdapter.List
     @Override
     public int getItemCount() {
 
-        Log.d("adapter","Aku dihitung");
+        Log.d("adapter","Hitung genre");
         return mListGenre.size();
 
     }
 
     public static  class ListGenreViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView tvGenre;
+//        public TextView tvGenre;
         public CheckBox cbxGenre;
         public ListGenreViewHolder(View itemView) {
             super(itemView);
 
             Log.d("adapter","Aku dilengketin");
-            tvGenre = (TextView)itemView.findViewById(R.id.tv_genre);
+//            tvGenre = (TextView)itemView.findViewById(R.id.tv_genre);
             cbxGenre = (CheckBox)itemView.findViewById(R.id.cbx_genre);
         }
     }

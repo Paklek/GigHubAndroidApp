@@ -16,6 +16,37 @@
         <item name="colorAccent">@color/colorAccent</item>
         <!--<item name="buttonPrimary">@color/primaryButton</item>-->
     </style>
+
+
+    <style name="Biasa" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primaryDark</item>
+        <item name="colorAccent">@color/primaryDark</item>
+        <item name="android:buttonTint">@color/primaryDark</item>
+        <item name="android:textColor">@color/primaryDark</item>
+        <item name="android:spinnerDropDownItemStyle">@style/MySpinnerStyle</item>
+        <item name="android:textViewStyle">@style/AppTheme.Primary</item>
+        <item name="android:titleTextColor">@color/primaryDark</item>
+        <item name="android:colorForeground">@color/primaryDark</item>
+        <!--<item name="android:foreground">@color/primaryDark</item>-->
+        <!--<item name="android:foregroundTint">@color/primaryDark</item>-->
+        <item name="android:panelColorForeground">@color/primaryDark</item>
+        <!--<item name="color"-->
+        <!--<item name="android:buttonTintMode"></item>-->
+        <!--<item name="android:backgroundTint">@color/primaryDark</item>-->
+        <!--<item name="android:textColorHint">@color/primaryDark</item>-->
+        <!--<item name="buttonPrimary">@color/primaryButton</item>-->
+    </style>
+    
+
+
+    <style name="MySpinnerStyle" parent="@style/Widget.AppCompat.TextView.SpinnerItem">
+        <item name="android:textColor">@color/primaryDark</item>
+        <item name="android:textAppearance">@color/primaryDark</item>
+    </style>
+
+
     <style name="AppTheme.NoActionBar.Child">
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
