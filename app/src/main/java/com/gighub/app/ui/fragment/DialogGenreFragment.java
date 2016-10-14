@@ -163,11 +163,12 @@ public class DialogGenreFragment extends DialogFragment {
         intent.putExtra("kirim",new Gson().toJson(mListGenre));
         Log.d("Data Log", new Gson().toJson(mListGenre));
         getTargetFragment().onActivityResult(getTargetRequestCode(),reqCode,intent);
+
     }
 
 //    public void sendResultActivity(int REQQODE){
 //        Intent intent = new Intent();
 //        intent.putExtra("kirim",new Gson().toJson(mListGenre));
-//        getFragmentManager();
+//        getActivity().getFragmentManager();
 //    }
 }

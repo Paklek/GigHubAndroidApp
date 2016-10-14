@@ -19,7 +19,7 @@
             android:value="AIzaSyCnr-Sxlgu9soj-V9u4xaoP1kDEy3ULW3A" />
         <meta-data
             android:name="CLOUDINARY_URL"
-            android:value="cloudinary://627999879788938:Tfnf61ZtXn61Ct-Jbr_F__1zSJ8@dv5anayv1"/>
+            android:value="cloudinary://627999879788938:Tfnf61ZtXn61Ct-Jbr_F__1zSJ8@dv5anayv1" />
 
         <activity
             android:name=".ui.activity.SplashActivity"
@@ -68,9 +68,12 @@
         <activity android:name=".ui.activity.LoginAsOrganizerActivity" />
         <activity android:name=".ui.activity.LoginAsMusicianActivity" />
         <activity android:name=".ui.activity.LoginAsActivity" />
-        <activity android:name=".ui.activity.CreateBandActivity"
-            android:theme="@style/Biasa"/>
-        <activity android:name=".ui.activity.GroupBandActivity"></activity>
+        <activity
+            android:name=".ui.activity.CreateBandActivity"
+            android:theme="@style/Biasa" />
+        <activity android:name=".ui.activity.GroupBandActivity" />
+        <activity android:name=".ui.activity.CreateGigActivity" />
+        <activity android:name=".ui.activity.YourGigActivity"></activity>
     </application>
 
 </manifest>

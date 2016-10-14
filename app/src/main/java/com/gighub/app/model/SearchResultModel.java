@@ -20,6 +20,7 @@ public class SearchResultModel {
     private int genre_id;
     private String genre_name;
     private String genrenya;
+    private String tipe;
 
     public int getId() {
         return id;
@@ -147,5 +148,13 @@ public class SearchResultModel {
 
     public void setGenrenya(String genrenya) {
         this.genrenya = genrenya;
+    }
+
+    public String getTipe() {
+        return tipe;
+    }
+
+    public void setTipe(String tipe) {
+        this.tipe = tipe;
     }
 }

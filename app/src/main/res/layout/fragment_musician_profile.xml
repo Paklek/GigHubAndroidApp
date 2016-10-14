@@ -33,8 +33,9 @@
                     android:text="Role "
                     android:gravity="right"/>
                 <TextView
+                    android:id="@+id/tv_tipe_musisi"
                     android:layout_column="1"
-                    android:text=": Band" />
+                    android:text=": -" />
             </TableRow>
 
             <TableRow

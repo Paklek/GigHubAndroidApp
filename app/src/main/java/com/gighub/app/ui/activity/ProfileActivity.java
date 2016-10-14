@@ -12,8 +12,10 @@ import android.widget.Toast;
 
 import com.gighub.app.R;
 import com.gighub.app.model.ResponseMusician;
+import com.gighub.app.model.ResponseUser;
 import com.gighub.app.util.BuildUrl;
 import com.gighub.app.util.SessionManager;
+import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,10 +27,11 @@ import retrofit2.Response;
 public class ProfileActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
-    private String mName, mFirstName, mLastName, mEmail, mKota, mPhone, mDescriptions,  mYoutubeVideoURL, mWebsiteURL,mUsernameSounCloud, mUsernameReverbnation;
-    private EditText mEditTextFirstName, mEditTextLastName,mEditTextEmail, mEditTextName, mEditTextKota, mEditTextPhoneNumber, mEditTextDescriptions, mEditTextYoutubeURL, mEditTextWebsiteURL, mEditTextUsernameSoundCloud, mEditTextUsernameReverbnation;
+    private int mMusicianId, mOrganizerId;
+    private String mName, mFirstName, mLastName, mHarga, mEmail, mKota, mPhone, mDescriptions,  mYoutubeVideoURL, mWebsiteURL,mUsernameSounCloud, mUsernameReverbnation;
+    private EditText mEditTextFirstName, mEditTextLastName,mEditTextHargaSewa,mEditTextEmail, mEditTextName, mEditTextKota, mEditTextPhoneNumber, mEditTextDescriptions, mEditTextYoutubeURL, mEditTextWebsiteURL, mEditTextUsernameSoundCloud, mEditTextUsernameReverbnation;
     private Button mButtonSaveInfoMusician;
-    private View mViewEditTextFirstName, mViewEditTextLastname, mViewEditTextName, mViewEditTextKota, mViewEditTextPhoneNumber, mViewEditTextDescriptions, mViewEditTextYoutubeURL, mViewEditTextWebsiteURL, mViewEditTextUsernameSoundCloud, mViewEditTextUsernameReverbnation;
+    private View mViewEditTextFirstName, mViewEditTextLastname, mViewEditTextHargaSewa, mViewEditTextName, mViewEditTextKota, mViewEditTextPhoneNumber, mViewEditTextDescriptions, mViewEditTextYoutubeURL, mViewEditTextWebsiteURL, mViewEditTextUsernameSoundCloud, mViewEditTextUsernameReverbnation;
     private SessionManager mSession;
 
     @Override
@@ -40,8 +43,11 @@ public class ProfileActivity extends AppCompatActivity {
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         Intent intent = getIntent();
 
+
+
         mEditTextFirstName = (EditText)findViewById(R.id.et_first_name_activityprofile);
         mEditTextLastName = (EditText)findViewById(R.id.et_last_name_activityprofile);
+        mEditTextHargaSewa = (EditText)findViewById(R.id.et_harga_sewa_activityprofile);
         mEditTextEmail = (EditText)findViewById(R.id.et_email_activityprofile);
         mEditTextName = (EditText)findViewById(R.id.et_name_activityprofile);
         mEditTextKota = (EditText)findViewById(R.id.et_kota_activityprofile);
@@ -56,6 +62,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         mViewEditTextFirstName = (View)findViewById(R.id.et_first_name_activityprofile);
         mViewEditTextLastname = (View)findViewById(R.id.et_last_name_activityprofile);
+        mViewEditTextHargaSewa = (View)findViewById(R.id.et_harga_sewa_activityprofile);
         mViewEditTextName = (View)findViewById(R.id.et_name_activityprofile);
         mViewEditTextKota = (View)findViewById(R.id.et_kota_activityprofile);
         mViewEditTextPhoneNumber = (View)findViewById(R.id.et_phone_number_activityprofile);
@@ -67,6 +74,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         if(mSession.isLoggedIn()){
             if(mSession.checkUserType().equals("org")){
+                mOrganizerId = mSession.getUserDetails().getId();
                 mFirstName = mSession.getUserDetails().getFirst_name();
                 mLastName = mSession.getUserDetails().getLast_name();
                 mEmail = mSession.getUserDetails().getEmail();
@@ -74,6 +82,7 @@ public class ProfileActivity extends AppCompatActivity {
                 toolbar.setTitle("Profile - "+mFirstName);
 
                 mEditTextName.setVisibility(mViewEditTextName.GONE);
+                mEditTextHargaSewa.setVisibility(mViewEditTextHargaSewa.GONE);
                 mEditTextPhoneNumber.setVisibility(mViewEditTextPhoneNumber.GONE);
                 mEditTextDescriptions.setVisibility(mViewEditTextDescriptions.GONE);
                 mEditTextKota.setVisibility(mViewEditTextKota.GONE);
@@ -87,8 +96,10 @@ public class ProfileActivity extends AppCompatActivity {
                 mEditTextEmail.setText(mEmail);
             }
             else if(mSession.checkUserType().equals("msc")){
+                mMusicianId = mSession.getMusicianDetails().getId();
                 mName = mSession.getMusicianDetails().getName();
                 mEmail = mSession.getMusicianDetails().getEmail();
+                mHarga = mSession.getMusicianDetails().getHarga_sewa();
                 mKota = mSession.getMusicianDetails().getKota();
                 mPhone = mSession.getMusicianDetails().getNo_telp();
                 mDescriptions = mSession.getMusicianDetails().getDeskripsi();
@@ -103,6 +114,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                 mEditTextName.setText(mName);
                 mEditTextEmail.setText(mEmail);
+                mEditTextHargaSewa.setText(mHarga);
                 mEditTextKota.setText(mKota);
                 mEditTextPhoneNumber.setText(mPhone);
                 mEditTextDescriptions.setText(mDescriptions);
@@ -132,27 +144,76 @@ public class ProfileActivity extends AppCompatActivity {
 
         BuildUrl buildUrl = new BuildUrl();
         buildUrl.buildBaseUrl();
+//      Start If For Check User for update
+        if(mSession.checkUserType().equals("msc")) {
+            dataUpdate.put("tipe_user","msc");
+            dataUpdate.put("name", mEditTextName.getText().toString());
+            dataUpdate.put("email", mEditTextEmail.getText().toString());
+            dataUpdate.put("id", Integer.toString(mMusicianId));
+            dataUpdate.put("deskripsi", mEditTextDescriptions.getText().toString());
+            dataUpdate.put("no_telp", mEditTextPhoneNumber.getText().toString());
+            dataUpdate.put("kota", mEditTextKota.getText().toString());
+            dataUpdate.put("harga_sewa", mEditTextHargaSewa.getText().toString());
+            dataUpdate.put("youtube_video", mEditTextYoutubeURL.getText().toString());
+            dataUpdate.put("url_website", mEditTextWebsiteURL.getText().toString());
+            dataUpdate.put("username_soundcloud", mEditTextUsernameSoundCloud.getText().toString());
+            dataUpdate.put("username_reverbnation", mEditTextUsernameReverbnation.getText().toString());
+            buildUrl.serviceGighub.sendProfileUpdateDataMusician(dataUpdate).enqueue(new Callback<ResponseMusician>() {
+                @Override
+                public void onResponse(Call<ResponseMusician> call, Response<ResponseMusician> response) {
 
-        dataUpdate.put("name",mEditTextName.getText().toString());
-
-        buildUrl.serviceGighub.sendProfileUpdateDataMusician(dataUpdate).enqueue(new Callback<ResponseMusician>() {
-            @Override
-            public void onResponse(Call<ResponseMusician> call, Response<ResponseMusician> response) {
-                if (response.code()==200){
-                    Toast.makeText(ProfileActivity.this, "Berhasil update", Toast.LENGTH_LONG).show();
-                    Log.d("Code",""+response.code());
+                    if (response.code() == 200) {
+                        mSession = new SessionManager(getApplicationContext());
+                        mSession.createLoginSession(new Gson().toJson(response.body().getMusician()), "msc");
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        Toast.makeText(ProfileActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                        Log.d("Code", "" + response.code());
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    } else {
+                        Log.d("Code", "Pesan Log : " + response.code());
+                        Toast.makeText(ProfileActivity.this, "Gagal update", Toast.LENGTH_LONG).show();
+                    }
                 }
-                else {
-                    Log.d("Code", "Pesan Log : " + response.code());
-                    Toast.makeText(ProfileActivity.this, "Gagal update", Toast.LENGTH_LONG).show();
+
+                @Override
+                public void onFailure(Call<ResponseMusician> call, Throwable t) {
+                    Log.d("fail",t.getCause().getMessage());
                 }
-            }
 
-            @Override
-            public void onFailure(Call<ResponseMusician> call, Throwable t) {
+            });
+        }
+        else if(mSession.checkUserType().equals("org")) {
+            dataUpdate.put("id",Integer.toString(mOrganizerId));
+            dataUpdate.put("tipe_user","org");
+            dataUpdate.put("first_name",mEditTextFirstName.getText().toString());
+            dataUpdate.put("last_name",mEditTextLastName.getText().toString());
+            dataUpdate.put("email",mEditTextEmail.getText().toString());
 
-            }
-        });
+            buildUrl.serviceGighub.sendProfileUpdateDataOrganizer(dataUpdate).enqueue(new Callback<ResponseUser>() {
+                @Override
+                public void onResponse(Call<ResponseUser> call, Response<ResponseUser> response) {
+                    if (response.code() == 200) {
+                        mSession = new SessionManager(getApplicationContext());
+                        mSession.createLoginSession(new Gson().toJson(response.body().getUser()), "org");
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        Toast.makeText(ProfileActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                        Log.d("Code", "" + response.code());
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    } else {
+                        Log.d("Code", "Pesan Log : " + response.code());
+                        Toast.makeText(ProfileActivity.this, "Gagal update", Toast.LENGTH_LONG).show();
+                    }
+                }
 
+                @Override
+                public void onFailure(Call<ResponseUser> call, Throwable t) {
+                    Log.d("fail",t.getCause().getMessage());
+                }
+            });
+
+        }
+//      End If for user Update
     }
 }

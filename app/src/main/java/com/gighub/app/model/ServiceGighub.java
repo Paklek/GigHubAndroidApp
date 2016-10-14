@@ -25,6 +25,9 @@ public interface ServiceGighub {
     @GET(StaticString.ROUTE_ALL_GIGS)
     Call<GigResponse> loadGig();
 
+    @POST(StaticString.ROUTE_YOUR_GIG)
+    Call<YourGigResponse> loadYourGig(@Body Map<String, String> organizerId);
+
     @GET(StaticString.ROUTE_ALL_MUSICIANS)
     Call<MusicianResponse> loadMusicians();
 
@@ -45,8 +48,11 @@ public interface ServiceGighub {
     Call<MResponse> sendLogin(@Body Map<String,String> loginData);
 //
 
-    @POST(StaticString.ROUTE_UPDATE_PROFILE_MUSICIAN)
+    @POST(StaticString.ROUTE_UPDATE_PROFILE)
     Call<ResponseMusician> sendProfileUpdateDataMusician(@Body Map<String, String> profileUpdateData);
+
+    @POST(StaticString.ROUTE_UPDATE_PROFILE)
+    Call<ResponseUser> sendProfileUpdateDataOrganizer(@Body Map<String, String> profileUpdateData);
 
     @GET(StaticString.ROUTE_ALL_GENRES)
     Call<ResponseCallGenre> loadMusicianGenre();
@@ -62,5 +68,14 @@ public interface ServiceGighub {
 
     @GET(StaticString.ROUTE_BANDS)
     Call<GroupBandsResponse> getDataBand();
+
+    @POST(StaticString.ROUTE_CREATE_GIG)
+    Call<GigResponse> sendInsertDataGig(@Body Map<String,String> DataGig);
+
+    @POST(StaticString.ROUTE_SEND_BOOK_GROUPBAND)
+    Call<Response> sendBookData(@Body Map<String,String> dataBook);
+
+//    @POST()
+//    Call<>
 
 }

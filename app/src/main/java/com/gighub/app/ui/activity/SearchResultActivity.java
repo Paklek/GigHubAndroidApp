@@ -65,15 +65,18 @@ public class SearchResultActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getApplicationContext(),MusicianActivity.class);
+                intent.putExtra("id",mSearchResult.get(position).getId());
                 intent.putExtra("name",mSearchResult.get(position).getName());
                 intent.putExtra("deskripsi",mSearchResult.get(position).getDeskripsi());
                 intent.putExtra("genre",mSearchResult.get(position).getGenrenya());
                 intent.putExtra("harga_sewa",mSearchResult.get(position).getHarga_sewa());
                 intent.putExtra("kota",mSearchResult.get(position).getKota());
+                intent.putExtra("tipe",mSearchResult.get(position).getTipe());
 //                pos = position;
                 intent.putExtra("posisi",position);
                 Log.d("pos",""+position);
                 Log.d("response",""+mSearchResult.get(position).getDeskripsi());
+                Log.d("response", "id musisinya adalah "+mSearchResult.get(position).getId()+" dengan tipe "+mSearchResult.get(position).getTipe());
                 startActivity(intent);
             }
         });

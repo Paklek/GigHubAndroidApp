@@ -28,9 +28,9 @@ import java.util.List;
 public class MusicianProfileFragment extends Fragment {
 
     Context mContext;
-    private String mDescriptions, mGenre, mName,mHarga;
-    private int pos=0;
-    private TextView mTextViewMusicianDescriptions, mTextViewMusicianGenres;
+    private String mDescriptions, mGenre, mName,mHarga, mTipe;
+    private int pos=0, mId;
+    private TextView mTextViewMusicianDescriptions, mTextViewMusicianGenres, mTextViewTipeMusisi;
     private Button mButtonBookRequest;
 
     private View mViewButtonBookRequest;
@@ -76,6 +76,7 @@ public class MusicianProfileFragment extends Fragment {
 
         mTextViewMusicianDescriptions = (TextView)view.findViewById(R.id.tv_musician_descriptions);
         mTextViewMusicianGenres = (TextView)view.findViewById(R.id.tv_musician_genres);
+        mTextViewTipeMusisi = (TextView)view.findViewById(R.id.tv_tipe_musisi);
 
         mButtonBookRequest = (Button)view.findViewById(R.id.btn_book_request_musicianprofile);
 
@@ -91,11 +92,13 @@ public class MusicianProfileFragment extends Fragment {
         pos = intent.getIntExtra("posisi",pos);
         mName = intent.getStringExtra("name");
         mHarga = intent.getStringExtra("harga_sewa");
-
+        mTipe = intent.getStringExtra("tipe");
+        mId = intent.getIntExtra("id",0);
         Log.d("pos",""+pos+" fragment");
 
         mTextViewMusicianDescriptions.setText(": "+mDescriptions);
         mTextViewMusicianGenres.setText(": "+ mGenre);
+        mTextViewTipeMusisi.setText(": "+mTipe);
 
         mButtonBookRequest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,10 +106,12 @@ public class MusicianProfileFragment extends Fragment {
 
                 Log.d("pos",""+pos+" fragmentclick");
                 Intent intent1 = new Intent(getActivity().getApplicationContext(), BookMusicianActivity.class);
+                intent1.putExtra("id",mId);
                 intent1.putExtra("pos",pos);
                 intent1.putExtra("name",mName);
                 intent1.putExtra("genre", mGenre);
                 intent1.putExtra("harga_sewa", mHarga);
+                intent1.putExtra("tipe",mTipe);
 //                intent1.putExtra("harga_sewa",mSearchResult.get(pos).getHarga_sewa());
 
                 startActivity(intent1);

@@ -12,7 +12,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.gighub.app.R;
+import com.gighub.app.model.GigResponse;
 import com.gighub.app.model.GroupBandsResponse;
+import com.gighub.app.model.YourGigResponse;
 import com.gighub.app.ui.adapter.MainViewPagerAdapter;
 import com.gighub.app.ui.fragment.DiscoverGigFragment;
 import com.gighub.app.ui.fragment.DiscoverMusicianFragment;
@@ -20,9 +22,13 @@ import com.gighub.app.util.BuildUrl;
 import com.gighub.app.util.SessionManager;
 import com.google.gson.Gson;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
     private String mName, mFirstName, mLastName, mEmail,mPhone,mGenre;
-    private int mMusicianId;
+    private String mMusicianId,mOrganizerId;
 
     public static final String FIRST_NAME = "fname";
 
@@ -48,8 +54,10 @@ public class MainActivity extends AppCompatActivity {
 
             mToolbar = (Toolbar)findViewById(R.id.toolbar);
             if(mSession.isLoggedIn()){
+
                 if(mSession.checkUserType().equals("org")){
                     mName = mSession.getUserDetails().getFirst_name();
+                    mOrganizerId = Integer.toString(mSession.getUserDetails().getId());
                 }
                 else if(mSession.checkUserType().equals("msc")){
                     mName = mSession.getMusicianDetails().getName();
@@ -113,6 +121,8 @@ public class MainActivity extends AppCompatActivity {
             else if(mSession.checkUserType().equals("msc")){
                 menu.getItem(2).setVisible(true);
                 menu.getItem(3).setVisible(true);
+                menu.getItem(4).setVisible(false);
+                menu.getItem(5).setVisible(false);
             }
             menu.getItem(0).setVisible(false);
             menu.getItem(1).setVisible(false);
@@ -158,17 +168,27 @@ public class MainActivity extends AppCompatActivity {
 //                startActivity(intent3);
                 return true;
 
+            case R.id.action_create_gig:
+                Intent intent4 = new Intent(getApplicationContext(),CreateGigActivity.class);
+                startActivity(intent4);
+                return true;
+
+            case R.id.action_yourgigs:
+                Intent intent5 = new Intent(getApplicationContext(),YourGigActivity.class);
+                getYourGigs(intent5);
+                return true;
+
             case R.id.action_booking_list:
                 // User chose the "Favorite" action, mark the current item
                 // as a favorite...
-                Intent intent4 = new Intent(getApplicationContext(),BookingListActivity.class);
-                startActivity(intent4);
+                Intent intent6 = new Intent(getApplicationContext(),BookingListActivity.class);
+                startActivity(intent6);
                 return true;
 
             case R.id.action_account:
                 // User chose the "Favorite" action, mark the current item
                 // as a favorite...
-                Intent intent5 = new Intent(getApplicationContext(),AccountActivity.class);
+                Intent intent7 = new Intent(getApplicationContext(),AccountActivity.class);
 
                 if(mSession.isLoggedIn()){
                     if(mSession.checkUserType().equals("org")){
@@ -177,20 +197,20 @@ public class MainActivity extends AppCompatActivity {
                         mEmail = mSession.getUserDetails().getEmail();
 //                        mPhone = mSession
 
-                        intent5.putExtra("first_name",mFirstName);
-                        intent5.putExtra("last_name",mLastName);
-                        intent5.putExtra("email",mEmail);
+                        intent7.putExtra("first_name",mFirstName);
+                        intent7.putExtra("last_name",mLastName);
+                        intent7.putExtra("email",mEmail);
                     }
                     else if(mSession.checkUserType().equals("msc")){
                         mName = mSession.getMusicianDetails().getName();
                         mEmail = mSession.getMusicianDetails().getEmail();
 
-                        intent5.putExtra("name",mName);
-                        intent5.putExtra("email",mEmail);
+                        intent7.putExtra("name",mName);
+                        intent7.putExtra("email",mEmail);
                     }
 
                 }
-                startActivity(intent5);
+                startActivity(intent7);
                 return true;
 
             default:
@@ -218,6 +238,35 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<GroupBandsResponse> call, Throwable t) {
 
+            }
+        });
+    }
+
+
+    Map<String,String> organizerId = new HashMap<>();
+    private void getYourGigs(final Intent i){
+        BuildUrl buildUrl = new BuildUrl();
+        buildUrl.buildBaseUrl();
+
+        Log.d("response",mOrganizerId);
+        Log.d("response",mSession.getUserDetails().getFirst_name());
+
+        organizerId.put("user_id",mOrganizerId);
+
+        buildUrl.serviceGighub.loadYourGig(organizerId).enqueue(new Callback<YourGigResponse>() {
+            @Override
+            public void onResponse(Call<YourGigResponse> call, Response<YourGigResponse> response) {
+                i.putExtra("yourgigs",new Gson().toJson(response.body().getYourgigs()));
+                Log.d("response",new Gson().toJson(response.body().getYourgigs()));
+                Log.d("response",new Gson().toJson(response.body()));
+                startActivity(i);
+            }
+
+            @Override
+            public void onFailure(Call<YourGigResponse> call, Throwable t) {
+                Log.d("fail",t.getCause().getMessage());
+                Log.d("fail",t.getMessage());
+                Log.d("fail",t.getCause().getLocalizedMessage());
             }
         });
     }

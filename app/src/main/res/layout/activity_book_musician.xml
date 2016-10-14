@@ -103,7 +103,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <EditText
-                        android:id="@+id/tv_nama_acara_bookmusicianactivity"
+                        android:id="@+id/et_nama_acara_bookmusicianactivity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Location Name"/>
@@ -113,7 +113,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <EditText
-                        android:id="@+id/tv_location_bookmusicianactivity"
+                        android:id="@+id/et_location_bookmusicianactivity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Location"/>
@@ -123,7 +123,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <EditText
-                        android:id="@+id/tv_location_details_bookmusicianactivity"
+                        android:id="@+id/et_location_details_bookmusicianactivity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Details"/>

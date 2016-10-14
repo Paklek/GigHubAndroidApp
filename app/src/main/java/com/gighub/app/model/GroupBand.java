@@ -20,6 +20,7 @@ public class GroupBand {
     private String url_website;
     private String username_soundcloud;
     private String username_reverbnation;
+    private String tipe;
 
     private int admin_id;
 
@@ -125,6 +126,14 @@ public class GroupBand {
 
     public void setGroupBandMusisis(List<GroupBandMusisi> groupBandMusisis) {
         this.groupBandMusisis = groupBandMusisis;
+    }
+
+    public String getTipe() {
+        return tipe;
+    }
+
+    public void setTipe(String tipe) {
+        this.tipe = tipe;
     }
 
     private enum aktif{
