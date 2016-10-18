@@ -11,7 +11,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -38,12 +40,17 @@ public class CreateBandActivity extends AppCompatActivity {
 
     private EditText mEditTextNamaBand, mEditTextDeskripsiBand, mEditTextHargaBand, mEditTextKota,mEditTextSelectGenres;
     private Button mButtonCreateBand;
+    private CheckBox mCheckBoxGenrePop, mCheckBoxGenreRock;
     private SessionManager mSession;
-    private String mMusicianId,mPosition;
+    private String mMusicianId,mPosition, mGenreDipilih ="";
     private Context mContext;
     private Spinner mSpinnerPosition;
+    private CheckBox[] cbxs = new CheckBox[5];
+    private LinearLayout mLinearLayoutCheckBoxGenre;
+    private String[] genres= new String[5];
 
-    private int mPositionId;
+
+    private int mPositionId,mCount=0;
 
     private String[] mListPosition={"Position","Vocalist","Guitarist","Bassist","Drummer","Keyboardist"};
 
@@ -61,6 +68,31 @@ public class CreateBandActivity extends AppCompatActivity {
 
         mSession = new SessionManager(getApplicationContext());
 
+        mLinearLayoutCheckBoxGenre = (LinearLayout)findViewById(R.id.ll_list_genre);
+
+        for(int i=0;i<cbxs.length;i++){
+            cbxs[i] = new CheckBox(mContext);
+            if(i==0){
+                cbxs[i].setText("Pop");
+            }
+            if(i==1){
+                cbxs[i].setText("Rock");
+            }
+            if(i==2){
+                cbxs[i].setText("Jazz");
+            }
+            if(i==3){
+                cbxs[i].setText("Dangdut");
+            }
+            if(i==4){
+                cbxs[i].setText("Reggeae");
+            }
+            cbxs[i].setPadding(10,10,10,10);
+            cbxs[i].setButtonDrawable(this.getResources().getDrawable(R.drawable.custom_checkbox));
+            cbxs[i].setTextColor(this.getResources().getColor(R.color.colorTextDark));
+            mLinearLayoutCheckBoxGenre.addView(cbxs[i]);
+        }
+
         mEditTextNamaBand = (EditText)findViewById(R.id.et_nama_band_createband);
         mEditTextDeskripsiBand = (EditText)findViewById(R.id.et_band_descriptions_createband);
         mEditTextHargaBand = (EditText)findViewById(R.id.et_harga_sewa_createband);
@@ -71,18 +103,49 @@ public class CreateBandActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(R.layout.spinner_item_position);
         mSpinnerPosition.setAdapter(adapter);
 
+//        mCheckBoxGenrePop = (CheckBox)findViewById(R.id.cbx_genre_pop_createbandactivity);
+//        mCheckBoxGenreRock = (CheckBox)findViewById(R.id.cbx_genre_rock_createbandactivity);
 
-        mEditTextSelectGenres = (EditText)findViewById(R.id.et_select_genre_createbandactivity);
-        mEditTextSelectGenres.setOnClickListener(new View.OnClickListener() {
+//        mEditTextSelectGenres = (EditText)findViewById(R.id.et_select_genre_createbandactivity);
+//        mEditTextSelectGenres.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                DialogFragment dialogFragment = new DialogGenreFragment();
+//                dialogFragment.show(getSupportFragmentManager(),Integer.toString(REQQODE));
+//            }
+//        });
+
+
+        cbxs[0].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment dialogFragment = new DialogGenreFragment();
-                dialogFragment.show(getSupportFragmentManager(),Integer.toString(REQQODE));
+                insertGenre(0);
             }
         });
-
-
-
+        cbxs[1].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                insertGenre(1);
+            }
+        });
+        cbxs[2].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                insertGenre(2);
+            }
+        });
+        cbxs[3].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                insertGenre(3);
+            }
+        });
+        cbxs[4].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                insertGenre(4);
+            }
+        });
 
 
         mSpinnerPosition.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -111,7 +174,8 @@ public class CreateBandActivity extends AppCompatActivity {
     }
 
     Map<String,String> dataBand = new HashMap<>();
-//    Map<String,Integer> dataInt = new HashMap<>();
+//    Map<String,String[]> dataArray = new HashMap<>();
+
 
     private void insertBand(){
 
@@ -135,6 +199,12 @@ public class CreateBandActivity extends AppCompatActivity {
         }
         else mPosition="Position";
 
+
+        mGenreDipilih = mGenreDipilih.substring(1,mGenreDipilih.length());
+        Log.d("genreyangdikirim",mGenreDipilih);
+
+        dataBand.put("genre_count",Integer.toString(mCount));
+        dataBand.put("genre_id",mGenreDipilih);
         dataBand.put("admin_id",mMusicianId);
         dataBand.put("nama_grupband",mEditTextNamaBand.getText().toString());
         dataBand.put("harga",mEditTextHargaBand.getText().toString());
@@ -149,21 +219,21 @@ public class CreateBandActivity extends AppCompatActivity {
                 if (response.code() == 200) {
                     Intent intent = new Intent(mContext,MainActivity.class);
 //                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    Toast.makeText(CreateBandActivity.this, "Success, Band has been created", Toast.LENGTH_LONG).show();
+                    Toast.makeText(CreateBandActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
                     Log.d(CREATEBAND,"response " +response.code() +" "+ response.body().getMessage());
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     mContext.startActivity(intent);
                 }
                 else {
                     Log.d(CREATEBAND, "Pesan Log : " + response.code() + response.message());
-                    Toast.makeText(CreateBandActivity.this, "Failed, Check Your Connection", Toast.LENGTH_LONG).show();
+                    Toast.makeText(CreateBandActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
                 }
 //                Log.d(CREATEBAND,"code" +response.code()+" "+response.message());
             }
 
             @Override
             public void onFailure(Call<GrupBandResponse> call, Throwable t) {
-                Log.d("ON FAILURE","fail" + t.getMessage() + " "+t.getCause().getMessage());
+
             }
         });
 
@@ -183,6 +253,21 @@ public class CreateBandActivity extends AppCompatActivity {
                 }
             }
             mEditTextSelectGenres.setText(genres);
+//            for(int i=0;i)
         }
+    }
+
+    private void insertGenre (int checkBoxIndex){
+        if(cbxs[checkBoxIndex].isChecked()) {
+            Log.d("genre", cbxs[checkBoxIndex].getText().toString());
+            genres[checkBoxIndex] = " "+(checkBoxIndex+1);
+            mGenreDipilih += genres[checkBoxIndex];
+            mCount+=1;
+        }
+        else{
+            mGenreDipilih = mGenreDipilih.replace(" "+(checkBoxIndex+1),"");
+            mCount-=1;
+        }
+        Log.d("genreyangdipilih",mGenreDipilih);
     }
 }

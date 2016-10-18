@@ -44,8 +44,8 @@ public class BookMusicianActivity extends AppCompatActivity {
     private Button mButtonTanggalMulai, mButtonWaktuMulai,mButtonTanggalSelesai,mButtonWaktuSelesai, mButtonSendRequest;
     private TextView mTextViewName, mTextViewGenre, mTextViewHarga;
     private EditText mEditTextNamaGig,mEditTextLokasi, mEditTextDetails;
-    private String mName, mGenre,mHarga,mMulai,mSelesai;
-    private int pos=0, mYear,mMonth,mDay,mHour, mMinute, mUserId,mMusicianId;
+    private String mName, mGenre,mHarga,mMulai,mSelesai,mTipe;
+    private int pos=0, mYear,mMonth,mDay,mHour, mMinute, mUserId,mObjectId;
     private List<SearchResultModel> mSearchResultModel;
     private SessionManager mSession;
 
@@ -82,7 +82,8 @@ public class BookMusicianActivity extends AppCompatActivity {
         mName = intent.getStringExtra("name");
         mGenre = intent.getStringExtra("genre");
         mHarga = intent.getStringExtra("harga_sewa");
-        mMusicianId = intent.getIntExtra("id",0);
+        mObjectId = intent.getIntExtra("id",0);
+        mTipe = intent.getStringExtra("tipe");
 
         mUserId = mSession.getUserDetails().getId();
 
@@ -197,7 +198,8 @@ public class BookMusicianActivity extends AppCompatActivity {
 
         Map<String, String> bookData = new HashMap<>();
         bookData.put("user_id",Integer.toString(mUserId));
-        bookData.put("band_id",Integer.toString(mMusicianId));
+        bookData.put("tipe",mTipe);
+        bookData.put("object_id",Integer.toString(mObjectId));
         bookData.put("nama_gig",mEditTextNamaGig.getText().toString());
         bookData.put("lokasi", mEditTextLokasi.getText().toString());
         bookData.put("detail_lokasi",mEditTextDetails.getText().toString());

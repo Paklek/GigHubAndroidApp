@@ -35,17 +35,20 @@
             android:layout_height="100dp" />
     </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Genres"/>
+    <LinearLayout
+        android:id="@+id/ll_list_genre"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText
-            android:focusable="false"
-            android:id="@+id/et_select_genre_createbandactivity"
-            android:text="Select Genres"
-            android:hint="Music Genres"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </android.support.design.widget.TextInputLayout>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+
+    </LinearLayout>
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
