@@ -220,7 +220,7 @@ public class BookMusicianActivity extends AppCompatActivity {
                     mContext.startActivity(intent);
                 }
                 else {
-                    Log.d("response ", response.code() + " " + response.message() +" "+response.code());
+                    Log.d("response ", response.code() + " " + response.body().getMessage() +" "+response.code());
                     Log.d("Pesan Log : " , response.code()+" " + response.message());
                     Toast.makeText(BookMusicianActivity.this, "Failed, Check Your Connection", Toast.LENGTH_LONG).show();
 
