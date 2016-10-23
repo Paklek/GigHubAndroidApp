@@ -1,5 +1,6 @@
 package com.gighub.app.ui.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -46,6 +47,11 @@ public class BookingListActivity extends AppCompatActivity {
 
             mTabLayout = (TabLayout) findViewById(R.id.tabs);
             mTabLayout.setupWithViewPager(mViewPager);
+
+//        ProgressDialog dialog = new ProgressDialog(this); // this = YourActivity
+//        if (dialog.isShowing()){
+//            dialog.cancel();
+//        }
 
     }
 

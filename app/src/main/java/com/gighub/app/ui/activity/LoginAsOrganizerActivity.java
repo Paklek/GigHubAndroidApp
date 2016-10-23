@@ -1,5 +1,6 @@
 package com.gighub.app.ui.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -78,6 +79,7 @@ public class LoginAsOrganizerActivity extends AppCompatActivity {
                          Toast.makeText(LoginAsOrganizerActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
                          intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                          mSession.SkipIntro();
+
                          mContext.startActivity(intent);
                      }
                  }
@@ -91,4 +93,6 @@ public class LoginAsOrganizerActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }

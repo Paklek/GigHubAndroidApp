@@ -5,7 +5,7 @@ package com.gighub.app.util;
  */
 public class StaticString {
 
-    public static final String API_BASE_URL = "http://192.168.1.5/Gighub-master-6/public/";
+    public static final String API_BASE_URL = "http://192.168.1.4/Gighub-master-6/public/";
     public static final String ROUTE_ALL_MUSICIANS = "mobile/musicians/1000";
     public static final String ROUTE_ALL_GIGS = "mobile/gigs/1000";
     public static final String ROUTE_ALL_GENRES = "mobile/genres/1000";
@@ -20,6 +20,11 @@ public class StaticString {
     public static final String ROUTE_CREATE_GIG = "mobile/organizer/create/gig";
     public static final String ROUTE_YOUR_GIG = "mobile/organizer/yourgig";
     public static final String ROUTE_SEND_BOOK_GROUPBAND = "mobile/organizer/book/musician";
+    public static final String ROUTE_ON_REQUEST_BOOK = "mobile/organizer/onrequestbook";
+    public static final String ROUTE_ON_PROCCESS_BOOK = "mobile/organizer/onproccessbook";
+
+    public static final String ROUTE_KONFIRMASI_PEMBAYARAN = "mobile/organizer/konfirmasipembayaran";
+
 
     public static final String API_CLOUDINARY = "cloudinary://627999879788938:Tfnf61ZtXn61Ct-Jbr_F__1zSJ8@dv5anayv1";
 

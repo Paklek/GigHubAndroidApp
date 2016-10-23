@@ -1,5 +1,7 @@
 package com.gighub.app.ui.activity;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -14,6 +16,7 @@ import android.view.MenuItem;
 import com.gighub.app.R;
 import com.gighub.app.model.GigResponse;
 import com.gighub.app.model.GroupBandsResponse;
+import com.gighub.app.model.PenyewaanResponse;
 import com.gighub.app.model.YourGigResponse;
 import com.gighub.app.ui.adapter.MainViewPagerAdapter;
 import com.gighub.app.ui.fragment.DiscoverGigFragment;
@@ -37,9 +40,12 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
     private String mName, mFirstName, mLastName, mEmail,mPhone,mGenre;
-    private String mMusicianId,mOrganizerId;
+    private String mMusicianId,mOrganizerId, mTipeUser;
+    private int mIdUser;
 
     public static final String FIRST_NAME = "fname";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else if(mSession.checkUserType().equals("msc")){
                     mName = mSession.getMusicianDetails().getName();
+                    mMusicianId = Integer.toString(mSession.getMusicianDetails().getId());
 //                    mSession.getMusicians().getGenreMusicians().get(0).getGenres().getGenre_name();
                     
 //                    mMusicianId = mSession.getMusicianDetails().getId();
@@ -92,6 +99,10 @@ public class MainActivity extends AppCompatActivity {
 
             mTabLayout = (TabLayout) findViewById(R.id.tabs);
             mTabLayout.setupWithViewPager(mViewPager);
+
+            ProgressDialog dialog = new ProgressDialog(this);
+
+
 
 
         }
@@ -182,7 +193,24 @@ public class MainActivity extends AppCompatActivity {
                 // User chose the "Favorite" action, mark the current item
                 // as a favorite...
                 Intent intent6 = new Intent(getApplicationContext(),BookingListActivity.class);
-                startActivity(intent6);
+
+                if(mSession.isLoggedIn()){
+                    if(mSession.checkUserType().equals("org")){
+                        mIdUser = mSession.getUserDetails().getId();
+                        mTipeUser = "org";
+                    }
+                    else if(mSession.checkUserType().equals("msc")){
+                        mIdUser = mSession.getMusicianDetails().getId();
+                        mTipeUser = "msc";
+                    }
+
+                }
+                BuatProgressDialog();
+//
+                Book(intent6,mIdUser,mTipeUser);
+//                onProccess(intent6,mIdUser,mTipeUser);
+//                startActivity(intent6);
+
                 return true;
 
             case R.id.action_account:
@@ -269,6 +297,89 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("fail",t.getCause().getLocalizedMessage());
             }
         });
+    }
+
+    Map<String, String> idUser = new HashMap<>();
+    Map<String,String> forOnProccess = new HashMap<>();
+    private void Book(final Intent i, int userId, String tipeUser){
+        BuildUrl buildUrl = new BuildUrl();
+        buildUrl.buildBaseUrl();
+
+        idUser.put("tipe_user", tipeUser);
+        idUser.put("user_id",Integer.toString(userId));
+        buildUrl.serviceGighub.sendIdUserForBook(idUser).enqueue(new Callback<PenyewaanResponse>() {
+            @Override
+            public void onResponse(Call<PenyewaanResponse> call, Response<PenyewaanResponse> response) {
+                i.putExtra("onreq", new Gson().toJson(response.body().getPenyewaanList()));
+                startActivity(i);
+            }
+
+            @Override
+            public void onFailure(Call<PenyewaanResponse> call, Throwable t) {
+
+            }
+        });
+
+
+//        forOnProccess.put("tipe_user", tipeUser);
+//        forOnProccess.put("user_id",Integer.toString(userId));
+//
+//        buildUrl.serviceGighub.sendForOnProccessBook(forOnProccess).enqueue(new Callback<PenyewaanResponse>() {
+//            @Override
+//            public void onResponse(Call<PenyewaanResponse> call, Response<PenyewaanResponse> response) {
+//                i.putExtra("onproc", new Gson().toJson(response.body().getPenyewaanList()));
+//            }
+//
+//            @Override
+//            public void onFailure(Call<PenyewaanResponse> call, Throwable t) {
+//
+//            }
+//        });
+
+
+
+    }
+
+    private void onProccess(final Intent i, int userId, String tipeUser){
+        BuildUrl buildUrl = new BuildUrl();
+        buildUrl.buildBaseUrl();
+
+        forOnProccess.put("tipe_user", tipeUser);
+        forOnProccess.put("user_id",Integer.toString(userId));
+
+        buildUrl.serviceGighub.sendForOnProccessBook(forOnProccess).enqueue(new Callback<PenyewaanResponse>() {
+            @Override
+            public void onResponse(Call<PenyewaanResponse> call, Response<PenyewaanResponse> response) {
+                i.putExtra("onproc", new Gson().toJson(response.body().getPenyewaanList()));
+                startActivity(i);
+            }
+
+            @Override
+            public void onFailure(Call<PenyewaanResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void BuatProgressDialog(){
+
+        final ProgressDialog dialog = new ProgressDialog(this); // this = YourActivity
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.setMessage("Loading. Please wait...");
+        dialog.setIndeterminate(true);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
+        new Thread(new Runnable(){
+            public void run(){
+                try {
+                    Thread.sleep(1000);
+                    dialog.dismiss();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
 

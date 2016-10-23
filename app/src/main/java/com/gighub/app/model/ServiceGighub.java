@@ -75,7 +75,13 @@ public interface ServiceGighub {
     @POST(StaticString.ROUTE_SEND_BOOK_GROUPBAND)
     Call<Response> sendBookData(@Body Map<String,String> dataBook);
 
-//    @POST()
-//    Call<>
+    @POST(StaticString.ROUTE_ON_REQUEST_BOOK)
+    Call<PenyewaanResponse> sendIdUserForBook(@Body Map<String, String> idUser);
+
+    @POST(StaticString.ROUTE_ON_PROCCESS_BOOK)
+    Call<PenyewaanResponse> sendForOnProccessBook(@Body Map<String, String> forOnProccess);
+
+    @POST(StaticString.ROUTE_KONFIRMASI_PEMBAYARAN)
+    Call<KonfirmasiPembayaranResponse> sendDataKonfirmasiPembayaran(@Body Map<String, String> dataKonfirmasiPembayaran);
 
 }
