@@ -60,7 +60,7 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
     private int mYear, mMonth, mDay;
     private EditText mEditTextSelectGenre;
     private RadioGroup mRadioGroupTipe;
-    private RadioButton mRadioButtonTipeGroup, mRadioButtonTipeSolo;
+    private RadioButton mRadioButtonTipeGroup, mRadioButtonTipeSolo, mRadioButtonTipeAll;
     Spinner mSpinner1;
     Spinner mSpinner2;
     private String[] mListProvinsi ={"-", "Aceh", "Bali", "Banten", "Bengkulu", "Gorontalo", "Jakarta", "Jambi", "Jawa Barat", "Jawa Tengah", "Jawa Timur", "Kalimantan Barat", "Kalimantan Selatan", "Kalimantan Tengah", "Kalimantan Timur", "Kalimantan Utara", "Kepulauan Bangka Belitung", "Kepulauan Riau", "Lampung", "Maluku", "Maluku Utara", "Nusa Tenggara Barat", "Nusa Tenggara Timur", "Papua", "Papua Barat", "Riau", "Sulawesi Barat", "Sulawesi Selatan", "Sulawesi Tengah", "Sulawesi Tenggara", "Sulawesi Utara", "Sumatera Barat", "Sumatera Selatan", "Sumatera Utara", "Yogyakarta"};
@@ -278,7 +278,9 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
 
         mRadioGroupTipe = (RadioGroup)view.findViewById(R.id.radiogroup_tipe_discovermusician);
 
+        mRadioButtonTipeGroup = (RadioButton)view.findViewById(R.id.radio_tipe_group);
         mRadioButtonTipeSolo = (RadioButton)view.findViewById(R.id.radio_tipe_solo);
+        mRadioButtonTipeAll = (RadioButton)view.findViewById(R.id.radio_tipe_all);
 
 
         mContext = inflater.getContext();
@@ -339,6 +341,7 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item, mListKota[0]);
         mSpinner2.setAdapter(adapter2);
         mSpinner2.setOnItemSelectedListener(this);
+        mRadioButtonTipeAll.setChecked(true);
 
         return view;
     }
@@ -396,7 +399,7 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
         mKotaSearch = mSpinner2.getSelectedItem().toString();
 
         Log.d("=","GetSearchMusician");
-        if(mKotaSearch.equals("-") && !mRadioGroupTipe.isFocused()){
+        if(mKotaSearch.equals("-") && mRadioButtonTipeAll.isChecked()){
 //            buildUrl.serviceGighub.loadMusicians().enqueue(new Callback<MusicianResponse>() {
 //                @Override
 //                public void onResponse(Call<MusicianResponse> call, Response<MusicianResponse> response) {
@@ -449,8 +452,33 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
 
         }
 
-        if(mKotaSearch.equals("-") && mRadioGroupTipe.isFocused()) {
+        if(mKotaSearch.equals("-") && mRadioButtonTipeSolo.isChecked()) {
             buildUrl.serviceGighub.getSearchMusicianByRole(mRadioButtonTipeSolo.getText().toString()).enqueue(new Callback<SearchResultResponse>() {
+                @Override
+                public void onResponse(Call<SearchResultResponse> call, Response<SearchResultResponse> response) {
+                    Intent i = new Intent(getActivity(),SearchResultActivity.class);
+                    Log.d("=",response.code()+"");
+                    if(response.code()==200){
+                        if(response.body().getError()==0){
+                            i.putExtra("search",new Gson().toJson(response.body().getMusicians()));
+//                            Log.d("kirim kota",mKotaSearch);
+                            Log.d("response",new Gson().toJson(response.body()));
+//                            Log.d("musisi",new Gson().toJson(response.raw()));
+                            startActivity(i);
+                        }
+                    }
+                    Log.d("response",new Gson().toJson(response.body()));
+                }
+
+                @Override
+                public void onFailure(Call<SearchResultResponse> call, Throwable t) {
+
+                }
+            });
+        }
+
+        if(mKotaSearch.equals("-") && mRadioButtonTipeGroup.isChecked()) {
+            buildUrl.serviceGighub.getSearchMusicianByRole(mRadioButtonTipeGroup.getText().toString()).enqueue(new Callback<SearchResultResponse>() {
                 @Override
                 public void onResponse(Call<SearchResultResponse> call, Response<SearchResultResponse> response) {
                     Intent i = new Intent(getActivity(),SearchResultActivity.class);

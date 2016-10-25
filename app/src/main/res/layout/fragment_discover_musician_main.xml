@@ -117,6 +117,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="Solo"/>
+            <RadioButton
+                android:id="@+id/radio_tipe_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="All"/>
         </RadioGroup>
 
         <android.support.v4.widget.Space
