@@ -21,6 +21,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -57,6 +59,8 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
     private Button mButtonDatePicker, mButtonSearch;
     private int mYear, mMonth, mDay;
     private EditText mEditTextSelectGenre;
+    private RadioGroup mRadioGroupTipe;
+    private RadioButton mRadioButtonTipeGroup, mRadioButtonTipeSolo;
     Spinner mSpinner1;
     Spinner mSpinner2;
     private String[] mListProvinsi ={"-", "Aceh", "Bali", "Banten", "Bengkulu", "Gorontalo", "Jakarta", "Jambi", "Jawa Barat", "Jawa Tengah", "Jawa Timur", "Kalimantan Barat", "Kalimantan Selatan", "Kalimantan Tengah", "Kalimantan Timur", "Kalimantan Utara", "Kepulauan Bangka Belitung", "Kepulauan Riau", "Lampung", "Maluku", "Maluku Utara", "Nusa Tenggara Barat", "Nusa Tenggara Timur", "Papua", "Papua Barat", "Riau", "Sulawesi Barat", "Sulawesi Selatan", "Sulawesi Tengah", "Sulawesi Tenggara", "Sulawesi Utara", "Sumatera Barat", "Sumatera Selatan", "Sumatera Utara", "Yogyakarta"};
@@ -271,6 +275,12 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
         mButtonSearch = (Button)view.findViewById(R.id.btn_search);
         mButtonDatePicker = (Button)view.findViewById(R.id.btn_date_search);
         mEditTextSelectGenre = (EditText)view.findViewById(R.id.et_select_genre);
+
+        mRadioGroupTipe = (RadioGroup)view.findViewById(R.id.radiogroup_tipe_discovermusician);
+
+        mRadioButtonTipeSolo = (RadioButton)view.findViewById(R.id.radio_tipe_solo);
+
+
         mContext = inflater.getContext();
 
         mButtonDatePicker.setOnClickListener(new View.OnClickListener() {
@@ -386,7 +396,7 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
         mKotaSearch = mSpinner2.getSelectedItem().toString();
 
         Log.d("=","GetSearchMusician");
-        if(mKotaSearch.equals("-")){
+        if(mKotaSearch.equals("-") && !mRadioGroupTipe.isFocused()){
 //            buildUrl.serviceGighub.loadMusicians().enqueue(new Callback<MusicianResponse>() {
 //                @Override
 //                public void onResponse(Call<MusicianResponse> call, Response<MusicianResponse> response) {
@@ -437,9 +447,33 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
             });
 
 
-
-
         }
+
+        if(mKotaSearch.equals("-") && mRadioGroupTipe.isFocused()) {
+            buildUrl.serviceGighub.getSearchMusicianByRole(mRadioButtonTipeSolo.getText().toString()).enqueue(new Callback<SearchResultResponse>() {
+                @Override
+                public void onResponse(Call<SearchResultResponse> call, Response<SearchResultResponse> response) {
+                    Intent i = new Intent(getActivity(),SearchResultActivity.class);
+                    Log.d("=",response.code()+"");
+                    if(response.code()==200){
+                        if(response.body().getError()==0){
+                            i.putExtra("search",new Gson().toJson(response.body().getMusicians()));
+//                            Log.d("kirim kota",mKotaSearch);
+                            Log.d("response",new Gson().toJson(response.body()));
+//                            Log.d("musisi",new Gson().toJson(response.raw()));
+                            startActivity(i);
+                        }
+                    }
+                    Log.d("response",new Gson().toJson(response.body()));
+                }
+
+                @Override
+                public void onFailure(Call<SearchResultResponse> call, Throwable t) {
+
+                }
+            });
+        }
+
         if(!mKotaSearch.equals("-")) {
             buildUrl.serviceGighub.getSearchMusician(mKotaSearch).enqueue(new Callback<SearchResultResponse>() {
                 @Override

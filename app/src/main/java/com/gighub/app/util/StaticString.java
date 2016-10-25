@@ -22,6 +22,7 @@ public class StaticString {
     public static final String ROUTE_SEND_BOOK_GROUPBAND = "mobile/organizer/book/musician";
     public static final String ROUTE_ON_REQUEST_BOOK = "mobile/organizer/onrequestbook";
     public static final String ROUTE_ON_PROCCESS_BOOK = "mobile/organizer/onproccessbook";
+    public static final String ROUTE_COMPLETED_BOOK = "mobile/organizer/completedbook";
 
     public static final String ROUTE_KONFIRMASI_PEMBAYARAN = "mobile/organizer/konfirmasipembayaran";
 

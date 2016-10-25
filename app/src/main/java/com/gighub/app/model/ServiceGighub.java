@@ -61,6 +61,9 @@ public interface ServiceGighub {
     Call<SearchResultResponse> getSearchMusician(@Query("kota") String kota);
 
     @GET(StaticString.ROUTE_SEARCH_MUSICIANS)
+    Call<SearchResultResponse> getSearchMusicianByRole(@Query("tipe") String tipe);
+
+    @GET(StaticString.ROUTE_SEARCH_MUSICIANS)
     Call<SearchResultResponse> getSearchAllMusician();
 
     @POST(StaticString.ROUTE_CREATE_MUSICIAN_BAND)
@@ -80,6 +83,9 @@ public interface ServiceGighub {
 
     @POST(StaticString.ROUTE_ON_PROCCESS_BOOK)
     Call<PenyewaanResponse> sendForOnProccessBook(@Body Map<String, String> forOnProccess);
+
+    @POST(StaticString.ROUTE_COMPLETED_BOOK)
+    Call<PenyewaanResponse> sendCompletedBook(@Body Map<String, String> dataCompletedBook);
 
     @POST(StaticString.ROUTE_KONFIRMASI_PEMBAYARAN)
     Call<KonfirmasiPembayaranResponse> sendDataKonfirmasiPembayaran(@Body Map<String, String> dataKonfirmasiPembayaran);

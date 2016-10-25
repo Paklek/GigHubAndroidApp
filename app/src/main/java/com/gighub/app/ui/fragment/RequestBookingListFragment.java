@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import com.gighub.app.R;
@@ -41,7 +42,7 @@ public class RequestBookingListFragment extends Fragment {
 
     private List<Penyewaan> mPenyewaan;
     private ListView mListView;
-    private RecyclerView.Adapter mAdapter;
+    private BaseAdapter mAdapter;
 
 
     public RequestBookingListFragment() {
@@ -62,9 +63,22 @@ public class RequestBookingListFragment extends Fragment {
         final Type type = new TypeToken<List<Penyewaan>>(){}.getType();
         mPenyewaan = new Gson().fromJson(i.getStringExtra("onreq"),type);
 //
+        mAdapter = new ListOnRequestBookingAdapter(getActivity().getApplicationContext(),mPenyewaan);
 //
         mListView = (ListView)view.findViewById(R.id.lv_book_req);
-        mListView.setAdapter(new ListOnRequestBookingAdapter(getActivity().getApplicationContext(), mPenyewaan));
+//
+//        for (int j=0;j<mPenyewaan.size();j++){
+//            if (mPenyewaan.get(j).getStatus().equals("1")){
+//                mListView.setAdapter(null);
+//            }
+//            else {
+//
+//                mListView.setAdapter(mAdapter);
+//            }
+//        }
+
+        mListView.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

@@ -99,17 +99,20 @@
             android:text="Role : "
             />
         <RadioGroup
+            android:id="@+id/radiogroup_tipe_discovermusician"
             android:layout_row="9"
             android:orientation="horizontal"
             android:layout_gravity="center_horizontal"
             android:layout_columnSpan="2"
             android:layout_column="0">
             <RadioButton
+                android:id="@+id/radio_tipe_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="Group"/>
             <RadioButton
+                android:id="@+id/radio_tipe_solo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

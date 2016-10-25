@@ -19,6 +19,7 @@ import java.util.List;
 public class ListOnProccessBookingAdapter extends BaseAdapter {
     private Context mContext;
     private List<Penyewaan> mPenyewaan;
+    private String mStatus;
 
     private static LayoutInflater inflater=null;
 
@@ -36,6 +37,16 @@ public class ListOnProccessBookingAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
+//        Holder holder =new Holder();
+//        for(position=0;position<mPenyewaan.size();position++) {
+//            if (mPenyewaan.get(position).getStatus().equals("1")) {
+//                holder.mTextViewVerify.setText("Not Verified");
+//            } else if(mPenyewaan.get(position).getStatus().equals("2")) {
+//                holder.mTextViewVerify.setText("Verified");
+//
+//            }
+//        }
+
         return position;
     }
 
@@ -55,23 +66,25 @@ public class ListOnProccessBookingAdapter extends BaseAdapter {
         Holder holder = new Holder();
 
         final View rowView;
-        rowView = inflater.inflate(R.layout.lv_onrequestbook,null);
+        rowView = inflater.inflate(R.layout.lv_on_proccess,null);
         holder.mTextViewName = (TextView)rowView.findViewById(R.id.tv_musician_name_onproccess);
         holder.mTextViewGenre = (TextView)rowView.findViewById(R.id.tv_musician_genres_onproccess);
         holder.mTextViewHour = (TextView)rowView.findViewById(R.id.tv_musician_hour_fee_onproccess);
         holder.mTextViewVerify = (TextView)rowView.findViewById(R.id.tv_verify_onproccess);
 
+        mStatus = ""+mPenyewaan.get(position).getStatus();
+
 //        if(mPenyewaan.get(position).getTipe()!=null){
         holder.mTextViewName.setText(mPenyewaan.get(position).getFirst_name());
         holder.mTextViewGenre.setText(mPenyewaan.get(position).getNama_gig());
         holder.mTextViewHour.setText("Rp. "+mPenyewaan.get(position).getTotal_biaya());
-        if (mPenyewaan.get(position).getStatus().equals("1")){
+        if (mStatus.equals("1")){
             holder.mTextViewVerify.setText("Not Verified");
             holder.mTextViewVerify.setTextColor(holder.mTextViewVerify.getResources().getColor(R.color.colorPrimary));
         }
-        else if (mPenyewaan.get(position).getStatus().equals("2")){
+        else if (mStatus.equals("2")){
             holder.mTextViewVerify.setText("Verified");
-            holder.mTextViewVerify.setTextColor(holder.mTextViewVerify.getResources().getColor(R.color.primaryButton2));
+            holder.mTextViewVerify.setTextColor(holder.mTextViewVerify.getResources().getColor(R.color.green));
         }
 
         return rowView;

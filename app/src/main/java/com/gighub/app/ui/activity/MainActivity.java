@@ -311,6 +311,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<PenyewaanResponse> call, Response<PenyewaanResponse> response) {
                 i.putExtra("onreq", new Gson().toJson(response.body().getPenyewaanList()));
+                i.putExtra("onproc", new Gson().toJson(response.body().getPenyewaanList()));
                 startActivity(i);
             }
 
@@ -320,14 +321,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
 //        forOnProccess.put("tipe_user", tipeUser);
 //        forOnProccess.put("user_id",Integer.toString(userId));
+//
 //
 //        buildUrl.serviceGighub.sendForOnProccessBook(forOnProccess).enqueue(new Callback<PenyewaanResponse>() {
 //            @Override
 //            public void onResponse(Call<PenyewaanResponse> call, Response<PenyewaanResponse> response) {
 //                i.putExtra("onproc", new Gson().toJson(response.body().getPenyewaanList()));
+////                startActivity(i);
 //            }
 //
 //            @Override
