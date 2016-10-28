@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gighub.app.R;
@@ -16,6 +18,8 @@ import com.gighub.app.model.Gig;
 import com.gighub.app.model.MusicianModel;
 import com.gighub.app.model.UserModel;
 import com.gighub.app.ui.activity.GigActivity;
+import com.gighub.app.util.CloudinaryUrl;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,13 +41,18 @@ public class ListDiscoverGigAdapter extends RecyclerView.Adapter<ListDiscoverGig
             implements View
             .OnClickListener {
         TextView label_name, musicianDate, mTextViewNamaGig;
+        ImageView mImageViewImageGig;
+        GridLayout mGridLayout;
         FrameLayout frameGig;
+        String mNamaGig,mImgGig;
 
         public DataObjectHolder(View itemView) {
             super(itemView);
+            mImageViewImageGig = (ImageView)itemView.findViewById(R.id.img_img_gig_discovergig);
             mTextViewNamaGig = (TextView)itemView.findViewById(R.id.tv_namagig_discovergig);
             label_name = (TextView) itemView.findViewById(R.id.musician_name);
             musicianDate = (TextView) itemView.findViewById(R.id.musician_gig_date);
+            mGridLayout = (GridLayout)itemView.findViewById(R.id.gridlayout_gig_discovergig);
             frameGig = (FrameLayout)itemView.findViewById(R.id.frame_gig);
             Log.i(LOG_TAG, "Adding Listener");
             mContext = itemView.getContext();
@@ -83,15 +92,34 @@ public class ListDiscoverGigAdapter extends RecyclerView.Adapter<ListDiscoverGig
     }
 
     @Override
-    public void onBindViewHolder(DataObjectHolder holder, int position) {
-        holder.mTextViewNamaGig.setText(mGig.get(position).getNama_gig());
+    public void onBindViewHolder(final DataObjectHolder holder, int position) {
+
+        CloudinaryUrl cloudinaryUrl = new CloudinaryUrl();
+        cloudinaryUrl.buildCloudinaryUrl();
+        if(mGig.get(position).getPhoto_gig()!=null && !mGig.get(position).getPhoto_gig().equals("")) {
+            Picasso.with(mContext).load(cloudinaryUrl.cloudinary.url().format("jpg").generate(mGig.get(position).getPhoto_gig())).into(holder.mImageViewImageGig);
+        }
+//        holder.mImageViewImageGig.
+        holder.mNamaGig = mGig.get(position).getNama_gig();
+
+        holder.mTextViewNamaGig.setText(holder.mNamaGig);
         holder.label_name.setText(mGig.get(position).getLokasi());
         holder.musicianDate.setText(mGig.get(position).getTanggal_mulai());
         holder.frameGig.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, GigActivity.class);
-//                intent.putExtra("user_id",123);
+                intent.putExtra("nama_gig",holder.mNamaGig);
+                intent.putExtra("photo_gig",holder.mImgGig);
+                mContext.startActivity(intent);
+            }
+        });
+
+        holder.mGridLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, GigActivity.class);
+                intent.putExtra("nama_gig",holder.mNamaGig);
                 mContext.startActivity(intent);
             }
         });

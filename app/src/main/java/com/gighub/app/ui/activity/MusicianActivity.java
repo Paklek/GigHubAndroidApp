@@ -1,5 +1,6 @@
 package com.gighub.app.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -23,9 +24,11 @@ import com.gighub.app.ui.adapter.MainViewPagerAdapter;
 import com.gighub.app.ui.fragment.MusicianMusicFragment;
 import com.gighub.app.ui.fragment.MusicianProfileFragment;
 import com.gighub.app.ui.fragment.MusicianReviewFragment;
+import com.gighub.app.util.CloudinaryUrl;
 import com.gighub.app.util.StaticString;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Type;
 import java.net.URL;
@@ -38,7 +41,8 @@ public class MusicianActivity extends AppCompatActivity {
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
     private ImageView mImageViewProfile;
-    private String mName;
+    private String mName, mPhoto;
+    private Context mContext;
     private int pos=0;
     private List<SearchResultModel> mSearchResultModels;
 
@@ -55,21 +59,17 @@ public class MusicianActivity extends AppCompatActivity {
         Intent intent = getIntent();
         mName = intent.getStringExtra("name");
         pos = intent.getIntExtra("posisi",pos);
+        mPhoto = intent.getStringExtra("photo");
         final Type type = new TypeToken<List<SearchResultModel>>(){}.getType();
         mSearchResultModels = new Gson().fromJson(intent.getStringExtra("search"),type);
+        CloudinaryUrl cloudinaryUrl = new CloudinaryUrl();
+        cloudinaryUrl.buildCloudinaryUrl();
+        if(mPhoto!=null && !mPhoto.equals("")) {
+            Picasso.with(mContext).load(cloudinaryUrl.cloudinary.url().format("jpg").generate(mPhoto)).into(mImageViewProfile);
+        }
 
         mToolbar = (Toolbar)findViewById(R.id.toolbar);
-//        Cloudinary cloudinary = new Cloudinary(Utils.cloudinaryUrlFromContext(getApplicationContext()));
 
-//        String mPhoto;
-//        URL url = new URL()
-//        Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-//        mImageViewProfile.setImageBitmap(url);
-//
-//
-//        mPhoto = cloudinary.url().generate("default_user");
-//
-//        mImageViewProfile.;
 
 
         mToolbar.setTitle(""+mName);

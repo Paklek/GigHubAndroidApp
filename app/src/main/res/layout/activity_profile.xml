@@ -44,6 +44,13 @@
             app:siBorderColor="@color/colorAccent3"
             android:layout_margin="5dp"
             android:layout_gravity="center_horizontal"/>
+
+        <Button
+            android:id="@+id/btn_upload_photo_activityprofile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_border2"
+            android:text="Upload Photo"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

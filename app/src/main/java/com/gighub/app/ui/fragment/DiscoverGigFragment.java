@@ -136,7 +136,7 @@ public class DiscoverGigFragment extends Fragment {
 //        });
 
 
-        img_gig = (ImageView)view.findViewById(R.id.btn_imgGig);
+        img_gig = (ImageView)view.findViewById(R.id.img_img_gig_discovergig);
         mRecyclerView = (RecyclerView)view.findViewById(R.id.rv_musician_list);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getContext());

@@ -64,6 +64,9 @@ public interface ServiceGighub {
     Call<SearchResultResponse> getSearchMusicianByRole(@Query("tipe") String tipe);
 
     @GET(StaticString.ROUTE_SEARCH_MUSICIANS)
+    Call<SearchResultResponse> getSearchMusicianByGenre(@Query("genre_name") String tipe);
+
+    @GET(StaticString.ROUTE_SEARCH_MUSICIANS)
     Call<SearchResultResponse> getSearchAllMusician();
 
     @POST(StaticString.ROUTE_CREATE_MUSICIAN_BAND)

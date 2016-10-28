@@ -10,19 +10,24 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cloudinary.Cloudinary;
 import com.gighub.app.R;
 import com.gighub.app.model.MusicianGenreModel;
 import com.gighub.app.model.MusicianModel;
 import com.gighub.app.model.SearchResultModel;
 import com.gighub.app.ui.activity.MusicianActivity;
 import com.gighub.app.ui.activity.SearchResultActivity;
+import com.gighub.app.util.CloudinaryUrl;
 import com.github.siyamed.shapeimageview.CircularImageView;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Paklek on 6/12/2016.
@@ -69,17 +74,33 @@ public class ListSearchResultAdapter extends BaseAdapter {
         Holder holder=new Holder();
 
         final View rowView;
+//        Cloudinary cloudinary = new Cloudinary();
         rowView = inflater.inflate(R.layout.lv_musician_result,null);
         holder.mTextViewName=(TextView) rowView.findViewById(R.id.musician_name);
         holder.mTextViewHarga = (TextView)rowView.findViewById(R.id.musician_fee);
-        holder.img=(CircularImageView) rowView.findViewById(R.id.img1);
+        holder.img=(CircularImageView) rowView.findViewById(R.id.img_musicianresult);
         holder.mTextViewMusicianGenres = (TextView)rowView.findViewById(R.id.musician_genres);
 //        holder.mTextViewDeskripsi = (TextView)rowView.findViewById(R.id.musician_genres);
 
+//        Map config = new HashMap();
+//        config.put("cloud_name", "dv5anayv1");
+//        config.put("api_key", "627999879788938");
+//        config.put("api_secret", "Tfnf61ZtXn61Ct-Jbr_F__lzSJ8@dv5anayv1");
+//        Cloudinary cloudinary = new Cloudinary(config);
+
+        CloudinaryUrl cloudinaryUrl = new CloudinaryUrl();
+        cloudinaryUrl.buildCloudinaryUrl();
+        if(mSearchResultModel.get(position).getPhoto()!=null && !mSearchResultModel.get(position).getPhoto().equals("")) {
+            Picasso.with(mContext).load(cloudinaryUrl.cloudinary.url().format("jpg").generate(mSearchResultModel.get(position).getPhoto())).into(holder.img);
+        }
+
+//        cloudinary.url().type("search").format("jpg").generate(mSearchResultModel.get(position).getPhoto());
+
         holder.mTextViewName.setText(mSearchResultModel.get(position).getName());
 //        holder.mTextViewName.setText(mListMusicianGenre.get(position).getMusician().getName());
-        holder.mTextViewHarga.setText(mSearchResultModel.get(position).getHarga_sewa());
+        holder.mTextViewHarga.setText("Rp."+mSearchResultModel.get(position).getHarga_sewa()+"/Hour");
         holder.mTextViewMusicianGenres.setText(mSearchResultModel.get(position).getGenrenya());
+//        holder.img.setImage
 //        holder.mTextViewHarga.setText(mListMusicianGenre.get(position).getMusician().getHarga_sewa());
 //        String g ="";
 //        for(int i =0;i<mSearchResultModel.size();i++){

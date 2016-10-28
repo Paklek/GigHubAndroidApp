@@ -2,6 +2,7 @@ package com.gighub.app.ui.fragment;
 
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ import com.gighub.app.model.SearchResultResponse;
 import com.gighub.app.ui.activity.MainActivity;
 import com.gighub.app.ui.activity.SearchResultActivity;
 import com.gighub.app.util.BuildUrl;
+import com.gighub.app.util.StaticFunction;
 import com.gighub.app.util.StaticString;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -308,6 +310,8 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
         mButtonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                StaticFunction staticFunction = new StaticFunction();
+                staticFunction.buildProgressDialog(getContext());
                 getSearchMusician();
             }
         });
@@ -399,7 +403,7 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
         mKotaSearch = mSpinner2.getSelectedItem().toString();
 
         Log.d("=","GetSearchMusician");
-        if(mKotaSearch.equals("-") && mRadioButtonTipeAll.isChecked()){
+        if(mKotaSearch.equals("-") && mRadioButtonTipeAll.isChecked() && mEditTextSelectGenre.getText().toString().equals("Select Genres")|| mEditTextSelectGenre.getText().toString().equals("")){
 //            buildUrl.serviceGighub.loadMusicians().enqueue(new Callback<MusicianResponse>() {
 //                @Override
 //                public void onResponse(Call<MusicianResponse> call, Response<MusicianResponse> response) {
@@ -452,7 +456,7 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
 
         }
 
-        if(mKotaSearch.equals("-") && mRadioButtonTipeSolo.isChecked()) {
+        if(mKotaSearch.equals("-") && mRadioButtonTipeSolo.isChecked()&& mEditTextSelectGenre.getText().toString().equals("Select Genres")|| mEditTextSelectGenre.getText().toString().equals("")) {
             buildUrl.serviceGighub.getSearchMusicianByRole(mRadioButtonTipeSolo.getText().toString()).enqueue(new Callback<SearchResultResponse>() {
                 @Override
                 public void onResponse(Call<SearchResultResponse> call, Response<SearchResultResponse> response) {
@@ -477,7 +481,7 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
             });
         }
 
-        if(mKotaSearch.equals("-") && mRadioButtonTipeGroup.isChecked()) {
+        if(mKotaSearch.equals("-") && mRadioButtonTipeGroup.isChecked()&& mEditTextSelectGenre.getText().toString().equals("Select Genres")|| mEditTextSelectGenre.getText().toString().equals("")) {
             buildUrl.serviceGighub.getSearchMusicianByRole(mRadioButtonTipeGroup.getText().toString()).enqueue(new Callback<SearchResultResponse>() {
                 @Override
                 public void onResponse(Call<SearchResultResponse> call, Response<SearchResultResponse> response) {

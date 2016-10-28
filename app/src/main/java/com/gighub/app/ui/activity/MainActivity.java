@@ -23,6 +23,7 @@ import com.gighub.app.ui.fragment.DiscoverGigFragment;
 import com.gighub.app.ui.fragment.DiscoverMusicianFragment;
 import com.gighub.app.util.BuildUrl;
 import com.gighub.app.util.SessionManager;
+import com.gighub.app.util.StaticFunction;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
@@ -205,7 +206,9 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                 }
-                BuatProgressDialog();
+//                BuatProgressDialog();
+                StaticFunction staticFunction = new StaticFunction();
+                staticFunction.buildProgressDialog(this);
 //
                 Book(intent6,mIdUser,mTipeUser);
 //                onProccess(intent6,mIdUser,mTipeUser);
@@ -363,26 +366,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void BuatProgressDialog(){
-
-        final ProgressDialog dialog = new ProgressDialog(this); // this = YourActivity
-        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        dialog.setMessage("Loading. Please wait...");
-        dialog.setIndeterminate(true);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.show();
-
-        new Thread(new Runnable(){
-            public void run(){
-                try {
-                    Thread.sleep(1000);
-                    dialog.dismiss();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
 
 
 

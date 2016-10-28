@@ -16,11 +16,11 @@
                 android:layout_column="0"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:src="@drawable/ava"
+                android:src="@drawable/default_user"
                 app:siBorderWidth="2dp"
                 app:siBorderColor="#ddd"
                 android:layout_margin="5dp"
-                android:id="@+id/img1"/>
+                android:id="@+id/img_musicianresult"/>
             <TextView
                 android:id="@+id/musician_name"
                 android:layout_column="1"

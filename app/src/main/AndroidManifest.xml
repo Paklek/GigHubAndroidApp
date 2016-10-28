@@ -7,7 +7,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_gighublogo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
@@ -19,7 +19,7 @@
             android:value="AIzaSyCnr-Sxlgu9soj-V9u4xaoP1kDEy3ULW3A" />
         <meta-data
             android:name="CLOUDINARY_URL"
-            android:value="cloudinary://627999879788938:Tfnf61ZtXn61Ct-Jbr_F__1zSJ8@dv5anayv1" />
+            android:value="cloudinary://627999879788938:Tfnf61ZtXn61Ct-Jbr_F__lzSJ8@dv5anayv1" />
 
         <activity
             android:name=".ui.activity.SplashActivity"

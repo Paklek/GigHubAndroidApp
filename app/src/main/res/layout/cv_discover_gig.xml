@@ -20,7 +20,7 @@
             <ImageView
                 android:src="@android:drawable/ic_menu_gallery"
                 android:background="@drawable/transparent_dark"
-                android:id="@+id/btn_imgGig"
+                android:id="@+id/img_img_gig_discovergig"
                 android:layout_width="match_parent"
                 android:scaleType="centerCrop"
                 android:fitsSystemWindows="true"
@@ -38,9 +38,9 @@
         </FrameLayout>
 
         <GridLayout
+            android:id="@+id/gridlayout_gig_discovergig"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:columnCount="3"
             android:rowCount="3"
             android:padding="10dp">

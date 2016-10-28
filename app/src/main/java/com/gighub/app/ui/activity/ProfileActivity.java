@@ -10,13 +10,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.gighub.app.R;
 import com.gighub.app.model.ResponseMusician;
 import com.gighub.app.model.ResponseUser;
 import com.gighub.app.util.BuildUrl;
+import com.gighub.app.util.CloudinaryUrl;
 import com.gighub.app.util.SessionManager;
 import com.google.gson.Gson;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,7 +35,7 @@ public class ProfileActivity extends AppCompatActivity {
     private int mMusicianId, mOrganizerId;
     private String mName, mFirstName, mLastName, mHarga, mEmail, mKota, mPhone, mDescriptions,  mYoutubeVideoURL, mWebsiteURL,mUsernameSounCloud, mUsernameReverbnation;
     private EditText mEditTextFirstName, mEditTextLastName,mEditTextHargaSewa,mEditTextEmail, mEditTextName, mEditTextKota, mEditTextPhoneNumber, mEditTextDescriptions, mEditTextYoutubeURL, mEditTextWebsiteURL, mEditTextUsernameSoundCloud, mEditTextUsernameReverbnation;
-    private Button mButtonSaveInfoMusician;
+    private Button mButtonSaveInfoMusician,mButtonUploadPhoto;
     private View mViewEditTextFirstName, mViewEditTextLastname, mViewEditTextHargaSewa, mViewEditTextName, mViewEditTextKota, mViewEditTextPhoneNumber, mViewEditTextDescriptions, mViewEditTextYoutubeURL, mViewEditTextWebsiteURL, mViewEditTextUsernameSoundCloud, mViewEditTextUsernameReverbnation;
     private SessionManager mSession;
 
@@ -59,6 +64,7 @@ public class ProfileActivity extends AppCompatActivity {
         mEditTextUsernameReverbnation = (EditText)findViewById(R.id.et_username_reverbnation_activityprofile);
 
         mButtonSaveInfoMusician = (Button)findViewById(R.id.btn_saveinfo_activityprofile);
+        mButtonUploadPhoto = (Button)findViewById(R.id.btn_upload_photo_activityprofile);
 
         mViewEditTextFirstName = (View)findViewById(R.id.et_first_name_activityprofile);
         mViewEditTextLastname = (View)findViewById(R.id.et_last_name_activityprofile);
@@ -129,6 +135,13 @@ public class ProfileActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mButtonUploadPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
 
         mButtonSaveInfoMusician.setOnClickListener(new View.OnClickListener() {
             @Override

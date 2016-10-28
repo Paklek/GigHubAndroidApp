@@ -1,5 +1,6 @@
 package com.gighub.app.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -9,25 +10,39 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.gighub.app.R;
 import com.gighub.app.ui.adapter.MainViewPagerAdapter;
 import com.gighub.app.ui.fragment.GigProfileFragment;
 import com.gighub.app.ui.fragment.GigUpcomingFragment;
+import com.gighub.app.util.CloudinaryUrl;
+import com.squareup.picasso.Picasso;
 
 public class GigActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
+    private ImageView mImageViewGig;
+    private String mNamaGig, mPhotoGig;
+    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gig);
 
+        mImageViewGig = (ImageView)findViewById(R.id.img_img_gig_gigactivity);
+        Intent intent = getIntent();
+        CloudinaryUrl cloudinaryUrl = new CloudinaryUrl();
+        cloudinaryUrl.buildCloudinaryUrl();
+        mPhotoGig = intent.getStringExtra("photo_gig");
+        mNamaGig = intent.getStringExtra("nama_gig");
+
         mToolbar = (Toolbar)findViewById(R.id.toolbar);
-        mToolbar.setTitle("Gig");
+
+        mToolbar.setTitle(mNamaGig);
         setSupportActionBar(mToolbar);
 //            getSupportActionBar().setDisplayHomeAsUpEnabled(true); -- Tombol Back
 
@@ -37,7 +52,9 @@ public class GigActivity extends AppCompatActivity {
         mTabLayout = (TabLayout) findViewById(R.id.tabs);
         mTabLayout.setupWithViewPager(mViewPager);
 
-
+        if(mPhotoGig!=null && !mPhotoGig.equals("")) {
+            Picasso.with(this).load(cloudinaryUrl.cloudinary.url().format("jpg").generate(mPhotoGig)).into(mImageViewGig);
+        }
 
     }
 

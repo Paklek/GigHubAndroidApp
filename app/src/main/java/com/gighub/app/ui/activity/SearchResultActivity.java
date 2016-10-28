@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import com.cloudinary.Cloudinary;
 import com.gighub.app.R;
 import com.gighub.app.model.Genre;
 import com.gighub.app.model.MusicianModel;
@@ -45,7 +46,8 @@ public class SearchResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_result);
 //        mListMusician = new ArrayList<MusicianModel>();
         mSearchResult = new ArrayList<SearchResultModel>();
-        mContext = this;
+
+//        mContext =;
 //        getSupportActionBar().setHomeButtonEnabled(true);
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         toolbar.setTitle("Search Result");
@@ -53,7 +55,7 @@ public class SearchResultActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 //        Intent i = new Intent(getApplicationContext(), SearchResultActivity.class);
-          Intent i = getIntent();
+        Intent i = getIntent();
 //        final Type typeListMusician = new TypeToken<List<MusicianModel>>(){}.getType();
 //        mListMusician = new Gson().fromJson(i.getStringExtra("search"),typeListMusician);
         final Type type = new TypeToken<List<SearchResultModel>>(){}.getType();
@@ -61,6 +63,7 @@ public class SearchResultActivity extends AppCompatActivity {
 
         mListView = (ListView)findViewById(R.id.lv_search);
         mListView.setAdapter(new ListSearchResultAdapter(getApplicationContext(),mSearchResult ));
+
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -72,6 +75,7 @@ public class SearchResultActivity extends AppCompatActivity {
                 intent.putExtra("harga_sewa",mSearchResult.get(position).getHarga_sewa());
                 intent.putExtra("kota",mSearchResult.get(position).getKota());
                 intent.putExtra("tipe",mSearchResult.get(position).getTipe());
+                intent.putExtra("photo",mSearchResult.get(position).getPhoto());
 //                pos = position;
                 intent.putExtra("posisi",position);
                 Log.d("pos",""+position);
