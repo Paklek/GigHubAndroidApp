@@ -37,9 +37,10 @@
         android:layout_marginTop="10dp"
         android:orientation="vertical">
         <com.github.siyamed.shapeimageview.CircularImageView
+            android:id="@+id/img_photo_activityprofile"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:src="@drawable/ic_person_black_48dp"
+            android:src="@drawable/default_user"
             app:siBorderWidth="2dp"
             app:siBorderColor="@color/colorAccent3"
             android:layout_margin="5dp"

@@ -17,6 +17,7 @@ public class StaticString {
     public static final String ROUTE_UPDATE_PROFILE = "mobile/update/profile";
     public static final String ROUTE_CREATE_MUSICIAN_BAND = "mobile/musician/create/band";
     public static final String ROUTE_BANDS = "mobile/grupbands/1000";
+    public static final String ROUTE_YOUR_BANDS = "mobile/musician/yourbands";
     public static final String ROUTE_CREATE_GIG = "mobile/organizer/create/gig";
     public static final String ROUTE_YOUR_GIG = "mobile/organizer/yourgig";
     public static final String ROUTE_SEND_BOOK_GROUPBAND = "mobile/organizer/book/musician";

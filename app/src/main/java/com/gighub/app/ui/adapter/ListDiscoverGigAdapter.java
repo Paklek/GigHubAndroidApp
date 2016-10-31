@@ -35,6 +35,7 @@ public class ListDiscoverGigAdapter extends RecyclerView.Adapter<ListDiscoverGig
     private static MyClickListener myClickListener;
 //    private List<MusicianModel> mDaftarMusician;
     private List<Gig> mGig;
+    private int mPos;
     public static Context mContext;
 
     public static class DataObjectHolder extends RecyclerView.ViewHolder
@@ -101,6 +102,7 @@ public class ListDiscoverGigAdapter extends RecyclerView.Adapter<ListDiscoverGig
         }
 //        holder.mImageViewImageGig.
         holder.mNamaGig = mGig.get(position).getNama_gig();
+        mPos=position;
 
         holder.mTextViewNamaGig.setText(holder.mNamaGig);
         holder.label_name.setText(mGig.get(position).getLokasi());
@@ -110,7 +112,9 @@ public class ListDiscoverGigAdapter extends RecyclerView.Adapter<ListDiscoverGig
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, GigActivity.class);
                 intent.putExtra("nama_gig",holder.mNamaGig);
-                intent.putExtra("photo_gig",holder.mImgGig);
+                intent.putExtra("photo_gig",mGig.get(mPos).getPhoto_gig());
+                Log.d("photo",mGig.get(mPos).getPhoto_gig());
+
                 mContext.startActivity(intent);
             }
         });

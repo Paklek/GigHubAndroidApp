@@ -3,6 +3,7 @@ package com.gighub.app.ui.activity;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.support.annotation.IntegerRes;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import com.gighub.app.R;
 import com.gighub.app.model.GigResponse;
 import com.gighub.app.model.GroupBandsResponse;
 import com.gighub.app.model.PenyewaanResponse;
+import com.gighub.app.model.YourBandResponse;
 import com.gighub.app.model.YourGigResponse;
 import com.gighub.app.ui.adapter.MainViewPagerAdapter;
 import com.gighub.app.ui.fragment.DiscoverGigFragment;
@@ -125,24 +127,30 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
 
-        if(mSession.isLoggedIn()){
-            if(mSession.checkUserType().equals("org")){
-                menu.getItem(2).setVisible(false);
-                menu.getItem(3).setVisible(false);
-            }
-            else if(mSession.checkUserType().equals("msc")){
-                menu.getItem(2).setVisible(true);
-                menu.getItem(3).setVisible(true);
-                menu.getItem(4).setVisible(false);
-                menu.getItem(5).setVisible(false);
-            }
-            menu.getItem(0).setVisible(false);
-            menu.getItem(1).setVisible(false);
-        }
-        if(!mSession.isLoggedIn()){
-            menu.getItem(2).setVisible(false);
-            menu.getItem(3).setVisible(false);
-        }
+        StaticFunction staticFunction = new StaticFunction();
+        staticFunction.createOptionMenu(menu,mSession);
+//
+//        if(mSession.isLoggedIn()){
+//            if(mSession.checkUserType().equals("org")){
+//                menu.getItem(2).setVisible(false);
+//                menu.getItem(3).setVisible(false);
+//            }
+//            else if(mSession.checkUserType().equals("msc")){
+//                menu.getItem(2).setVisible(true);
+//                menu.getItem(3).setVisible(true);
+//                menu.getItem(4).setVisible(false);
+//                menu.getItem(5).setVisible(false);
+//            }
+//            menu.getItem(0).setVisible(false);
+//            menu.getItem(1).setVisible(false);
+//        }
+//        if(!mSession.isLoggedIn()){
+//            menu.getItem(2).setVisible(false);
+//            menu.getItem(3).setVisible(false);
+//            menu.getItem(4).setVisible(false);
+//            menu.getItem(5).setVisible(false);
+//            menu.getItem(6).setVisible(false);
+//        }
 
         return true;
     }
@@ -252,14 +260,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    Map <String, String> sendYourBandData = new HashMap<>();
     private void getBands(final Intent i){
         BuildUrl buildUrl = new BuildUrl();
         buildUrl.buildBaseUrl();
 
-        buildUrl.serviceGighub.getDataBand().enqueue(new Callback<GroupBandsResponse>() {
-            @Override
-            public void onResponse(Call<GroupBandsResponse> call, Response<GroupBandsResponse> response) {
+        sendYourBandData.put("user_id",mMusicianId);
 
+        buildUrl.serviceGighub.sendYourBands(sendYourBandData).enqueue(new Callback<YourBandResponse>() {
+            @Override
+            public void onResponse(Call<YourBandResponse> call, Response<YourBandResponse> response) {
                 i.putExtra("bands",new Gson().toJson(response.body().getGroupBands()));
                 Log.d("response",new Gson().toJson(response.body().getGroupBands()));
                 Log.d("response",new Gson().toJson(response.body()));
@@ -267,7 +277,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<GroupBandsResponse> call, Throwable t) {
+            public void onFailure(Call<YourBandResponse> call, Throwable t) {
 
             }
         });

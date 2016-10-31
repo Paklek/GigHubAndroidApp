@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.cloudinary.Cloudinary;
@@ -19,6 +20,7 @@ import com.gighub.app.util.BuildUrl;
 import com.gighub.app.util.CloudinaryUrl;
 import com.gighub.app.util.SessionManager;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,11 +35,12 @@ public class ProfileActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private int mMusicianId, mOrganizerId;
-    private String mName, mFirstName, mLastName, mHarga, mEmail, mKota, mPhone, mDescriptions,  mYoutubeVideoURL, mWebsiteURL,mUsernameSounCloud, mUsernameReverbnation;
+    private String mName, mFirstName, mLastName, mHarga, mEmail, mKota, mPhone, mDescriptions,  mYoutubeVideoURL, mWebsiteURL,mUsernameSounCloud, mUsernameReverbnation,mPhoto;
     private EditText mEditTextFirstName, mEditTextLastName,mEditTextHargaSewa,mEditTextEmail, mEditTextName, mEditTextKota, mEditTextPhoneNumber, mEditTextDescriptions, mEditTextYoutubeURL, mEditTextWebsiteURL, mEditTextUsernameSoundCloud, mEditTextUsernameReverbnation;
     private Button mButtonSaveInfoMusician,mButtonUploadPhoto;
     private View mViewEditTextFirstName, mViewEditTextLastname, mViewEditTextHargaSewa, mViewEditTextName, mViewEditTextKota, mViewEditTextPhoneNumber, mViewEditTextDescriptions, mViewEditTextYoutubeURL, mViewEditTextWebsiteURL, mViewEditTextUsernameSoundCloud, mViewEditTextUsernameReverbnation;
     private SessionManager mSession;
+    private ImageView mImageViewPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,7 @@ public class ProfileActivity extends AppCompatActivity {
         mEditTextWebsiteURL = (EditText)findViewById(R.id.et_website_url_activityprofile);
         mEditTextUsernameSoundCloud = (EditText)findViewById(R.id.et_username_soundcloud_activityprofile);
         mEditTextUsernameReverbnation = (EditText)findViewById(R.id.et_username_reverbnation_activityprofile);
+        mImageViewPhoto = (ImageView)findViewById(R.id.img_photo_activityprofile);
 
         mButtonSaveInfoMusician = (Button)findViewById(R.id.btn_saveinfo_activityprofile);
         mButtonUploadPhoto = (Button)findViewById(R.id.btn_upload_photo_activityprofile);
@@ -77,6 +81,11 @@ public class ProfileActivity extends AppCompatActivity {
         mViewEditTextWebsiteURL = (View)findViewById(R.id.et_website_url_activityprofile);
         mViewEditTextUsernameSoundCloud = (View)findViewById(R.id.et_username_soundcloud_activityprofile);
         mViewEditTextUsernameReverbnation = (View)findViewById(R.id.et_username_reverbnation_activityprofile);
+
+        CloudinaryUrl cloudinaryUrl = new CloudinaryUrl();
+        cloudinaryUrl.buildCloudinaryUrl();
+
+        mEditTextEmail.setEnabled(false);
 
         if(mSession.isLoggedIn()){
             if(mSession.checkUserType().equals("org")){
@@ -96,6 +105,8 @@ public class ProfileActivity extends AppCompatActivity {
                 mEditTextWebsiteURL.setVisibility(mViewEditTextWebsiteURL.GONE);
                 mEditTextUsernameSoundCloud.setVisibility(mViewEditTextUsernameSoundCloud.GONE);
                 mEditTextUsernameReverbnation.setVisibility(mViewEditTextUsernameReverbnation.GONE);
+                mImageViewPhoto.setVisibility(View.GONE);
+                mButtonUploadPhoto.setVisibility(View.GONE);
 
                 mEditTextFirstName.setText(mFirstName);
                 mEditTextLastName.setText(mLastName);
@@ -103,6 +114,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
             else if(mSession.checkUserType().equals("msc")){
                 mMusicianId = mSession.getMusicianDetails().getId();
+                mPhoto = mSession.getMusicianDetails().getPhoto();
                 mName = mSession.getMusicianDetails().getName();
                 mEmail = mSession.getMusicianDetails().getEmail();
                 mHarga = mSession.getMusicianDetails().getHarga_sewa();
@@ -118,6 +130,11 @@ public class ProfileActivity extends AppCompatActivity {
                 mEditTextFirstName.setVisibility(mViewEditTextFirstName.GONE);
                 mEditTextLastName.setVisibility(mViewEditTextLastname.GONE);
 
+
+
+                if(mPhoto!=null && !mPhoto.equals("")) {
+                    Picasso.with(this).load(cloudinaryUrl.cloudinary.url().format("jpg").generate(mPhoto)).into(mImageViewPhoto);
+                }
                 mEditTextName.setText(mName);
                 mEditTextEmail.setText(mEmail);
                 mEditTextHargaSewa.setText(mHarga);

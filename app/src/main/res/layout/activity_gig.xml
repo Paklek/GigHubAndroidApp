@@ -24,8 +24,8 @@
             <ImageView
                 android:id="@+id/img_img_gig_gigactivity"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ava"
+                android:layout_height="match_parent"
+                android:src="@android:drawable/ic_menu_gallery"
                 android:scaleType="centerCrop"
                 android:fitsSystemWindows="true"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"

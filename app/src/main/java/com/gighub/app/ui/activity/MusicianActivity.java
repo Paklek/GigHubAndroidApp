@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.android.Utils;
@@ -25,6 +26,7 @@ import com.gighub.app.ui.fragment.MusicianMusicFragment;
 import com.gighub.app.ui.fragment.MusicianProfileFragment;
 import com.gighub.app.ui.fragment.MusicianReviewFragment;
 import com.gighub.app.util.CloudinaryUrl;
+import com.gighub.app.util.SessionManager;
 import com.gighub.app.util.StaticString;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -43,6 +45,7 @@ public class MusicianActivity extends AppCompatActivity {
     private ImageView mImageViewProfile;
     private String mName, mPhoto;
     private Context mContext;
+    private SessionManager mSession;
     private int pos=0;
     private List<SearchResultModel> mSearchResultModels;
 
@@ -50,6 +53,8 @@ public class MusicianActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_musician);
+
+        mSession = new SessionManager(getApplicationContext());
 
         mSearchResultModels = new ArrayList<SearchResultModel>();
 
@@ -98,6 +103,15 @@ public class MusicianActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
+
+        if(!mSession.isLoggedIn()){
+            menu.getItem(2).setVisible(false);
+            menu.getItem(3).setVisible(false);
+            menu.getItem(4).setVisible(false);
+            menu.getItem(5).setVisible(false);
+            menu.getItem(6).setVisible(false);
+        }
+
         return true;
     }
     @Override

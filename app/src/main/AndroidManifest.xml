@@ -74,7 +74,8 @@
         <activity android:name=".ui.activity.GroupBandActivity" />
         <activity android:name=".ui.activity.CreateGigActivity" />
         <activity android:name=".ui.activity.YourGigActivity" />
-        <activity android:name=".ui.activity.KonfirmasiPembayaranActivity"></activity>
+        <activity android:name=".ui.activity.KonfirmasiPembayaranActivity" />
+        <activity android:name=".ui.activity.GroupBandProfileActivity"></activity>
     </application>
 
 </manifest>

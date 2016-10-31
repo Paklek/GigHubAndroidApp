@@ -67,11 +67,12 @@
         </TableLayout>
         </LinearLayout>
         <TextView
+            android:id="@+id/tv_anggota_musicianprofile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:layout_marginBottom="25dp"
-            android:text="Biography"
+            android:text="Anggota"
             android:textStyle="bold"
             android:gravity="center"/>
 

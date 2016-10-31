@@ -61,10 +61,19 @@ public interface ServiceGighub {
     Call<SearchResultResponse> getSearchMusician(@Query("kota") String kota);
 
     @GET(StaticString.ROUTE_SEARCH_MUSICIANS)
+    Call<SearchResultResponse> getSearchMusicianByKotaNTipe(@Query("kota") String kota,@Query("tipe") String tipe);
+
+    @GET(StaticString.ROUTE_SEARCH_MUSICIANS)
+    Call<SearchResultResponse> getSearchMusicianByKotaNGenre(@Query("kota") String kota,@Query("genre_name") String genre_name);
+
+    @GET(StaticString.ROUTE_SEARCH_MUSICIANS)
+    Call<SearchResultResponse> getSearchMusicianByKotaNTipeNGenre(@Query("kota") String kota,@Query("tipe") String tipe,@Query("genre_name") String genre_name);
+
+    @GET(StaticString.ROUTE_SEARCH_MUSICIANS)
     Call<SearchResultResponse> getSearchMusicianByRole(@Query("tipe") String tipe);
 
     @GET(StaticString.ROUTE_SEARCH_MUSICIANS)
-    Call<SearchResultResponse> getSearchMusicianByGenre(@Query("genre_name") String tipe);
+    Call<SearchResultResponse> getSearchMusicianByGenre(@Query("genre_name") String genre_name);
 
     @GET(StaticString.ROUTE_SEARCH_MUSICIANS)
     Call<SearchResultResponse> getSearchAllMusician();
@@ -72,8 +81,8 @@ public interface ServiceGighub {
     @POST(StaticString.ROUTE_CREATE_MUSICIAN_BAND)
     Call<GrupBandResponse> sendInsertDataBand(@Body Map<String, String> insertDataBand);
 
-    @GET(StaticString.ROUTE_BANDS)
-    Call<GroupBandsResponse> getDataBand();
+    @POST(StaticString.ROUTE_YOUR_BANDS)
+    Call<YourBandResponse> sendYourBands(@Body Map<String, String> sendDataYourBands);
 
     @POST(StaticString.ROUTE_CREATE_GIG)
     Call<GigResponse> sendInsertDataGig(@Body Map<String,String> DataGig);

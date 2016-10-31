@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gighub.app.R;
 import com.gighub.app.model.SearchResultModel;
@@ -30,7 +31,7 @@ public class MusicianProfileFragment extends Fragment {
     Context mContext;
     private String mDescriptions, mGenre, mName,mHarga, mTipe;
     private int pos=0, mId;
-    private TextView mTextViewMusicianDescriptions, mTextViewMusicianGenres, mTextViewTipeMusisi;
+    private TextView mTextViewMusicianDescriptions, mTextViewMusicianGenres, mTextViewTipeMusisi, mTextViewAnggota;
     private Button mButtonBookRequest;
 
     private View mViewButtonBookRequest;
@@ -53,6 +54,7 @@ public class MusicianProfileFragment extends Fragment {
         mSession = new SessionManager(getActivity().getApplicationContext());
 
         mViewButtonBookRequest = (View)view.findViewById(R.id.btn_book_request_musicianprofile);
+        mTextViewAnggota = (TextView)view.findViewById(R.id.tv_anggota_musicianprofile);
 
         if(mSession.isLoggedIn()){
             if(mSession.checkUserType().equals("org")){
@@ -73,6 +75,7 @@ public class MusicianProfileFragment extends Fragment {
 
 
         mContext = inflater.getContext();
+
 
         mTextViewMusicianDescriptions = (TextView)view.findViewById(R.id.tv_musician_descriptions);
         mTextViewMusicianGenres = (TextView)view.findViewById(R.id.tv_musician_genres);
@@ -96,6 +99,13 @@ public class MusicianProfileFragment extends Fragment {
         mId = intent.getIntExtra("id",0);
         Log.d("pos",""+pos+" fragment");
 
+        if(mSearchResult.get(pos).getTipe().equals("Solo")){
+            mTextViewAnggota.setVisibility(View.GONE);
+        }
+        else if(mSearchResult.get(pos).getTipe().equals("Group")){
+            mTextViewAnggota.setVisibility(View.VISIBLE);
+        }
+
         mTextViewMusicianDescriptions.setText(": "+mDescriptions);
         mTextViewMusicianGenres.setText(": "+ mGenre);
         mTextViewTipeMusisi.setText(": "+mTipe);
@@ -104,17 +114,23 @@ public class MusicianProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Log.d("pos",""+pos+" fragmentclick");
-                Intent intent1 = new Intent(getActivity().getApplicationContext(), BookMusicianActivity.class);
-                intent1.putExtra("id",mId);
-                intent1.putExtra("pos",pos);
-                intent1.putExtra("name",mName);
-                intent1.putExtra("genre", mGenre);
-                intent1.putExtra("harga_sewa", mHarga);
-                intent1.putExtra("tipe",mTipe);
+                if(!mSession.isLoggedIn()){
+                    Toast.makeText(mContext, "You Must be logged in as Organizer to book",Toast.LENGTH_LONG).show();
+                }
+                else {
+
+                    Log.d("pos", "" + pos + " fragmentclick");
+                    Intent intent1 = new Intent(getActivity().getApplicationContext(), BookMusicianActivity.class);
+                    intent1.putExtra("id", mId);
+                    intent1.putExtra("pos", pos);
+                    intent1.putExtra("name", mName);
+                    intent1.putExtra("genre", mGenre);
+                    intent1.putExtra("harga_sewa", mHarga);
+                    intent1.putExtra("tipe", mTipe);
 //                intent1.putExtra("harga_sewa",mSearchResult.get(pos).getHarga_sewa());
 
-                startActivity(intent1);
+                    startActivity(intent1);
+                }
             }
         });
 
