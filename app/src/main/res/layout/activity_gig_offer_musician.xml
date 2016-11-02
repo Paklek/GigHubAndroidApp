@@ -1,0 +1,97 @@
+<LinearLayout android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <GridLayout
+        android:background="@drawable/border_orange"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:rowCount="3"
+        android:padding="10dp">
+        <com.github.siyamed.shapeimageview.CircularImageView
+            android:layout_row="0"
+            android:layout_rowSpan="3"
+            android:layout_column="0"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/default_user"
+            app:siBorderWidth="2dp"
+            app:siBorderColor="#ddd"
+            android:layout_margin="5dp"
+            android:id="@+id/img_gigoffermusician"/>
+        <TextView
+            android:id="@+id/musician_name_gigoffermusician"
+            android:layout_column="1"
+            android:layout_row="0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="The Black Adams"
+            android:textColor="@color/colorTextDark"
+            android:layout_marginLeft="10dp"/>
+        <TextView
+            android:id="@+id/musician_fee_gigoffermusician"
+            android:layout_column="1"
+            android:layout_row="1"
+            android:layout_columnSpan="2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:textColor="@color/colorTextDark"
+            android:text="Rp. 200.000 / Hours"
+            />
+        <TextView
+            android:id="@+id/musician_genres_gigoffermusician"
+            android:layout_column="1"
+            android:layout_row="2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rock, Jazz"
+            android:textColor="@color/colorTextDark"
+            android:layout_marginLeft="10dp"/>
+
+    </GridLayout>
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:text="tipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_tipe_gigoffermusician"/>
+
+    <TextView
+        android:text="deskripsi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_deskripsi_gigoffermusician"/>
+
+
+    <TextView
+        android:text="kota"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_kota_gigoffermusician"/>
+
+    <!--<Spinner-->
+        <!--android:id="@+id/spinner"-->
+        <!--android:background="@drawable/spinner_drawable"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"></Spinner>-->
+
+
+
+    <Button
+        android:layout_marginTop="40dp"
+        android:background="@drawable/button_border2"
+        android:text="Submit"
+        android:id="@+id/btn_submit_gigoffermusician"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

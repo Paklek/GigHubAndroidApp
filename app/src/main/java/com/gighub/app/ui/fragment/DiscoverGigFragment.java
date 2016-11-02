@@ -51,6 +51,7 @@ public class DiscoverGigFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     private ImageView img_gig;
     private FrameLayout frameLayout;
+    private String mLokasi;
 
     Context mContext;
     public DiscoverGigFragment() {
@@ -90,6 +91,7 @@ public class DiscoverGigFragment extends Fragment {
                     for(int i =0 ;i<mGig.size();i++)
                     {
                         tmp += String.format(""+ mGig.get(i).getNama_gig());
+//                        mLokasi = mGig.get(i).getLokasi();
                     }
 
 
@@ -138,6 +140,7 @@ public class DiscoverGigFragment extends Fragment {
 
         img_gig = (ImageView)view.findViewById(R.id.img_img_gig_discovergig);
         mRecyclerView = (RecyclerView)view.findViewById(R.id.rv_musician_list);
+
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);

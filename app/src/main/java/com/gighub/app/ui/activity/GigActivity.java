@@ -40,10 +40,10 @@ public class GigActivity extends AppCompatActivity {
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
     private ImageView mImageViewGig;
-    private String mNamaGig, mPhotoGig,mMusicianId,mOrganizerId, mTipeUser, mName, mFirstName, mLastName,mEmail;
+    private String mNamaGig, mPhotoGig,mOrganizerId, mTipeUser, mName, mFirstName, mLastName,mEmail;
     private Context mContext;
     private SessionManager mSession;
-    private int mIdUser;
+    private int mIdUser,mMusicianId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +57,7 @@ public class GigActivity extends AppCompatActivity {
         cloudinaryUrl.buildCloudinaryUrl();
         mPhotoGig = intent.getStringExtra("photo_gig");
         mNamaGig = intent.getStringExtra("nama_gig");
+        mIdUser = mSession.getMusicianDetails().getId();
 
         mToolbar = (Toolbar)findViewById(R.id.toolbar);
 
@@ -78,7 +79,7 @@ public class GigActivity extends AppCompatActivity {
             }
             else if(mSession.checkUserType().equals("msc")){
                 mName = mSession.getMusicianDetails().getName();
-                mMusicianId = Integer.toString(mSession.getMusicianDetails().getId());
+                mMusicianId = mSession.getMusicianDetails().getId();
 //                    mSession.getMusicians().getGenreMusicians().get(0).getGenres().getGenre_name();
 
 //                    mMusicianId = mSession.getMusicianDetails().getId();
@@ -225,7 +226,7 @@ public class GigActivity extends AppCompatActivity {
         BuildUrl buildUrl = new BuildUrl();
         buildUrl.buildBaseUrl();
 
-        sendYourBandData.put("user_id",mMusicianId);
+        sendYourBandData.put("user_id",Integer.toString(mMusicianId));
 
         buildUrl.serviceGighub.sendYourBands(sendYourBandData).enqueue(new Callback<YourBandResponse>() {
             @Override

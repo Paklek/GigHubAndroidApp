@@ -99,10 +99,10 @@ public class MusicianProfileFragment extends Fragment {
         mId = intent.getIntExtra("id",0);
         Log.d("pos",""+pos+" fragment");
 
-        if(mSearchResult.get(pos).getTipe().equals("Solo")){
+        if(mTipe.equals("Solo")){
             mTextViewAnggota.setVisibility(View.GONE);
         }
-        else if(mSearchResult.get(pos).getTipe().equals("Group")){
+        else if(mTipe.equals("Group")){
             mTextViewAnggota.setVisibility(View.VISIBLE);
         }
 

@@ -19,6 +19,7 @@ import com.gighub.app.model.MusicianModel;
 import com.gighub.app.model.UserModel;
 import com.gighub.app.ui.activity.GigActivity;
 import com.gighub.app.util.CloudinaryUrl;
+import com.gighub.app.util.SessionManager;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ public class ListDiscoverGigAdapter extends RecyclerView.Adapter<ListDiscoverGig
     private List<Gig> mGig;
     private int mPos;
     public static Context mContext;
+
 
     public static class DataObjectHolder extends RecyclerView.ViewHolder
             implements View
@@ -93,7 +95,7 @@ public class ListDiscoverGigAdapter extends RecyclerView.Adapter<ListDiscoverGig
     }
 
     @Override
-    public void onBindViewHolder(final DataObjectHolder holder, int position) {
+    public void onBindViewHolder(final DataObjectHolder holder, final int position) {
 
         CloudinaryUrl cloudinaryUrl = new CloudinaryUrl();
         cloudinaryUrl.buildCloudinaryUrl();
@@ -111,8 +113,17 @@ public class ListDiscoverGigAdapter extends RecyclerView.Adapter<ListDiscoverGig
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, GigActivity.class);
+                intent.putExtra("gig_id",mGig.get(position).getId());
                 intent.putExtra("nama_gig",holder.mNamaGig);
                 intent.putExtra("photo_gig",mGig.get(mPos).getPhoto_gig());
+                intent.putExtra("gig_id",mGig.get(position).getId());
+                intent.putExtra("tanggal_mulai",mGig.get(position).getTanggal_mulai());
+                intent.putExtra("tanggal_selesai",mGig.get(position).getTanggal_selesai());
+                intent.putExtra("deskripsi",mGig.get(position).getDeskripsi());
+                intent.putExtra("lokasi",mGig.get(position).getLokasi());
+                intent.putExtra("lokasi_detail",mGig.get(position).getDetail_lokasi());
+                intent.putExtra("user_id",mGig.get(position).getUser_id());
+
                 Log.d("photo",mGig.get(mPos).getPhoto_gig());
 
                 mContext.startActivity(intent);
@@ -124,6 +135,7 @@ public class ListDiscoverGigAdapter extends RecyclerView.Adapter<ListDiscoverGig
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, GigActivity.class);
                 intent.putExtra("nama_gig",holder.mNamaGig);
+                intent.putExtra("gig_id",mGig.get(position).getId());
                 mContext.startActivity(intent);
             }
         });

@@ -188,10 +188,10 @@ public class CreateBandActivity extends AppCompatActivity {
         else  if(mPosition.equals("Guitarist")){
             mPositionId = 2;
         }
-        else if(mPosition.equals("Drummer")){
+        else if(mPosition.equals("Bassist")){
             mPositionId = 3;
         }
-        else if(mPosition.equals("Bassist")){
+        else if(mPosition.equals("Drummer")){
             mPositionId = 4;
         }
         else if(mPosition.equals("Keyboardist")){

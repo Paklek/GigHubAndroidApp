@@ -2,17 +2,12 @@ package com.gighub.app.model;
 
 import com.gighub.app.util.StaticString;
 
-import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -89,6 +84,12 @@ public interface ServiceGighub {
 
     @POST(StaticString.ROUTE_SEND_BOOK_GROUPBAND)
     Call<Response> sendBookData(@Body Map<String,String> dataBook);
+
+    @POST(StaticString.ROUTE_LIST_GIG_OFFER_MUSICIAN)
+    Call<GigOfferMusicianResponse> sendGigOfferData(@Body Map<String, String> dataMusicianOffer);
+
+    @POST(StaticString.ROUTE_GIG_OFFER)
+    Call<Response> sendOfferSubmitData(@Body Map<String, String> submitData);
 
     @POST(StaticString.ROUTE_ON_REQUEST_BOOK)
     Call<PenyewaanResponse> sendIdUserForBook(@Body Map<String, String> idUser);

@@ -7,11 +7,48 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:layout_marginTop="20dp"
+        android:id="@+id/tv_deskripsi_gigprofile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment" />
+        android:text="Deskripsi" />
+
+    <TextView
+        android:id="@+id/tv_location_gigprofile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="location" />
+
+    <TextView
+        android:id="@+id/tv_location_detail_gigprofile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="location detail" />
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:id="@+id/tv_tanggal_mulai_gigprofile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tanggal Mulai" />
+
+    <TextView
+
+        android:id="@+id/tv_tanggal_selesai_gigprofile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tanggal Selesai" />
 
     <Button
+        android:layout_marginTop="20dp"
+        android:id="@+id/btn_offer_gig_gigprofile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_border2"
+        android:text="Gig Offer"/>
+
+    <Button
+        android:layout_marginTop="20dp"
         android:id="@+id/btn_view_map"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
