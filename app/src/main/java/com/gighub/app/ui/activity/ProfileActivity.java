@@ -23,6 +23,8 @@ import android.widget.Toast;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.gighub.app.R;
+import com.gighub.app.model.Bank;
+import com.gighub.app.model.BankResponse;
 import com.gighub.app.model.Genre;
 import com.gighub.app.model.ResponseCallGenre;
 import com.gighub.app.model.ResponseMusician;
@@ -33,6 +35,7 @@ import com.gighub.app.ui.adapter.ListSearchResultAdapter;
 import com.gighub.app.util.BuildUrl;
 import com.gighub.app.util.CloudinaryUrl;
 import com.gighub.app.util.SessionManager;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
@@ -56,17 +59,18 @@ public class ProfileActivity extends AppCompatActivity {
     private GridView mGridView;
     private int mMusicianId, mOrganizerId, mGenreCount=0;
     private String mGenreDipilih="",mName, mFirstName, mLastName, mHarga, mEmail, mKota, mPhone, mDescriptions,  mYoutubeVideoURL, mWebsiteURL,mUsernameSounCloud, mUsernameReverbnation,mPhoto;
-    private EditText mEditTextFirstName, mEditTextLastName,mEditTextHargaSewa,mEditTextEmail, mEditTextName, mEditTextKota, mEditTextPhoneNumber, mEditTextDescriptions, mEditTextYoutubeURL, mEditTextWebsiteURL, mEditTextUsernameSoundCloud, mEditTextUsernameReverbnation;
-    private Button mButtonSaveInfoMusician,mButtonUploadPhoto;
+    private EditText mEditTextNoRek, mEditTextAtasNama,mEditTextNamaBank, mEditTextFirstName, mEditTextLastName,mEditTextHargaSewa,mEditTextEmail, mEditTextName, mEditTextKota, mEditTextPhoneNumber, mEditTextDescriptions, mEditTextYoutubeURL, mEditTextWebsiteURL, mEditTextUsernameSoundCloud, mEditTextUsernameReverbnation;
+    private Button mButtonSaveInfoMusician,mButtonUploadPhoto, mButtonLoadBank;
     private View mViewEditTextFirstName, mViewEditTextLastname, mViewEditTextHargaSewa, mViewEditTextName, mViewEditTextKota, mViewEditTextPhoneNumber, mViewEditTextDescriptions, mViewEditTextYoutubeURL, mViewEditTextWebsiteURL, mViewEditTextUsernameSoundCloud, mViewEditTextUsernameReverbnation;
     private SessionManager mSession;
     private ImageView mImageViewPhoto;
     private CheckBox[] cbxs = new CheckBox[5];
     private List<Genre> mGenreList;
     private List<Genre> mMusicianGenres;
+    private List<Bank> bank;
     private ListAddGenreAdapter listAddGenreAdapter;
     private TextView mTextViewMusicianGenres;
-    private LinearLayout mLinearLayoutMusicianGenres;
+    private LinearLayout mLinearLayoutMusicianGenres, mLinearLayoutBank;
 //    Map <String, String> musicianGenreData = new HashMap<>();
 
     @Override
@@ -76,14 +80,17 @@ public class ProfileActivity extends AppCompatActivity {
 
         mGenreList = new ArrayList<Genre>();
         mMusicianGenres = new ArrayList<Genre>();
-
+        bank = new ArrayList<Bank>();
         mSession = new SessionManager(getApplicationContext());
         toolbar = (Toolbar)findViewById(R.id.toolbar);
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
 
         final Type type = new TypeToken<List<Genre>>(){}.getType();
+//        bank = new Gson().fromJson(intent.getStringExtra("bank"),type);
         mMusicianGenres = new Gson().fromJson(intent.getStringExtra("musiciangenres"),type);
         mGenreList = new Gson().fromJson(intent.getStringExtra("genres"),type);
+
+
 
 
         mEditTextFirstName = (EditText)findViewById(R.id.et_first_name_activityprofile);
@@ -99,11 +106,15 @@ public class ProfileActivity extends AppCompatActivity {
         mEditTextUsernameSoundCloud = (EditText)findViewById(R.id.et_username_soundcloud_activityprofile);
         mEditTextUsernameReverbnation = (EditText)findViewById(R.id.et_username_reverbnation_activityprofile);
         mImageViewPhoto = (ImageView)findViewById(R.id.img_photo_activityprofile);
+//        mEditTextNoRek = (EditText)findViewById(R.id.et_no_rek_activityprofile);
+//        mEditTextNamaBank = (EditText)findViewById(R.id.et_nama_bank_activityprofile);
+//        mEditTextAtasNama = (EditText) findViewById(R.id.et_atas_nama_activityprofile);
 
         mTextViewMusicianGenres = (TextView)findViewById(R.id.tv_genres_activityprofile);
 
         mButtonSaveInfoMusician = (Button)findViewById(R.id.btn_saveinfo_activityprofile);
         mButtonUploadPhoto = (Button)findViewById(R.id.btn_upload_photo_activityprofile);
+        mButtonLoadBank = (Button)findViewById(R.id.btn_load_bank_activityprofile);
 
         mViewEditTextFirstName = (View)findViewById(R.id.et_first_name_activityprofile);
         mViewEditTextLastname = (View)findViewById(R.id.et_last_name_activityprofile);
@@ -118,6 +129,7 @@ public class ProfileActivity extends AppCompatActivity {
         mViewEditTextUsernameReverbnation = (View)findViewById(R.id.et_username_reverbnation_activityprofile);
         mGridView = (GridView) findViewById(R.id.lv_genres_activityprofile);
         mLinearLayoutMusicianGenres = (LinearLayout)findViewById(R.id.ll_genre_musician_activityprofile);
+        mLinearLayoutBank = (LinearLayout)findViewById(R.id.ll_bank_activityprofile);
 
         CloudinaryUrl cloudinaryUrl = new CloudinaryUrl();
         cloudinaryUrl.buildCloudinaryUrl();
@@ -146,6 +158,7 @@ public class ProfileActivity extends AppCompatActivity {
                 mButtonUploadPhoto.setVisibility(View.GONE);
                 mLinearLayoutMusicianGenres.setVisibility(View.GONE);
                 mTextViewMusicianGenres.setVisibility(View.GONE);
+                mLinearLayoutBank.setVisibility(View.GONE);
 
 
                 mEditTextFirstName.setText(mFirstName);
@@ -194,6 +207,11 @@ public class ProfileActivity extends AppCompatActivity {
                 }
                 mTextViewMusicianGenres.setText("Genres : "+tmpGenres);
 
+//                if(bank!=null){
+//                    mEditTextNoRek.setText(bank.get(0).getNo_rek());
+//                    mEditTextAtasNama.setText(bank.get(0).getAtas_nama());
+//                    mEditTextNamaBank.setText(bank.get(0).getNama_bank());
+//                }
 
             }
 
@@ -221,6 +239,40 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
+
+        mButtonLoadBank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BuildUrl buildUrl = new BuildUrl();
+                buildUrl.buildBaseUrl();
+
+                Map<String, String> dataBank =new HashMap<>();
+                dataBank.put("id",Integer.toString(mMusicianId));
+                buildUrl.serviceGighub.sendDataForBank(dataBank).enqueue(new Callback<BankResponse>() {
+                    @Override
+                    public void onResponse(Call<BankResponse> call, Response<BankResponse> response) {
+                        if(response.code()==200) {
+                            Intent _intent = new Intent(ProfileActivity.this, MusicianBankActivity.class);
+                            _intent.putExtra("bank", new Gson().toJson(response.body().getBank()));
+                            _intent.putExtra("musiciangenres",new Gson().toJson(mMusicianGenres));
+                            _intent.putExtra("genres",new Gson().toJson(mGenreList));
+                            startActivity(_intent);
+                            Log.d("response", response.message());
+                        }
+                        else {
+                            Log.d("response", "error :"+ response.message());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<BankResponse> call, Throwable t) {
+                        Log.d("failed", t.getLocalizedMessage());
+                    }
+                });
+
+
+            }
+        });
 
 
         mGridView.setAdapter(listAddGenreAdapter);
@@ -331,6 +383,10 @@ public class ProfileActivity extends AppCompatActivity {
             dataUpdate.put("username_reverbnation", mEditTextUsernameReverbnation.getText().toString());
             dataUpdate.put("genre_id",mGenreDipilih);
             dataUpdate.put("genre_count",Integer.toString(mGenreCount));
+//            dataUpdate.put("no_rek",mEditTextNoRek.getText().toString());
+//            dataUpdate.put("atas_nama", mEditTextAtasNama.getText().toString());
+//            dataUpdate.put("nama_bank", mEditTextNamaBank.getText().toString());
+
             Log.d("mGenreCount",Integer.toString(mGenreCount));
             Log.d("mGenreDipilih",mGenreDipilih);
             buildUrl.serviceGighub.sendProfileUpdateDataMusician(dataUpdate).enqueue(new Callback<ResponseMusician>() {
@@ -347,7 +403,7 @@ public class ProfileActivity extends AppCompatActivity {
                         startActivity(intent);
                     } else {
                         Log.d("Code", "Pesan Log : " + response.code());
-                        Toast.makeText(ProfileActivity.this, "Gagal update", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ProfileActivity.this, "Failed to update, Please Complete Your Data", Toast.LENGTH_LONG).show();
                     }
                 }
 

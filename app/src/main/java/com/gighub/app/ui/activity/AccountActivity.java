@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.gighub.app.R;
+import com.gighub.app.model.Bank;
+import com.gighub.app.model.BankResponse;
 import com.gighub.app.model.Genre;
 import com.gighub.app.model.ResponseCallGenre;
 import com.gighub.app.util.BuildUrl;
@@ -21,7 +23,9 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,6 +39,7 @@ public class AccountActivity extends AppCompatActivity {
     private String mName;
     private Context mContext;
     private List<Genre> mMusicianGenres;
+    private Bank mBank;
 
     public static final String PESANLOG ="pesanlog";
 
@@ -75,13 +80,18 @@ public class AccountActivity extends AppCompatActivity {
         mButtonLogout = (Button)findViewById(R.id.btn_logout);
 
 
+
+        final Map<String,String> dataBank = new HashMap<>();
         mButtonProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Intent _intent = new Intent(getApplicationContext(),ProfileActivity.class);
 
+
                 BuildUrl buildUrl = new BuildUrl();
                 buildUrl.buildBaseUrl();
+
+
 
                 buildUrl.serviceGighub.loadMusicianGenre().enqueue(new Callback<ResponseCallGenre>() {
                     @Override
@@ -95,7 +105,8 @@ public class AccountActivity extends AppCompatActivity {
                             startActivity(_intent);
                         }
                         else {
-                            Toast.makeText(AccountActivity.this,response.code(),Toast.LENGTH_LONG).show();
+                            Log.d("response",Integer.toString(response.code()));
+                            Toast.makeText(AccountActivity.this,response.message(),Toast.LENGTH_LONG).show();
                         }
                     }
 
