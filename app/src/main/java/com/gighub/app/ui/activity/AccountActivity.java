@@ -1,5 +1,6 @@
 package com.gighub.app.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,7 +10,22 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.gighub.app.R;
+import com.gighub.app.model.Genre;
+import com.gighub.app.model.ResponseCallGenre;
+import com.gighub.app.util.BuildUrl;
 import com.gighub.app.util.SessionManager;
+import com.gighub.app.util.StaticFunction;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AccountActivity extends AppCompatActivity {
 
@@ -17,6 +33,8 @@ public class AccountActivity extends AppCompatActivity {
     private SessionManager mSession;
     private View mViewButtonLogout, mViewButtonProfile, mViewButtonGigMoney, mViewButtonManager;
     private String mName;
+    private Context mContext;
+    private List<Genre> mMusicianGenres;
 
     public static final String PESANLOG ="pesanlog";
 
@@ -26,7 +44,14 @@ public class AccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_account);
         mSession = new SessionManager(getApplicationContext());
 
+        mMusicianGenres = new ArrayList<Genre>();
+        mContext = getApplicationContext();
+
+
+
         Intent intent = getIntent();
+        final Type type = new TypeToken<List<Genre>>(){}.getType();
+        mMusicianGenres = new Gson().fromJson(intent.getStringExtra("musiciangenres"),type);
 
         if(mSession.isLoggedIn()){
             if(mSession.checkUserType().equals("org")){
@@ -53,8 +78,34 @@ public class AccountActivity extends AppCompatActivity {
         mButtonProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent _intent = new Intent(getApplicationContext(),ProfileActivity.class);
-                startActivity(_intent);
+                final Intent _intent = new Intent(getApplicationContext(),ProfileActivity.class);
+
+                BuildUrl buildUrl = new BuildUrl();
+                buildUrl.buildBaseUrl();
+
+                buildUrl.serviceGighub.loadMusicianGenre().enqueue(new Callback<ResponseCallGenre>() {
+                    @Override
+                    public void onResponse(Call<ResponseCallGenre> call, Response<ResponseCallGenre> response) {
+                        if (response.code()==200) {
+                            _intent.putExtra("genres", new Gson().toJson(response.body().getGenreList()));
+                            _intent.putExtra("musiciangenres",new Gson().toJson(mMusicianGenres));
+                            Log.d("response", "call genres");
+                            StaticFunction staticFunction = new StaticFunction();
+                            staticFunction.buildProgressDialog(AccountActivity.this);
+                            startActivity(_intent);
+                        }
+                        else {
+                            Toast.makeText(AccountActivity.this,response.code(),Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseCallGenre> call, Throwable t) {
+                        Log.d("response",t.getCause().getLocalizedMessage());
+                    }
+                });
+
+
             }
         });
 

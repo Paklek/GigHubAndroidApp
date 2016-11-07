@@ -85,6 +85,7 @@ public class LoginAsOrganizerActivity extends AppCompatActivity {
                  }
                 Log.d(PESANLOG,""+response.body().getMessage());
                 Log.d(PESANLOG,""+response.code());
+                Toast.makeText(LoginAsOrganizerActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
             }
 
             @Override

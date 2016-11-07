@@ -26,7 +26,7 @@ public class StaticString {
     public static final String ROUTE_COMPLETED_BOOK = "mobile/organizer/completedbook";
     public static final String ROUTE_LIST_GIG_OFFER_MUSICIAN = "mobile/musician/listgigoffer";
     public static final String ROUTE_GIG_OFFER = "mobile/musician/gigoffer";
-
+    public static final String ROUTE_MUSICIAN_GENRES = "mobile/musician/genres";
     public static final String ROUTE_KONFIRMASI_PEMBAYARAN = "mobile/organizer/konfirmasipembayaran";
 
 

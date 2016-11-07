@@ -38,9 +38,12 @@ public interface ServiceGighub {
     @POST(StaticString.ROUTE_LOGIN_MUSICIAN)
     Call<ResponseMusician> sendLoginDataMusician(@Body Map<String,String> loginData);
 
+    @POST(StaticString.ROUTE_MUSICIAN_GENRES)
+    Call<MusicianGenresResponse> sendGenreMusicianData(@Body Map<String, String> genreData);
+
 //
-    @POST(StaticString.ROUTE_LOGIN_MUSICIAN)
-    Call<MResponse> sendLogin(@Body Map<String,String> loginData);
+//    @POST(StaticString.ROUTE_LOGIN_MUSICIAN)
+//    Call<MResponse> sendLogin(@Body Map<String,String> loginData);
 //
 
     @POST(StaticString.ROUTE_UPDATE_PROFILE)

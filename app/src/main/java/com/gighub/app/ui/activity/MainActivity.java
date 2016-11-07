@@ -17,7 +17,9 @@ import android.view.MenuItem;
 import com.gighub.app.R;
 import com.gighub.app.model.GigResponse;
 import com.gighub.app.model.GroupBandsResponse;
+import com.gighub.app.model.MusicianGenresResponse;
 import com.gighub.app.model.PenyewaanResponse;
+import com.gighub.app.model.ResponseCallGenre;
 import com.gighub.app.model.YourBandResponse;
 import com.gighub.app.model.YourGigResponse;
 import com.gighub.app.ui.adapter.MainViewPagerAdapter;
@@ -227,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_account:
                 // User chose the "Favorite" action, mark the current item
                 // as a favorite...
-                Intent intent7 = new Intent(getApplicationContext(),AccountActivity.class);
+                final Intent intent7 = new Intent(getApplicationContext(),AccountActivity.class);
 
                 if(mSession.isLoggedIn()){
                     if(mSession.checkUserType().equals("org")){
@@ -249,7 +251,29 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                 }
-                startActivity(intent7);
+
+                if(mSession.checkUserType().equals("msc")){
+
+                    BuildUrl buildUrl = new BuildUrl();
+                    buildUrl.buildBaseUrl();
+
+                    musicianGenreData.put("user_id",mMusicianId);
+                    buildUrl.serviceGighub.sendGenreMusicianData(musicianGenreData).enqueue(new Callback<MusicianGenresResponse>() {
+                        @Override
+                        public void onResponse(Call<MusicianGenresResponse> call, Response<MusicianGenresResponse> response) {
+                            intent7.putExtra("musiciangenres",new Gson().toJson(response.body().getMusicianGenres()));
+                            startActivity(intent7);
+                        }
+
+                        @Override
+                        public void onFailure(Call<MusicianGenresResponse> call, Throwable t) {
+
+                        }
+                    });
+                }
+                else {
+                    startActivity(intent7);
+                }
                 return true;
 
             default:
@@ -259,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-
+    Map <String, String> musicianGenreData = new HashMap<>();
     Map <String, String> sendYourBandData = new HashMap<>();
     private void getBands(final Intent i){
         BuildUrl buildUrl = new BuildUrl();

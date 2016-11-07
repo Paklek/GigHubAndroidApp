@@ -12,17 +12,17 @@ public class Genres {
         return genreMusician;
     }
 
-    private String id;
+    private int id;
     private String genre_name;
     private Boolean isSelected =false;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+//    public String getId() {
+//        return id;
+//    }
+//
+//    public void setId(String id) {
+//        this.id = id;
+//    }
 
     public String getGenre_name() {
         return genre_name;
@@ -38,5 +38,13 @@ public class Genres {
 
     public void setSelected(Boolean selected) {
         isSelected = selected;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

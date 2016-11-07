@@ -86,6 +86,7 @@ public class LoginAsMusicianActivity extends AppCompatActivity {
                 }
                 Log.d(PESANLOG,""+response.body().getMessage());
                 Log.d(PESANLOG,""+response.code());
+                Toast.makeText(LoginAsMusicianActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
             }
 
             @Override
