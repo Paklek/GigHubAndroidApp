@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import com.gighub.app.R;
 import com.gighub.app.model.Penyewaan;
 import com.gighub.app.model.PenyewaanResponse;
+import com.gighub.app.ui.activity.BookingDetailsActivity;
 import com.gighub.app.ui.adapter.ListOnProccessBookingAdapter;
 import com.gighub.app.util.BuildUrl;
 import com.gighub.app.util.SessionManager;
@@ -78,6 +80,28 @@ public class OnProccessBookingListFragment extends Fragment {
         mListView = (ListView)view.findViewById(R.id.lv_book_on_proc);
 //        mListView.setAdapter(new ListOnProccessBookingAdapter(getActivity().getApplicationContext(),mPenyewaan));
         onProccess(mIdUser,mTipeUser);
+
+        if(!mSession.checkUserType().equals("msc")) {
+            mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent(getActivity().getApplicationContext(), BookingDetailsActivity.class);
+
+                    intent.putExtra("nama_grupband", mPenyewaan.get(position).getNama_grupband());
+                    intent.putExtra("nama_gig", mPenyewaan.get(position).getNama_gig());
+                    intent.putExtra("nama_user", mPenyewaan.get(position).getFirst_name() + " " + mPenyewaan.get(position).getLast_name());
+                    intent.putExtra("lokasi", mPenyewaan.get(position).getLokasi());
+                    intent.putExtra("harga", mPenyewaan.get(position).getHarga());
+                    intent.putExtra("harga_sewa", mPenyewaan.get(position).getHarga_sewa());
+                    intent.putExtra("waktu_mulai", mPenyewaan.get(position).getTanggal_mulai());
+                    intent.putExtra("waktu_selesai", mPenyewaan.get(position).getTanggal_selesai());
+                    intent.putExtra("total", mPenyewaan.get(position).getTotal_biaya());
+                    intent.putExtra("sewa_id", mPenyewaan.get(position).getId());
+
+                    startActivity(intent);
+                }
+            });
+        }
 
         return view;
     }

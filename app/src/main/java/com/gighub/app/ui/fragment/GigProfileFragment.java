@@ -75,6 +75,10 @@ public class GigProfileFragment extends Fragment {
         mTextViewTanggalSelesai.setText("Finish Date : "+tanggal_selesai);
 
 
+        if (mSession.checkUserType().equals("org")){
+            mButtonGigOffer.setVisibility(View.GONE);
+        }
+
 
         mButtonGigOffer.setOnClickListener(new View.OnClickListener() {
             @Override

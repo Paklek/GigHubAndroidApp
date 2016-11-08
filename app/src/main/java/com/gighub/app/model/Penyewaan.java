@@ -11,6 +11,7 @@ public class Penyewaan {
     private int subject_id;
     private String status;
     private String status_request;
+    private String type_sewa;
 
     private String nama_gig;
     private String deskripsi;
@@ -22,6 +23,7 @@ public class Penyewaan {
     private String lat;
     private String lng;
     private int user_id;
+    private String type_gig;
 
     private String nama_grupband;
     private String name;
@@ -249,5 +251,21 @@ public class Penyewaan {
 
     public void setStatus_request(String status_request) {
         this.status_request = status_request;
+    }
+
+    public String getType_sewa() {
+        return type_sewa;
+    }
+
+    public void setType_sewa(String type_sewa) {
+        this.type_sewa = type_sewa;
+    }
+
+    public String getType_gig() {
+        return type_gig;
+    }
+
+    public void setType_gig(String type_gig) {
+        this.type_gig = type_gig;
     }
 }

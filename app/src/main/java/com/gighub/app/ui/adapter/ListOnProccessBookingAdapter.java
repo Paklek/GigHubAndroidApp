@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.gighub.app.R;
 import com.gighub.app.model.Penyewaan;
+import com.gighub.app.util.SessionManager;
 import com.github.siyamed.shapeimageview.CircularImageView;
 
 import java.util.List;
@@ -19,7 +20,8 @@ import java.util.List;
 public class ListOnProccessBookingAdapter extends BaseAdapter {
     private Context mContext;
     private List<Penyewaan> mPenyewaan;
-    private String mStatus;
+    private String mStatus, mStatusRequest;
+    private SessionManager mSession;
 
     private static LayoutInflater inflater=null;
 
@@ -65,6 +67,8 @@ public class ListOnProccessBookingAdapter extends BaseAdapter {
 
         Holder holder = new Holder();
 
+        mSession = new SessionManager(mContext.getApplicationContext());
+
         final View rowView;
         rowView = inflater.inflate(R.layout.lv_on_proccess,null);
         holder.mTextViewName = (TextView)rowView.findViewById(R.id.tv_musician_name_onproccess);
@@ -73,18 +77,30 @@ public class ListOnProccessBookingAdapter extends BaseAdapter {
         holder.mTextViewVerify = (TextView)rowView.findViewById(R.id.tv_verify_onproccess);
 
         mStatus = ""+mPenyewaan.get(position).getStatus();
+        mStatusRequest = ""+mPenyewaan.get(position).getStatus_request();
 
 //        if(mPenyewaan.get(position).getTipe()!=null){
         holder.mTextViewName.setText(mPenyewaan.get(position).getFirst_name());
         holder.mTextViewGenre.setText(mPenyewaan.get(position).getNama_gig());
         holder.mTextViewHour.setText("Rp. "+mPenyewaan.get(position).getTotal_biaya());
-        if (mStatus.equals("1")){
-            holder.mTextViewVerify.setText("Not Verified");
+        if (mStatus.equals("0" )&& mStatusRequest.equals("1")){
+            holder.mTextViewVerify.setText("Waiting to Paid");
             holder.mTextViewVerify.setTextColor(holder.mTextViewVerify.getResources().getColor(R.color.colorPrimary));
         }
-        else if (mStatus.equals("2")){
+        else if (mStatus.equals("1") && mStatusRequest.equals("1")){
+            holder.mTextViewVerify.setText("Waiting to Verified");
+            holder.mTextViewVerify.setTextColor(holder.mTextViewVerify.getResources().getColor(R.color.primaryButton2));
+        }
+        else if (mStatus.equals("2") && mStatusRequest.equals("1")){
             holder.mTextViewVerify.setText("Verified");
             holder.mTextViewVerify.setTextColor(holder.mTextViewVerify.getResources().getColor(R.color.green));
+        }
+
+        if(mSession.checkUserType().equals("org")){
+            holder.mTextViewName.setText(mPenyewaan.get(position).getName());
+        }
+        else if(mSession.checkUserType().equals("msc")){
+            holder.mTextViewName.setText(mPenyewaan.get(position).getFirst_name()+" "+mPenyewaan.get(position).getLast_name());
         }
 
         return rowView;
