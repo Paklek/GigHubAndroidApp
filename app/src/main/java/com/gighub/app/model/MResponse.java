@@ -7,7 +7,7 @@ import java.util.List;
  * Created by user on 30/09/2016.
  */
 public class MResponse extends Response {
-    private List<Musicians>  musicianans = new ArrayList<>();
+    private List<Musicians>  musicianans ;
 
     public List<Musicians> getMusicianans() {
         return musicianans;

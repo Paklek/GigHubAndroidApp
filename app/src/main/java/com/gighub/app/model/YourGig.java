@@ -15,6 +15,7 @@ public class YourGig {
     private String tanggal_selesai;
     private String lat;
     private String lng;
+    private String photo_musisi;
     private int user_id;
 
     public int getId() {
@@ -103,5 +104,13 @@ public class YourGig {
 
     public void setUser_id(int user_id) {
         this.user_id = user_id;
+    }
+
+    public String getPhoto_musisi() {
+        return photo_musisi;
+    }
+
+    public void setPhoto_musisi(String photo_musisi) {
+        this.photo_musisi = photo_musisi;
     }
 }

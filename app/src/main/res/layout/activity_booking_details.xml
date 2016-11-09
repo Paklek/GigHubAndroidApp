@@ -44,10 +44,10 @@ android:layout_margin="7dp">
             android:layout_height="200dp"
             android:textAlignment="center"/>
         <TextView
-            android:id="@+id/tv_nama_grupband_bookdetails"
+            android:id="@+id/tv_nama_gig_bookdetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="nama grupband"
+            android:text="nama Gig"
             android:textStyle="bold"
             android:textColor="@color/colorAccent"
             android:textSize="30dp"
@@ -73,12 +73,12 @@ android:layout_margin="7dp">
             app:siBorderColor="#ddd"
             android:layout_margin="5dp"/>
         <TextView
-            android:id="@+id/tv_nama_user_bookdetails"
+            android:id="@+id/tv_nama_musisi_bookdetails"
             android:layout_column="1"
             android:layout_row="0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nama User"
+            android:text="Nama Musisi"
             android:layout_marginLeft="10dp"/>
         <TextView
             android:id="@+id/tv_harga_grupband"
@@ -113,39 +113,16 @@ android:layout_margin="7dp">
         android:orientation="vertical"
         tools:context="com.gighub.app.ui.activity.BookingDetailsActivity">
         <TextView
-
+            android:id="@+id/tv_penyewa_bookdetails"
             android:layout_gravity="bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="apa"/>
-
-        <FrameLayout
-            android:id="@+id/frame_giga"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:src="@android:drawable/ic_menu_gallery"
-                android:background="@drawable/transparent_dark"
-                android:id="@+id/btn_img_cover_band_grupban"
-                android:layout_width="match_parent"
-                android:scaleType="centerCrop"
-                android:fitsSystemWindows="true"
-                android:layout_height="200dp"
-                android:textAlignment="center"/>
-            <TextView
-                android:id="@+id/tv_nama_gig_bookdetails"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="nama Gig"
-                android:textStyle="bold"
-                android:textColor="@color/colorAccent"
-                android:textSize="30dp"
-                android:layout_gravity="center"/>
-        </FrameLayout>
+            android:text="Renter : "/>
         <TextView
+            android:id="@+id/tv_status_bookdetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="detail"/>
+            android:text="Status"/>
 
     </LinearLayout>
 

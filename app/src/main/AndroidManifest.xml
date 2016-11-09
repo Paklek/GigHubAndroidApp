@@ -78,7 +78,9 @@
         <activity android:name=".ui.activity.GroupBandProfileActivity" />
         <activity android:name=".ui.activity.GigOfferMusicianActivity" />
         <activity android:name=".ui.activity.GigOfferMusicianItemActivity" />
-        <activity android:name=".ui.activity.MusicianBankActivity"></activity>
+        <activity android:name=".ui.activity.MusicianBankActivity" />
+        <activity android:name=".ui.activity.AddMusicianToGroupActivity" />
+        <activity android:name=".ui.activity.AddPositionMusicianActivity"></activity>
     </application>
 
 </manifest>

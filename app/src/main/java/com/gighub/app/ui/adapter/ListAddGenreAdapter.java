@@ -71,8 +71,8 @@ public class ListAddGenreAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-        mSession = new SessionManager(mContext);
 //        mMusicianGenres = new ArrayList<Genre>();
+        mSession = new SessionManager(mContext);
         final  View rowView;
         rowView = inflater.inflate(R.layout.cv_genre_horizontal,null);
 

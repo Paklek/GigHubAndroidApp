@@ -81,27 +81,34 @@ public class OnProccessBookingListFragment extends Fragment {
 //        mListView.setAdapter(new ListOnProccessBookingAdapter(getActivity().getApplicationContext(),mPenyewaan));
         onProccess(mIdUser,mTipeUser);
 
-        if(!mSession.checkUserType().equals("msc")) {
+//        if(!mSession.checkUserType().equals("msc")) {
             mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Intent intent = new Intent(getActivity().getApplicationContext(), BookingDetailsActivity.class);
 
-                    intent.putExtra("nama_grupband", mPenyewaan.get(position).getNama_grupband());
+                    intent.putExtra("nama_musisi", mPenyewaan.get(position).getName());
                     intent.putExtra("nama_gig", mPenyewaan.get(position).getNama_gig());
                     intent.putExtra("nama_user", mPenyewaan.get(position).getFirst_name() + " " + mPenyewaan.get(position).getLast_name());
                     intent.putExtra("lokasi", mPenyewaan.get(position).getLokasi());
-                    intent.putExtra("harga", mPenyewaan.get(position).getHarga());
+//                    intent.putExtra("harga", mPenyewaan.get(position).getHarga());
                     intent.putExtra("harga_sewa", mPenyewaan.get(position).getHarga_sewa());
                     intent.putExtra("waktu_mulai", mPenyewaan.get(position).getTanggal_mulai());
                     intent.putExtra("waktu_selesai", mPenyewaan.get(position).getTanggal_selesai());
                     intent.putExtra("total", mPenyewaan.get(position).getTotal_biaya());
                     intent.putExtra("sewa_id", mPenyewaan.get(position).getId());
+                    intent.putExtra("type_sewa", mPenyewaan.get(position).getType_sewa());
+                    intent.putExtra("type_gig", mPenyewaan.get(position).getType_gig());
+                    intent.putExtra("photo", mPenyewaan.get(position).getPhoto());
+                    intent.putExtra("photo_gig", mPenyewaan.get(position).getPhoto_gig());
+                    intent.putExtra("status", mPenyewaan.get(position).getStatus());
+                    intent.putExtra("status_request", mPenyewaan.get(position).getStatus_request());
+                    intent.putExtra("activity","onproccessbooking");
 
                     startActivity(intent);
                 }
             });
-        }
+//        }
 
         return view;
     }

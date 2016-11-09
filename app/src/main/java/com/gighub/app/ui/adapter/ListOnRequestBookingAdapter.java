@@ -135,6 +135,7 @@ public class ListOnRequestBookingAdapter extends BaseAdapter {
         }
         else if(mSession.checkUserType().equals("msc")){
             holder.mTextViewName.setText(mPenyewaan.get(position).getFirst_name()+" "+mPenyewaan.get(position).getLast_name());
+            holder.mImg.setImageResource(android.R.drawable.ic_menu_gallery);
             if(mPenyewaan.get(position).getPhoto_gig()!=null && !mPenyewaan.get(position).getPhoto_gig().equals("")) {
                 Picasso.with(mContext).load(cloudinaryUrl.cloudinary.url().format("jpg").generate(mPenyewaan.get(position).getPhoto_gig())).into(holder.mImg);
             }

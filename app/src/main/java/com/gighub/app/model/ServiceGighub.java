@@ -99,6 +99,12 @@ public interface ServiceGighub {
     @POST(StaticString.ROUTE_GIG_OFFER)
     Call<Response> sendOfferSubmitData(@Body Map<String, String> submitData);
 
+    @POST(StaticString.ROUTE_CONFIRM_BOOK_REQUEST)
+    Call<Response> sendConfirmRequestData (@Body Map<String,String> dataConfirmRequest);
+
+    @POST(StaticString.ROUTE_VIEW_ADD_MUSICIAN_TO_GROUP)
+    Call<MResponse> sendForViewMember (@Body Map<String,String> dataViewMember);
+
     @POST(StaticString.ROUTE_ON_REQUEST_BOOK)
     Call<PenyewaanResponse> sendIdUserForBook(@Body Map<String, String> idUser);
 
@@ -110,5 +116,8 @@ public interface ServiceGighub {
 
     @POST(StaticString.ROUTE_KONFIRMASI_PEMBAYARAN)
     Call<KonfirmasiPembayaranResponse> sendDataKonfirmasiPembayaran(@Body Map<String, String> dataKonfirmasiPembayaran);
+
+    @GET(StaticString.ROUTE_POSITION)
+    Call<PositionResponse> callPosition();
 
 }

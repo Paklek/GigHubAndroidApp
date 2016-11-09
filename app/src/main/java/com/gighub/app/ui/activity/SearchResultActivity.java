@@ -55,9 +55,9 @@ public class SearchResultActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 //        Intent i = new Intent(getApplicationContext(), SearchResultActivity.class);
-        Intent i = getIntent();
 //        final Type typeListMusician = new TypeToken<List<MusicianModel>>(){}.getType();
 //        mListMusician = new Gson().fromJson(i.getStringExtra("search"),typeListMusician);
+        Intent i = getIntent();
         final Type type = new TypeToken<List<SearchResultModel>>(){}.getType();
         mSearchResult = new Gson().fromJson(i.getStringExtra("search"),type);
 

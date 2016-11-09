@@ -9,8 +9,10 @@ import android.widget.TextView;
 
 import com.gighub.app.R;
 import com.gighub.app.model.Penyewaan;
+import com.gighub.app.util.CloudinaryUrl;
 import com.gighub.app.util.SessionManager;
 import com.github.siyamed.shapeimageview.CircularImageView;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -69,12 +71,17 @@ public class ListOnProccessBookingAdapter extends BaseAdapter {
 
         mSession = new SessionManager(mContext.getApplicationContext());
 
+        CloudinaryUrl cloudinaryUrl = new CloudinaryUrl();
+        cloudinaryUrl.buildCloudinaryUrl();
+
         final View rowView;
         rowView = inflater.inflate(R.layout.lv_on_proccess,null);
         holder.mTextViewName = (TextView)rowView.findViewById(R.id.tv_musician_name_onproccess);
         holder.mTextViewGenre = (TextView)rowView.findViewById(R.id.tv_musician_genres_onproccess);
         holder.mTextViewHour = (TextView)rowView.findViewById(R.id.tv_musician_hour_fee_onproccess);
         holder.mTextViewVerify = (TextView)rowView.findViewById(R.id.tv_verify_onproccess);
+
+        holder.mImg = (CircularImageView)rowView.findViewById(R.id.img_onproccess);
 
         mStatus = ""+mPenyewaan.get(position).getStatus();
         mStatusRequest = ""+mPenyewaan.get(position).getStatus_request();
@@ -96,11 +103,25 @@ public class ListOnProccessBookingAdapter extends BaseAdapter {
             holder.mTextViewVerify.setTextColor(holder.mTextViewVerify.getResources().getColor(R.color.green));
         }
 
+//        if(mSession.checkUserType().equals("org")){
+//            holder.mTextViewName.setText(mPenyewaan.get(position).getName());
+//        }
+//        else if(mSession.checkUserType().equals("msc")){
+//            holder.mTextViewName.setText(mPenyewaan.get(position).getFirst_name()+" "+mPenyewaan.get(position).getLast_name());
+//        }
+
         if(mSession.checkUserType().equals("org")){
             holder.mTextViewName.setText(mPenyewaan.get(position).getName());
+            if(mPenyewaan.get(position).getPhoto()!=null && !mPenyewaan.get(position).getPhoto().equals("")) {
+                Picasso.with(mContext).load(cloudinaryUrl.cloudinary.url().format("jpg").generate(mPenyewaan.get(position).getPhoto())).into(holder.mImg);
+            }
         }
         else if(mSession.checkUserType().equals("msc")){
             holder.mTextViewName.setText(mPenyewaan.get(position).getFirst_name()+" "+mPenyewaan.get(position).getLast_name());
+            holder.mImg.setImageResource(android.R.drawable.ic_menu_gallery);
+            if(mPenyewaan.get(position).getPhoto_gig()!=null && !mPenyewaan.get(position).getPhoto_gig().equals("")) {
+                Picasso.with(mContext).load(cloudinaryUrl.cloudinary.url().format("jpg").generate(mPenyewaan.get(position).getPhoto_gig())).into(holder.mImg);
+            }
         }
 
         return rowView;

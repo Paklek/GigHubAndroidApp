@@ -44,6 +44,7 @@
             android:rowCount="3"
             android:padding="10dp">
             <com.github.siyamed.shapeimageview.CircularImageView
+                android:id="@+id/img_photo_musician_grupband"
                 android:layout_row="0"
                 android:layout_rowSpan="3"
                 android:layout_column="0"

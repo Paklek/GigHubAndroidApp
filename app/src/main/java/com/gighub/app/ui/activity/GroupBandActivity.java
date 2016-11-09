@@ -53,6 +53,9 @@ public class GroupBandActivity extends AppCompatActivity {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+
                 Intent intent1 = new Intent(mContext,GroupBandProfileActivity.class);
                 intent1.putExtra("anggota",mListGroupBand.get(position).getAnggota());
                 intent1.putExtra("posisi", mListGroupBand.get(position).getPosisi());

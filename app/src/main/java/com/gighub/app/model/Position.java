@@ -11,6 +11,7 @@ public class Position {
 
     private int id;
     private String position_name;
+    private boolean isSelected = false;
 
     public int getId() {
         return id;
@@ -34,5 +35,13 @@ public class Position {
 
     public void setGroupBandMusisis(List<GroupBandMusisi> groupBandMusisis) {
         this.groupBandMusisis = groupBandMusisis;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 }

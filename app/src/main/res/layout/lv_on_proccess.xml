@@ -28,7 +28,7 @@
             app:siBorderWidth="2dp"
             app:siBorderColor="#ddd"
             android:layout_margin="5dp"
-            android:id="@+id/img1"/>
+            android:id="@+id/img_onproccess"/>
         <TextView
             android:id="@+id/tv_musician_name_onproccess"
             android:layout_column="1"
