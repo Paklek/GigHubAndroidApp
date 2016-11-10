@@ -31,10 +31,10 @@ import retrofit2.Response;
 
 public class KonfirmasiPembayaranActivity extends AppCompatActivity {
 
-    private String[] mBankAdmin = {"BII","BRI","BTN"};
-    private String[] mAccountNameAdmin = {"Ramadiansyah","Septian Rahman","Ramadiansyah",};
+    private String[] mBankAdmin = {"BRI","BCA","Mandiri"};
+    private String[] mAccountNameAdmin = {"PT. Gighub Indonesia","PT. Gighub Indonesia","PT. Gighub Indonesia",};
     private String[] mBankName = {"BII","BTN","BCA","BRI","Mandiri","BNI"};
-    private String[] mAccountNumber = {"123456781234", "098765430987","786528100287"};
+    private String[] mAccountNumber = {"230109230827", "09087871824","000092132323"};
     private Spinner mSpinnerBankAdmin, mSpinnerBankName;
     private EditText mEditTextNoRekAdmin,mEditTextNameRekAdmin, mEditTextAccountName, mEditTextAccountNumber;
     private Button mButtonOk;
@@ -127,13 +127,13 @@ public class KonfirmasiPembayaranActivity extends AppCompatActivity {
         dataKonfirmasiPembayaran.put("nama_rek", mEditTextAccountName.getText().toString());
         dataKonfirmasiPembayaran.put("no_rek", mEditTextAccountNumber.getText().toString());
         dataKonfirmasiPembayaran.put("sewa_id",Integer.toString(mSewaId));
-        if(mSpinnerBankAdmin.getSelectedItem().equals("BII")){
+        if(mSpinnerBankAdmin.getSelectedItem().equals("BRI")){
             dataKonfirmasiPembayaran.put("bank_admin_id","1");
         }
-        if(mSpinnerBankAdmin.getSelectedItem().equals("BRI")){
+        if(mSpinnerBankAdmin.getSelectedItem().equals("BCA")){
             dataKonfirmasiPembayaran.put("bank_admin_id","2");
         }
-        if(mSpinnerBankAdmin.getSelectedItem().equals("BTN")){
+        if(mSpinnerBankAdmin.getSelectedItem().equals("Mandiri")){
             dataKonfirmasiPembayaran.put("bank_admin_id","3");
         }
 
@@ -151,7 +151,7 @@ public class KonfirmasiPembayaranActivity extends AppCompatActivity {
                 }
                 else {
                     Log.d("Pesan Log : " , response.code() + response.message());
-                    Toast.makeText(KonfirmasiPembayaranActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(KonfirmasiPembayaranActivity.this, response.message(), Toast.LENGTH_LONG).show();
                 }
             }
 

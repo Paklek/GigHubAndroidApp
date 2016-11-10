@@ -101,7 +101,7 @@ public class DiscoverGigFragment extends Fragment {
 
             @Override
             public void onFailure(Call<GigResponse> call, Throwable t) {
-                Toast.makeText(mContext,"Error"+t.getCause(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext,"Connection Fail. Check Your Connection",Toast.LENGTH_LONG).show();
 //                Log.e("-:failure",t.getMessage());
             }
         });

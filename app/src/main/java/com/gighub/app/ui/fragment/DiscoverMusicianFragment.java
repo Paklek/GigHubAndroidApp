@@ -363,7 +363,9 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
             adapter2.notifyDataSetChanged();
             break;
             case R.id.kota_spinner:
-                Toast.makeText(mContext,mListKota[mIndexProvinsi][pos],Toast.LENGTH_LONG).show();
+//                Toast.makeText(mContext,mListKota[mIndexProvinsi][pos],Toast.LENGTH_LONG).show();
+                Log.d("kota",mListKota[mIndexProvinsi][pos]);
+//                Toast.makeText(mContext,mListKota[mIndexProvinsi][pos],Toast.LENGTH_LONG).show();
                 break;
         }
 

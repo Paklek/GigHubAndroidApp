@@ -29,13 +29,14 @@ public class GroupBandProfileActivity extends AppCompatActivity {
     private Button mButtonAddAnggota;
     private SessionManager mSession;
     private Context mContext;
+    private int mGrupBandId, mAdminId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_band_profile);
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
 
         mContext = getApplicationContext();
         mSession = new SessionManager(mContext);
@@ -47,6 +48,8 @@ public class GroupBandProfileActivity extends AppCompatActivity {
         mKota = intent.getStringExtra("kota");
         mTipe = intent.getStringExtra("tipe");
         mDeskripsi = intent.getStringExtra("deskripsi");
+        mGrupBandId = intent.getIntExtra("grupband_id",0);
+        mAdminId = intent.getIntExtra("admin_id",0);
 
         mTextViewAnggota = (TextView)findViewById(R.id.tv_anggota_grupbandprofileactivity);
         mTextViewPosisi = (TextView)findViewById(R.id.tv_posisi_grupbandprofileactivity);
@@ -66,6 +69,10 @@ public class GroupBandProfileActivity extends AppCompatActivity {
         mTextViewPosisi.setText("Posisi : "+mPosisi);
         mTextViewDeskripsi.setText(mDeskripsi);
 
+        if(mAdminId!=mSession.getMusicianDetails().getId()){
+            mButtonAddAnggota.setVisibility(View.GONE);
+        }
+
 
         mButtonAddAnggota.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +89,8 @@ public class GroupBandProfileActivity extends AppCompatActivity {
                     public void onResponse(Call<MResponse> call, Response<MResponse> response) {
                         Intent intent1 = new Intent(GroupBandProfileActivity.this, AddMusicianToGroupActivity.class);
                         intent1.putExtra("calonanggota",new Gson().toJson(response.body().getMusicianans()));
+                        intent1.putExtra("grupband_id",mGrupBandId);
+                        intent1.putExtra("admin_id",mAdminId);
 //                        Toast.makeText(GroupBandProfileActivity.this,"Musician has been added", Toast.LENGTH_SHORT).show();
                         startActivity(intent1);
                     }

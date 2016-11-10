@@ -103,6 +103,7 @@ public class RequestBookingListFragment extends Fragment {
                     intent.putExtra("photo_gig", mPenyewaan.get(position).getPhoto_gig());
                     intent.putExtra("status", mPenyewaan.get(position).getStatus());
                     intent.putExtra("status_request", mPenyewaan.get(position).getStatus_request());
+                    intent.putExtra("admin_id", mPenyewaan.get(position).getAdmin_id());
                     intent.putExtra("activity","onrequestbooking");
 
                     startActivity(intent);

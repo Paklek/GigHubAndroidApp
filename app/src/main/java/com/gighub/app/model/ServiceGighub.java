@@ -120,4 +120,6 @@ public interface ServiceGighub {
     @GET(StaticString.ROUTE_POSITION)
     Call<PositionResponse> callPosition();
 
+    @POST(StaticString.ROUTE_ADD_ANGGOTA)
+    Call<Response> sendAddPositionData(@Body Map<String, String> dataAddPosition);
 }

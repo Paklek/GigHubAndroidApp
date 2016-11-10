@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.gighub.app.R;
 import com.gighub.app.model.GigResponse;
@@ -347,14 +348,20 @@ public class MainActivity extends AppCompatActivity {
         buildUrl.serviceGighub.sendIdUserForBook(idUser).enqueue(new Callback<PenyewaanResponse>() {
             @Override
             public void onResponse(Call<PenyewaanResponse> call, Response<PenyewaanResponse> response) {
-                i.putExtra("onreq", new Gson().toJson(response.body().getPenyewaanList()));
-                i.putExtra("onproc", new Gson().toJson(response.body().getPenyewaanList()));
-                startActivity(i);
+                if(response.code()==200) {
+                    i.putExtra("onreq", new Gson().toJson(response.body().getPenyewaanList()));
+                    i.putExtra("onproc", new Gson().toJson(response.body().getPenyewaanList()));
+                    startActivity(i);
+                }
+                else {
+                    Log.d("response",response.message());
+                    Toast.makeText(getApplicationContext(),"Booking list is empty",Toast.LENGTH_LONG).show();
+                }
             }
 
             @Override
             public void onFailure(Call<PenyewaanResponse> call, Throwable t) {
-
+                Log.d("fail",t.getCause().getMessage());
             }
         });
 

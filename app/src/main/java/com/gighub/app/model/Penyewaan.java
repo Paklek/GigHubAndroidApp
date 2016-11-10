@@ -33,6 +33,8 @@ public class Penyewaan {
     private int harga;
     private int harga_sewa;
     private String tipe;
+    private int grupband_id;
+    private int admin_id;
 
     private String first_name;
     private String last_name;
@@ -267,5 +269,21 @@ public class Penyewaan {
 
     public void setType_gig(String type_gig) {
         this.type_gig = type_gig;
+    }
+
+    public int getGrupband_id() {
+        return grupband_id;
+    }
+
+    public void setGrupband_id(int grupband_id) {
+        this.grupband_id = grupband_id;
+    }
+
+    public int getAdmin_id() {
+        return admin_id;
+    }
+
+    public void setAdmin_id(int admin_id) {
+        this.admin_id = admin_id;
     }
 }

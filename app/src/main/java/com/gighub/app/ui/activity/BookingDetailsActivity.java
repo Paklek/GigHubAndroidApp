@@ -31,10 +31,10 @@ public class BookingDetailsActivity extends AppCompatActivity {
     private Button mButtonConfirmPayment, mButtonConfirmRequest;
     private TextView mTextViewNamaGig, mTextViewNamaMusisi, mTextViewLocation, mTextViewHarga, mTextViewWaktuMulai, mTextViewWaktuSelesai, mTextViewTotal, mTextViewNamaPenyewa, mTextViewStatus;
     private SessionManager mSession;
-    private int mSewaId,mMusicianId, mOrganizerId;
+    private int mSewaId,mMusicianId, mOrganizerId,mAdminId;
     private ImageView mImgPhotoGig;
     private CircularImageView mImgPhotoMusician;
-    private String mPhoto, mPhotoGig, mStatus, mStatusRequest, mTipeGig, mActivity;
+    private String mPhoto, mPhotoGig, mStatus, mStatusRequest, mTipeGig, mActivity,mTipeSewa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +65,14 @@ public class BookingDetailsActivity extends AppCompatActivity {
         mStatus = intent.getStringExtra("status");
         mStatusRequest = intent.getStringExtra("status_request");
         mActivity = intent.getStringExtra("activity");
+        mAdminId = intent.getIntExtra("admin_id",0);
+        mTipeSewa = intent.getStringExtra("type_sewa");
+
 
         mTipeGig = intent.getStringExtra("type_gig");
+
+        mButtonConfirmRequest.setVisibility(View.GONE);
+        mButtonConfirmPayment.setVisibility(View.GONE);
 
         if(mSession.checkUserType().equals("org")){
             mOrganizerId = mSession.getUserDetails().getId();
@@ -83,7 +89,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
             mButtonConfirmRequest.setVisibility(View.VISIBLE);
             mButtonConfirmPayment.setVisibility(View.GONE);
         }
-        else if(mSession.checkUserType().equals("msc") && mTipeGig.equals("sewa") && mActivity.equals("onrequestbooking")){
+        else if(mSession.checkUserType().equals("msc") && mTipeGig.equals("sewa") && mActivity.equals("onrequestbooking") && (mAdminId==mMusicianId || mTipeSewa.equals("hiremusisi"))){
             mButtonConfirmRequest.setVisibility(View.VISIBLE);
             mButtonConfirmPayment.setVisibility(View.GONE);
         }
@@ -91,7 +97,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
             mButtonConfirmRequest.setVisibility(View.GONE);
             mButtonConfirmPayment.setVisibility(View.GONE);
         }
-        else if (mSession.checkUserType().equals("org") && mTipeGig.equals("sewa") && mActivity.equals("onproccessbooking")){
+        else if (mSession.checkUserType().equals("org") && mTipeGig.equals("sewa") && mActivity.equals("onproccessbooking") && mStatus.equals("0")){
             mButtonConfirmRequest.setVisibility(View.GONE);
             mButtonConfirmPayment.setVisibility(View.VISIBLE);
         }

@@ -62,6 +62,8 @@ public class ListAddMusicianToGroupAdapter extends BaseAdapter {
         holder.mTextViewMusicianGenres = (TextView)rowView.findViewById(R.id.musician_genres);
 
         holder.mTextViewName.setText(mCalonAnggota.get(position).getName());
+        holder.mTextViewMusicianGenres.setText(mCalonAnggota.get(position).getTipe()+" "+mCalonAnggota.get(position).getBasis());
+        holder.mTextViewHarga.setText(mCalonAnggota.get(position).getHarga_sewa());
 
 
         return rowView;

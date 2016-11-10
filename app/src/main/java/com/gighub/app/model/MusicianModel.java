@@ -17,6 +17,7 @@ public class MusicianModel {
     private String username_soundcloud;
     private String username_reverbnation;
     private String basis;
+    private String tipe;
     private int genreId;
 
     public String getDeskripsi() {
@@ -121,6 +122,14 @@ public class MusicianModel {
 
     public void setBasis(String basis) {
         this.basis = basis;
+    }
+
+    public String getTipe() {
+        return tipe;
+    }
+
+    public void setTipe(String tipe) {
+        this.tipe = tipe;
     }
 
 

@@ -32,6 +32,7 @@ public class AddMusicianToGroupActivity extends AppCompatActivity {
     private Context mContext;
 
     private List<MusicianModel> mCalonAnggota;
+    private int mGrupBandId,mAdminId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,9 @@ public class AddMusicianToGroupActivity extends AppCompatActivity {
         Intent i = getIntent();
         final Type type = new TypeToken<List<MusicianModel>>(){}.getType();
         mCalonAnggota = new Gson().fromJson(i.getStringExtra("calonanggota"),type);
+
+        mGrupBandId = i.getIntExtra("grupband_id",0);
+        mAdminId = i.getIntExtra("admin_id",0);
 
         mListView = (ListView)findViewById(R.id.lv_add_anggota);
         mListView.setAdapter(new ListAddMusicianToGroupAdapter(mContext,mCalonAnggota));
@@ -64,6 +68,9 @@ public class AddMusicianToGroupActivity extends AppCompatActivity {
                         intent.putExtra("name", mCalonAnggota.get(position).getName());
                         intent.putExtra("kota", mCalonAnggota.get(position).getKota());
                         intent.putExtra("basis", mCalonAnggota.get(position).getBasis());
+                        intent.putExtra("calon_id", mCalonAnggota.get(position).getId());
+                        intent.putExtra("grupband_id",mGrupBandId);
+                        intent.putExtra("admin_id",mAdminId);
                         Log.d("response",response.body().toString());
                         startActivity(intent);
                     }

@@ -57,6 +57,8 @@ public class GroupBandActivity extends AppCompatActivity {
 
 
                 Intent intent1 = new Intent(mContext,GroupBandProfileActivity.class);
+                intent1.putExtra("grupband_id",mListGroupBand.get(position).getId());
+                intent1.putExtra("admin_id",mListGroupBand.get(position).getAdmin_id());
                 intent1.putExtra("anggota",mListGroupBand.get(position).getAnggota());
                 intent1.putExtra("posisi", mListGroupBand.get(position).getPosisi());
                 intent1.putExtra("photo", mListGroupBand.get(position).getPhoto());

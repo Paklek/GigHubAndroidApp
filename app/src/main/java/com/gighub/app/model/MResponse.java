@@ -7,13 +7,13 @@ import java.util.List;
  * Created by user on 30/09/2016.
  */
 public class MResponse extends Response {
-    private List<Musicians>  musicianans ;
+    private List<MusicianModel>  musicianans ;
 
-    public List<Musicians> getMusicianans() {
+    public List<MusicianModel> getMusicianans() {
         return musicianans;
     }
 
-    public void setMusicianans(List<Musicians> musicianans) {
+    public void setMusicianans(List<MusicianModel> musicianans) {
         this.musicianans = musicianans;
     }
 }

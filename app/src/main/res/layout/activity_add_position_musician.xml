@@ -84,10 +84,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
+            android:id="@+id/btn_cancel_addpositionmusician"
+            android:background="@drawable/button_border"
             android:text="Cancel"
+            android:textColor="#ffffff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <Button
+            android:id="@+id/btn_add_position_addpositionmusician"
+            android:background="@drawable/button_border2"
             android:text="Add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
