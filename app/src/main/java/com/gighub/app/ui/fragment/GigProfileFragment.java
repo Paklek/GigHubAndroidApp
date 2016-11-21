@@ -41,7 +41,7 @@ public class GigProfileFragment extends Fragment {
     private TextView mTextViewLocation, mTextViewLocationDetail, mTextViewDeskripsi, mTextViewTanggalMulai, mTextViewTanggalSelesai;
     private SessionManager mSession;
     private int mMusicianId, mOrganizerId, mGigId;
-    private String tanggal_mulai, tanggal_selesai;
+    private String tanggal_mulai, tanggal_selesai,mLat,mLng;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,6 +67,9 @@ public class GigProfileFragment extends Fragment {
         tanggal_selesai = intent1.getStringExtra("tanggal_selesai");
         mOrganizerId = intent1.getIntExtra("user_id",0);
         mGigId = intent1.getIntExtra("gig_id",0);
+
+        mLat = intent1.getStringExtra("lat");
+        mLng = intent1.getStringExtra("lng");
 
         mTextViewLocation.setText("Location : "+intent1.getStringExtra("lokasi"));
         mTextViewLocationDetail.setText("Location Detail : "+intent1.getStringExtra("lokasi_detail"));
@@ -94,7 +97,8 @@ public class GigProfileFragment extends Fragment {
             public void onClick(View v) {
 
                 Intent intent = new Intent(getActivity(), ViewMapGig.class);
-
+                intent.putExtra("lat",mLat);
+                intent.putExtra("lng",mLng);
                 startActivity(intent);
             }
         });

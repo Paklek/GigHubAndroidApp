@@ -122,6 +122,8 @@ public class ListDiscoverGigAdapter extends RecyclerView.Adapter<ListDiscoverGig
                 intent.putExtra("deskripsi",mGig.get(position).getDeskripsi());
                 intent.putExtra("lokasi",mGig.get(position).getLokasi());
                 intent.putExtra("lokasi_detail",mGig.get(position).getDetail_lokasi());
+                intent.putExtra("lat",mGig.get(position).getLat());
+                intent.putExtra("lng",mGig.get(position).getLng());
                 intent.putExtra("user_id",mGig.get(position).getUser_id());
 
                 Log.d("photo",mGig.get(mPos).getPhoto_gig());

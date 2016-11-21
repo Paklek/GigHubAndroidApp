@@ -1,14 +1,20 @@
 package com.gighub.app.ui.activity;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowInsets;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -26,22 +32,23 @@ import com.gighub.app.R;
 import com.gighub.app.model.Bank;
 import com.gighub.app.model.BankResponse;
 import com.gighub.app.model.Genre;
-import com.gighub.app.model.ResponseCallGenre;
 import com.gighub.app.model.ResponseMusician;
 import com.gighub.app.model.ResponseUser;
-import com.gighub.app.model.SearchResultModel;
+import com.gighub.app.model.Utility;
 import com.gighub.app.ui.adapter.ListAddGenreAdapter;
-import com.gighub.app.ui.adapter.ListSearchResultAdapter;
 import com.gighub.app.util.BuildUrl;
 import com.gighub.app.util.CloudinaryUrl;
 import com.gighub.app.util.SessionManager;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.gighub.app.util.StaticInt;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,7 +65,7 @@ public class ProfileActivity extends AppCompatActivity {
     private ListView mListView;
     private GridView mGridView;
     private int mMusicianId, mOrganizerId, mGenreCount=0;
-    private String mGenreDipilih="",mName, mFirstName, mLastName, mHarga, mEmail, mKota, mPhone, mDescriptions,  mYoutubeVideoURL, mWebsiteURL,mUsernameSounCloud, mUsernameReverbnation,mPhoto;
+    private String mPilihanUser,mGenreDipilih="",mName, mFirstName, mLastName, mHarga, mEmail, mKota, mPhone, mDescriptions,  mYoutubeVideoURL, mWebsiteURL,mUsernameSounCloud, mUsernameReverbnation,mPhoto;
     private EditText mEditTextNoRek, mEditTextAtasNama,mEditTextNamaBank, mEditTextFirstName, mEditTextLastName,mEditTextHargaSewa,mEditTextEmail, mEditTextName, mEditTextKota, mEditTextPhoneNumber, mEditTextDescriptions, mEditTextYoutubeURL, mEditTextWebsiteURL, mEditTextUsernameSoundCloud, mEditTextUsernameReverbnation;
     private Button mButtonSaveInfoMusician,mButtonUploadPhoto, mButtonLoadBank;
     private View mViewEditTextFirstName, mViewEditTextLastname, mViewEditTextHargaSewa, mViewEditTextName, mViewEditTextKota, mViewEditTextPhoneNumber, mViewEditTextDescriptions, mViewEditTextYoutubeURL, mViewEditTextWebsiteURL, mViewEditTextUsernameSoundCloud, mViewEditTextUsernameReverbnation;
@@ -71,6 +78,10 @@ public class ProfileActivity extends AppCompatActivity {
     private ListAddGenreAdapter listAddGenreAdapter;
     private TextView mTextViewMusicianGenres;
     private LinearLayout mLinearLayoutMusicianGenres, mLinearLayoutBank;
+    private Context mContext;
+    private File destination;
+    private Map Result;
+    private CloudinaryUrl cloudinaryUrl;
 //    Map <String, String> musicianGenreData = new HashMap<>();
 
     @Override
@@ -82,6 +93,7 @@ public class ProfileActivity extends AppCompatActivity {
         mMusicianGenres = new ArrayList<Genre>();
         bank = new ArrayList<Bank>();
         mSession = new SessionManager(getApplicationContext());
+        mContext = getApplicationContext();
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         final Intent intent = getIntent();
 
@@ -131,7 +143,7 @@ public class ProfileActivity extends AppCompatActivity {
         mLinearLayoutMusicianGenres = (LinearLayout)findViewById(R.id.ll_genre_musician_activityprofile);
         mLinearLayoutBank = (LinearLayout)findViewById(R.id.ll_bank_activityprofile);
 
-        CloudinaryUrl cloudinaryUrl = new CloudinaryUrl();
+        cloudinaryUrl = new CloudinaryUrl();
         cloudinaryUrl.buildCloudinaryUrl();
 
         mEditTextEmail.setEnabled(false);
@@ -347,7 +359,7 @@ public class ProfileActivity extends AppCompatActivity {
         mButtonUploadPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                selectImage();
             }
         });
 
@@ -447,4 +459,128 @@ public class ProfileActivity extends AppCompatActivity {
         }
 //      End If for user Update
     }
+
+    private void selectImage(){
+        final CharSequence[] items = { "From Camera", "From Gallery",
+                "Cancel" };
+        AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
+        builder.setTitle("Choose Photo");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                boolean result = Utility.checkPermission(mContext);
+                if (items[which].equals("From Camera")){
+                    mPilihanUser = "From Camera";
+                    if(result){
+                        cameraIntent();
+                    }
+                }
+                else if(items[which].equals("From Gallery")){
+                    mPilihanUser = "From Gallery";
+                    if (result){
+                        galleryIntent();
+                    }
+                }
+                else if (items[which].equals("Cancel")){
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
+    }
+
+    private void cameraIntent()
+    {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, StaticInt.REQUEST_CAMERA);
+    }
+
+    private void galleryIntent()
+    {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select File"),StaticInt.SELECT_FILE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case Utility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if(mPilihanUser.equals("From Camera"))
+                        cameraIntent();
+                    else if(mPilihanUser.equals("From Gallery"))
+                        galleryIntent();
+                } else {
+//code for deny
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == StaticInt.SELECT_FILE) {
+                onSelectFromGalleryResult(data);
+            }
+            else if (requestCode == StaticInt.REQUEST_CAMERA)
+                onCaptureImageResult(data);
+        }
+    }
+
+
+    @SuppressWarnings("deprecation")
+    private void onSelectFromGalleryResult(Intent data) {
+        Bitmap bm=null;
+        if (data != null) {
+            try {
+                bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        mImageViewPhoto.setImageBitmap(bm);
+    }
+
+    private void onCaptureImageResult(Intent data) {
+        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+        destination = new File(Environment.getExternalStorageDirectory(),
+                System.currentTimeMillis() + ".jpg");
+        FileOutputStream fo;
+        try {
+            destination.createNewFile();
+            fo = new FileOutputStream(destination);
+            fo.write(bytes.toByteArray());
+            fo.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        mImageViewPhoto.setImageBitmap(thumbnail);
+
+    }
+    public class Upload extends AsyncTask<String, Void, String>{
+
+        @Override
+        protected String doInBackground(String... params) {
+            String response = "";
+
+            try {
+                Log.d("uploading", "uploading");
+                Result = cloudinaryUrl.cloudinary.uploader().upload(destination, ObjectUtils.emptyMap());
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            return response;
+        }
+    }
 }
+
+

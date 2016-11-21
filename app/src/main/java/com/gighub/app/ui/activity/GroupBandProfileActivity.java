@@ -26,7 +26,7 @@ public class GroupBandProfileActivity extends AppCompatActivity {
 
     private TextView mTextViewAnggota, mTextViewPosisi, mTextViewNamaBand, mTextViewKota, mTextViewHarga, mTextTipe, mTextViewBasis, mTextViewDeskripsi;
     private String mAnggota, mPosisi, mNamaGrupBand, mKota, mHarga, mTipe, mDeskripsi;
-    private Button mButtonAddAnggota;
+    private Button mButtonAddAnggota, mButtonRemoveAnggota;
     private SessionManager mSession;
     private Context mContext;
     private int mGrupBandId, mAdminId;
@@ -60,6 +60,7 @@ public class GroupBandProfileActivity extends AppCompatActivity {
         mTextViewDeskripsi = (TextView)findViewById(R.id.tv_deskripsi_grupbandprofileactivity);
 
         mButtonAddAnggota = (Button)findViewById(R.id.btn_add_anggota_groupbandprofileactivity);
+        mButtonRemoveAnggota = (Button)findViewById(R.id.btn_remove_anggota_groupbandprofileactivity);
 
         mTextViewNamaBand.setText(mNamaGrupBand);
         mTextViewHarga.setText("Rp."+mHarga);
@@ -83,6 +84,7 @@ public class GroupBandProfileActivity extends AppCompatActivity {
                 Map<String,String> viewMemberData = new HashMap<String, String>();
 
                 viewMemberData.put("user_id",Integer.toString(mSession.getMusicianDetails().getId()));
+                viewMemberData.put("grupband_id",Integer.toString(mGrupBandId));
 
                 buildUrl.serviceGighub.sendForViewMember(viewMemberData).enqueue(new Callback<MResponse>() {
                     @Override
@@ -92,6 +94,35 @@ public class GroupBandProfileActivity extends AppCompatActivity {
                         intent1.putExtra("grupband_id",mGrupBandId);
                         intent1.putExtra("admin_id",mAdminId);
 //                        Toast.makeText(GroupBandProfileActivity.this,"Musician has been added", Toast.LENGTH_SHORT).show();
+                        startActivity(intent1);
+                    }
+
+                    @Override
+                    public void onFailure(Call<MResponse> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
+
+        mButtonRemoveAnggota.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BuildUrl buildUrl = new BuildUrl();
+                buildUrl.buildBaseUrl();
+
+                Map<String,String> viewMemberData = new HashMap<String, String>();
+
+                viewMemberData.put("user_id",Integer.toString(mSession.getMusicianDetails().getId()));
+                viewMemberData.put("grupband_id",Integer.toString(mGrupBandId));
+
+                buildUrl.serviceGighub.sendForViewRemoveMember(viewMemberData).enqueue(new Callback<MResponse>() {
+                    @Override
+                    public void onResponse(Call<MResponse> call, Response<MResponse> response) {
+                        Intent intent1 = new Intent(GroupBandProfileActivity.this, RemoveMusicianFromGroupActivity.class);
+                        intent1.putExtra("calonanggota",new Gson().toJson(response.body().getMusicianans()));
+                        intent1.putExtra("grupband_id",mGrupBandId);
+                        intent1.putExtra("admin_id",mAdminId);
                         startActivity(intent1);
                     }
 

@@ -20,6 +20,8 @@ public class MusicianModel {
     private String tipe;
     private int genreId;
 
+    private String position_name;
+
     public String getDeskripsi() {
         return deskripsi;
     }
@@ -130,6 +132,14 @@ public class MusicianModel {
 
     public void setTipe(String tipe) {
         this.tipe = tipe;
+    }
+
+    public String getPosition_name() {
+        return position_name;
+    }
+
+    public void setPosition_name(String position_name) {
+        this.position_name = position_name;
     }
 
 

@@ -7,7 +7,7 @@ public class YourBand {
 
     private int id;
     private int musician_id;
-    private int groupband_id;
+    private int grupband_id;
     private int position_id;
 
 //    private int id;
@@ -40,14 +40,6 @@ public class YourBand {
 
     public void setMusician_id(int musician_id) {
         this.musician_id = musician_id;
-    }
-
-    public int getGroupband_id() {
-        return groupband_id;
-    }
-
-    public void setGroupband_id(int groupband_id) {
-        this.groupband_id = groupband_id;
     }
 
     public int getPosition_id() {
@@ -168,5 +160,13 @@ public class YourBand {
 
     public void setAnggota(String anggota) {
         this.anggota = anggota;
+    }
+
+    public int getGrupband_id() {
+        return grupband_id;
+    }
+
+    public void setGrupband_id(int grupband_id) {
+        this.grupband_id = grupband_id;
     }
 }

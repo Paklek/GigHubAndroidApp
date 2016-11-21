@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -80,7 +82,9 @@
         <activity android:name=".ui.activity.GigOfferMusicianItemActivity" />
         <activity android:name=".ui.activity.MusicianBankActivity" />
         <activity android:name=".ui.activity.AddMusicianToGroupActivity" />
-        <activity android:name=".ui.activity.AddPositionMusicianActivity"></activity>
+        <activity android:name=".ui.activity.AddPositionMusicianActivity" />
+        <activity android:name=".ui.activity.RemoveMusicianFromGroupActivity" />
+        <activity android:name=".ui.activity.RemoveMemberMusicianActivity"></activity>
     </application>
 
 </manifest>
