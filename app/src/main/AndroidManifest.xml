@@ -84,7 +84,8 @@
         <activity android:name=".ui.activity.AddMusicianToGroupActivity" />
         <activity android:name=".ui.activity.AddPositionMusicianActivity" />
         <activity android:name=".ui.activity.RemoveMusicianFromGroupActivity" />
-        <activity android:name=".ui.activity.RemoveMemberMusicianActivity"></activity>
+        <activity android:name=".ui.activity.RemoveMemberMusicianActivity" />
+        <activity android:name=".ui.activity.WithdrawalActivity"></activity>
     </application>
 
 </manifest>

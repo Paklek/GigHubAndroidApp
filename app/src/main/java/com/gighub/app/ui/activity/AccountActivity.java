@@ -13,6 +13,8 @@ import com.gighub.app.R;
 import com.gighub.app.model.Bank;
 import com.gighub.app.model.BankResponse;
 import com.gighub.app.model.Genre;
+import com.gighub.app.model.MusicianSaldo;
+import com.gighub.app.model.MusicianSaldoResponse;
 import com.gighub.app.model.ResponseCallGenre;
 import com.gighub.app.util.BuildUrl;
 import com.gighub.app.util.SessionManager;
@@ -39,6 +41,7 @@ public class AccountActivity extends AppCompatActivity {
     private String mName;
     private Context mContext;
     private List<Genre> mMusicianGenres;
+    private List<MusicianSaldo> musicianSaldos;
     private Bank mBank;
 
     public static final String PESANLOG ="pesanlog";
@@ -50,6 +53,7 @@ public class AccountActivity extends AppCompatActivity {
         mSession = new SessionManager(getApplicationContext());
 
         mMusicianGenres = new ArrayList<Genre>();
+        musicianSaldos = new ArrayList<MusicianSaldo>();
         mContext = getApplicationContext();
 
 
@@ -75,7 +79,7 @@ public class AccountActivity extends AppCompatActivity {
         mViewButtonManager = (View)findViewById(R.id.btn_manager);
 
         mButtonProfile = (Button)findViewById(R.id.btn_profile) ;
-//        mButtonGigMoney = (Button)findViewById(R.id.btn_gig_money);
+        mButtonGigMoney = (Button)findViewById(R.id.btn_gig_money);
         mButtonAboutUs = (Button)findViewById(R.id.btn_about_us);
         mButtonLogout = (Button)findViewById(R.id.btn_logout);
 
@@ -120,13 +124,32 @@ public class AccountActivity extends AppCompatActivity {
             }
         });
 
-//        mButtonGigMoney.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent _intent = new Intent(getApplicationContext(),GigMoneyActivity.class);
-//                startActivity(_intent);
-//            }
-//        });
+        mButtonGigMoney.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BuildUrl buildUrl = new BuildUrl();
+                buildUrl.buildBaseUrl();
+                Map<String, String> dataInfoSaldo = new HashMap<String, String>();
+
+                dataInfoSaldo.put("user_id",Integer.toString(mSession.getMusicianDetails().getId()));
+
+                buildUrl.serviceGighub.sendSaldoInfo(dataInfoSaldo).enqueue(new Callback<MusicianSaldoResponse>() {
+                    @Override
+                    public void onResponse(Call<MusicianSaldoResponse> call, Response<MusicianSaldoResponse> response) {
+                        Intent _intent = new Intent(getApplicationContext(),GigMoneyActivity.class);
+                        _intent.putExtra("musiciansaldos",new Gson().toJson(response.body().getMusicianSaldos()));
+                        startActivity(_intent);
+                    }
+
+                    @Override
+                    public void onFailure(Call<MusicianSaldoResponse> call, Throwable t) {
+
+                    }
+                });
+
+
+            }
+        });
         
 
         mButtonAboutUs.setOnClickListener(new View.OnClickListener() {

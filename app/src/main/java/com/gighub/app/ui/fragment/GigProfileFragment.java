@@ -60,7 +60,9 @@ public class GigProfileFragment extends Fragment {
 
         mButtonGigOffer = (Button)view.findViewById(R.id.btn_offer_gig_gigprofile);
 
-        mMusicianId = mSession.getMusicianDetails().getId();
+        if(mSession.checkUserType().equals("msc")){
+            mMusicianId = mSession.getMusicianDetails().getId();
+        }
         Intent intent1 = new Intent(getActivity().getIntent());
 
         tanggal_mulai = intent1.getStringExtra("tanggal_mulai");
@@ -79,6 +81,12 @@ public class GigProfileFragment extends Fragment {
 
 
         if (mSession.checkUserType().equals("org")){
+            mButtonGigOffer.setVisibility(View.GONE);
+        }
+        else if(mSession.checkUserType().equals("msc")){
+            mButtonGigOffer.setVisibility(View.VISIBLE);
+        }
+        else {
             mButtonGigOffer.setVisibility(View.GONE);
         }
 

@@ -57,7 +57,7 @@ public class GigActivity extends AppCompatActivity {
         cloudinaryUrl.buildCloudinaryUrl();
         mPhotoGig = intent.getStringExtra("photo_gig");
         mNamaGig = intent.getStringExtra("nama_gig");
-        mIdUser = mSession.getMusicianDetails().getId();
+//        mIdUser = mSession.getMusicianDetails().getId();
 
         mToolbar = (Toolbar)findViewById(R.id.toolbar);
 
