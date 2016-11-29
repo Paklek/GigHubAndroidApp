@@ -1,11 +1,13 @@
 package com.gighub.app.ui.activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -31,6 +33,7 @@ import com.cloudinary.utils.ObjectUtils;
 import com.gighub.app.R;
 import com.gighub.app.model.Bank;
 import com.gighub.app.model.BankResponse;
+import com.gighub.app.model.CloudinaryResponse;
 import com.gighub.app.model.Genre;
 import com.gighub.app.model.ResponseMusician;
 import com.gighub.app.model.ResponseUser;
@@ -39,6 +42,7 @@ import com.gighub.app.ui.adapter.ListAddGenreAdapter;
 import com.gighub.app.util.BuildUrl;
 import com.gighub.app.util.CloudinaryUrl;
 import com.gighub.app.util.SessionManager;
+import com.gighub.app.util.StaticFunction;
 import com.gighub.app.util.StaticInt;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -61,6 +65,7 @@ import retrofit2.Response;
 
 public class ProfileActivity extends AppCompatActivity {
 
+    private static final int REQ_CODE_RESULT_PHOTO = 10001;
     private Toolbar toolbar;
     private ListView mListView;
     private GridView mGridView;
@@ -82,12 +87,15 @@ public class ProfileActivity extends AppCompatActivity {
     private File destination;
     private Map Result;
     private CloudinaryUrl cloudinaryUrl;
+    CloudinaryResponse cloudinaryResponse;
 //    Map <String, String> musicianGenreData = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+
 
         mGenreList = new ArrayList<Genre>();
         mMusicianGenres = new ArrayList<Genre>();
@@ -375,6 +383,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void doUpdateProfile(){
 
+        cloudinaryResponse = new Gson().fromJson(new Gson().toJson(responseCloudinary),CloudinaryResponse.class);
         mGenreDipilih = mGenreDipilih.substring(1,mGenreDipilih.length());
 
         BuildUrl buildUrl = new BuildUrl();
@@ -388,6 +397,7 @@ public class ProfileActivity extends AppCompatActivity {
             dataUpdate.put("deskripsi", mEditTextDescriptions.getText().toString());
             dataUpdate.put("no_telp", mEditTextPhoneNumber.getText().toString());
             dataUpdate.put("kota", mEditTextKota.getText().toString());
+            dataUpdate.put("photo", cloudinaryResponse.getPublic_id());
             dataUpdate.put("harga_sewa", mEditTextHargaSewa.getText().toString());
             dataUpdate.put("youtube_video", mEditTextYoutubeURL.getText().toString());
             dataUpdate.put("url_website", mEditTextWebsiteURL.getText().toString());
@@ -497,10 +507,12 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void galleryIntent()
     {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select File"),StaticInt.SELECT_FILE);
+        Intent intent = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, REQ_CODE_RESULT_PHOTO);
+//        intent.setType("image/*");
+//        intent.setAction(Intent.ACTION_GET_CONTENT);
+//        startActivityForResult(Intent.createChooser(intent, "Select File"),StaticInt.SELECT_FILE);
     }
 
     @Override
@@ -526,23 +538,111 @@ public class ProfileActivity extends AppCompatActivity {
             if (requestCode == StaticInt.SELECT_FILE) {
                 onSelectFromGalleryResult(data);
             }
-            else if (requestCode == StaticInt.REQUEST_CAMERA)
+            else if (requestCode == StaticInt.REQUEST_CAMERA){
+
                 onCaptureImageResult(data);
+            }else if(requestCode == REQ_CODE_RESULT_PHOTO){
+
+                onSelectFromGalleryResult(data);
+
+            }
         }
     }
+
+    /**
+     *
+     */
+    Uri uriGalery = null;
+    Map<String,String> responseCloudinary;
 
 
     @SuppressWarnings("deprecation")
     private void onSelectFromGalleryResult(Intent data) {
-        Bitmap bm=null;
-        if (data != null) {
-            try {
-                bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        uriGalery = data.getData();
+        responseCloudinary = new HashMap<>();
+//        progressDialog = new ProgressDialog(ProfileActivity.this);
+//        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//        progressDialog.setCancelable(false);
+//        progressDialog.show();
+        new uploadImageAsync(uriGalery).execute();
+//        Bitmap bm=null;
+//        if (data != null) {
+//            try {
+//                bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        mImageViewPhoto.setImageBitmap(bm);
+    }
+    public class uploadImageAsync extends AsyncTask{
+        Uri uri;
+        ProgressDialog progressDialog;
+        public uploadImageAsync(Uri uri) {
+
+            // nanti show loading disini (ProgressDialog)
+//            StaticFunction.get(mContext).buildProgressDialog(mContext);
+//            progressDialog = new ProgressDialog(mContext);
+//            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//            progressDialog.setMessage("Uploading...");
+//            progressDialog.setIndeterminate(true);
+//            progressDialog.setCanceledOnTouchOutside(false);
+//            progressDialog.show();
+            Log.d("infoin","prepeare");
+
+            this.uri = uri;
         }
-        mImageViewPhoto.setImageBitmap(bm);
+
+        @Override
+        protected Object doInBackground(Object[] params) {
+            String url = StaticFunction.get(getApplicationContext()).getRealBaseURL(uri);
+            try{
+//                responseCloudinary = new Cloudinary().uploader().upload(url, ObjectUtils.emptyMap());
+                CloudinaryUrl cloudinaryUrl =new CloudinaryUrl();
+                cloudinaryUrl.buildCloudinaryUrl();
+                responseCloudinary = cloudinaryUrl.cloudinary.uploader().upload(url, ObjectUtils.emptyMap());
+            }catch(IOException e){
+
+            }
+            if(!responseCloudinary.isEmpty()){
+                // nanti dismiss loading disini (ProgressDialog)
+//                progressDialog.dismiss();
+                Log.d("infoin","Sukses");
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            super.onPostExecute(o);
+//            updateTableUser();
+            Toast.makeText(ProfileActivity.this, "Upload Success", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void updateTableUser() {
+
+//        doUpdateProfile();
+
+        //bawak si id ke retrofit
+//        cloudinaryResponse.getPublic_id();
+
+//        BuildUrl buildUrl = new BuildUrl();
+//        buildUrl.buildBaseUrl();
+//
+////        dataUpdate.put("photo",cloudinaryResponse.getPublic_id());
+//        buildUrl.serviceGighub.sendProfileUpdateDataMusician(dataUpdate).enqueue(new Callback<ResponseMusician>() {
+//            @Override
+//            public void onResponse(Call<ResponseMusician> call, Response<ResponseMusician> response) {
+////                progressDialog.dismiss();
+//                Toast.makeText(ProfileActivity.this, "Upload Success", Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResponseMusician> call, Throwable t) {
+//
+//            }
+//        });
     }
 
     private void onCaptureImageResult(Intent data) {
