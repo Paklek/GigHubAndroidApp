@@ -36,6 +36,7 @@ public class StaticString {
     public static final String ROUTE_POSITION = "mobile/musician/position";
     public static final String ROUTE_ADD_ANGGOTA = "mobile/musician/addanggota";
     public static final String ROUTE_VIEW_SALDO = "mobile/musician/viewsaldo";
+    public static final String ROUTE_REMOVE_ANGGOTA = "mobile/musician/removeanggota";
 
     public static final String API_CLOUDINARY = "cloudinary://627999879788938:Tfnf61ZtXn61Ct-Jbr_F__1zSJ8@dv5anayv1";
 

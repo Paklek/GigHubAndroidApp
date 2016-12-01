@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -93,6 +94,7 @@ public class GroupBandProfileActivity extends AppCompatActivity {
                         intent1.putExtra("calonanggota",new Gson().toJson(response.body().getMusicianans()));
                         intent1.putExtra("grupband_id",mGrupBandId);
                         intent1.putExtra("admin_id",mAdminId);
+                        intent1.putExtra("nama_grupband",mNamaGrupBand);
 //                        Toast.makeText(GroupBandProfileActivity.this,"Musician has been added", Toast.LENGTH_SHORT).show();
                         startActivity(intent1);
                     }
@@ -120,9 +122,11 @@ public class GroupBandProfileActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<MResponse> call, Response<MResponse> response) {
                         Intent intent1 = new Intent(GroupBandProfileActivity.this, RemoveMusicianFromGroupActivity.class);
-                        intent1.putExtra("calonanggota",new Gson().toJson(response.body().getMusicianans()));
+                        intent1.putExtra("calonmantananggota",new Gson().toJson(response.body().getMusicianans()));
                         intent1.putExtra("grupband_id",mGrupBandId);
                         intent1.putExtra("admin_id",mAdminId);
+                        intent1.putExtra("nama_grupband",mNamaGrupBand);
+                        Log.d("response",response.body().toString());
                         startActivity(intent1);
                     }
 

@@ -128,4 +128,7 @@ public interface ServiceGighub {
 
     @POST(StaticString.ROUTE_VIEW_SALDO)
     Call<MusicianSaldoResponse> sendSaldoInfo(@Body Map<String, String> dataInfoSaldo);
+
+    @POST(StaticString.ROUTE_REMOVE_ANGGOTA)
+    Call<Response> sendRemoveMusicianFromGroup (@Body Map<String, String> dataRemove);
 }

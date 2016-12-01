@@ -13,6 +13,7 @@ import com.gighub.app.R;
 import com.gighub.app.model.MusicianModel;
 import com.gighub.app.model.PositionResponse;
 import com.gighub.app.ui.adapter.ListAddMusicianToGroupAdapter;
+import com.gighub.app.ui.adapter.ListViewRemoveAnggotaAdapter;
 import com.gighub.app.util.BuildUrl;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -32,6 +33,7 @@ public class RemoveMusicianFromGroupActivity extends AppCompatActivity {
 
     private List<MusicianModel> mCalonMantanAnggota;
     private int mGrupBandId,mAdminId;
+    private String mNamaGrupband;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,43 +47,46 @@ public class RemoveMusicianFromGroupActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         final Type type = new TypeToken<List<MusicianModel>>(){}.getType();
-        mCalonMantanAnggota = new Gson().fromJson(i.getStringExtra("calonanggota"),type);
+        mCalonMantanAnggota = new Gson().fromJson(i.getStringExtra("calonmantananggota"),type);
 
         mGrupBandId = i.getIntExtra("grupband_id",0);
         mAdminId = i.getIntExtra("admin_id",0);
+        mNamaGrupband = i.getStringExtra("nama_grupband");
 
-//        mListView = (ListView)findViewById(R.id.lv_remove_anggota_from_group);
-//        mListView.setAdapter(new ListAddMusicianToGroupAdapter(mContext,mCalonMantanAnggota));
+        mListView = (ListView)findViewById(R.id.lv_remove_anggota_from_group);
+        mListView.setAdapter(new ListViewRemoveAnggotaAdapter(mContext,mCalonMantanAnggota));
 //
-//        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-//
-//                BuildUrl buildUrl = new BuildUrl();
-//                buildUrl.buildBaseUrl();
-//
-//                buildUrl.serviceGighub.callPosition().enqueue(new Callback<PositionResponse>() {
-//                    @Override
-//                    public void onResponse(Call<PositionResponse> call, Response<PositionResponse> response) {
-//                        Intent intent = new Intent(mContext, AddPositionMusicianActivity.class);
-//                        intent.putExtra("positions", new Gson().toJson(response.body().getPositions()));
-//                        intent.putExtra("name", mCalonAnggota.get(position).getName());
-//                        intent.putExtra("kota", mCalonAnggota.get(position).getKota());
-//                        intent.putExtra("basis", mCalonAnggota.get(position).getBasis());
-//                        intent.putExtra("calon_id", mCalonAnggota.get(position).getId());
-//                        intent.putExtra("grupband_id",mGrupBandId);
-//                        intent.putExtra("admin_id",mAdminId);
-//                        Log.d("response",response.body().toString());
-//                        startActivity(intent);
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<PositionResponse> call, Throwable t) {
-//
-//                    }
-//                });
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 
-//            }
-//        });
+                BuildUrl buildUrl = new BuildUrl();
+                buildUrl.buildBaseUrl();
+
+                buildUrl.serviceGighub.callPosition().enqueue(new Callback<PositionResponse>() {
+                    @Override
+                    public void onResponse(Call<PositionResponse> call, Response<PositionResponse> response) {
+                        Intent intent = new Intent(mContext, RemoveMemberMusicianActivity.class);
+                        intent.putExtra("positions", new Gson().toJson(response.body().getPositions()));
+                        intent.putExtra("name", mCalonMantanAnggota.get(position).getName());
+                        intent.putExtra("kota", mCalonMantanAnggota.get(position).getKota());
+                        intent.putExtra("basis", mCalonMantanAnggota.get(position).getBasis());
+                        intent.putExtra("posisi", mCalonMantanAnggota.get(position).getPosition_name());
+                        intent.putExtra("user_id", mCalonMantanAnggota.get(position).getId());
+                        intent.putExtra("grupband_id",mGrupBandId);
+                        intent.putExtra("nama_grupband",mNamaGrupband);
+                        intent.putExtra("admin_id",mAdminId);
+                        Log.d("response",response.body().toString());
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onFailure(Call<PositionResponse> call, Throwable t) {
+
+                    }
+                });
+
+            }
+        });
     }
 }
