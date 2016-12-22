@@ -91,7 +91,7 @@ public class AddPositionMusicianActivity extends AppCompatActivity {
                     mPositionList.get(position).setSelected(true);
                     mPositionId = mPositionList.get(position).getId();
                     Log.d("item", mPositionList.get(position).getPosition_name()+" "+mPositionList.get(position).isSelected());
-                    mGridView.getChildAt(position).setBackground(mGridView.getResources().getDrawable(R.drawable.button_border2));
+                    mGridView.getChildAt(position).setBackground(mGridView.getResources().getDrawable(R.drawable.button_border_black));
                 }
                 else {
                     mPositionList.get(position).setSelected(false);

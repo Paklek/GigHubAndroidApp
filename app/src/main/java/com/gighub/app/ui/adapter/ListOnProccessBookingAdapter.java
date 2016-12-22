@@ -96,7 +96,7 @@ public class ListOnProccessBookingAdapter extends BaseAdapter {
         }
         else if (mStatus.equals("1") && mStatusRequest.equals("1")){
             holder.mTextViewVerify.setText("Waiting to Verified");
-            holder.mTextViewVerify.setTextColor(holder.mTextViewVerify.getResources().getColor(R.color.primaryButton2));
+            holder.mTextViewVerify.setTextColor(holder.mTextViewVerify.getResources().getColor(R.color.primaryOrange2));
         }
         else if (mStatus.equals("2") && mStatusRequest.equals("1")){
             holder.mTextViewVerify.setText("Verified");

@@ -276,7 +276,7 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_discover_musician_main, container, false);
         mButtonSearch = (Button)view.findViewById(R.id.btn_search);
-        mButtonDatePicker = (Button)view.findViewById(R.id.btn_date_search);
+//        mButtonDatePicker = (Button)view.findViewById(R.id.btn_date_search);
         mEditTextSelectGenre = (EditText)view.findViewById(R.id.et_select_genre);
 
         mRadioGroupTipe = (RadioGroup)view.findViewById(R.id.radiogroup_tipe_discovermusician);
@@ -288,24 +288,24 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
 
         mContext = inflater.getContext();
 
-        mButtonDatePicker.setOnClickListener(new View.OnClickListener() {
-                                             @Override
-                                             public void onClick(View v) {
-//                Tanggal Sekarang
-                                                 final Calendar c = Calendar.getInstance();
-                                                 mYear = c.get(Calendar.YEAR);
-                                                 mMonth = c.get(Calendar.MONTH);
-                                                 mDay = c.get(Calendar.DAY_OF_MONTH);
-
-                                                 DatePickerDialog datePickerDialog = new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
-                                                     @Override
-                                                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                                         mButtonDatePicker.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-                                                     }
-                                                 }, mYear, mMonth, mDay);
-                                                 datePickerDialog.show();
-                                             }
-                                         });
+//        mButtonDatePicker.setOnClickListener(new View.OnClickListener() {
+//                                             @Override
+//                                             public void onClick(View v) {
+////                Tanggal Sekarang
+//                                                 final Calendar c = Calendar.getInstance();
+//                                                 mYear = c.get(Calendar.YEAR);
+//                                                 mMonth = c.get(Calendar.MONTH);
+//                                                 mDay = c.get(Calendar.DAY_OF_MONTH);
+//
+//                                                 DatePickerDialog datePickerDialog = new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
+//                                                     @Override
+//                                                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+//                                                         mButtonDatePicker.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+//                                                     }
+//                                                 }, mYear, mMonth, mDay);
+//                                                 datePickerDialog.show();
+//                                             }
+//                                         });
 
 
         mButtonSearch.setOnClickListener(new View.OnClickListener() {

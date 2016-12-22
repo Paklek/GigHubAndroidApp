@@ -1,6 +1,7 @@
 package com.gighub.app.ui.activity;
 
 import android.content.Intent;
+import android.content.PeriodicSync;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +19,8 @@ import com.gighub.app.util.SessionManager;
 import com.github.siyamed.shapeimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
+import org.joda.time.DateTime;
+import org.joda.time.Period;
 import org.w3c.dom.Text;
 
 import java.util.HashMap;
@@ -29,12 +32,13 @@ import retrofit2.Callback;
 public class BookingDetailsActivity extends AppCompatActivity {
 
     private Button mButtonConfirmPayment, mButtonConfirmRequest;
-    private TextView mTextViewNamaGig, mTextViewNamaMusisi, mTextViewLocation, mTextViewHarga, mTextViewWaktuMulai, mTextViewWaktuSelesai, mTextViewTotal, mTextViewNamaPenyewa, mTextViewStatus;
+    private TextView mTextViewHour, mTextViewNamaGig, mTextViewNamaMusisi, mTextViewLocation, mTextViewHarga, mTextViewWaktuMulai, mTextViewWaktuSelesai, mTextViewTotal, mTextViewNamaPenyewa, mTextViewStatus;
     private SessionManager mSession;
     private int mSewaId,mMusicianId, mOrganizerId,mAdminId;
     private ImageView mImgPhotoGig;
     private CircularImageView mImgPhotoMusician;
-    private String mPhoto, mPhotoGig, mStatus, mStatusRequest, mTipeGig, mActivity,mTipeSewa;
+    private String mPhoto, mPhotoGig, mStatus, mStatusRequest, mTipeGig, mActivity,mTipeSewa,mWaktuMulai,mWaktuSelesai,mWaktuMulaiJoda,mWaktuSelesaiJoda;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
         mSession = new SessionManager(getApplicationContext());
         final Intent intent = getIntent();
 
+        mTextViewHour = (TextView)findViewById(R.id.tv_hour_bookdetails);
         mTextViewNamaGig = (TextView)findViewById(R.id.tv_nama_gig_bookdetails);
         mTextViewNamaMusisi = (TextView)findViewById(R.id.tv_nama_musisi_bookdetails);
         mTextViewLocation = (TextView)findViewById(R.id.tv_location_bookdetails);
@@ -127,14 +132,27 @@ public class BookingDetailsActivity extends AppCompatActivity {
             mTextViewStatus.setText("Status : Verified");
         }
 
+        mWaktuMulai = intent.getStringExtra("waktu_mulai");
+        mWaktuSelesai = intent.getStringExtra("waktu_selesai");
+
+        mWaktuMulaiJoda = mWaktuMulai.replace(' ','T');
+        mWaktuSelesaiJoda = mWaktuSelesai.replace(' ', 'T');
+
+        DateTime startTime, endTime;
+        startTime = DateTime.parse(mWaktuMulaiJoda);
+        endTime = DateTime.parse(mWaktuSelesaiJoda);
+        Period p = new Period(startTime,endTime);
+        int totalHours = p.getHours();
+
         mTextViewNamaGig.setText(intent.getStringExtra("nama_gig"));
         mTextViewNamaMusisi.setText(intent.getStringExtra("nama_musisi"));
         mTextViewNamaPenyewa.setText("Renter : "+intent.getStringExtra("nama_user"));
         mTextViewLocation.setText(intent.getStringExtra("lokasi"));
-        mTextViewWaktuMulai.setText(intent.getStringExtra("waktu_mulai"));
-        mTextViewWaktuSelesai.setText(intent.getStringExtra("waktu_selesai"));
+        mTextViewWaktuMulai.setText(mWaktuMulai);
+        mTextViewWaktuSelesai.setText(mWaktuSelesai);
         mTextViewHarga.setText("Rp."+Integer.toString(intent.getIntExtra("harga_sewa",0)));
         mTextViewTotal.setText("Rp."+Integer.toString(intent.getIntExtra("total",0)));
+        mTextViewHour.setText(""+totalHours);
 
         mPhoto = intent.getStringExtra("photo");
         mPhotoGig = intent.getStringExtra("photo_gig");

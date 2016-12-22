@@ -165,7 +165,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="date"
-                        android:background="@drawable/button_border2"
+                        android:background="@drawable/button_border_black"
                         android:elevation="4dp"/>
                 </android.support.design.widget.TextInputLayout>
 
@@ -178,7 +178,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="date"
-                        android:background="@drawable/button_border2"
+                        android:background="@drawable/button_border_black"
                         android:hint="Done Time"
                         android:elevation="4dp"/>
                 </android.support.design.widget.TextInputLayout>
@@ -200,7 +200,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="date"
-                        android:background="@drawable/button_border2"
+                        android:background="@drawable/button_border_black"
                         android:elevation="4dp"/>
                 </android.support.design.widget.TextInputLayout>
 
@@ -213,7 +213,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="date"
-                        android:background="@drawable/button_border2"
+                        android:background="@drawable/button_border_black"
                         android:hint="Done Time"
                         android:elevation="4dp"/>
                 </android.support.design.widget.TextInputLayout>
@@ -224,7 +224,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
-                android:background="@drawable/button_border2"
+                android:background="@drawable/button_border_black"
                 android:text="@string/send_req"/>
         </LinearLayout>
 

@@ -115,7 +115,7 @@ public class MusicianProfileFragment extends Fragment {
             public void onClick(View v) {
 
                 if(!mSession.isLoggedIn()){
-                    Toast.makeText(mContext, "You Must be logged in as Organizer to book",Toast.LENGTH_LONG).show();
+                    Toast.makeText(mContext, R.string.you_must_be_logged,Toast.LENGTH_LONG).show();
                 }
                 else {
 

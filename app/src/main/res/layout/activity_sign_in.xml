@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:layout_marginRight="10px"
-            android:background="@color/primaryButton2"
+            android:background="@color/primaryOrange2"
             android:text="Cancel"/>
         <Button
             android:elevation="4dp"
@@ -71,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:background="@color/primaryButton"
+            android:background="@color/primaryOrange"
             android:text="@string/sign_in"/>
     </LinearLayout>
 

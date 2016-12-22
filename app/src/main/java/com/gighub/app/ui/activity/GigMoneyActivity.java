@@ -1,9 +1,12 @@
 package com.gighub.app.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.gighub.app.R;
@@ -22,6 +25,8 @@ public class GigMoneyActivity extends AppCompatActivity {
     private List<MusicianSaldo> musicianSaldos;
     private TextView mTextViewSaldo;
     private int total=0;
+    private Button mButtonWithdrawal;
+    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +35,10 @@ public class GigMoneyActivity extends AppCompatActivity {
 
         musicianSaldos = new ArrayList<MusicianSaldo>();
 
+        mButtonWithdrawal = (Button)findViewById(R.id.btn_withdrawal_gigmoney);
         mTextViewSaldo = (TextView)findViewById(R.id.tv_saldo_gigmoney);
+
+        mContext = getApplicationContext();
 
         Intent intent = getIntent();
 
@@ -45,8 +53,16 @@ public class GigMoneyActivity extends AppCompatActivity {
         for (int i = 0; i<musicianSaldos.size();i++){
             total+=musicianSaldos.get(i).getSaldo();
         }
-
         mTextViewSaldo.setText("Rp. "+total);
+
+        mButtonWithdrawal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(mContext,WithdrawalActivity.class);
+                intent1.putExtra("musiciansaldos",new Gson().toJson(musicianSaldos));
+                startActivity(intent1);
+            }
+        });
     }
 
     @Override

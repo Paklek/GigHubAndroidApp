@@ -131,4 +131,10 @@ public interface ServiceGighub {
 
     @POST(StaticString.ROUTE_REMOVE_ANGGOTA)
     Call<Response> sendRemoveMusicianFromGroup (@Body Map<String, String> dataRemove);
+
+    @POST(StaticString.ROUTE_UPDATE_PHOTO)
+    Call<ResponseMusician> sendDataPhotoUpdate (@Body Map<String,String> dataPhoto);
+
+    @POST(StaticString.ROUTE_WITHDRAW)
+    Call<Response> sendWithdrawData (@Body Map<String, String> withdrawData);
 }

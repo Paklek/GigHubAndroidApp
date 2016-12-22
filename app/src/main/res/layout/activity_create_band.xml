@@ -102,16 +102,15 @@
         android:id="@+id/spinner_position_createbandactivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/spinner_drawable"
-        android:foregroundTint="@color/abc_primary_text_material_light"
-        android:foreground="@color/abc_primary_text_material_light"></Spinner>
+        android:background="@drawable/edittext1"></Spinner>
 
     <Button
         android:id="@+id/btn_create_band_createband"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:background="@drawable/button_border2"
+        android:textColor="@color/colorAccent"
+        android:background="@drawable/button_border_white"
         android:text="CREATE"/>
 
 </LinearLayout>

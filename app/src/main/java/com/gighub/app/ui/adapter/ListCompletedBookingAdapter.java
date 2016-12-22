@@ -74,7 +74,7 @@ public class ListCompletedBookingAdapter extends BaseAdapter {
 
         if (mStatus.equals("3") && mStatusRequest.equals("1")){
             holder.mTextViewVerify.setText("Done");
-            holder.mTextViewVerify.setTextColor(holder.mTextViewVerify.getResources().getColor(R.color.primaryButton2));
+            holder.mTextViewVerify.setTextColor(holder.mTextViewVerify.getResources().getColor(R.color.primaryOrange2));
         }
         else if (mStatus.equals("4") && mStatusRequest.equals("1")){
             holder.mTextViewVerify.setText("Done, Your balance have been added");

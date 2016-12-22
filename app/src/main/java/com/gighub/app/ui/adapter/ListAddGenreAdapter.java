@@ -87,7 +87,7 @@ public class ListAddGenreAdapter extends BaseAdapter {
 
         for(int i=0;i<mMusicianGenres.size();i++) {
             if (mMusicianGenres.get(i).getId() == mGenreList.get(position).getId()) {
-                holder.mLinearLayout.setBackground(holder.mLinearLayout.getResources().getDrawable(R.drawable.button_border2));
+                holder.mLinearLayout.setBackground(holder.mLinearLayout.getResources().getDrawable(R.drawable.button_border_black));
                 mGenreList.get(position).setSelected(true);
             }
         }

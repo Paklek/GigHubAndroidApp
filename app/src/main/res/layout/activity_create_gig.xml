@@ -132,8 +132,9 @@
                         android:id="@+id/btn_date_waktu_mulai_creategigactivity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="date"
-                        android:background="@drawable/button_border2"
+                        android:text="@string/date"
+                        android:textColor="@color/colorAccent"
+                        android:background="@drawable/button_border_white"
                         android:elevation="4dp"/>
                 </android.support.design.widget.TextInputLayout>
 
@@ -145,8 +146,9 @@
                         android:id="@+id/btn_time_waktu_mulai_creategigactivity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="time"
-                        android:background="@drawable/button_border2"
+                        android:text="@string/time"
+                        android:textColor="@color/colorAccent"
+                        android:background="@drawable/button_border_white"
                         android:hint="Done Time"
                         android:elevation="4dp"/>
                 </android.support.design.widget.TextInputLayout>
@@ -165,8 +167,9 @@
                         android:id="@+id/btn_date_waktu_selesai_creategigactivity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="date"
-                        android:background="@drawable/button_border2"
+                        android:text="@string/date"
+                        android:textColor="@color/colorAccent"
+                        android:background="@drawable/button_border_white"
                         android:elevation="4dp"/>
                 </android.support.design.widget.TextInputLayout>
 
@@ -178,8 +181,9 @@
                         android:id="@+id/btn_time_waktu_selesai_creategigactivity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="time"
-                        android:background="@drawable/button_border2"
+                        android:text="@string/time"
+                        android:textColor="@color/colorAccent"
+                        android:background="@drawable/button_border_white"
                         android:hint="Done Time"
                         android:elevation="4dp"/>
                 </android.support.design.widget.TextInputLayout>
@@ -190,8 +194,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
-                android:background="@drawable/button_border2"
-                android:text="Create Gig"/>
+                android:textColor="@color/colorAccent"
+                android:background="@drawable/button_border_white"
+                android:text="@string/create_gig"/>
         </LinearLayout>
 
 

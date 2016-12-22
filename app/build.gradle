@@ -34,4 +34,5 @@ dependencies {
     compile 'com.cloudinary:cloudinary-android:1.4.5'
     compile 'com.cloudinary:cloudinary-core:1.4.5'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'joda-time:joda-time:2.9.7'
 }

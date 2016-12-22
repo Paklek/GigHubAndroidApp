@@ -9,7 +9,7 @@
     <color name="colorTextDark">#000000</color>
     <color name="primary">#505050</color>
     <color name="primaryDark">#333333</color>
-    <color name="primaryButton">#ff4400</color>
-    <color name="primaryButton2">#ff9955</color>
+    <color name="primaryOrange">#e05a11</color>
+    <color name="primaryOrange2">#ff9955</color>
     <color name="green">#00ff00</color>
 </resources>

@@ -87,6 +87,7 @@ public class ProfileActivity extends AppCompatActivity {
     private File destination;
     private Map Result;
     private CloudinaryUrl cloudinaryUrl;
+//    public static ProgressDialog progressDialog;
     CloudinaryResponse cloudinaryResponse;
 //    Map <String, String> musicianGenreData = new HashMap<>();
 
@@ -94,14 +95,14 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        mContext = getApplicationContext();
 
-
+//        progressDialog = new ProgressDialog(mContext);
 
         mGenreList = new ArrayList<Genre>();
         mMusicianGenres = new ArrayList<Genre>();
         bank = new ArrayList<Bank>();
         mSession = new SessionManager(getApplicationContext());
-        mContext = getApplicationContext();
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         final Intent intent = getIntent();
 
@@ -329,7 +330,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 //                Log.d("isSelected",""+selected[position]);
                 if (!mGenreList.get(position).getSelected()){
-                    mGridView.getChildAt(position).setBackground(mGridView.getResources().getDrawable(R.drawable.button_border2));
+                    mGridView.getChildAt(position).setBackground(mGridView.getResources().getDrawable(R.drawable.button_border_black));
                     mGenreList.get(position).setSelected(true);
                     mGenreDipilih += " "+mGenreList.get(position).getId();
                     mGenreCount +=1;
@@ -380,10 +381,43 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     Map<String, String> dataUpdate = new HashMap<>();
+    Map<String, String> photoUpdate = new HashMap<>();
+
+    private void doUpdatePhoto(){
+        cloudinaryResponse = new Gson().fromJson(new Gson().toJson(responseCloudinary),CloudinaryResponse.class);
+        mGenreDipilih = mGenreDipilih.substring(1,mGenreDipilih.length());
+
+        BuildUrl buildUrl = new BuildUrl();
+        buildUrl.buildBaseUrl();
+
+        photoUpdate.put("tipe_user","msc");
+        photoUpdate.put("photo", cloudinaryResponse.getPublic_id());
+        photoUpdate.put("id", Integer.toString(mMusicianId));
+
+
+        buildUrl.serviceGighub.sendDataPhotoUpdate(photoUpdate).enqueue(new Callback<ResponseMusician>() {
+            @Override
+            public void onResponse(Call<ResponseMusician> call, Response<ResponseMusician> response) {
+                if (response.code() == 200) {
+                    Toast.makeText(ProfileActivity.this, R.string.photo_profile_updated, Toast.LENGTH_SHORT).show();
+                    mSession = new SessionManager(getApplicationContext());
+                    mSession.createLoginSession(new Gson().toJson(response.body().getMusician()), "msc");
+                }
+                else {
+                    Toast.makeText(ProfileActivity.this, R.string.failed_try_again, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseMusician> call, Throwable t) {
+                Toast.makeText(ProfileActivity.this, R.string.failed_try_again, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     private void doUpdateProfile(){
 
-        cloudinaryResponse = new Gson().fromJson(new Gson().toJson(responseCloudinary),CloudinaryResponse.class);
+//        cloudinaryResponse = new Gson().fromJson(new Gson().toJson(responseCloudinary),CloudinaryResponse.class);
         mGenreDipilih = mGenreDipilih.substring(1,mGenreDipilih.length());
 
         BuildUrl buildUrl = new BuildUrl();
@@ -397,7 +431,7 @@ public class ProfileActivity extends AppCompatActivity {
             dataUpdate.put("deskripsi", mEditTextDescriptions.getText().toString());
             dataUpdate.put("no_telp", mEditTextPhoneNumber.getText().toString());
             dataUpdate.put("kota", mEditTextKota.getText().toString());
-            dataUpdate.put("photo", cloudinaryResponse.getPublic_id());
+//            dataUpdate.put("photo", cloudinaryResponse.getPublic_id());
             dataUpdate.put("harga_sewa", mEditTextHargaSewa.getText().toString());
             dataUpdate.put("youtube_video", mEditTextYoutubeURL.getText().toString());
             dataUpdate.put("url_website", mEditTextWebsiteURL.getText().toString());
@@ -560,35 +594,43 @@ public class ProfileActivity extends AppCompatActivity {
     private void onSelectFromGalleryResult(Intent data) {
         uriGalery = data.getData();
         responseCloudinary = new HashMap<>();
-//        progressDialog = new ProgressDialog(ProfileActivity.this);
+//        ProgressDialog progressDialog = new ProgressDialog(mContext);
 //        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//        progressDialog.setMessage("Uploading...");
 //        progressDialog.setCancelable(false);
 //        progressDialog.show();
         new uploadImageAsync(uriGalery).execute();
-//        Bitmap bm=null;
-//        if (data != null) {
-//            try {
-//                bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        mImageViewPhoto.setImageBitmap(bm);
+        Bitmap bm=null;
+        if (data != null) {
+            try {
+                bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        mImageViewPhoto.setImageBitmap(bm);
+//        progressDialog.dismiss();
     }
     public class uploadImageAsync extends AsyncTask{
         Uri uri;
+//        ProgressDialog progressDialog;
         ProgressDialog progressDialog;
+//        progressDialog.s(ProgressDialog.STYLE_SPINNER);
+//        progressDialog.setMessage("Uploading...");
+//        progressDialog.setCancelable(false);
+//        progressDialog.show();
         public uploadImageAsync(Uri uri) {
 
             // nanti show loading disini (ProgressDialog)
 //            StaticFunction.get(mContext).buildProgressDialog(mContext);
-//            progressDialog = new ProgressDialog(mContext);
-//            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//            progressDialog.setMessage("Uploading...");
-//            progressDialog.setIndeterminate(true);
-//            progressDialog.setCanceledOnTouchOutside(false);
-//            progressDialog.show();
+            progressDialog = new ProgressDialog(ProfileActivity.this);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setMessage("Uploading...");
+            progressDialog.setIndeterminate(true);
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.show();
             Log.d("infoin","prepeare");
+
 
             this.uri = uri;
         }
@@ -616,7 +658,19 @@ public class ProfileActivity extends AppCompatActivity {
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
 //            updateTableUser();
-            Toast.makeText(ProfileActivity.this, "Upload Success", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(ProfileActivity.this, "Upload Success", Toast.LENGTH_SHORT).show();
+            doUpdatePhoto();
+            progressDialog.dismiss();
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+//            ProgressDialog progressDialog = new ProgressDialog(mContext);
+//            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//            progressDialog.setMessage("Uploading...");
+//            progressDialog.setCancelable(false);
+//            progressDialog.show();
         }
     }
 

@@ -4,15 +4,25 @@
     <shared>
       <config />
     </shared>
+    <layouts>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_withdrawal.xml">
+        <config>
+          <theme>@style/AppTheme.NoActionBar</theme>
+        </config>
+      </layout>
+    </layouts>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="code" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="DEBUG" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4118a0ae-5463-4744-a2c8-306d5d9db6a5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/adapter/ListViewRemoveAnggotaAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/joda_time_2_9_7.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/button_border_black_negative.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/button_border_white_negative.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/edittext1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/values-in/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" />
@@ -24,11 +34,56 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/model/ServiceGighub.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/model/ServiceGighub.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/GroupBandProfileActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/GroupBandProfileActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/RemoveMemberMusicianActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/RemoveMemberMusicianActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/RemoveMusicianFromGroupActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/RemoveMusicianFromGroupActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/AccountActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/AccountActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/AddPositionMusicianActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/AddPositionMusicianActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/BookMusicianActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/BookMusicianActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/BookingDetailsActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/BookingDetailsActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/GigMoneyActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/GigMoneyActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/IntroActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/IntroActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/MusicianBankActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/MusicianBankActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/ProfileActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/ProfileActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/WithdrawalActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/WithdrawalActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/adapter/ListAddGenreAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/adapter/ListAddGenreAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/adapter/ListCompletedBookingAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/adapter/ListCompletedBookingAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/adapter/ListOnProccessBookingAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/adapter/ListOnProccessBookingAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/adapter/ListOnRequestBookingAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/adapter/ListOnRequestBookingAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/fragment/DiscoverMusicianFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/fragment/DiscoverMusicianFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/fragment/MusicianProfileFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/fragment/MusicianProfileFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/util/StaticString.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/gighub/app/util/StaticString.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_account.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_account.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_position_musician.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_position_musician.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_book_musician.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_book_musician.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_booking_details.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_booking_details.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_create_band.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_create_band.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_create_gig.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_create_gig.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_gig_money.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_gig_money.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_gig_offer_musician.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_gig_offer_musician.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_group_band_profile.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_group_band_profile.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_intro.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_intro.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login_as.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login_as.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login_as_musician.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login_as_musician.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login_as_organizer.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login_as_organizer.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_musician_bank.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_musician_bank.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_profile.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_profile.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_register_as.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_register_as.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_register_as_musician.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_register_as_musician.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_register_as_organizer.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_register_as_organizer.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_remove_anggota_musician.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_remove_anggota_musician.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_sign_in.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_sign_in.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_withdrawal.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_withdrawal.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_dialog_genre.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_dialog_genre.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_discover_musician_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_discover_musician_main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_gig_profile.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_gig_profile.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_musician_music.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_musician_music.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_musician_profile.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_musician_profile.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/spinner_item_position.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/spinner_item_position.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/button_border.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/button_border_white.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/button_border2.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/button_border_black.xml" />
     </list>
     <ignored path="GigHub.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,55 +99,64 @@
     <option name="PATCH_PATH" value="" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <PATH>
+              <PATH_ELEMENT>
+                <option name="myItemId" value="" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ExternalProjectsStructure$RootNode" />
+              </PATH_ELEMENT>
+              <PATH_ELEMENT>
+                <option name="myItemId" value="GigHub" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ProjectNode" />
+              </PATH_ELEMENT>
+            </PATH>
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
   <component name="FavoritesManager">
     <favorites_list name="GigHub" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="RemoveMusicianFromGroupActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/RemoveMusicianFromGroupActivity.java">
+      <file leaf-file-name="WithdrawalActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/WithdrawalActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.38444924">
-              <caret line="69" column="29" selection-start-line="69" selection-start-column="29" selection-end-line="69" selection-end-column="29" />
+            <state vertical-scroll-proportion="0.52284265">
+              <caret line="100" column="0" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
               <folding>
-                <element signature="e#1947#3655#0" expanded="true" />
-                <element signature="e#3654#3655#0" expanded="true" />
+                <element signature="e#2916#3064#0" expanded="true" />
+                <element signature="e#3063#3064#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GroupBandProfileActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/GroupBandProfileActivity.java">
+      <file leaf-file-name="DiscoverMusicianFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/fragment/DiscoverMusicianFragment.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="127" column="72" selection-start-line="127" selection-start-column="72" selection-end-line="127" selection-end-column="72" />
+              <caret line="404" column="0" selection-start-line="404" selection-start-column="0" selection-end-line="404" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RemoveMemberMusicianActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/RemoveMemberMusicianActivity.java">
+      <file leaf-file-name="activity_withdrawal.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_withdrawal.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="48" column="56" selection-start-line="48" selection-start-column="56" selection-end-line="48" selection-end-column="56" />
-              <folding>
-                <element signature="e#1876#3245#0" expanded="true" />
-                <element signature="e#2123#2139#0" expanded="true" />
-                <element signature="e#3244#3245#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BuildUrl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/util/BuildUrl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+            <state vertical-scroll-proportion="-2.5454545">
+              <caret line="28" column="8" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="8" />
               <folding />
             </state>
+          </provider>
+          <provider editor-type-id="android-designer">
+            <state />
           </provider>
         </entry>
       </file>
@@ -100,7 +164,17 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/model/ServiceGighub.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="131" column="43" selection-start-line="131" selection-start-column="43" selection-end-line="131" selection-end-column="43" />
+              <caret line="138" column="77" selection-start-line="138" selection-start-column="77" selection-end-line="138" selection-end-column="77" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProfileActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/ProfileActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="488" column="24" selection-start-line="488" selection-start-column="24" selection-end-line="489" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -110,42 +184,9 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/util/StaticString.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="38" column="84" selection-start-line="38" selection-start-column="84" selection-end-line="38" selection-end-column="84" />
+              <caret line="7" column="67" selection-start-line="7" selection-start-column="67" selection-end-line="7" selection-end-column="67" />
               <folding />
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GigOfferMusicianResponse.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/model/GigOfferMusicianResponse.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AddPositionMusicianActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/AddPositionMusicianActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="126" column="47" selection-start-line="122" selection-start-column="24" selection-end-line="126" selection-end-column="47" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_remove_anggota_musician.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_remove_anggota_musician.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.4727273">
-              <caret line="40" column="16" selection-start-line="40" selection-start-column="16" selection-end-line="40" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer">
-            <state />
           </provider>
         </entry>
       </file>
@@ -155,6 +196,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="valueResourceFile" />
+        <option value="resourceFile" />
       </list>
     </option>
   </component>
@@ -1557,7 +1600,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="4415277844166" />
+        <entry key="$PROJECT_DIR$" value="4420127017189" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -1747,6 +1790,7 @@
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.cloudinary/cloudinary-android/1.4.5/b2e47877509c81bb774f43743ec954d5ebcfe82c/cloudinary-android-1.4.5.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.cloudinary/cloudinary-core/1.4.5/814d2cc56fdb539e36cf95fb627f2b6d923c09e2/cloudinary-core-1.4.5.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/joda-time/joda-time/2.9.7/6eb2e87ddb09e944bb88f06f19ba0638d4607ffd/joda-time-2.9.7.jar" />
                             <option value="D:/SOFTWARE/AndroidStudio/sdk/extras/android/m2repository/com/android/support/animated-vector-drawable/23.4.0/animated-vector-drawable-23.4.0.aar" />
                             <option value="D:/SOFTWARE/AndroidStudio/sdk/extras/android/m2repository/com/android/support/support-vector-drawable/23.4.0/support-vector-drawable-23.4.0.aar" />
                             <option value="D:/SOFTWARE/AndroidStudio/sdk/extras/android/m2repository/com/android/support/support-annotations/23.4.0/support-annotations-23.4.0.jar" />
@@ -1851,14 +1895,54 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/gighub/app/util/CloudinaryUrl.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/gighub/app/model/CloudinaryResponse.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/gighub/app/util/StaticFunction.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/ProfileActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/adapter/ListViewRemoveAnggota.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/gighub/app/model/RemoveMusicianFromGroupResponse.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/gighub/app/util/StaticString.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/gighub/app/model/ServiceGighub.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/RemoveMusicianFromGroupActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/RemoveMemberMusicianActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/GroupBandProfileActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/edittext1.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings-in.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/fragment/MusicianProfileFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/IntroActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_intro.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/button_border2.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/button_border.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_sign_in.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/button_border2_negative.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/button_border_white_negative.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/AddPositionMusicianActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/adapter/ListAddGenreAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/adapter/ListCompletedBookingAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/adapter/ListOnProccessBookingAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/adapter/ListOnRequestBookingAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_login_as_musician.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/button_border_white.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_discover_musician_main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/fragment/DiscoverMusicianFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_create_band.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_dialog_genre.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/spinner_item_position.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_gig_money.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_login_as_organizer.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_create_gig.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_profile.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/GigMoneyActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_musician_bank.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/adapter/ListSearchResultAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/BookMusicianActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_booking_details.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/BookingDetailsActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/ProfileActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/AccountActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/MusicianBankActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values-in/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/gighub/app/model/ServiceGighub.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_withdrawal.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/gighub/app/util/StaticString.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/WithdrawalActivity.java" />
       </list>
     </option>
   </component>
@@ -1893,17 +1977,22 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="PackagesPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="GigHub" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -1920,6 +2009,50 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GigHub" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="strings.xml" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResGroupNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GigHub" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -2053,21 +2186,38 @@
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="GigHub" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GigHub" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="android.sdk-updates" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="device.picker.selection" value="Nexus_5_API_23" />
+    <property name="device.picker.selection" value="3d66c87f" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/values" />
+    <property name="android.project.structure.last.selected" value="app" />
+    <property name="android.project.structure.proportion" value="0.15" />
   </component>
   <component name="RunManager" selected="Android Application.app">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
@@ -2343,16 +2493,16 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.097103916" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16354345" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.61669505" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32879046" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -2361,8 +2511,8 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25416037" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -2384,53 +2534,53 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/ProfileActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/adapter/ListAddGenreAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="method#selectImage#0;class#ProfileActivity#0" expanded="false" />
-            <element signature="method#galleryIntent#0;class#ProfileActivity#0" expanded="false" />
-            <element signature="method#onRequestPermissionsResult#0;class#ProfileActivity#0" expanded="false" />
-            <element signature="method#onActivityResult#0;class#ProfileActivity#0" expanded="false" />
-            <element signature="method#onSelectFromGalleryResult#0;class#ProfileActivity#0" expanded="false" />
-            <element signature="class#uploadImageAsync#0;class#ProfileActivity#0" expanded="false" />
-            <element signature="method#doInBackground#0;class#uploadImageAsync#0;class#ProfileActivity#0" expanded="false" />
-            <element signature="method#onPostExecute#0;class#uploadImageAsync#0;class#ProfileActivity#0" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="0.4293059">
+          <caret line="89" column="129" selection-start-line="89" selection-start-column="129" selection-end-line="89" selection-end-column="129" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/util/StaticFunction.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/AddPositionMusicianActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="31" column="8" selection-start-line="31" selection-start-column="8" selection-end-line="34" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="method#createOptionMenu#0;class#StaticFunction#0" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="0.4293059">
+          <caret line="93" column="132" selection-start-line="93" selection-start-column="132" selection-end-line="93" selection-end-column="132" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/util/CloudinaryUrl.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="61" selection-start-line="17" selection-start-column="61" selection-end-line="17" selection-end-column="61" />
+        <state vertical-scroll-proportion="1.0553746">
+          <caret line="77" column="63" selection-start-line="77" selection-start-column="63" selection-end-line="77" selection-end-column="63" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/util/StaticString.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/button_border_black_negative.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.28099173">
+          <caret line="6" column="8" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/button_border_white_negative.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7491961">
-          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.28099173">
+          <caret line="6" column="8" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/button_border_white.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.23415978">
+          <caret line="5" column="54" selection-start-line="5" selection-start-column="54" selection-end-line="5" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_discover_musician_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8498498">
+          <caret line="139" column="56" selection-start-line="139" selection-start-column="56" selection-end-line="139" selection-end-column="56" />
           <folding />
         </state>
       </provider>
@@ -2438,179 +2588,477 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/button_border_black.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="105" column="57" selection-start-line="105" selection-start-column="57" selection-end-line="105" selection-end-column="57" />
+        <state vertical-scroll-proportion="0.28176796">
+          <caret line="6" column="8" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/util/CloudinaryUrl.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login_as_musician.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="61" selection-start-line="17" selection-start-column="61" selection-end-line="17" selection-end-column="61" />
+        <state vertical-scroll-proportion="-0.08708709">
+          <caret line="50" column="50" selection-start-line="50" selection-start-column="50" selection-end-line="50" selection-end-column="50" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/LoginAsMusicianActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7448454">
+          <caret line="44" column="47" selection-start-line="44" selection-start-column="47" selection-end-line="44" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/cv_genre_horizontal.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/cv_genre.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_create_band.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.18018018">
+          <caret line="104" column="48" selection-start-line="104" selection-start-column="48" selection-end-line="104" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/spinner_item_position.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.45945945">
+          <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/CreateBandActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.45103094">
+          <caret line="102" column="64" selection-start-line="102" selection-start-column="64" selection-end-line="102" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/spinner_drawable.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_dialog_genre.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6726727">
+          <caret line="20" column="45" selection-start-line="20" selection-start-column="45" selection-end-line="20" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/fragment/DialogGenreFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5953608">
+          <caret line="67" column="58" selection-start-line="67" selection-start-column="58" selection-end-line="67" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_gig_money.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5405405">
+          <caret line="52" column="49" selection-start-line="52" selection-start-column="49" selection-end-line="52" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login_as_organizer.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5885886">
+          <caret line="66" column="36" selection-start-line="66" selection-start-column="36" selection-end-line="66" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/LoginAsOrganizerActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7010309">
+          <caret line="41" column="46" selection-start-line="41" selection-start-column="46" selection-end-line="41" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/CreateGigActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="40" column="47" selection-start-line="40" selection-start-column="47" selection-end-line="40" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#6182#6183#0" expanded="false" />
+            <element signature="e#6225#6226#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_create_gig.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="121" column="16" selection-start-line="121" selection-start-column="16" selection-end-line="121" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_profile.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="125" column="41" selection-start-line="125" selection-start-column="41" selection-end-line="125" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/model/CloudinaryResponse.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4">
-          <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.25757575">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/util/StaticFunction.java">
+    <entry file="file://D:/SOFTWARE/AndroidStudio/sdk/sources/android-23/android/app/Activity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="31" column="8" selection-start-line="31" selection-start-column="8" selection-end-line="34" selection-end-column="22" />
+          <caret line="6183" column="0" selection-start-line="6183" selection-start-column="0" selection-end-line="6183" selection-end-column="0" />
           <folding>
+            <element signature="e#0#280082#0" expanded="false" />
             <element signature="imports" expanded="false" />
-            <element signature="method#createOptionMenu#0;class#StaticFunction#0" expanded="false" />
+            <element signature="e#38135#38136#0" expanded="false" />
+            <element signature="e#38165#38166#0" expanded="false" />
+            <element signature="e#38552#38553#0" expanded="false" />
+            <element signature="e#38587#38588#0" expanded="false" />
+            <element signature="e#38695#38696#0" expanded="false" />
+            <element signature="e#38730#38731#0" expanded="false" />
+            <element signature="e#38833#38834#0" expanded="false" />
+            <element signature="e#38871#38872#0" expanded="false" />
+            <element signature="e#38985#38986#0" expanded="false" />
+            <element signature="e#39015#39016#0" expanded="false" />
+            <element signature="e#39129#39130#0" expanded="false" />
+            <element signature="e#39166#39167#0" expanded="false" />
+            <element signature="e#39514#39515#0" expanded="false" />
+            <element signature="e#39544#39545#0" expanded="false" />
+            <element signature="e#39681#39682#0" expanded="false" />
+            <element signature="e#39733#39734#0" expanded="false" />
+            <element signature="e#40075#40076#0" expanded="false" />
+            <element signature="e#40148#40149#0" expanded="false" />
+            <element signature="e#48983#48984#0" expanded="false" />
+            <element signature="e#49035#49036#0" expanded="false" />
+            <element signature="e#52431#52432#0" expanded="false" />
+            <element signature="e#52461#52462#0" expanded="false" />
+            <element signature="e#55061#55062#0" expanded="false" />
+            <element signature="e#55108#55109#0" expanded="false" />
+            <element signature="e#55966#55967#0" expanded="false" />
+            <element signature="e#56005#56006#0" expanded="false" />
+            <element signature="e#67446#67447#0" expanded="false" />
+            <element signature="e#67474#67475#0" expanded="false" />
+            <element signature="e#68254#68255#0" expanded="false" />
+            <element signature="e#68281#68282#0" expanded="false" />
+            <element signature="e#78226#78227#0" expanded="false" />
+            <element signature="e#78267#78268#0" expanded="false" />
+            <element signature="e#82550#82551#0" expanded="false" />
+            <element signature="e#82577#82578#0" expanded="false" />
+            <element signature="e#84275#84276#0" expanded="false" />
+            <element signature="e#84302#84303#0" expanded="false" />
+            <element signature="e#85757#85758#0" expanded="false" />
+            <element signature="e#85811#85812#0" expanded="false" />
+            <element signature="e#92856#92857#0" expanded="false" />
+            <element signature="e#92907#92908#0" expanded="false" />
+            <element signature="e#99266#99267#0" expanded="false" />
+            <element signature="e#99318#99319#0" expanded="false" />
+            <element signature="e#99488#99489#0" expanded="false" />
+            <element signature="e#99542#99543#0" expanded="false" />
+            <element signature="e#107363#107364#0" expanded="false" />
+            <element signature="e#107391#107392#0" expanded="false" />
+            <element signature="e#108766#108767#0" expanded="false" />
+            <element signature="e#108794#108795#0" expanded="false" />
+            <element signature="e#111490#111491#0" expanded="false" />
+            <element signature="e#111518#111519#0" expanded="false" />
+            <element signature="e#112748#112749#0" expanded="false" />
+            <element signature="e#112776#112777#0" expanded="false" />
+            <element signature="e#117258#117259#0" expanded="false" />
+            <element signature="e#117282#117283#0" expanded="false" />
+            <element signature="e#121787#121788#0" expanded="false" />
+            <element signature="e#121814#121815#0" expanded="false" />
+            <element signature="e#133758#133759#0" expanded="false" />
+            <element signature="e#133795#133796#0" expanded="false" />
+            <element signature="e#138032#138033#0" expanded="false" />
+            <element signature="e#138089#138090#0" expanded="false" />
+            <element signature="e#138425#138426#0" expanded="false" />
+            <element signature="e#138482#138483#0" expanded="false" />
+            <element signature="e#138784#138785#0" expanded="false" />
+            <element signature="e#138822#138823#0" expanded="false" />
+            <element signature="e#140695#140696#0" expanded="false" />
+            <element signature="e#140722#140723#0" expanded="false" />
+            <element signature="e#142424#142425#0" expanded="false" />
+            <element signature="e#142465#142466#0" expanded="false" />
+            <element signature="e#142659#142660#0" expanded="false" />
+            <element signature="e#142704#142705#0" expanded="false" />
+            <element signature="e#144414#144415#0" expanded="false" />
+            <element signature="e#144450#144451#0" expanded="false" />
+            <element signature="e#151513#151514#0" expanded="false" />
+            <element signature="e#151548#151549#0" expanded="false" />
+            <element signature="e#154871#154872#0" expanded="false" />
+            <element signature="e#154917#154918#0" expanded="false" />
+            <element signature="e#156672#156673#0" expanded="false" />
+            <element signature="e#156726#156727#0" expanded="false" />
+            <element signature="e#178899#178900#0" expanded="false" />
+            <element signature="e#178947#178948#0" expanded="false" />
+            <element signature="e#180755#180756#0" expanded="false" />
+            <element signature="e#180801#180802#0" expanded="false" />
+            <element signature="e#196008#196009#0" expanded="false" />
+            <element signature="e#196035#196036#0" expanded="false" />
+            <element signature="e#202194#202195#0" expanded="false" />
+            <element signature="e#202221#202222#0" expanded="false" />
+            <element signature="e#205912#205913#0" expanded="false" />
+            <element signature="e#205944#205945#0" expanded="false" />
+            <element signature="e#206123#206124#0" expanded="false" />
+            <element signature="e#206156#206157#0" expanded="false" />
+            <element signature="e#206720#206721#0" expanded="false" />
+            <element signature="e#206766#206767#0" expanded="false" />
+            <element signature="e#208671#208672#0" expanded="false" />
+            <element signature="e#208700#208701#0" expanded="false" />
+            <element signature="e#210420#210421#0" expanded="false" />
+            <element signature="e#210444#210445#0" expanded="false" />
+            <element signature="e#212615#212616#0" expanded="false" />
+            <element signature="e#212643#212644#0" expanded="false" />
+            <element signature="e#222590#222591#0" expanded="false" />
+            <element signature="e#222623#222624#0" expanded="false" />
+            <element signature="e#224858#224859#0" expanded="false" />
+            <element signature="e#224900#224901#0" expanded="false" />
+            <element signature="e#225492#225493#0" expanded="false" />
+            <element signature="e#225521#225522#0" expanded="false" />
+            <element signature="e#225561#225562#0" expanded="false" />
+            <element signature="e#225595#225596#0" expanded="false" />
+            <element signature="e#232061#232062#0" expanded="false" />
+            <element signature="e#232120#232121#0" expanded="false" />
+            <element signature="e#233529#233530#0" expanded="false" />
+            <element signature="e#233584#233585#0" expanded="false" />
+            <element signature="e#234727#234728#0" expanded="false" />
+            <element signature="e#234754#234755#0" expanded="false" />
+            <element signature="e#246717#246718#0" expanded="false" />
+            <element signature="e#246747#246748#0" expanded="false" />
+            <element signature="e#261243#261244#0" expanded="false" />
+            <element signature="e#261309#261310#0" expanded="false" />
+            <element signature="e#261778#261779#0" expanded="false" />
+            <element signature="e#261810#261811#0" expanded="false" />
+            <element signature="e#270644#270645#0" expanded="false" />
+            <element signature="e#270675#270676#0" expanded="false" />
+            <element signature="e#277465#277466#0" expanded="false" />
+            <element signature="e#277522#277523#0" expanded="false" />
+            <element signature="e#277796#277797#0" expanded="false" />
+            <element signature="e#277841#277842#0" expanded="false" />
+            <element signature="e#278494#278495#0" expanded="false" />
+            <element signature="e#278538#278539#0" expanded="false" />
+            <element signature="e#278605#278606#0" expanded="false" />
+            <element signature="e#278666#278667#0" expanded="false" />
+            <element signature="e#279380#279381#0" expanded="false" />
+            <element signature="e#279430#279431#0" expanded="false" />
+            <element signature="e#279842#279843#0" expanded="false" />
+            <element signature="e#279903#279904#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/ProfileActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="83" column="45" selection-start-line="83" selection-start-column="45" selection-end-line="83" selection-end-column="45" />
-          <folding>
-            <element signature="method#selectImage#0;class#ProfileActivity#0" expanded="false" />
-            <element signature="method#galleryIntent#0;class#ProfileActivity#0" expanded="false" />
-            <element signature="method#onRequestPermissionsResult#0;class#ProfileActivity#0" expanded="false" />
-            <element signature="method#onActivityResult#0;class#ProfileActivity#0" expanded="false" />
-            <element signature="method#onSelectFromGalleryResult#0;class#ProfileActivity#0" expanded="false" />
-            <element signature="class#uploadImageAsync#0;class#ProfileActivity#0" expanded="false" />
-            <element signature="method#doInBackground#0;class#uploadImageAsync#0;class#ProfileActivity#0" expanded="false" />
-            <element signature="method#onPostExecute#0;class#uploadImageAsync#0;class#ProfileActivity#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/model/MusicianModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1675">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/adapter/ListAddMusicianToGroupAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="53" column="8" selection-start-line="53" selection-start-column="8" selection-end-line="53" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/model/MResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.265625">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/adapter/ListViewRemoveAnggotaAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="29" selection-start-line="22" selection-start-column="29" selection-end-line="22" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1000#1001#0" expanded="true" />
-            <element signature="e#1049#1050#0" expanded="true" />
-            <element signature="e#1106#1107#0" expanded="true" />
-            <element signature="e#1162#1163#0" expanded="true" />
-            <element signature="e#1219#1220#0" expanded="true" />
-            <element signature="e#1283#1284#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_add_musician_to_group.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.55">
-          <caret line="11" column="20" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_remove_musician_from_group.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.6363635">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/AddMusicianToGroupActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="4" selection-start-line="30" selection-start-column="4" selection-end-line="31" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/model/Position.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31733334">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/model/PositionResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36266667">
-          <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/model/MusicianSaldoResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31733334">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/model/GigOfferMusicianResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/model/Response.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22666667">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/util/BuildUrl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.34605598">
+          <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/util/StaticString.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/model/ResponseMusician.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.21628499">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/util/StaticFunction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="84" selection-start-line="38" selection-start-column="84" selection-end-line="38" selection-end-column="84" />
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/GigMoneyActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="26" column="16" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/adapter/ListSearchResultAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/SearchResultActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/adapter/ListOnRequestBookingAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="4.259259">
+          <caret line="110" column="58" selection-start-line="110" selection-start-column="58" selection-end-line="110" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_musician_bank.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.39107612">
+          <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/fragment/CompletedBookingListFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.83112586">
+          <caret line="97" column="21" selection-start-line="97" selection-start-column="21" selection-end-line="97" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/fragment/OnProccessBookingListFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17549668">
+          <caret line="127" column="0" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/MusicianBankActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9735099">
+          <caret line="86" column="60" selection-start-line="86" selection-start-column="60" selection-end-line="86" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/fragment/RequestBookingListFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.8774834">
+          <caret line="40" column="13" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/AccountActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.0364238">
+          <caret line="176" column="56" selection-start-line="176" selection-start-column="56" selection-end-line="176" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/BookMusicianActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.86754966">
+          <caret line="129" column="83" selection-start-line="129" selection-start-column="83" selection-end-line="129" selection-end-column="83" />
+          <folding>
+            <element signature="e#6070#6383#0" expanded="false" />
+            <element signature="e#6382#6383#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/BookingDetailsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.28807947">
+          <caret line="137" column="41" selection-start-line="137" selection-start-column="41" selection-end-line="137" selection-end-column="41" />
+          <folding>
+            <element signature="e#8683#8994#0" expanded="false" />
+            <element signature="e#8993#8994#0" expanded="false" />
+            <element signature="e#9047#10627#0" expanded="false" />
+            <element signature="e#10626#10627#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_booking_details.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.39676112">
+          <caret line="237" column="49" selection-start-line="237" selection-start-column="49" selection-end-line="237" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values-in/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5731132">
+          <caret line="62" column="68" selection-start-line="62" selection-start-column="68" selection-end-line="62" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9198113">
+          <caret line="65" column="4" selection-start-line="65" selection-start-column="4" selection-end-line="65" selection-end-column="79" />
           <folding />
         </state>
       </provider>
@@ -2618,23 +3066,31 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/model/ServiceGighub.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="131" column="43" selection-start-line="131" selection-start-column="43" selection-end-line="131" selection-end-column="43" />
+          <caret line="138" column="77" selection-start-line="138" selection-start-column="77" selection-end-line="138" selection-end-column="77" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/AddPositionMusicianActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/fragment/MusicianProfileFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="126" column="47" selection-start-line="122" selection-start-column="24" selection-end-line="126" selection-end-column="47" />
+          <caret line="140" column="0" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_remove_anggota_musician.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/fragment/DiscoverMusicianFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.4727273">
-          <caret line="40" column="16" selection-start-line="40" selection-start-column="16" selection-end-line="40" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="404" column="0" selection-start-line="404" selection-start-column="0" selection-end-line="404" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_withdrawal.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.5454545">
+          <caret line="28" column="8" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="8" />
           <folding />
         </state>
       </provider>
@@ -2642,41 +3098,29 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/GroupBandActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/ProfileActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.78401726">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="488" column="24" selection-start-line="488" selection-start-column="24" selection-end-line="489" selection-end-column="46" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/RemoveMemberMusicianActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/util/StaticString.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="48" column="56" selection-start-line="48" selection-start-column="56" selection-end-line="48" selection-end-column="56" />
-          <folding>
-            <element signature="e#1876#3245#0" expanded="true" />
-            <element signature="e#2123#2139#0" expanded="true" />
-            <element signature="e#3244#3245#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/GroupBandProfileActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="127" column="72" selection-start-line="127" selection-start-column="72" selection-end-line="127" selection-end-column="72" />
+          <caret line="7" column="67" selection-start-line="7" selection-start-column="67" selection-end-line="7" selection-end-column="67" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/RemoveMusicianFromGroupActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/gighub/app/ui/activity/WithdrawalActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.38444924">
-          <caret line="69" column="29" selection-start-line="69" selection-start-column="29" selection-end-line="69" selection-end-column="29" />
+        <state vertical-scroll-proportion="0.52284265">
+          <caret line="100" column="0" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
           <folding>
-            <element signature="e#1947#3655#0" expanded="true" />
-            <element signature="e#3654#3655#0" expanded="true" />
+            <element signature="e#2916#3064#0" expanded="true" />
+            <element signature="e#3063#3064#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -50,7 +50,8 @@
             android:id="@+id/btn_upload_photo_activityprofile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_border2"
+            android:textColor="@color/colorAccent"
+            android:background="@drawable/button_border_white"
             android:text="Upload Photo"/>
         <TextView
             android:layout_width="wrap_content"
@@ -109,6 +110,7 @@
                 android:id="@+id/et_harga_sewa_activityprofile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
                 android:hint="Price" />
         </android.support.design.widget.TextInputLayout>
 
@@ -121,6 +123,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Phone Number"
+                android:inputType="number"
                 android:text=""/>
         </android.support.design.widget.TextInputLayout>
 
@@ -163,7 +166,8 @@
             android:layout_height="wrap_content">
             <Button
                 android:id="@+id/btn_load_bank_activityprofile"
-                android:background="@drawable/button_border2"
+                android:textColor="@color/colorAccent"
+                android:background="@drawable/button_border_white"
                 android:text="Edit Bank"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -230,7 +234,8 @@
             android:id="@+id/btn_saveinfo_activityprofile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_border2"
+            android:textColor="@color/colorAccent"
+            android:background="@drawable/button_border_white"
             android:text="Save"/>
     </LinearLayout>
     <LinearLayout
@@ -282,7 +287,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/button_border2"
+            android:textColor="@color/colorAccent"
+            android:background="@drawable/button_border_white"
             android:text="Save"/>
     </LinearLayout>
 </LinearLayout>

@@ -10,7 +10,7 @@
     <string name="discover">DISCOVER</string>
     <string name="are_you_manager">Are you manager or musician?</string>
     <string name="join">JOIN</string>
-    <string name="already_have">Already have an Account?</string>
+    <string name="already_have">Already have an account?</string>
     <string name="sign_in"> Sign In</string>
     <string name="create_a_gighub">Create a GigHub Account</string>
     <string name="i_agree">I agree to terms and conditions</string>
@@ -56,4 +56,12 @@
     <string name="password">Password</string>
     <string name="account">Account</string>
     <string name="booking_list">Booking List</string>
+    <string name="you_must_be_logged">You Must be logged in as Organizer</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="create_gig">Create Gig</string>
+    <string name="photo_profile_updated">Photo profile has been updated</string>
+    <string name="failed_try_again">Failed, please try again and check your internet connection</string>
+    <string name="available_balance">Available balance</string>
+    <string name="the_amount_of_withdrawals">The amount of withdrawals</string>
 </resources>

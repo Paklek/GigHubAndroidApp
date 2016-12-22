@@ -43,6 +43,7 @@ public class AccountActivity extends AppCompatActivity {
     private List<Genre> mMusicianGenres;
     private List<MusicianSaldo> musicianSaldos;
     private Bank mBank;
+    private int mMusicianId, mOrganizerId;
 
     public static final String PESANLOG ="pesanlog";
 
@@ -55,6 +56,7 @@ public class AccountActivity extends AppCompatActivity {
         mMusicianGenres = new ArrayList<Genre>();
         musicianSaldos = new ArrayList<MusicianSaldo>();
         mContext = getApplicationContext();
+        mMusicianId = mSession.getMusicianDetails().getId();
 
 
 
@@ -166,6 +168,13 @@ public class AccountActivity extends AppCompatActivity {
             mButtonProfile.setVisibility(mViewButtonProfile.GONE);
             mViewButtonGigMoney.setVisibility(mViewButtonGigMoney.GONE);
             mViewButtonManager.setVisibility(mViewButtonManager.GONE);
+        }
+        if (mSession.checkUserType().equals("org")){
+            mViewButtonGigMoney.setVisibility(View.GONE);
+            mViewButtonManager.setVisibility(View.GONE);
+        }
+        else if(mSession.checkUserType().equals("msc")){
+            mButtonGigMoney.setVisibility(View.VISIBLE);
         }
 
         mButtonLogout.setOnClickListener(new View.OnClickListener() {

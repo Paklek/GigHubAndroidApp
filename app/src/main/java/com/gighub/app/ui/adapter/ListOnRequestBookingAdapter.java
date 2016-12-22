@@ -103,25 +103,25 @@ public class ListOnRequestBookingAdapter extends BaseAdapter {
         if(mPenyewaan.get(position).getType_sewa().equals("hiremusisi")){
             mStatusBook = "Book Musician | Waiting";
             holder.mTextViewStatusBook.setText(mStatusBook);
-            holder.mTextViewStatusBook.setTextColor(holder.mTextViewStatusBook.getResources().getColor(R.color.primaryButton2));
+            holder.mTextViewStatusBook.setTextColor(holder.mTextViewStatusBook.getResources().getColor(R.color.primaryOrange2));
         }
 
         else if(mPenyewaan.get(position).getType_sewa().equals("hireband")){
             mStatusBook = "Book Group | Waiting";
             holder.mTextViewStatusBook.setText(mStatusBook);
-            holder.mTextViewStatusBook.setTextColor(holder.mTextViewStatusBook.getResources().getColor(R.color.primaryButton2));
+            holder.mTextViewStatusBook.setTextColor(holder.mTextViewStatusBook.getResources().getColor(R.color.primaryOrange2));
 
         }
         else if(mPenyewaan.get(position).getType_sewa().equals("musisihire")){
             mStatusBook = "Gig Offer From Musician";
             holder.mTextViewStatusBook.setText(mStatusBook);
-            holder.mTextViewStatusBook.setTextColor(holder.mTextViewStatusBook.getResources().getColor(R.color.primaryButton2));
+            holder.mTextViewStatusBook.setTextColor(holder.mTextViewStatusBook.getResources().getColor(R.color.primaryOrange2));
 
         }
         else if(mPenyewaan.get(position).getType_sewa().equals("bandhire")){
             mStatusBook = "Gig Offer From Group";
             holder.mTextViewStatusBook.setText(mStatusBook);
-            holder.mTextViewStatusBook.setTextColor(holder.mTextViewStatusBook.getResources().getColor(R.color.primaryButton2));
+            holder.mTextViewStatusBook.setTextColor(holder.mTextViewStatusBook.getResources().getColor(R.color.primaryOrange2));
         }
 
 

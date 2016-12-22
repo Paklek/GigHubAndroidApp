@@ -3,6 +3,7 @@ package com.gighub.app.ui.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -57,10 +58,11 @@ public class MusicianBankActivity extends AppCompatActivity {
 
         mButtonUpdateBank = (Button)findViewById(R.id.btn_update_bank_musicianbank);
 
-        mEditTextNoRek.setText(bank.get(0).getNo_rek());
-        mEditTextAtasNama.setText(bank.get(0).getAtas_nama());
-        mEditTextNamaBank.setText(bank.get(0).getNama_bank());
-
+        if(bank.size()!=0) {
+            mEditTextNoRek.setText(bank.get(0).getNo_rek());
+            mEditTextAtasNama.setText(bank.get(0).getAtas_nama());
+            mEditTextNamaBank.setText(bank.get(0).getNama_bank());
+        }
         mButtonUpdateBank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,6 +84,7 @@ public class MusicianBankActivity extends AppCompatActivity {
                         intent1.putExtra("genres",new Gson().toJson(mGenreList));
 
                         Toast.makeText(MusicianBankActivity.this,response.body().getMessage(),Toast.LENGTH_SHORT).show();
+                        Log.d("updatebank",response.code()+"");
 
                         startActivity(intent1);
                         finish();

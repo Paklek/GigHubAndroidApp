@@ -235,6 +235,7 @@ android:layout_margin="7dp">
                     android:textColor="@color/primaryDark"
                     android:text="Hours"/>
                 <TextView
+                    android:id="@+id/tv_hour_bookdetails"
                     android:layout_marginTop="10dp"
                     android:layout_row="4"
                     android:layout_column="1"
@@ -261,7 +262,7 @@ android:layout_margin="7dp">
         </LinearLayout>
 
         <Button
-            android:background="@drawable/button_border2"
+            android:background="@drawable/button_border_black"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="20dp"
             android:id="@+id/btn_konfirmasi_pembayaran_bookingdetails"
@@ -270,7 +271,7 @@ android:layout_margin="7dp">
             android:text="Confirm Payment"/>
 
         <Button
-            android:background="@drawable/button_border2"
+            android:background="@drawable/button_border_black"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="20dp"
             android:id="@+id/btn_konfirmasi_permintaan_bookingdetails"

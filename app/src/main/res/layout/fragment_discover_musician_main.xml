@@ -58,26 +58,27 @@
             android:layout_height="20dp"
             android:layout_gravity="fill_horizontal"/>
 
-        <ImageView
-            android:layout_row="5"
-            android:layout_column="0"
-            android:layout_rowSpan="2"
-            android:src="@android:drawable/ic_menu_mapmode"
-            android:layout_gravity="center"
-            />
-        <TextView
-            android:layout_row="5"
-            android:layout_column="1"
-            android:text="Date : "
-            />
-        <Button
-            android:id="@+id/btn_date_search"
-            android:layout_gravity="center"
-            android:layout_row="6"
-            android:layout_column="1"
-            android:layout_width="wrap_content"
-            android:text="Date Time"
-            android:background="@drawable/button_border2" />
+        <!--<ImageView-->
+            <!--android:layout_row="5"-->
+            <!--android:layout_column="0"-->
+            <!--android:layout_rowSpan="2"-->
+            <!--android:src="@android:drawable/ic_menu_mapmode"-->
+            <!--android:layout_gravity="center"-->
+            <!--/>-->
+        <!--<TextView-->
+            <!--android:layout_row="5"-->
+            <!--android:layout_column="1"-->
+            <!--android:text="Date : "-->
+            <!--/>-->
+        <!--<Button-->
+            <!--android:id="@+id/btn_date_search"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_row="6"-->
+            <!--android:layout_column="1"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:text="Date Time"-->
+            <!--android:textColor="@color/colorAccent"-->
+            <!--android:background="@drawable/button_border_white" />-->
 
         <android.support.v4.widget.Space
             android:layout_row="7"
@@ -90,7 +91,7 @@
             android:layout_row="8"
             android:layout_column="0"
             android:layout_rowSpan="2"
-            android:src="@android:drawable/ic_menu_mapmode"
+            android:src="@android:drawable/ic_menu_view"
             android:layout_gravity="center"
             />
         <TextView
@@ -136,7 +137,7 @@
             android:layout_row="10"
             android:layout_column="0"
             android:layout_rowSpan="2"
-            android:src="@android:drawable/ic_menu_mapmode"
+            android:src="@android:drawable/ic_media_play"
             android:layout_gravity="center"
             />
         <TextView
@@ -165,8 +166,9 @@
             android:layout_columnSpan="2"
             android:layout_gravity="center_vertical"
             android:layout_width="match_parent"
+            android:textColor="@color/colorAccent"
             android:text="Search"
-            android:background="@drawable/button_border2"
+            android:background="@drawable/button_border_white"
             android:layout_column="0" />
 
     </GridLayout>

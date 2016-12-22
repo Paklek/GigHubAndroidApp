@@ -105,7 +105,7 @@ public class BookMusicianActivity extends AppCompatActivity {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(getLayoutInflater().getContext(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        mButtonTanggalMulai.setText(year+"-"+monthOfYear+"-"+dayOfMonth);
+                        mButtonTanggalMulai.setText(year+"-"+(monthOfYear+1)+"-"+dayOfMonth);
                     }
                 },mYear,mMonth,mDay);
                 datePickerDialog.show();
@@ -118,7 +118,7 @@ public class BookMusicianActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final Calendar c = Calendar.getInstance();
-                mHour = c.get(Calendar.HOUR);
+                mHour = c.get(Calendar.HOUR_OF_DAY);
                 mMinute = c.get(Calendar.MINUTE);
 
 
@@ -150,7 +150,7 @@ public class BookMusicianActivity extends AppCompatActivity {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(getLayoutInflater().getContext(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        mButtonTanggalSelesai.setText(year+"-"+monthOfYear+"-"+dayOfMonth);
+                        mButtonTanggalSelesai.setText(year+"-"+(monthOfYear+1)+"-"+dayOfMonth);
 
                     }
                 },mYear,mMonth,mDay);
@@ -164,7 +164,7 @@ public class BookMusicianActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final Calendar c = Calendar.getInstance();
-                mHour = c.get(Calendar.HOUR);
+                mHour = c.get(Calendar.HOUR_OF_DAY);
                 mMinute = c.get(Calendar.MINUTE);
 
                 TimePickerDialog timePickerDialog = new TimePickerDialog(getLayoutInflater().getContext(), new TimePickerDialog.OnTimeSetListener() {
@@ -174,6 +174,7 @@ public class BookMusicianActivity extends AppCompatActivity {
                         mButtonWaktuSelesai.setText(waktu+":00");
                     }
                 },mHour,mMinute, android.text.format.DateFormat.is24HourFormat(getApplicationContext()));
+
 
                 timePickerDialog.show();
             }
