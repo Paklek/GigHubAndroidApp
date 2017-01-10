@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.gighub.app.ui.fragment.DialogGenreFragment">
+
+    <RadioGroup
+        android:id="@+id/rg_position"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+      <!--  <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_position"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scrollbars="vertical">
+        </android.support.v7.widget.RecyclerView>-->
+    </RadioGroup>
+   <!-- <Button
+        android:id="@+id/btn_submit_position_select"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/submit"
+        android:textColor="@color/colorAccent"
+        android:background="@drawable/button_border_white"/>-->
+</LinearLayout>

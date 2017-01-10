@@ -179,8 +179,29 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_create_band:
 ////                // User chose the "Favorite" action, mark the current item
 ////                // as a favorite...
-                Intent intent2 = new Intent(getApplicationContext(),CreateBandActivity.class);
-                startActivity(intent2);
+
+                getGenreForCreateBand();
+//
+//                BuildUrl buildUrl = new BuildUrl();
+//                buildUrl.buildBaseUrl();
+//
+//                buildUrl.serviceGighub.loadMusicianGenre().enqueue(new Callback<ResponseCallGenre>() {
+//                    @Override
+//                    public void onResponse(Call<ResponseCallGenre> call, Response<ResponseCallGenre> response) {
+//                        if(response.code()==200){
+//                            Intent intent2 = new Intent(getApplicationContext(),CreateBandActivity.class);
+//                            intent2.putExtra("genres",new Gson().toJson(response.body().getGenreList()));
+//                            startActivity(intent2);
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<ResponseCallGenre> call, Throwable t) {
+//
+//                    }
+//                });
+
+
                 return true;
 
             case R.id.action_bands:
@@ -407,6 +428,26 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void getGenreForCreateBand(){
+        BuildUrl buildUrl = new BuildUrl();
+        buildUrl.buildBaseUrl();
+
+        buildUrl.serviceGighub.loadMusicianGenre().enqueue(new Callback<ResponseCallGenre>() {
+            @Override
+            public void onResponse(Call<ResponseCallGenre> call, Response<ResponseCallGenre> response) {
+                if(response.code()==200){
+                    Intent intent2 = new Intent(getApplicationContext(),CreateBandActivity.class);
+                    intent2.putExtra("genres",new Gson().toJson(response.body().getGenreList()));
+                    startActivity(intent2);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseCallGenre> call, Throwable t) {
+
+            }
+        });
+    }
 
 
 

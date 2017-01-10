@@ -70,6 +70,8 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
 
     public final static int REQCODE = 1000;
 
+    List<Genre> genreList = new ArrayList<>();
+
     private String mListKota[][]={
             {
                 "-"
@@ -375,16 +377,16 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
     {
 
     }
-    void showDialog(){
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        DialogFragment dialogFragment = DialogGenreFragment.newInstance("isi");
-    }
+//    void showDialog(){
+//        FragmentTransaction ft = getFragmentManager().beginTransaction();
+//        DialogFragment dialogFragment = DialogGenreFragment.newInstance("isi");
+//    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==DiscoverMusicianFragment.REQCODE){
-            List<Genre> genreList = new ArrayList<>();
+
             Type typeGenreList = new TypeToken<List<Genre>>(){}.getType();
             genreList = new Gson().fromJson(data.getStringExtra("kirim"),typeGenreList);
             String genres = "";

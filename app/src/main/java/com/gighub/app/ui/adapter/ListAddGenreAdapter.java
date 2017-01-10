@@ -52,6 +52,10 @@ public class ListAddGenreAdapter extends BaseAdapter {
         mCheckedStates = new SparseBooleanArray(mGenreList.size());
     }
 
+    /**
+     * lorem ipsum kolor si polan
+     */
+
     @Override
     public int getCount() {
         return mGenreList.size();

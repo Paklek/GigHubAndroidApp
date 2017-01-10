@@ -5,7 +5,7 @@ package com.gighub.app.util;
  */
 public class StaticString {
 
-    public static final String API_BASE_URL = "http://192.168.0.101/Gighub.id-master/public/";
+    public static final String API_BASE_URL = "http://192.168.0.103/Gighub.id-master/public/";
     public static final String ROUTE_ALL_MUSICIANS = "mobile/musicians/1000";
     public static final String ROUTE_ALL_GIGS = "mobile/gigs/1000";
     public static final String ROUTE_ALL_GENRES = "mobile/genres/1000";

@@ -52,14 +52,14 @@ public class DialogGenreFragment extends DialogFragment {
         // Required empty public constructor
     }
 
-    static DialogGenreFragment newInstance(String isi){
-        DialogGenreFragment dialogGenreFragment = new DialogGenreFragment();
-        Bundle args = new Bundle();
-        args.putString("isi",isi);
-        dialogGenreFragment.setArguments(args);
-
-        return dialogGenreFragment;
-    }
+//    static DialogGenreFragment newInstance(String isi){
+//        DialogGenreFragment dialogGenreFragment = new DialogGenreFragment();
+//        Bundle args = new Bundle();
+//        args.putString("isi",isi);
+//        dialogGenreFragment.setArguments(args);
+//
+//        return dialogGenreFragment;
+//    }
 
 
     @Override
@@ -141,10 +141,10 @@ public class DialogGenreFragment extends DialogFragment {
         return view;
     }
 
-    void showDialog(){
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        DialogFragment dialogFragment = DialogGenreFragment.newInstance("isi");
-    }
+//    void showDialog(){
+//        FragmentTransaction ft = getFragmentManager().beginTransaction();
+//        DialogFragment dialogFragment = DialogGenreFragment.newInstance("isi");
+//    }
 
     @NonNull
     @Override

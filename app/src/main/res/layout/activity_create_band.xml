@@ -40,13 +40,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Genres"/>
+
+
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
         android:id="@+id/ll_list_genre"
         android:layout_marginBottom="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
+        <GridView
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/lv_genres_createband"
+            android:layout_marginBottom="20dp"
+            android:numColumns="2"></GridView>
 
     </LinearLayout>
 
@@ -98,11 +106,18 @@
     </android.support.design.widget.TextInputLayout>
 
 
-    <Spinner
-        android:id="@+id/spinner_position_createbandactivity"
+    <!--<Spinner-->
+        <!--android:id="@+id/spinner_position_createbandactivity"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/edittext1"></Spinner>-->
+
+    <EditText
+        android:id="@+id/et_selectposition_createband"
+        android:focusable="false"
+        android:text="Select a Position"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/edittext1"></Spinner>
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/btn_create_band_createband"
