@@ -137,4 +137,7 @@ public interface ServiceGighub {
 
     @POST(StaticString.ROUTE_WITHDRAW)
     Call<Response> sendWithdrawData (@Body Map<String, String> withdrawData);
+
+    @POST(StaticString.ROUTE_LOGOUT)
+    Call<Response> sendLogoutData (@Body Map<String, String> logoutData);
 }

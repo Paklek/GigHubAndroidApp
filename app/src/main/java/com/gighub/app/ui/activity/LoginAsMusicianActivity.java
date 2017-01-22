@@ -18,6 +18,7 @@ import com.gighub.app.model.ServiceGighub;
 import com.gighub.app.util.BuildUrl;
 import com.gighub.app.util.SessionManager;
 import com.gighub.app.util.StaticString;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
@@ -68,6 +69,7 @@ public class LoginAsMusicianActivity extends AppCompatActivity {
 //        --------------
         loginData.put("email",mEditTextEmailLoginMusician.getText().toString());
         loginData.put("password",mEditTextPasswordLoginMusician.getText().toString());
+        loginData.put("firebase", FirebaseInstanceId.getInstance().getToken());
 
         buildUrl.serviceGighub.sendLoginDataMusician(loginData).enqueue(new Callback<ResponseMusician>() {
             @Override

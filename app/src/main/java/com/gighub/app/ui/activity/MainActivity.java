@@ -279,12 +279,17 @@ public class MainActivity extends AppCompatActivity {
                     BuildUrl buildUrl = new BuildUrl();
                     buildUrl.buildBaseUrl();
 
-                    musicianGenreData.put("user_id",mMusicianId);
+                    musicianGenreData.put("user_id",Integer.toString(mSession.getMusicianDetails().getId()));
                     buildUrl.serviceGighub.sendGenreMusicianData(musicianGenreData).enqueue(new Callback<MusicianGenresResponse>() {
                         @Override
                         public void onResponse(Call<MusicianGenresResponse> call, Response<MusicianGenresResponse> response) {
-                            intent7.putExtra("musiciangenres",new Gson().toJson(response.body().getMusicianGenres()));
-                            startActivity(intent7);
+                            if(response.code()==200){
+                                intent7.putExtra("musiciangenres",new Gson().toJson(response.body().getMusicianGenres()));
+                                startActivity(intent7);
+                            }
+                            else {
+                                Toast.makeText(MainActivity.this,""+ response.code()+" "+response.message(), Toast.LENGTH_SHORT).show();
+                            }
                         }
 
                         @Override

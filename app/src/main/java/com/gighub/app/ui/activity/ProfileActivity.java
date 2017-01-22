@@ -175,8 +175,8 @@ public class ProfileActivity extends AppCompatActivity {
                 mEditTextWebsiteURL.setVisibility(mViewEditTextWebsiteURL.GONE);
                 mEditTextUsernameSoundCloud.setVisibility(mViewEditTextUsernameSoundCloud.GONE);
                 mEditTextUsernameReverbnation.setVisibility(mViewEditTextUsernameReverbnation.GONE);
-                mImageViewPhoto.setVisibility(View.GONE);
-                mButtonUploadPhoto.setVisibility(View.GONE);
+//                mImageViewPhoto.setVisibility(View.GONE);
+//                mButtonUploadPhoto.setVisibility(View.GONE);
                 mLinearLayoutMusicianGenres.setVisibility(View.GONE);
                 mTextViewMusicianGenres.setVisibility(View.GONE);
                 mLinearLayoutBank.setVisibility(View.GONE);

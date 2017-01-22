@@ -14,16 +14,27 @@ import android.widget.TextView;
 
 import com.gighub.app.R;
 import com.gighub.app.model.DataObject;
+import com.gighub.app.model.DistanceGig;
 import com.gighub.app.model.Gig;
 import com.gighub.app.model.MusicianModel;
+import com.gighub.app.model.ResponseDistance;
 import com.gighub.app.model.UserModel;
 import com.gighub.app.ui.activity.GigActivity;
 import com.gighub.app.util.CloudinaryUrl;
 import com.gighub.app.util.SessionManager;
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by Paklek on 6/19/2016.
@@ -39,11 +50,12 @@ public class ListDiscoverGigAdapter extends RecyclerView.Adapter<ListDiscoverGig
     private int mPos;
     public static Context mContext;
 
-
+    private String myLat; // A poin 3
+    private String myLng;//
     public static class DataObjectHolder extends RecyclerView.ViewHolder
             implements View
             .OnClickListener {
-        TextView label_name, musicianDate, mTextViewNamaGig;
+        TextView label_name, musicianDate, mTextViewNamaGig, mTextViewDistance;
         ImageView mImageViewImageGig;
         GridLayout mGridLayout;
         FrameLayout frameGig;
@@ -51,6 +63,7 @@ public class ListDiscoverGigAdapter extends RecyclerView.Adapter<ListDiscoverGig
 
         public DataObjectHolder(View itemView) {
             super(itemView);
+            mTextViewDistance = (TextView)itemView.findViewById(R.id.gig_distance_discovergig);
             mImageViewImageGig = (ImageView)itemView.findViewById(R.id.img_img_gig_discovergig);
             mTextViewNamaGig = (TextView)itemView.findViewById(R.id.tv_namagig_discovergig);
             label_name = (TextView) itemView.findViewById(R.id.musician_name);
@@ -78,6 +91,8 @@ public class ListDiscoverGigAdapter extends RecyclerView.Adapter<ListDiscoverGig
 
     public ListDiscoverGigAdapter(List<Gig> data){
         mGig = data;
+        myLat = null;
+        myLng = null;
     }
 
     public List<Gig> getmGig() {
@@ -99,45 +114,53 @@ public class ListDiscoverGigAdapter extends RecyclerView.Adapter<ListDiscoverGig
 
         CloudinaryUrl cloudinaryUrl = new CloudinaryUrl();
         cloudinaryUrl.buildCloudinaryUrl();
-        if(mGig.get(position).getPhoto_gig()!=null && !mGig.get(position).getPhoto_gig().equals("")) {
-            Picasso.with(mContext).load(cloudinaryUrl.cloudinary.url().format("jpg").generate(mGig.get(position).getPhoto_gig())).into(holder.mImageViewImageGig);
+        final Gig item = mGig.get(position);
+        if(item.getPhoto_gig()!=null && !item.getPhoto_gig().equals("")) {
+            Picasso.with(mContext).load(cloudinaryUrl.cloudinary.url().format("jpg").generate(item.getPhoto_gig())).into(holder.mImageViewImageGig);
         }
 //        holder.mImageViewImageGig.
-        holder.mNamaGig = mGig.get(position).getNama_gig();
+        holder.mNamaGig = item.getNama_gig();
         mPos=position;
 
         holder.mTextViewNamaGig.setText(holder.mNamaGig);
-        holder.label_name.setText(mGig.get(position).getLokasi());
-        holder.musicianDate.setText(mGig.get(position).getTanggal_mulai());
+        holder.label_name.setText(item.getLokasi());
+        holder.musicianDate.setText(item.getTanggal_mulai());
         holder.frameGig.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, GigActivity.class);
-                intent.putExtra("gig_id",mGig.get(position).getId());
+                intent.putExtra("gig_id",item.getId());
                 intent.putExtra("nama_gig",holder.mNamaGig);
                 intent.putExtra("photo_gig",mGig.get(mPos).getPhoto_gig());
-                intent.putExtra("gig_id",mGig.get(position).getId());
-                intent.putExtra("tanggal_mulai",mGig.get(position).getTanggal_mulai());
-                intent.putExtra("tanggal_selesai",mGig.get(position).getTanggal_selesai());
-                intent.putExtra("deskripsi",mGig.get(position).getDeskripsi());
-                intent.putExtra("lokasi",mGig.get(position).getLokasi());
-                intent.putExtra("lokasi_detail",mGig.get(position).getDetail_lokasi());
-                intent.putExtra("lat",mGig.get(position).getLat());
-                intent.putExtra("lng",mGig.get(position).getLng());
-                intent.putExtra("user_id",mGig.get(position).getUser_id());
+                intent.putExtra("gig_id",item.getId());
+                intent.putExtra("tanggal_mulai",item.getTanggal_mulai());
+                intent.putExtra("tanggal_selesai",item.getTanggal_selesai());
+                intent.putExtra("deskripsi",item.getDeskripsi());
+                intent.putExtra("lokasi",item.getLokasi());
+                intent.putExtra("lokasi_detail",item.getDetail_lokasi());
+                intent.putExtra("lat",item.getLat());
+                intent.putExtra("lng",item.getLng());
+                intent.putExtra("user_id",item.getUser_id());
 
                 Log.d("photo",mGig.get(mPos).getPhoto_gig());
 
                 mContext.startActivity(intent);
             }
         });
+        if(myLng!=null && myLat!=null && item.getLat()!=null && item.getLng()!=null){
+            Log.d("Jarak",String.format("(my)%s %s,(item)%s %s",myLat,myLng,item.getLat(),item.getLng()));
 
+            Log.d("Jarak","sudah di panggil");
+            getDistance(holder,myLat,myLng,item.getLat(),item.getLng());
+        }else{
+            Log.d("Jarak","Belum di panggil");
+        }
         holder.mGridLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, GigActivity.class);
                 intent.putExtra("nama_gig",holder.mNamaGig);
-                intent.putExtra("gig_id",mGig.get(position).getId());
+                intent.putExtra("gig_id",item.getId());
                 mContext.startActivity(intent);
             }
         });
@@ -157,9 +180,60 @@ public class ListDiscoverGigAdapter extends RecyclerView.Adapter<ListDiscoverGig
     public int getItemCount() {
         return mGig.size();
     }
-
+    public void setMyLatLng(String lat,String lng){ // A point 2
+        this.myLat=lat;
+        this.myLng = lng;
+        notifyDataSetChanged();
+    }
     public interface MyClickListener {
         public void onItemClick(int position, View v);
     }
+    private void getDistance(final DataObjectHolder holder, String latAku, String lngAku, String latGig, String lngGig){
 
+        String url = "https://maps.googleapis.com/maps/";
+        Log.d("getDistance","ini ambil jarak");
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+// set your desired log level
+        logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
+
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+// add your other interceptors …
+
+// add logging as last interceptor
+        httpClient.addInterceptor(logging);  // <-- this is the important line!
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(httpClient.build())
+                .build();
+
+        DistanceGig service = retrofit.create(DistanceGig.class);
+        Log.d("Location",latAku + "," + lngAku+"-"+latGig + "," + lngGig);
+        Call<ResponseDistance> call = service.getDistanceDuration("metric", latAku + "," + lngAku,latGig + "," + lngGig, "driving");
+        call.enqueue(new Callback<ResponseDistance>() {
+            @Override
+            public void onResponse(Call<ResponseDistance> call, Response<ResponseDistance> response) {
+                if(response.isSuccessful()) {
+                    if (response.body() != null) {
+                        Log.d("Response", new Gson().toJson(response.body()));
+                        if (response.body().getRoutes().size() > 0) {
+                            Log.d("getDistance", "ini response :"+response.body().getRoutes());
+                            Log.d("Jarak", response.body().getRoutes().get(0).getLegs().get(0).getDistance().getText().toString());
+                            updateView(holder, response.body().getRoutes().get(0).getLegs().get(0).getDistance().getText().toString());
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseDistance> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void updateView(DataObjectHolder h, String s) {
+        h.mTextViewDistance.setText(s);
+    }
 }

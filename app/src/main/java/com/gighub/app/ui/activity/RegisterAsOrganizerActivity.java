@@ -14,6 +14,7 @@ import com.gighub.app.model.Response;
 import com.gighub.app.model.ServiceGighub;
 import com.gighub.app.util.BuildUrl;
 import com.gighub.app.util.SessionManager;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -65,6 +66,7 @@ public class RegisterAsOrganizerActivity extends AppCompatActivity {
         dataO.put("last_name",mEditTextLastNameRegisterOrg.getText().toString());
         dataO.put("email",mEditTextEmailRegisterOrg.getText().toString());
         dataO.put("password",mEditTextPasswordRegisterOrg.getText().toString());
+        dataO.put("firebase", FirebaseInstanceId.getInstance().getToken());
 
         buildUrl.serviceGighub.insertOrganizer(dataO).enqueue(new Callback<Response>() {
             @Override

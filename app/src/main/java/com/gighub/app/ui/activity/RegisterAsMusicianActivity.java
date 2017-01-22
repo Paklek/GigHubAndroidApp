@@ -14,6 +14,7 @@ import com.gighub.app.model.Response;
 import com.gighub.app.model.ServiceGighub;
 import com.gighub.app.util.BuildUrl;
 import com.gighub.app.util.SessionManager;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -66,6 +67,7 @@ public class RegisterAsMusicianActivity extends AppCompatActivity {
         dataM.put("name",mEditTextNameRegister.getText().toString());
         dataM.put("email",mEditTextEmailRegister.getText().toString());
         dataM.put("password",mEditTextPasswordRegister.getText().toString());
+        dataM.put("firebase", FirebaseInstanceId.getInstance().getToken());
 
         buildUrl.serviceGighub.insertMusician(dataM).enqueue(new Callback<Response>() {
             @Override

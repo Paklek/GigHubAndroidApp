@@ -187,12 +187,39 @@ public class AccountActivity extends AppCompatActivity {
 
     private void logout(){
         mSession = new SessionManager(getApplicationContext());
-        mSession.clearLoginSession();
-        Intent _intent = new Intent(getApplicationContext(),MainActivity.class);
-        _intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        Log.d(PESANLOG,"Logout Success");
-        Toast.makeText(AccountActivity.this,"Logout Success",Toast.LENGTH_LONG).show();
-        startActivity(_intent);
+
+        BuildUrl buildUrl = new BuildUrl();
+        buildUrl.buildBaseUrl();
+
+        Map<String, String> dataLogout = new HashMap<String, String>();
+
+        if(mSession.checkUserType().equals("msc")){
+            dataLogout.put("tipe_user","msc");
+            dataLogout.put("user_id",Integer.toString(mMusicianId));
+        }
+        else if(mSession.checkUserType().equals("org")){
+            dataLogout.put("tipe_user","org");
+            dataLogout.put("user_id",Integer.toString(mOrganizerId));
+
+        }
+        buildUrl.serviceGighub.sendLogoutData(dataLogout).enqueue(new Callback<com.gighub.app.model.Response>() {
+            @Override
+            public void onResponse(Call<com.gighub.app.model.Response> call, Response<com.gighub.app.model.Response> response) {
+                Intent _intent = new Intent(getApplicationContext(),MainActivity.class);
+                _intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                Log.d(PESANLOG,"Logout Success");
+                Toast.makeText(AccountActivity.this,"Logout Success",Toast.LENGTH_LONG).show();
+                startActivity(_intent);
+                mSession.clearLoginSession();
+            }
+
+            @Override
+            public void onFailure(Call<com.gighub.app.model.Response> call, Throwable t) {
+
+            }
+        });
+
+
 
     }
 }

@@ -17,6 +17,7 @@ import com.gighub.app.model.ResponseUser;
 import com.gighub.app.model.ServiceGighub;
 import com.gighub.app.util.BuildUrl;
 import com.gighub.app.util.SessionManager;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
@@ -65,6 +66,7 @@ public class LoginAsOrganizerActivity extends AppCompatActivity {
 
         loginData.put("email", mEditTextEmailLoginOrganizer.getText().toString());
         loginData.put("password", mEditTextPasswordLoginOrganizer.getText().toString());
+        loginData.put("firebase", FirebaseInstanceId.getInstance().getToken());
 
         buildUrl.serviceGighub.sendLoginDataOrganizer(loginData).enqueue(new Callback<ResponseUser>() {
             @Override

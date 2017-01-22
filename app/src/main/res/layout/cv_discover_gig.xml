@@ -35,6 +35,23 @@
                 android:textColor="@color/colorAccent"
                 android:textSize="30dp"
                 android:layout_gravity="center"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
+                android:gravity="end">
+                <TextView
+                    android:id="@+id/gig_distance_discovergig"
+                    android:textSize="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorAccent"
+                    android:text="0 Km" />
+            </LinearLayout>
         </FrameLayout>
 
         <GridLayout
@@ -62,16 +79,16 @@
                 android:layout_height="wrap_content"
                 android:text="The Black Adams"
                 android:layout_marginLeft="10dp"/>
-            <TextView
-                android:id="@+id/musician_distance"
-                android:layout_column="1"
-                android:layout_row="1"
-                android:layout_columnSpan="2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:text="1.2 KM"
-                />
+            <!--<TextView-->
+                <!--android:id="@+id/musician_distance"-->
+                <!--android:layout_column="1"-->
+                <!--android:layout_row="1"-->
+                <!--android:layout_columnSpan="2"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="right"-->
+                <!--android:text="1.2 KM"-->
+                <!--/>-->
             <TextView
                 android:id="@+id/musician_gig_date"
                 android:layout_column="1"
@@ -80,6 +97,8 @@
                 android:layout_height="wrap_content"
                 android:text="4 Maret 2016"
                 android:layout_marginLeft="10dp"/>
+
+
 
         </GridLayout>
     </android.support.v7.widget.LinearLayoutCompat>
