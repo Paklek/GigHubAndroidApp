@@ -36,4 +36,9 @@ public class LoginAsActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+//        overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
+    }
 }

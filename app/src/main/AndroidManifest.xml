@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -14,18 +14,17 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <service
-            android:name=".util.InstanceIdService">
+        <service android:name=".util.InstanceIdService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-        <service
-            android:name=".util.MessagingService">
+        <service android:name=".util.MessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -98,7 +97,8 @@
         <activity android:name=".ui.activity.AddPositionMusicianActivity" />
         <activity android:name=".ui.activity.RemoveMusicianFromGroupActivity" />
         <activity android:name=".ui.activity.RemoveMemberMusicianActivity" />
-        <activity android:name=".ui.activity.WithdrawalActivity"></activity>
+        <activity android:name=".ui.activity.WithdrawalActivity" />
+        <activity android:name=".ui.activity.YouTubeVideoActivity"></activity>
     </application>
 
 </manifest>

@@ -11,6 +11,7 @@ import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gighub.app.R;
 import com.gighub.app.model.DataObject;
@@ -18,15 +19,19 @@ import com.gighub.app.model.DistanceGig;
 import com.gighub.app.model.Gig;
 import com.gighub.app.model.MusicianModel;
 import com.gighub.app.model.ResponseDistance;
+import com.gighub.app.model.ResponseUser;
 import com.gighub.app.model.UserModel;
 import com.gighub.app.ui.activity.GigActivity;
+import com.gighub.app.util.BuildUrl;
 import com.gighub.app.util.CloudinaryUrl;
 import com.gighub.app.util.SessionManager;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -128,7 +133,7 @@ public class ListDiscoverGigAdapter extends RecyclerView.Adapter<ListDiscoverGig
         holder.frameGig.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, GigActivity.class);
+                final Intent intent = new Intent(mContext, GigActivity.class);
                 intent.putExtra("gig_id",item.getId());
                 intent.putExtra("nama_gig",holder.mNamaGig);
                 intent.putExtra("photo_gig",mGig.get(mPos).getPhoto_gig());
@@ -144,7 +149,27 @@ public class ListDiscoverGigAdapter extends RecyclerView.Adapter<ListDiscoverGig
 
                 Log.d("photo",mGig.get(mPos).getPhoto_gig());
 
-                mContext.startActivity(intent);
+                BuildUrl buildUrl = new BuildUrl();
+                buildUrl.buildBaseUrl();
+                Map<String, String> dataProfile  = new HashMap<String, String>();
+                dataProfile.put("user_id",Integer.toString(item.getUser_id()));
+                buildUrl.serviceGighub.sendDataOrganizerProfile(dataProfile).enqueue(new Callback<ResponseUser>() {
+                    @Override
+                    public void onResponse(Call<ResponseUser> call, Response<ResponseUser> response) {
+                        if(response.code()==200) {
+                            intent.putExtra("organizer", new Gson().toJson(response.body().getUser()));
+                            mContext.startActivity(intent);
+                        }
+                        else {
+                            Log.d("fail", "onResponse: "+response.code()+" "+response.message());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseUser> call, Throwable t) {
+                        Log.d("fail", "onFailure: user organizer "+t.getMessage());
+                    }
+                });
             }
         });
         if(myLng!=null && myLat!=null && item.getLat()!=null && item.getLng()!=null){

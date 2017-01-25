@@ -52,6 +52,12 @@ public class RegisterAsOrganizerActivity extends AppCompatActivity {
                 insertOrganizer();
             }
         });
+        mButtonCancelRegisterOrg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     Map<String, String> dataO = new HashMap<>();
@@ -91,5 +97,9 @@ public class RegisterAsOrganizerActivity extends AppCompatActivity {
             }
         });
 
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

@@ -12,26 +12,26 @@
 
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-    <android.support.design.widget.CollapsingToolbarLayout
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-        android:fitsSystemWindows="true"
-        app:layout_collapseMode="pin"
-        app:contentScrim="@color/colorPrimary"
-        android:minHeight="0dp">
-
-        <ImageView
-            android:id="@+id/img_img_profile_musicianactivity"
+        <android.support.design.widget.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ava"
-            android:scaleType="fitCenter"
-            android:fitsSystemWindows="true"
+            android:layout_height="200dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-            app:layout_collapseMode="parallax"/>
+            android:fitsSystemWindows="true"
+            app:layout_collapseMode="pin"
+            app:contentScrim="@color/colorPrimary"
+            android:minHeight="0dp">
 
-    </android.support.design.widget.CollapsingToolbarLayout>
+            <ImageView
+                android:id="@+id/img_img_profile_musicianactivity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ava"
+                android:scaleType="fitCenter"
+                android:fitsSystemWindows="true"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                app:layout_collapseMode="parallax"/>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"

@@ -8,6 +8,7 @@ public class UserModel {
     private String email;
     private String first_name;
     private String last_name;
+    private String photo;
 
     public String getLast_name() {
         return last_name;
@@ -39,5 +40,13 @@ public class UserModel {
 
     public String getFirst_name() {
         return first_name;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }

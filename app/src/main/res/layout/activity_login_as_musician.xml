@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
-        android:gravity="end">
+        android:gravity="right">
         <Button
             android:id="@+id/btn_cancel_login_msc"
             android:elevation="4dp"

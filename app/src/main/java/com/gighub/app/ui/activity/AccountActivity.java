@@ -56,7 +56,6 @@ public class AccountActivity extends AppCompatActivity {
         mMusicianGenres = new ArrayList<Genre>();
         musicianSaldos = new ArrayList<MusicianSaldo>();
         mContext = getApplicationContext();
-        mMusicianId = mSession.getMusicianDetails().getId();
 
 
 
@@ -66,9 +65,11 @@ public class AccountActivity extends AppCompatActivity {
 
         if(mSession.isLoggedIn()){
             if(mSession.checkUserType().equals("org")){
+                mOrganizerId = mSession.getUserDetails().getId();
                 mName = mSession.getUserDetails().getFirst_name();
             }
             else if(mSession.checkUserType().equals("msc")){
+                mMusicianId = mSession.getMusicianDetails().getId();
                 mName = mSession.getMusicianDetails().getName();
             }
 
@@ -186,7 +187,6 @@ public class AccountActivity extends AppCompatActivity {
     }
 
     private void logout(){
-        mSession = new SessionManager(getApplicationContext());
 
         BuildUrl buildUrl = new BuildUrl();
         buildUrl.buildBaseUrl();
@@ -197,7 +197,7 @@ public class AccountActivity extends AppCompatActivity {
             dataLogout.put("tipe_user","msc");
             dataLogout.put("user_id",Integer.toString(mMusicianId));
         }
-        else if(mSession.checkUserType().equals("org")){
+        else{
             dataLogout.put("tipe_user","org");
             dataLogout.put("user_id",Integer.toString(mOrganizerId));
 

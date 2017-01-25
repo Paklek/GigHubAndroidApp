@@ -55,6 +55,12 @@ public class LoginAsOrganizerActivity extends AppCompatActivity {
                 sendLoginDataOrganizer();
             }
         });
+        mButtonCancelLoginOrganizer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     Map <String, String> loginData = new HashMap<>();
@@ -95,6 +101,10 @@ public class LoginAsOrganizerActivity extends AppCompatActivity {
                 Log.d(PESANLOG,""+t.getMessage());
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
 

@@ -4,6 +4,9 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -55,6 +58,8 @@ public class MessagingService extends FirebaseMessagingService {
 
     private void pushNotification(RemoteMessage data) {
 
+        Uri uri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
         Intent intent = new Intent(this, targetActivity);
         if (mSession.checkUserType().equals("org")) {
             mIdUser = mSession.getUserDetails().getId();
@@ -71,6 +76,8 @@ public class MessagingService extends FirebaseMessagingService {
         notificationBuilder.setContentText(data.getData().get("body"));
         notificationBuilder.setAutoCancel(true);
         notificationBuilder.setSmallIcon(R.drawable.logo_v2);
+        notificationBuilder.setSound(uri);
+        notificationBuilder.setLights(Color.GREEN,1,1);
 
 
         notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -101,7 +108,7 @@ public class MessagingService extends FirebaseMessagingService {
 
             @Override
             public void onFailure(Call<PenyewaanResponse> call, Throwable t) {
-                Log.d("fail", t.getCause().getMessage());
+                Log.d("fail", t.getMessage());
             }
         });
     }

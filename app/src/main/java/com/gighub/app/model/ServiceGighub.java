@@ -135,9 +135,15 @@ public interface ServiceGighub {
     @POST(StaticString.ROUTE_UPDATE_PHOTO)
     Call<ResponseMusician> sendDataPhotoUpdate (@Body Map<String,String> dataPhoto);
 
+    @POST(StaticString.ROUTE_UPDATE_PHOTO)
+    Call<ResponseUser> sendDataUserPhotoUpdate (@Body Map<String, String> dataPhoto);
+
     @POST(StaticString.ROUTE_WITHDRAW)
     Call<Response> sendWithdrawData (@Body Map<String, String> withdrawData);
 
     @POST(StaticString.ROUTE_LOGOUT)
     Call<Response> sendLogoutData (@Body Map<String, String> logoutData);
+
+    @POST(StaticString.ROUTE_ORGANIZER_PROFILE)
+    Call<ResponseUser> sendDataOrganizerProfile(@Body Map<String, String> dataProfile);
 }

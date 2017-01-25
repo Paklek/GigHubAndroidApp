@@ -8,17 +8,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gighub.app.R;
 import com.gighub.app.model.GigOfferMusicianResponse;
+import com.gighub.app.model.ResponseUser;
+import com.gighub.app.model.SearchResultModel;
+import com.gighub.app.model.UserModel;
 import com.gighub.app.ui.activity.GigOfferMusicianActivity;
 import com.gighub.app.ui.activity.ViewMapGig;
 import com.gighub.app.util.BuildUrl;
+import com.gighub.app.util.CloudinaryUrl;
 import com.gighub.app.util.SessionManager;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.squareup.picasso.Picasso;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -38,10 +47,14 @@ public class GigProfileFragment extends Fragment {
 
     private View view;
     private Button btn_viewMapGig, mButtonGigOffer;
-    private TextView mTextViewLocation, mTextViewLocationDetail, mTextViewDeskripsi, mTextViewTanggalMulai, mTextViewTanggalSelesai;
+    private TextView mTextViewOrganizerName, mTextViewOrganizerEmail,mTextViewLocation, mTextViewLocationDetail, mTextViewDeskripsi, mTextViewTanggalMulai, mTextViewTanggalSelesai;
     private SessionManager mSession;
     private int mMusicianId, mOrganizerId, mGigId;
     private String tanggal_mulai, tanggal_selesai,mLat,mLng;
+    private UserModel mOrganizer;
+    private ImageView mImagePhotoOrganizer;
+    private CloudinaryUrl cloudinaryUrl;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,8 +62,17 @@ public class GigProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_gig_profile, container, false);
 
+        Intent i = getActivity().getIntent();
+        final Type type = new TypeToken<UserModel>(){}.getType();
+        mOrganizer = new Gson().fromJson(i.getStringExtra("organizer"),type);
+
 
         mSession = new SessionManager(getActivity().getApplicationContext());
+
+        mImagePhotoOrganizer = (ImageView)view.findViewById(R.id.img_organizer_photo_gigprofile);
+        mTextViewOrganizerName = (TextView)view.findViewById(R.id.tv_organizer_name_gigprofile);
+        mTextViewOrganizerEmail = (TextView)view.findViewById(R.id.tv_organizer_email_gigprofile);
+
         btn_viewMapGig = (Button)view.findViewById(R.id.btn_view_map);
         mTextViewLocation = (TextView)view.findViewById(R.id.tv_location_gigprofile);
         mTextViewLocationDetail = (TextView)view.findViewById(R.id.tv_location_detail_gigprofile);
@@ -59,6 +81,10 @@ public class GigProfileFragment extends Fragment {
         mTextViewTanggalSelesai = (TextView)view.findViewById(R.id.tv_tanggal_selesai_gigprofile);
 
         mButtonGigOffer = (Button)view.findViewById(R.id.btn_offer_gig_gigprofile);
+
+        cloudinaryUrl = new CloudinaryUrl();
+        cloudinaryUrl.buildCloudinaryUrl();
+
 
         if(mSession.checkUserType().equals("msc")){
             mMusicianId = mSession.getMusicianDetails().getId();
@@ -111,6 +137,13 @@ public class GigProfileFragment extends Fragment {
             }
         });
 
+
+
+        if (!mOrganizer.getPhoto().equals("")){
+            Picasso.with(getContext()).load(cloudinaryUrl.cloudinary.url().format("jpg").generate(mOrganizer.getPhoto())).into(mImagePhotoOrganizer);
+        }
+        mTextViewOrganizerName.setText(""+mOrganizer.getFirst_name()+" "+mOrganizer.getLast_name());
+        mTextViewOrganizerEmail.setText(mOrganizer.getEmail());
         return view;
     }
 

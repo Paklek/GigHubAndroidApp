@@ -59,6 +59,14 @@ public class LoginAsMusicianActivity extends AppCompatActivity {
                 sendLoginDataMusician();
             }
         });
+
+        mButtonCancelLoginMusician.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+//                Toast.makeText(LoginAsMusicianActivity.this, "Cancel", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
     Map<String, String> loginData = new HashMap<>();
 
@@ -168,5 +176,13 @@ public class LoginAsMusicianActivity extends AppCompatActivity {
 //
 //            }
 //        });
+
+
+
+
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

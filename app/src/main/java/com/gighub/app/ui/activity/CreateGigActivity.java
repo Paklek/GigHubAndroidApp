@@ -60,11 +60,11 @@ public class CreateGigActivity extends AppCompatActivity implements AdapterView.
     private Context mContext;
     private EditText mAutoCompleteTextViewLocation;
 
-    private static final String LOG_TAG = "GooglePlaces";
     //    private static final String PLACES_API_BASE = "https://maps.googleapis.com/maps/api/place";
-    private static final String PLACES_API_BASE = "https://maps.googleapis.com/maps/api";
     //    private static final String TYPE_AUTOCOMPLETE = "/autocomplete";
     private static final String TYPE_GEOCODE = "/geocode";
+    private static final String PLACES_API_BASE = "https://maps.googleapis.com/maps/api";
+    private static final String LOG_TAG = "GooglePlaces";
     private static final String OUT_JSON = "/json";
 
     public static final String API_KEY = "AIzaSyCnr-Sxlgu9soj-V9u4xaoP1kDEy3ULW3A";
@@ -124,6 +124,7 @@ public class CreateGigActivity extends AppCompatActivity implements AdapterView.
                 DatePickerDialog datePickerDialog = new DatePickerDialog(getLayoutInflater().getContext(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        monthOfYear+=1;
                         mButtonTanggalMulai.setText(year + "-" + monthOfYear + "-" + dayOfMonth);
                     }
                 }, mYear, mMonth, mDay);
@@ -165,6 +166,7 @@ public class CreateGigActivity extends AppCompatActivity implements AdapterView.
                 DatePickerDialog datePickerDialog = new DatePickerDialog(getLayoutInflater().getContext(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        monthOfYear+=1;
                         mButtonTanggalSelesai.setText(year + "-" + monthOfYear + "-" + dayOfMonth);
 
                     }

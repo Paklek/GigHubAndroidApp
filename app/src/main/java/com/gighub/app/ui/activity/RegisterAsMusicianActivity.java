@@ -31,7 +31,7 @@ public class RegisterAsMusicianActivity extends AppCompatActivity {
 
     private EditText mEditTextNameRegister, mEditTextEmailRegister, mEditTextPasswordRegister, mEditTextConfirmationPasswordRegister;
 
-    private Button mButtonRegister;
+    private Button mButtonRegister, mButtonCancelRegister;
     private SessionManager mSession;
 
     public static final String PESANLOG = "pesanlog";
@@ -47,11 +47,18 @@ public class RegisterAsMusicianActivity extends AppCompatActivity {
         mEditTextConfirmationPasswordRegister = (EditText)findViewById(R.id.et_confirmation_password_register_msc);
 
         mButtonRegister = (Button)findViewById(R.id.btn_register_register_msc);
+        mButtonCancelRegister = (Button)findViewById(R.id.btn_cancel_register_msc);
 
         mButtonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 insertMusician();
+            }
+        });
+        mButtonCancelRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
     }
@@ -90,6 +97,10 @@ public class RegisterAsMusicianActivity extends AppCompatActivity {
                 Toast.makeText(RegisterAsMusicianActivity.this,"Gagal Register",Toast.LENGTH_LONG).show();
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
 }

@@ -159,6 +159,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         if(mSession.isLoggedIn()){
             if(mSession.checkUserType().equals("org")){
+                mPhoto = mSession.getUserDetails().getPhoto();
                 mOrganizerId = mSession.getUserDetails().getId();
                 mFirstName = mSession.getUserDetails().getFirst_name();
                 mLastName = mSession.getUserDetails().getLast_name();
@@ -180,6 +181,10 @@ public class ProfileActivity extends AppCompatActivity {
                 mLinearLayoutMusicianGenres.setVisibility(View.GONE);
                 mTextViewMusicianGenres.setVisibility(View.GONE);
                 mLinearLayoutBank.setVisibility(View.GONE);
+
+                if(mPhoto!=null && !mPhoto.equals("")) {
+                    Picasso.with(this).load(cloudinaryUrl.cloudinary.url().format("jpg").generate(mPhoto)).into(mImageViewPhoto);
+                }
 
 
                 mEditTextFirstName.setText(mFirstName);
@@ -385,45 +390,73 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void doUpdatePhoto(){
         cloudinaryResponse = new Gson().fromJson(new Gson().toJson(responseCloudinary),CloudinaryResponse.class);
-        mGenreDipilih = mGenreDipilih.substring(1,mGenreDipilih.length());
 
         BuildUrl buildUrl = new BuildUrl();
         buildUrl.buildBaseUrl();
 
-        photoUpdate.put("tipe_user","msc");
-        photoUpdate.put("photo", cloudinaryResponse.getPublic_id());
-        photoUpdate.put("id", Integer.toString(mMusicianId));
+        if (mSession.checkUserType().equals("msc")){
+            mGenreDipilih = mGenreDipilih.substring(1,mGenreDipilih.length());
+            photoUpdate.put("tipe_user","msc");
+            photoUpdate.put("id", Integer.toString(mMusicianId));
+            photoUpdate.put("photo", cloudinaryResponse.getPublic_id());
 
+            buildUrl.serviceGighub.sendDataPhotoUpdate(photoUpdate).enqueue(new Callback<ResponseMusician>() {
+                @Override
+                public void onResponse(Call<ResponseMusician> call, Response<ResponseMusician> response) {
+                    if (response.code() == 200) {
+                        Toast.makeText(ProfileActivity.this, R.string.photo_profile_updated, Toast.LENGTH_SHORT).show();
+                        mSession = new SessionManager(getApplicationContext());
+                        mSession.createLoginSession(new Gson().toJson(response.body().getMusician()), "msc");
 
-        buildUrl.serviceGighub.sendDataPhotoUpdate(photoUpdate).enqueue(new Callback<ResponseMusician>() {
-            @Override
-            public void onResponse(Call<ResponseMusician> call, Response<ResponseMusician> response) {
-                if (response.code() == 200) {
-                    Toast.makeText(ProfileActivity.this, R.string.photo_profile_updated, Toast.LENGTH_SHORT).show();
-                    mSession = new SessionManager(getApplicationContext());
-                    mSession.createLoginSession(new Gson().toJson(response.body().getMusician()), "msc");
+                    }
+                    else {
+                        Toast.makeText(ProfileActivity.this, R.string.failed_try_again, Toast.LENGTH_SHORT).show();
+                    }
                 }
-                else {
+
+                @Override
+                public void onFailure(Call<ResponseMusician> call, Throwable t) {
                     Toast.makeText(ProfileActivity.this, R.string.failed_try_again, Toast.LENGTH_SHORT).show();
                 }
-            }
+            });
+        }
+        else if(mSession.checkUserType().equals("org")){
+            photoUpdate.put("tipe_user","org");
+            photoUpdate.put("id", Integer.toString(mOrganizerId));
+            photoUpdate.put("photo", cloudinaryResponse.getPublic_id());
 
-            @Override
-            public void onFailure(Call<ResponseMusician> call, Throwable t) {
-                Toast.makeText(ProfileActivity.this, R.string.failed_try_again, Toast.LENGTH_SHORT).show();
-            }
-        });
+            buildUrl.serviceGighub.sendDataUserPhotoUpdate(photoUpdate).enqueue(new Callback<ResponseUser>() {
+                @Override
+                public void onResponse(Call<ResponseUser> call, Response<ResponseUser> response) {
+                    if(response.code()==200) {
+                        Toast.makeText(ProfileActivity.this, R.string.photo_profile_updated, Toast.LENGTH_SHORT).show();
+                        mSession = new SessionManager(getApplicationContext());
+                        mSession.createLoginSession(new Gson().toJson(response.body().getUser()), "org");
+                    }
+                    else {
+                        Toast.makeText(ProfileActivity.this, R.string.failed_try_again, Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseUser> call, Throwable t) {
+                    Toast.makeText(ProfileActivity.this, R.string.failed_try_again, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+
     }
 
     private void doUpdateProfile(){
 
 //        cloudinaryResponse = new Gson().fromJson(new Gson().toJson(responseCloudinary),CloudinaryResponse.class);
-        mGenreDipilih = mGenreDipilih.substring(1,mGenreDipilih.length());
 
         BuildUrl buildUrl = new BuildUrl();
         buildUrl.buildBaseUrl();
 //      Start If For Check User for update
         if(mSession.checkUserType().equals("msc")) {
+            mGenreDipilih = mGenreDipilih.substring(1,mGenreDipilih.length());
             dataUpdate.put("tipe_user","msc");
             dataUpdate.put("name", mEditTextName.getText().toString());
             dataUpdate.put("email", mEditTextEmail.getText().toString());

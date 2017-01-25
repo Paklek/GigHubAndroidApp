@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.TimeFormatException;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.DatePicker.OnDateChangedListener;
@@ -24,7 +25,22 @@ import com.gighub.app.model.Response;
 import com.gighub.app.model.SearchResultModel;
 import com.gighub.app.util.BuildUrl;
 import com.gighub.app.util.SessionManager;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
+import com.google.android.gms.maps.model.LatLng;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -37,17 +53,27 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class BookMusicianActivity extends AppCompatActivity {
+public class BookMusicianActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private Context mContext;
     private Toolbar toolbar;
     private Button mButtonTanggalMulai, mButtonWaktuMulai,mButtonTanggalSelesai,mButtonWaktuSelesai, mButtonSendRequest;
     private TextView mTextViewName, mTextViewGenre, mTextViewHarga;
     private EditText mEditTextNamaGig,mEditTextLokasi, mEditTextDetails;
-    private String mName, mGenre,mHarga,mMulai,mSelesai,mTipe;
+    private String mName, mGenre,mHarga,mMulai,mSelesai,mTipe, mLat, mLng;
     private int pos=0, mYear,mMonth,mDay,mHour, mMinute, mUserId,mObjectId;
     private List<SearchResultModel> mSearchResultModel;
     private SessionManager mSession;
+
+
+    private static final String TYPE_GEOCODE = "/geocode";
+    private static final String PLACES_API_BASE = "https://maps.googleapis.com/maps/api";
+    private static final String LOG_TAG = "GooglePlaces";
+    private static final String OUT_JSON = "/json";
+
+    public static final String API_KEY = "AIzaSyCnr-Sxlgu9soj-V9u4xaoP1kDEy3ULW3A";
+
+    private final int PLACE_AUTOCOMPLETE_REQUEST_CODE = 10001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +118,22 @@ public class BookMusicianActivity extends AppCompatActivity {
         mTextViewHarga.setText(mHarga);
 
         Log.d("name",mName);
+
+        mEditTextLokasi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Intent intent =
+                            new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
+                                    .build(BookMusicianActivity.this);
+                    startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
+                } catch (GooglePlayServicesRepairableException e) {
+                    // TODO: Handle the error.
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    // TODO: Handle the error.
+                }
+            }
+        });
 
 
         mButtonTanggalMulai.setOnClickListener(new View.OnClickListener() {
@@ -206,6 +248,8 @@ public class BookMusicianActivity extends AppCompatActivity {
         bookData.put("detail_lokasi",mEditTextDetails.getText().toString());
         bookData.put("tanggal_mulai",mMulai);
         bookData.put("tanggal_selesai",mSelesai);
+        bookData.put("lat",mLat);
+        bookData.put("lng",mLng);
 
         buildUrl.serviceGighub.sendBookData(bookData).enqueue(new Callback<Response>() {
             @Override
@@ -237,4 +281,92 @@ public class BookMusicianActivity extends AppCompatActivity {
 
     }
 
+    private ArrayList autocomplete(String input) {
+        ArrayList mLocationList = null;
+
+        HttpURLConnection conn = null;
+        StringBuilder jsonResults = new StringBuilder();
+        try {
+            StringBuilder sb = new StringBuilder(PLACES_API_BASE + TYPE_GEOCODE + OUT_JSON);
+            sb.append("?address=" + URLEncoder.encode(input, "utf8"));
+            sb.append("&components=country:id");
+            sb.append("&sensor=true");
+            sb.append("&?key=" + API_KEY);
+//                sb.append("&input=" + URLEncoder.encode(input, "utf8"));
+
+            URL url = new URL(sb.toString());
+            conn = (HttpURLConnection) url.openConnection();
+            InputStreamReader in = new InputStreamReader(conn.getInputStream());
+
+            // Load the results into a StringBuilder
+            int read;
+            char[] buff = new char[1024];
+            while ((read = in.read(buff)) != -1) {
+                jsonResults.append(buff, 0, read);
+            }
+        } catch (MalformedURLException e) {
+            Log.e(LOG_TAG, "Error processing Places API URL" + e);
+            return mLocationList;
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "Error connecting to Places API" + e);
+            return mLocationList;
+        } finally {
+            if (conn != null) {
+                conn.disconnect();
+            }
+        }
+
+        try {
+            // Create a JSON object hierarchy from the results
+            JSONObject jsonObj = new JSONObject(jsonResults.toString());
+//                JSONArray predsJsonArray = jsonObj.getJSONArray("predictions");
+            JSONArray predsJsonArray = jsonObj.getJSONArray("results");
+            JSONArray locationJsonArray = jsonObj.getJSONArray("location");
+            // Extract the Place descriptions from the results
+            mLocationList = new ArrayList(predsJsonArray.length());
+            for (int i = 0; i < predsJsonArray.length(); i++) {
+                JSONObject jsonResult = locationJsonArray.getJSONObject(i);
+                System.out.println(predsJsonArray.getJSONObject(i).getString("formatted_address"));
+                System.out.println("============================================================");
+                mLocationList.add(predsJsonArray.getJSONObject(i).getString("formatted_address"));
+                mLat = jsonResult.getString("lat");
+//                    mLat = locationJsonArray.getJSONObject(i).getString("location");
+                mLng = predsJsonArray.getJSONObject(i).getJSONObject("location").getString("lng");
+            }
+        } catch (JSONException e) {
+            Log.e(LOG_TAG, "Cannot process JSON results", e);
+        }
+
+
+        return mLocationList;
+    }
+
+
+
+
+    private LatLng latlng = new LatLng(0,0);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+            if(requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE){
+                Place place = PlaceAutocomplete.getPlace(this, data);
+                Log.i("Lokasi", "Place: " + place.getName());
+                mEditTextLokasi.setText(place.getAddress());
+                latlng = place.getLatLng();
+                mLat = Double.toString(place.getLatLng().latitude);
+                mLng = Double.toString(place.getLatLng().longitude);
+
+                Log.d("LatLng ",""+latlng);
+            }
+        }
+    }
+
+
+    @Override
+    public void onItemClick(AdapterView parent, View view, int position, long id) {
+        String str = (String) parent.getItemAtPosition(position);
+        Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
+
+    }
 }

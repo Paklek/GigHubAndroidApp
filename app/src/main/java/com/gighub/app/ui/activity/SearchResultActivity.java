@@ -85,6 +85,7 @@ public class SearchResultActivity extends AppCompatActivity {
                     intent.putExtra("kota", mSearchResult.get(position).getKota());
                     intent.putExtra("tipe", mSearchResult.get(position).getTipe());
                     intent.putExtra("photo", mSearchResult.get(position).getPhoto());
+                    intent.putExtra("youtube_video",mSearchResult.get(position).getYoutube_video());
 //                pos = position;
                     intent.putExtra("posisi", position);
                     Log.d("pos", "" + position);
@@ -102,6 +103,7 @@ public class SearchResultActivity extends AppCompatActivity {
                     intent.putExtra("kota", mSearchResult.get(position).getKota());
                     intent.putExtra("tipe", mSearchResult.get(position).getTipe());
                     intent.putExtra("photo", mSearchResult.get(position).getPhoto());
+                    intent.putExtra("youtube_video",mSearchResult.get(position).getYoutube_video());
 //                pos = position;
                     intent.putExtra("posisi", position);
                     Log.d("pos", "" + position);

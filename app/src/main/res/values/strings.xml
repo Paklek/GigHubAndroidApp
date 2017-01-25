@@ -64,4 +64,6 @@
     <string name="failed_try_again">Failed, please try again and check your internet connection</string>
     <string name="available_balance">Available balance</string>
     <string name="the_amount_of_withdrawals">The amount of withdrawals</string>
+    <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
+    <string name="video_is_not_available">Video is not avalailable</string>
 </resources>

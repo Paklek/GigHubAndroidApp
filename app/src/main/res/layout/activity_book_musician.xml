@@ -116,7 +116,8 @@
                         android:id="@+id/et_location_bookmusicianactivity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Location"/>
+                        android:hint="Location"
+                        android:focusable="false" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout

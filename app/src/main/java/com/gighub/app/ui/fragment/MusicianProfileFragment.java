@@ -16,7 +16,10 @@ import android.widget.Toast;
 import com.gighub.app.R;
 import com.gighub.app.model.SearchResultModel;
 import com.gighub.app.ui.activity.BookMusicianActivity;
+import com.gighub.app.ui.activity.YouTubeVideoActivity;
 import com.gighub.app.util.SessionManager;
+import com.gighub.app.util.YoutubeVideoConfig;
+import com.google.android.youtube.player.YouTubePlayerView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -29,10 +32,11 @@ import java.util.List;
 public class MusicianProfileFragment extends Fragment {
 
     Context mContext;
-    private String mDescriptions, mGenre, mName,mHarga, mTipe;
+    private String mDescriptions, mGenre, mName,mHarga, mTipe, mYouTubeVideoUrl;
     private int pos=0, mId;
     private TextView mTextViewMusicianDescriptions, mTextViewMusicianGenres, mTextViewTipeMusisi, mTextViewAnggota;
-    private Button mButtonBookRequest;
+    private Button mButtonBookRequest, mButtonYouTubeVideo;
+    private YouTubePlayerView mYouTubeView;
 
     private View mViewButtonBookRequest;
 
@@ -51,10 +55,14 @@ public class MusicianProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_musician_profile, container, false);
 
+        mContext = inflater.getContext();
         mSession = new SessionManager(getActivity().getApplicationContext());
 
         mViewButtonBookRequest = (View)view.findViewById(R.id.btn_book_request_musicianprofile);
         mTextViewAnggota = (TextView)view.findViewById(R.id.tv_anggota_musicianprofile);
+//        mYouTubeView = (YouTubePlayerView)view.findViewById(R.id.youtube_view);
+        mButtonYouTubeVideo = (Button)view.findViewById(R.id.btn_youtubevideo_musicianprofile);
+//        mYouTubeView.initialize(YoutubeVideoConfig.YOUTUBE_API_KEYz );
 
         if(mSession.isLoggedIn()){
             if(mSession.checkUserType().equals("org")){
@@ -74,7 +82,6 @@ public class MusicianProfileFragment extends Fragment {
         }
 
 
-        mContext = inflater.getContext();
 
 
         mTextViewMusicianDescriptions = (TextView)view.findViewById(R.id.tv_musician_descriptions);
@@ -97,6 +104,7 @@ public class MusicianProfileFragment extends Fragment {
         mHarga = intent.getStringExtra("harga_sewa");
         mTipe = intent.getStringExtra("tipe");
         mId = intent.getIntExtra("id",0);
+        mYouTubeVideoUrl = intent.getStringExtra("youtube_video");
         Log.d("pos",""+pos+" fragment");
 
         if(mTipe.equals("Solo")){
@@ -109,6 +117,16 @@ public class MusicianProfileFragment extends Fragment {
         mTextViewMusicianDescriptions.setText(": "+mDescriptions);
         mTextViewMusicianGenres.setText(": "+ mGenre);
         mTextViewTipeMusisi.setText(": "+mTipe);
+
+
+        mButtonYouTubeVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(getActivity(), YouTubeVideoActivity.class);
+                intent1.putExtra("youtube_video", mYouTubeVideoUrl);
+                startActivity(intent1);
+            }
+        });
 
         mButtonBookRequest.setOnClickListener(new View.OnClickListener() {
             @Override
