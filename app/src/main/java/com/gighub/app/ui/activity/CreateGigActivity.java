@@ -256,8 +256,13 @@ public class CreateGigActivity extends AppCompatActivity implements AdapterView.
 
         dataGig.put("user_id", Integer.toString(mOrganizerId));
         dataGig.put("nama_gig", mEditTextGigName.getText().toString());
-        if(!cloudinaryResponse.getPublic_id().equals("")){
-            dataGig.put("photo_gig", cloudinaryResponse.getPublic_id());
+        if(cloudinaryResponse!=null) {
+            if (!cloudinaryResponse.getPublic_id().equals("") || cloudinaryResponse.getPublic_id() != null) {
+                dataGig.put("photo_gig", cloudinaryResponse.getPublic_id());
+            }
+        }
+        else {
+            dataGig.put("photo_gig", "");
         }
         dataGig.put("lokasi", mAutoCompleteTextViewLocation.getText().toString());
         dataGig.put("detail_lokasi", mEditTextDetails.getText().toString());

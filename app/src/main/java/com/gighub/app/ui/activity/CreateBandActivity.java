@@ -333,12 +333,14 @@ public class CreateBandActivity extends AppCompatActivity {
         dataBand.put("genre_id",mGenreDipilih);
         dataBand.put("admin_id",mMusicianId);
         dataBand.put("nama_grupband",mEditTextNamaBand.getText().toString());
-        if(!cloudinaryResponse.getPublic_id().equals("")){
-            dataBand.put("photo", cloudinaryResponse.getPublic_id());
+        if(cloudinaryResponse!=null) {
+            if (!cloudinaryResponse.getPublic_id().equals("") || cloudinaryResponse.getPublic_id() != null) {
+                dataBand.put("photo", cloudinaryResponse.getPublic_id());
+            }
         }
-//        else {
-//            dataBand.put("photo","default_user");
-//        }
+        else {
+            dataBand.put("photo", "");
+        }
         dataBand.put("harga",mEditTextHargaBand.getText().toString());
         dataBand.put("deskripsi",mEditTextDeskripsiBand.getText().toString());
         dataBand.put("kota", mEditTextKota.getText().toString());

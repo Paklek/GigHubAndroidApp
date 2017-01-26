@@ -56,4 +56,8 @@ public class YourGigActivity extends AppCompatActivity {
 
 
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

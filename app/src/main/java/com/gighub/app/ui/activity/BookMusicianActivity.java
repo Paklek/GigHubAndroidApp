@@ -284,8 +284,13 @@ public class BookMusicianActivity extends AppCompatActivity implements AdapterVi
         bookData.put("object_id",Integer.toString(mObjectId));
         bookData.put("nama_gig",mEditTextNamaGig.getText().toString());
         bookData.put("lokasi", mEditTextLokasi.getText().toString());
-        if(!cloudinaryResponse.getPublic_id().equals("")){
-            bookData.put("photo_gig", cloudinaryResponse.getPublic_id());
+        if(cloudinaryResponse!=null) {
+            if (!cloudinaryResponse.getPublic_id().equals("") || cloudinaryResponse.getPublic_id() != null) {
+                bookData.put("photo_gig", cloudinaryResponse.getPublic_id());
+            }
+        }
+        else {
+            bookData.put("photo_gig", "");
         }
         bookData.put("detail_lokasi",mEditTextDetails.getText().toString());
         bookData.put("tanggal_mulai",mMulai);
