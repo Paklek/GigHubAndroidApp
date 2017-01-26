@@ -6,15 +6,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.gighub.app.R;
 import com.gighub.app.model.Response;
+import com.gighub.app.model.ResponseUser;
 import com.gighub.app.model.ServiceGighub;
 import com.gighub.app.util.BuildUrl;
 import com.gighub.app.util.SessionManager;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,6 +33,7 @@ public class RegisterAsOrganizerActivity extends AppCompatActivity {
     private EditText mEditTextFirstNameRegisterOrg, mEditTextLastNameRegisterOrg, mEditTextEmailRegisterOrg, mEditTextPasswordRegisterOrg,mEditTextConfirmationPasswordOrg;
     private Button mButtonRegisterRegisterOrg, mButtonCancelRegisterOrg;
     private SessionManager mSession;
+    private CheckBox mCheckBoxAgree;
 
     public static final String PESANLOG = "pesanlog";
 
@@ -42,9 +47,24 @@ public class RegisterAsOrganizerActivity extends AppCompatActivity {
         mEditTextEmailRegisterOrg = (EditText)findViewById(R.id.et_email_register_org);
         mEditTextPasswordRegisterOrg = (EditText)findViewById(R.id.et_password_register_org);
         mEditTextConfirmationPasswordOrg = (EditText)findViewById(R.id.et_confirmation_password_register_org);
+        mCheckBoxAgree = (CheckBox)findViewById(R.id.cbx_agree_termcondition);
 
         mButtonCancelRegisterOrg = (Button)findViewById(R.id.btn_cancel_register_org);
         mButtonRegisterRegisterOrg = (Button)findViewById(R.id.btn_register_register_org);
+
+        mCheckBoxAgree.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(mCheckBoxAgree.isChecked()){
+                    mButtonRegisterRegisterOrg.setFocusable(true);
+                    mButtonRegisterRegisterOrg.setEnabled(true);
+                }
+                if(!mCheckBoxAgree.isChecked()){
+                    mButtonRegisterRegisterOrg.setFocusable(false);
+                    mButtonRegisterRegisterOrg.setEnabled(false);
+                }
+            }
+        });
 
         mButtonRegisterRegisterOrg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,10 +99,13 @@ public class RegisterAsOrganizerActivity extends AppCompatActivity {
         dataO.put("password",mEditTextPasswordRegisterOrg.getText().toString());
         dataO.put("firebase", FirebaseInstanceId.getInstance().getToken());
 
-        buildUrl.serviceGighub.insertOrganizer(dataO).enqueue(new Callback<Response>() {
+        buildUrl.serviceGighub.insertOrganizer(dataO).enqueue(new Callback<ResponseUser>() {
             @Override
-            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+            public void onResponse(Call<ResponseUser> call, retrofit2.Response<ResponseUser> response) {
+
                 if (response.code() == 200) {
+                    mSession = new SessionManager(getApplicationContext());
+                    mSession.createLoginSession(new Gson().toJson(response.body().getUser()), "org");
                     mSession.SkipIntro();
                     Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -96,7 +119,7 @@ public class RegisterAsOrganizerActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Response> call, Throwable t) {
+            public void onFailure(Call<ResponseUser> call, Throwable t) {
                 Log.d(PESANLOG,"Gagal Register");
                 Toast.makeText(RegisterAsOrganizerActivity.this, "Gagal Register",Toast.LENGTH_LONG).show();
             }

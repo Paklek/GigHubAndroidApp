@@ -43,17 +43,17 @@
             android:columnCount="3"
             android:rowCount="3"
             android:padding="10dp">
-            <com.github.siyamed.shapeimageview.CircularImageView
-                android:id="@+id/img_circle_user_yourgig"
-                android:layout_row="0"
-                android:layout_rowSpan="3"
-                android:layout_column="0"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/ic_person_black_48dp"
-                app:siBorderWidth="2dp"
-                app:siBorderColor="#ddd"
-                android:layout_margin="5dp"/>
+            <!--<com.github.siyamed.shapeimageview.CircularImageView-->
+                <!--android:id="@+id/img_circle_user_yourgig"-->
+                <!--android:layout_row="0"-->
+                <!--android:layout_rowSpan="3"-->
+                <!--android:layout_column="0"-->
+                <!--android:layout_width="80dp"-->
+                <!--android:layout_height="80dp"-->
+                <!--android:src="@drawable/ic_person_black_48dp"-->
+                <!--app:siBorderWidth="2dp"-->
+                <!--app:siBorderColor="#ddd"-->
+                <!--android:layout_margin="5dp"/>-->
             <TextView
                 android:id="@+id/tv_location_gig_yourgig"
                 android:layout_column="1"

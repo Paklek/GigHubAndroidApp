@@ -6,15 +6,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.gighub.app.R;
 import com.gighub.app.model.Response;
+import com.gighub.app.model.ResponseMusician;
 import com.gighub.app.model.ServiceGighub;
 import com.gighub.app.util.BuildUrl;
 import com.gighub.app.util.SessionManager;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -30,7 +34,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RegisterAsMusicianActivity extends AppCompatActivity {
 
     private EditText mEditTextNameRegister, mEditTextEmailRegister, mEditTextPasswordRegister, mEditTextConfirmationPasswordRegister;
-
+    private CheckBox mCheckBoxAgree;
     private Button mButtonRegister, mButtonCancelRegister;
     private SessionManager mSession;
 
@@ -41,6 +45,8 @@ public class RegisterAsMusicianActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_as_musician);
 
+
+        mCheckBoxAgree = (CheckBox)findViewById(R.id.cbx_agree_termcondition);
         mEditTextNameRegister = (EditText)findViewById(R.id.et_name_register_msc);
         mEditTextEmailRegister = (EditText)findViewById(R.id.et_email_register_msc);
         mEditTextPasswordRegister = (EditText)findViewById(R.id.et_password_register_msc);
@@ -48,6 +54,25 @@ public class RegisterAsMusicianActivity extends AppCompatActivity {
 
         mButtonRegister = (Button)findViewById(R.id.btn_register_register_msc);
         mButtonCancelRegister = (Button)findViewById(R.id.btn_cancel_register_msc);
+
+//        mButtonRegister.setFocusable(false);
+//        mButtonRegister.setEnabled(false);
+//
+
+        mCheckBoxAgree.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(mCheckBoxAgree.isChecked()){
+                    mButtonRegister.setFocusable(true);
+                    mButtonRegister.setEnabled(true);
+                }
+                if(!mCheckBoxAgree.isChecked()){
+                    mButtonRegister.setFocusable(false);
+                    mButtonRegister.setEnabled(false);
+                }
+            }
+        });
+
 
         mButtonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,9 +82,11 @@ public class RegisterAsMusicianActivity extends AppCompatActivity {
                 }
                 else {
                     insertMusician();
+
                 }
             }
         });
+
         mButtonCancelRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,10 +108,12 @@ public class RegisterAsMusicianActivity extends AppCompatActivity {
         dataM.put("password",mEditTextPasswordRegister.getText().toString());
         dataM.put("firebase", FirebaseInstanceId.getInstance().getToken());
 
-        buildUrl.serviceGighub.insertMusician(dataM).enqueue(new Callback<Response>() {
+        buildUrl.serviceGighub.insertMusician(dataM).enqueue(new Callback<ResponseMusician>() {
             @Override
-            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+            public void onResponse(Call<ResponseMusician> call, retrofit2.Response<ResponseMusician> response) {
                 if (response.code() == 200) {
+                    mSession = new SessionManager(getApplicationContext());
+                    mSession.createLoginSession(new Gson().toJson(response.body().getMusician()), "msc");
                     mSession.SkipIntro();
                     Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -96,8 +125,9 @@ public class RegisterAsMusicianActivity extends AppCompatActivity {
                     Log.d(PESANLOG, "Pesan Log : " + response.code());
                 }
             }
+
             @Override
-            public void onFailure(Call<Response> call, Throwable t) {
+            public void onFailure(Call<ResponseMusician> call, Throwable t) {
                 Log.d(PESANLOG,"Gagal Register");
                 Toast.makeText(RegisterAsMusicianActivity.this,"Gagal Register",Toast.LENGTH_LONG).show();
             }

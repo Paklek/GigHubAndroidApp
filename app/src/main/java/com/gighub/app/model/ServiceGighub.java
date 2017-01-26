@@ -27,10 +27,10 @@ public interface ServiceGighub {
     Call<MusicianResponse> loadMusicians();
 
     @POST(StaticString.ROUTE_REGISTER_MUSICIAN)
-    Call <Response> insertMusician(@Body Map<String, String> dataMusisi);
+    Call <ResponseMusician> insertMusician(@Body Map<String, String> dataMusisi);
 
     @POST(StaticString.ROUTE_REGISTER_ORGANIZER)
-    Call<Response> insertOrganizer(@Body Map<String, String> dataOrganizer);
+    Call<ResponseUser> insertOrganizer(@Body Map<String, String> dataOrganizer);
 
     @POST(StaticString.ROUTE_LOGIN_ORGANIZER)
     Call<ResponseUser> sendLoginDataOrganizer(@Body Map<String, String> loginData);
