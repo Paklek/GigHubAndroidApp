@@ -119,13 +119,14 @@ public class ListDiscoverGigAdapter extends RecyclerView.Adapter<ListDiscoverGig
 
         CloudinaryUrl cloudinaryUrl = new CloudinaryUrl();
         cloudinaryUrl.buildCloudinaryUrl();
+        mPos = holder.getAdapterPosition();
         final Gig item = mGig.get(position);
-        if(item.getPhoto_gig()!=null && !item.getPhoto_gig().equals("")) {
+        if(!item.getPhoto_gig().equals("")) {
             Picasso.with(mContext).load(cloudinaryUrl.cloudinary.url().format("jpg").generate(item.getPhoto_gig())).into(holder.mImageViewImageGig);
         }
 //        holder.mImageViewImageGig.
         holder.mNamaGig = item.getNama_gig();
-        mPos=position;
+//        mPos=position;
 
         holder.mTextViewNamaGig.setText(holder.mNamaGig);
         holder.label_name.setText(item.getLokasi());

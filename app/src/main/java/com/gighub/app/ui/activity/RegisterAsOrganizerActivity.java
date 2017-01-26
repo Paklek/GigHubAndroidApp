@@ -49,7 +49,12 @@ public class RegisterAsOrganizerActivity extends AppCompatActivity {
         mButtonRegisterRegisterOrg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                insertOrganizer();
+                if(!mEditTextPasswordRegisterOrg.getText().toString().equals(mEditTextConfirmationPasswordOrg.getText().toString())){
+                    Toast.makeText(RegisterAsOrganizerActivity.this, "Check your password", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    insertOrganizer();
+                }
             }
         });
         mButtonCancelRegisterOrg.setOnClickListener(new View.OnClickListener() {

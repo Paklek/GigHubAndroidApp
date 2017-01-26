@@ -52,7 +52,12 @@ public class RegisterAsMusicianActivity extends AppCompatActivity {
         mButtonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                insertMusician();
+                if(!mEditTextPasswordRegister.getText().toString().equals(mEditTextConfirmationPasswordRegister.getText().toString())){
+                    Toast.makeText(RegisterAsMusicianActivity.this, "Check your password", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    insertMusician();
+                }
             }
         });
         mButtonCancelRegister.setOnClickListener(new View.OnClickListener() {
