@@ -147,6 +147,9 @@ public interface ServiceGighub {
     @POST(StaticString.ROUTE_ORGANIZER_PROFILE)
     Call<ResponseUser> sendDataOrganizerProfile(@Body Map<String, String> dataProfile);
 
-    @POST()
+    @POST(StaticString.ROUTE_UPLOAD_GIG_PHOTO)
     Call<Response> sendGigPhoto(@Body Map<String, String> gigPhoto);
+
+    @POST(StaticString.ROUTE_CALL_MEMBER_GROUP)
+    Call<MemberResponse> sendCallMember (@Body Map <String, String> memberGroup);
 }

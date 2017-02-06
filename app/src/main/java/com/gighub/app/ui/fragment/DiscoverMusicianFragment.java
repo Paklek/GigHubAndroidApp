@@ -38,6 +38,7 @@ import com.gighub.app.model.SearchResultResponse;
 import com.gighub.app.ui.activity.MainActivity;
 import com.gighub.app.ui.activity.SearchResultActivity;
 import com.gighub.app.util.BuildUrl;
+import com.gighub.app.util.SessionManager;
 import com.gighub.app.util.StaticFunction;
 import com.gighub.app.util.StaticString;
 import com.google.gson.Gson;
@@ -58,13 +59,14 @@ import retrofit2.Response;
 public class DiscoverMusicianFragment extends Fragment implements AdapterView.OnItemSelectedListener{
 
     Context mContext;
-    private Button mButtonDatePicker, mButtonSearch;
+    private Button mButtonDatePicker, mButtonSearch, mButtonSearchGigs;
     private int mYear, mMonth, mDay;
     private EditText mEditTextSelectGenre;
     private RadioGroup mRadioGroupTipe;
     private RadioButton mRadioButtonTipeGroup, mRadioButtonTipeSolo, mRadioButtonTipeAll;
     Spinner mSpinner1;
     Spinner mSpinner2;
+    private SessionManager mSession;
     private String mKotaSearch, mGenreName;
     private String[] mListProvinsi ={"-", "Aceh", "Bali", "Banten", "Bengkulu", "Gorontalo", "Jakarta", "Jambi", "Jawa Barat", "Jawa Tengah", "Jawa Timur", "Kalimantan Barat", "Kalimantan Selatan", "Kalimantan Tengah", "Kalimantan Timur", "Kalimantan Utara", "Kepulauan Bangka Belitung", "Kepulauan Riau", "Lampung", "Maluku", "Maluku Utara", "Nusa Tenggara Barat", "Nusa Tenggara Timur", "Papua", "Papua Barat", "Riau", "Sulawesi Barat", "Sulawesi Selatan", "Sulawesi Tengah", "Sulawesi Tenggara", "Sulawesi Utara", "Sumatera Barat", "Sumatera Selatan", "Sumatera Utara", "Yogyakarta"};
 
@@ -77,12 +79,7 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
                 "-"
             },
             {
-                "-",
-                "Banda Aceh",
-                "Langsa",
-                "Lhokseumawe",
-                "Sabang",
-                "Subulussalam"
+                "Banda Aceh"
             },
 
             {
@@ -90,11 +87,7 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
             },
 
             {
-                "-",
-                "Cilegon",
-                "Serang",
-                "Tangerang",
-                "Tangerang Selatan"
+                "Serang"
             },
             {
                 "Bengkulu"
@@ -103,68 +96,31 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
                 "Gorontalo"
             },
             {
-                "-",
-                "Jakarta Barat",
-                "Jakarta Pusat",
-                "Jakarta Selatan",
-                "Jakarta Timur",
-                "Jakarta Utara"
+                "Jakarta"
             },
             {
-                "-",
-                "Jambi",
-                "Sungai Penuh"
+                "Jambi"
             },
             {
-                "-",
-                "Bandung",
-                "Banjar",
-                "Bekasi",
-                "Bogor",
-                "Cimahi",
-                "Cirebon",
-                "Depok",
-                "Sukabumi",
-                "Tasikmalaya"
+                "Bandung"
             },
             {
-                "-",
-                "Magelang",
-                "Pekalongan",
-                "Salatiga",
-                "Semarang",
-                "Surakarta",
-                "Tegal"
+
+                "Semarang"
             },
             {
-                "-",
-                "Batu",
-                "Blitar",
-                "Kediri",
-                "Madiun",
-                "Malang",
-                "Mojokerto",
-                "Pasuruan",
-                "Probolinggo",
                 "Surabaya"
             },
             {
-                "-",
-                "Pontianak",
-                "Singkawang"
+                "Pontianak"
             },
             {
-                "-",
-                "Banjar Baru",
                 "Banjarmasin"
             },
             {
                 "Palangka Raya"
             },
             {
-                "-",
-                "Balikpapan",
-                "Bontang",
                 "Samarinda"
             },
             {
@@ -174,28 +130,18 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
                 "Pangkal Pinang"
             },
             {
-                "-",
-                "Batam",
                 "Tanjung Pinang"
             },
             {
-                "-",
-                "Bandar Lampung",
-                "Metro"
+                "Bandar Lampung"
             },
             {
-                "-",
-                "Ambon",
-                "Tual"
+                "Ambon"
             },
             {
-                "-",
-                "Ternate",
-                "Tidore Kepulauan"
+                "Sofifi",
             },
             {
-                "-",
-                "Bima",
                 "Mataram"
             },
             {
@@ -205,64 +151,34 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
                 "Jayapura"
             },
             {
-                "Sorong"
+                "Manokwari"
             },
             {
-                "-",
-                "Dumai",
                 "Pekanbaru"
             },
             {
                 "Mamuju"
             },
             {
-                "-",
-                "Makassar",
-                "Palopo",
-                "Parepare"
+                "Makassar"
             },
             {
                 "Palu"
             },
             {
-                "-",
-                "Bau-Bau",
                 "Kendari"
             },
             {
-                "-",
-                "Bitung",
-                "Kotamobagu",
-                "Manado",
-                "Tomohon"
+                "Manado"
             },
             {
-                "-",
-                "Bukit Tinggi",
-                "Padang",
-                "Padang Panjang",
-                "Pariaman",
-                "Payakumbuh",
-                "Sawahlunto",
-                "Solok"
+                "Padang"
             },
             {
-                "-",
-                "Lubuklinggau",
-                "Pagar Alam",
-                "Palembang",
-                "Prabumulih"
+                "Palembang"
             },
             {
-                "-",
-                "Binjai",
-                "Gunung Sitoli",
-                "Medan",
-                "Padang Sidempuan",
-                "Pematang Siantar",
-                "Sibolga",
-                "Tanjung Balai",
-                "Tebing Tinggi"
+                "Medan"
             },
             {
                 "Yogyakarta"
@@ -277,19 +193,29 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_discover_musician_main, container, false);
-        mButtonSearch = (Button)view.findViewById(R.id.btn_search);
+        mContext = inflater.getContext();
+
 //        mButtonDatePicker = (Button)view.findViewById(R.id.btn_date_search);
+        mSession = new SessionManager(getContext().getApplicationContext());
+        mButtonSearch = (Button)view.findViewById(R.id.btn_search);
         mEditTextSelectGenre = (EditText)view.findViewById(R.id.et_select_genre);
-
         mRadioGroupTipe = (RadioGroup)view.findViewById(R.id.radiogroup_tipe_discovermusician);
-
         mRadioButtonTipeGroup = (RadioButton)view.findViewById(R.id.radio_tipe_group);
         mRadioButtonTipeSolo = (RadioButton)view.findViewById(R.id.radio_tipe_solo);
         mRadioButtonTipeAll = (RadioButton)view.findViewById(R.id.radio_tipe_all);
+//        mButtonSearchGigs = (Button)view.findViewById(R.id.btn_search_gigs);
+        mSpinner2 = (Spinner)view.findViewById(R.id.kota_spinner);
+        mSpinner1 = (Spinner)view.findViewById(R.id.provinsi_spinner);
 
-
-        mContext = inflater.getContext();
-
+//        if (mSession.checkUserType().equals("msc")){
+//            mButtonSearch.setVisibility(View.GONE);
+//        }
+//        else if(mSession.checkUserType().equals("org")){
+//            mButtonSearchGigs.setVisibility(View.GONE);
+//        }
+//        else {
+//            mButtonSearchGigs.setVisibility(View.GONE);
+//        }
 //        mButtonDatePicker.setOnClickListener(new View.OnClickListener() {
 //                                             @Override
 //                                             public void onClick(View v) {
@@ -308,8 +234,6 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
 //                                                 datePickerDialog.show();
 //                                             }
 //                                         });
-
-
         mButtonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -326,24 +250,15 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
                 DialogFragment dialogFragment = new DialogGenreFragment();
                 dialogFragment.setTargetFragment(this_fragment,REQCODE);
                 dialogFragment.show(getFragmentManager(),"Isi");
-
             }
         });
-
-
-
 //        Spinner spinner = (Spinner) view.findViewById(R.id.provinsi_spinner);
-
 //        masalah di getActivity, karena tadinya di activity work, trus pake "this" nah kalo di fragment gk work
-        mSpinner1 = (Spinner)view.findViewById(R.id.provinsi_spinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),R.layout.support_simple_spinner_dropdown_item,mListProvinsi);
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         mSpinner1.setAdapter(adapter);
         mSpinner1.setOnItemSelectedListener(this);
 
-
-
-        mSpinner2 = (Spinner)view.findViewById(R.id.kota_spinner);
 
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item, mListKota[0]);
         mSpinner2.setAdapter(adapter2);
@@ -386,7 +301,6 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==DiscoverMusicianFragment.REQCODE){
-
             Type typeGenreList = new TypeToken<List<Genre>>(){}.getType();
             genreList = new Gson().fromJson(data.getStringExtra("kirim"),typeGenreList);
             String genres = "";
@@ -403,8 +317,6 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
             mEditTextSelectGenre.setText(genres);
         }
     }
-
-
 
     private void getSearchMusician(){
         BuildUrl buildUrl = new BuildUrl();
@@ -463,8 +375,6 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
 
                 }
             });
-
-
         }
 
         if(mKotaSearch.equals("-") && mRadioButtonTipeSolo.isChecked()&& (mEditTextSelectGenre.getText().toString().equals("")||mEditTextSelectGenre.getText()==null)) {
@@ -717,4 +627,5 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
             });
         }
     }
+
 }

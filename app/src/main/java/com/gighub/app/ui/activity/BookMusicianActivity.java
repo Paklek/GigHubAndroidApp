@@ -133,7 +133,8 @@ public class BookMusicianActivity extends AppCompatActivity implements AdapterVi
 
         toolbar.setTitle("Book Request");
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         mName = intent.getStringExtra("name");
         mGenre = intent.getStringExtra("genre");
@@ -628,4 +629,9 @@ public class BookMusicianActivity extends AppCompatActivity implements AdapterVi
 //            }
 //        });
 //    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

@@ -119,8 +119,17 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         MainViewPagerAdapter adapter = new MainViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new DiscoverMusicianFragment(), "MUSICIANS");
-        adapter.addFragment(new DiscoverGigFragment(), "GIGS");
+        if(mSession.checkUserType().equals("org")){
+            adapter.addFragment(new DiscoverMusicianFragment(), "MUSICIANS");
+//            adapter.removeFragment(new DiscoverGigFragment());
+        }
+        else if (mSession.checkUserType().equals("msc")){
+            adapter.addFragment(new DiscoverGigFragment(), "GIGS");
+//            adapter.removeFragment(new DiscoverMusicianFragment());
+        }
+        else {
+            adapter.addFragment(new DiscoverMusicianFragment(), "MUSICIANS");
+        }
         viewPager.setAdapter(adapter);
     }
 
@@ -131,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu, menu);
 
         StaticFunction staticFunction = new StaticFunction();
-        staticFunction.createOptionMenu(menu,mSession);
+        staticFunction.createOptionMenu(menu,mSession, MainActivity.class);
 //
 //        if(mSession.isLoggedIn()){
 //            if(mSession.checkUserType().equals("org")){

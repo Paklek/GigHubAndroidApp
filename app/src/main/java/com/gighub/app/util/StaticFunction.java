@@ -11,6 +11,7 @@ import android.view.MenuItem;
 
 import com.gighub.app.R;
 import com.gighub.app.ui.activity.AccountActivity;
+import com.gighub.app.ui.activity.BookingDetailsActivity;
 import com.gighub.app.ui.activity.BookingListActivity;
 import com.gighub.app.ui.activity.CreateBandActivity;
 import com.gighub.app.ui.activity.CreateGigActivity;
@@ -46,7 +47,8 @@ public class StaticFunction {
         }).start();
     }
 
-    public void createOptionMenu(Menu menu,SessionManager sessionManager){
+    public void createOptionMenu(Menu menu,SessionManager sessionManager, Class<?> activityIni){
+//        Class<?> activityIni;
         if(sessionManager.isLoggedIn()){
             if(sessionManager.checkUserType().equals("org")){
                 menu.getItem(2).setVisible(false);
@@ -57,6 +59,9 @@ public class StaticFunction {
                 menu.getItem(3).setVisible(true);
                 menu.getItem(4).setVisible(false);
                 menu.getItem(5).setVisible(false);
+                if(activityIni==BookingDetailsActivity.class){
+                    menu.getItem(6).setVisible(false);
+                }
             }
             menu.getItem(0).setVisible(false);
             menu.getItem(1).setVisible(false);

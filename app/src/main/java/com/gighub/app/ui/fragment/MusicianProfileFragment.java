@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gighub.app.R;
+import com.gighub.app.model.Member;
 import com.gighub.app.model.SearchResultModel;
 import com.gighub.app.ui.activity.BookMusicianActivity;
 import com.gighub.app.ui.activity.YouTubeVideoActivity;
@@ -32,9 +33,9 @@ import java.util.List;
 public class MusicianProfileFragment extends Fragment {
 
     Context mContext;
-    private String mDescriptions, mGenre, mName,mHarga, mTipe, mYouTubeVideoUrl;
+    private String mDescriptions, mGenre, mName,mHarga, mTipe, mYouTubeVideoUrl,mAnggota,mPosisi, mUrlWebsite, mUsernameSoundcloud, mUsernameReverbnation;
     private int pos=0, mId;
-    private TextView mTextViewMusicianDescriptions, mTextViewMusicianGenres, mTextViewTipeMusisi, mTextViewAnggota;
+    private TextView mTextViewMusicianDescriptions, mTextViewMusicianGenres, mTextViewTipeMusisi, mTextViewAnggota,mTextViewPosisi, mTextViewUrlWebsite, mTextViewUrlSoundCloud, mTextViewUrlReverbnation;
     private Button mButtonBookRequest, mButtonYouTubeVideo;
     private YouTubePlayerView mYouTubeView;
 
@@ -43,6 +44,7 @@ public class MusicianProfileFragment extends Fragment {
     private SessionManager mSession;
 
     private List<SearchResultModel> mSearchResult;
+    private Member mMember;
 
     public MusicianProfileFragment() {
         // Required empty public constructor
@@ -57,9 +59,14 @@ public class MusicianProfileFragment extends Fragment {
 
         mContext = inflater.getContext();
         mSession = new SessionManager(getActivity().getApplicationContext());
+        mMember = new Member();
 
         mViewButtonBookRequest = (View)view.findViewById(R.id.btn_book_request_musicianprofile);
         mTextViewAnggota = (TextView)view.findViewById(R.id.tv_anggota_musicianprofile);
+        mTextViewPosisi = (TextView)view.findViewById(R.id.tv_posisi_musicianprofile);
+        mTextViewUrlWebsite = (TextView)view.findViewById(R.id.tv_musician_url_website);
+        mTextViewUrlSoundCloud = (TextView)view.findViewById(R.id.tv_musician_url_soundcloud);
+        mTextViewUrlReverbnation = (TextView)view.findViewById(R.id.tv_musician_url_reverbnation);
 //        mYouTubeView = (YouTubePlayerView)view.findViewById(R.id.youtube_view);
         mButtonYouTubeVideo = (Button)view.findViewById(R.id.btn_youtubevideo_musicianprofile);
 //        mYouTubeView.initialize(YoutubeVideoConfig.YOUTUBE_API_KEYz );
@@ -94,7 +101,9 @@ public class MusicianProfileFragment extends Fragment {
 
 
         final Type type = new TypeToken<List<SearchResultModel>>(){}.getType();
+        final Type typemember = new TypeToken<Member>(){}.getType();
         mSearchResult = new Gson().fromJson(intent.getStringExtra("search"),type);
+        mMember = new Gson().fromJson(intent.getStringExtra("member"),typemember);
 
 
         mDescriptions = intent.getStringExtra("deskripsi");
@@ -105,19 +114,32 @@ public class MusicianProfileFragment extends Fragment {
         mTipe = intent.getStringExtra("tipe");
         mId = intent.getIntExtra("id",0);
         mYouTubeVideoUrl = intent.getStringExtra("youtube_video");
+        if(mTipe.equals("Group")) {
+            mAnggota = mMember.getAnggota();
+            mPosisi = mMember.getPosisi();
+        }
+        mUrlWebsite = intent.getStringExtra("url_website");
+        mUsernameSoundcloud = intent.getStringExtra("username_soundcloud");
+        mUsernameReverbnation = intent.getStringExtra("username_reverbnation");
         Log.d("pos",""+pos+" fragment");
 
         if(mTipe.equals("Solo")){
             mTextViewAnggota.setVisibility(View.GONE);
+            mTextViewPosisi.setVisibility(View.GONE);
         }
         else if(mTipe.equals("Group")){
             mTextViewAnggota.setVisibility(View.VISIBLE);
+            mTextViewPosisi.setVisibility(View.VISIBLE);
         }
 
-        mTextViewMusicianDescriptions.setText(": "+mDescriptions);
+        mTextViewMusicianDescriptions.setText(mDescriptions);
         mTextViewMusicianGenres.setText(": "+ mGenre);
         mTextViewTipeMusisi.setText(": "+mTipe);
-
+        mTextViewUrlWebsite.setText(mUrlWebsite);
+        mTextViewUrlSoundCloud.setText(mUsernameSoundcloud);
+        mTextViewUrlReverbnation.setText(mUsernameReverbnation);
+        mTextViewAnggota.setText("Anggota : "+mAnggota);
+        mTextViewPosisi.setText("Posisi : "+mPosisi);
 
         mButtonYouTubeVideo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,5 +180,6 @@ public class MusicianProfileFragment extends Fragment {
         return view;
 
     }
+
 
 }

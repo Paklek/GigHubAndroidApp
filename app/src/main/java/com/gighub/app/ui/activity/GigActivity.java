@@ -128,8 +128,32 @@ public class GigActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
-        StaticFunction staticFunction = new StaticFunction();
-        staticFunction.createOptionMenu(menu, mSession);
+//        StaticFunction staticFunction = new StaticFunction();
+//        staticFunction.createOptionMenu(menu, mSession,GigActivity.class);
+
+        if(mSession.isLoggedIn()){
+            if(mSession.checkUserType().equals("org")){
+                menu.getItem(2).setVisible(false);
+                menu.getItem(3).setVisible(false);
+            }
+            else if(mSession.checkUserType().equals("msc")){
+                menu.getItem(2).setVisible(true);
+                menu.getItem(3).setVisible(true);
+                menu.getItem(4).setVisible(false);
+                menu.getItem(5).setVisible(false);
+                menu.getItem(6).setVisible(false);
+
+            }
+            menu.getItem(0).setVisible(false);
+            menu.getItem(1).setVisible(false);
+        }
+        if(!mSession.isLoggedIn()){
+            menu.getItem(2).setVisible(false);
+            menu.getItem(3).setVisible(false);
+            menu.getItem(4).setVisible(false);
+            menu.getItem(5).setVisible(false);
+            menu.getItem(6).setVisible(false);
+        }
         return true;
     }
 

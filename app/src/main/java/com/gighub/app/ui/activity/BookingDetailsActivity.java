@@ -227,4 +227,9 @@ public class BookingDetailsActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }
