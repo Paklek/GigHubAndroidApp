@@ -6,9 +6,30 @@
     android:layout_centerVertical="true"
     android:fillViewport="false">
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Review" />
+        android:orientation="vertical">
+        <ListView
+            android:id="@+id/lv_review_musicianfragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </ListView>
+
+        <LinearLayout
+            android:id="@+id/ll_no_review_musicianreview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+            <TextView
+                android:layout_gravity="center"
+                android:text="@string/no_reviews"
+                android:id="@+id/tv_no_review_musicianreview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
 
 </android.support.v4.widget.NestedScrollView>

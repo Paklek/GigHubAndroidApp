@@ -158,4 +158,7 @@ public interface ServiceGighub {
 
     @POST(StaticString.ROUTE_YOUR_REVIEW)
     Call<YourReviewResponse> sendDataYourReview (@Body Map <String, String> dataYourReview);
+
+    @POST(StaticString.ROUTE_YOUR_REVIEWER)
+    Call<ListReviewerResponse> sendReviewerData (@Body Map<String, String> dataReviewer);
 }

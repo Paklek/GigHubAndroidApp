@@ -37,7 +37,7 @@ public class ReviewMusicianActivity extends AppCompatActivity {
 
     private RatingBar mRatingBar;
     private float mRating;
-    private TextView mTextViewMusicianName,mTextViewRatingNumber, mTextViewMessageReview;
+    private TextView mTextViewMusicianName,mTextViewRatingNumber, mTextViewMessageReview, mTextViewNamaOrganizer, mTextViewTanggalReview;
     private EditText mEditTextReview;
     private Button mButtonSendReview;
     private ImageView mImageViewMusicianPhoto, mImageViewUserReviewerPhoto;
@@ -67,6 +67,8 @@ public class ReviewMusicianActivity extends AppCompatActivity {
         mImageViewUserReviewerPhoto = (ImageView)findViewById(R.id.img_user_reviewer_reviewmusician);
         mLinearLayoutReviewMessage = (LinearLayout)findViewById(R.id.ll_review_message_reviewmusician);
         mTextViewMessageReview = (TextView)findViewById(R.id.tv_pesan_review_reviewmusician);
+        mTextViewNamaOrganizer = (TextView)findViewById(R.id.tv_nama_reviewer_reviewmusician);
+        mTextViewTanggalReview = (TextView)findViewById(R.id.tv_tanggal_review_reviewmusician);
 
 //        Intent intent = getIntent();
         mPhotoMusisi = intent.getStringExtra("photo");
@@ -86,6 +88,8 @@ public class ReviewMusicianActivity extends AppCompatActivity {
             mTextViewMessageReview.setText(mYourReview.getPesan());
             mRatingBar.setRating(Float.parseFloat(mYourReview.getNilai()+".0"));
             mRatingBar.setIsIndicator(true);
+            mTextViewNamaOrganizer.setText(mYourReview.getFirst_name()+" "+mYourReview.getLast_name());
+            mTextViewTanggalReview.setText(mYourReview.getCreated_at());
 //            mRatingBar.setBackgroundColor();
             if (mPhotoUser != null && !mPhotoUser.equals("")) {
                 Picasso.with(mContext).load(cloudinaryUrl.cloudinary.url().format("jpg").generate(mPhotoUser)).into(mImageViewUserReviewerPhoto);

@@ -66,8 +66,9 @@
     <string name="available_balance">Saldo yang tersedia</string>
     <string name="the_amount_of_withdrawals">Jumlah penarikan</string>
     <string name="error_player">Error inisialisasi YouTubePlayer (%1$s)</string>
-    <string name="video_is_not_available">Video tidak tersedia</string>
+    <string name="video_is_not_available">Tidak ada video</string>
     <string name="write_a_review">berikan ulasan kepada musisi</string>
     <string name="how_about_the_show">Bagaimana dengan pertunjukannya?</string>
     <string name="very_good">Sangat bagus!</string>
+    <string name="no_reviews">Tidak ada ulasan</string>
 </resources>

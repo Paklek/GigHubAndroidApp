@@ -98,7 +98,7 @@ public class CompletedBookingListFragment extends Fragment {
                 mStatus = mPenyewaan.get(position).getStatus();
                 mStatusRequest = mPenyewaan.get(position).getStatus_request();
 
-                if(mStatus.equals("4")){
+                if(mStatus.equals("4")&& (mTipeUser.equals("org") || mTipeUser.equals("msc"))){
                     BuildUrl buildUrl = new BuildUrl();
                     buildUrl.buildBaseUrl();
                     Map <String, String> dataYourReview = new HashMap<String, String>();
@@ -136,7 +136,7 @@ public class CompletedBookingListFragment extends Fragment {
                     });
                 }
 
-                else {
+                else if(mStatus.equals("3") && mTipeUser.equals("org")) {
                     intent.putExtra("nama_musisi", mNamaMusisi);
                     intent.putExtra("nama_gig", mNamaGig);
                     intent.putExtra("nama_user", mNamaUser);

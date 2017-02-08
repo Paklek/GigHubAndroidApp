@@ -75,9 +75,9 @@ public class SearchResultActivity extends AppCompatActivity {
 //        mListMusician = new Gson().fromJson(i.getStringExtra("search"),typeListMusician);
         Intent i = getIntent();
         final Type type = new TypeToken<List<SearchResultModel>>(){}.getType();
-//        final Type typemember = new TypeToken<Member>(){}.getType();
+        final Type typemember = new TypeToken<Member>(){}.getType();
         mSearchResult = new Gson().fromJson(i.getStringExtra("search"),type);
-//        mMember = new Gson().fromJson(i.getStringExtra("search"),typemember);
+        mMember = new Gson().fromJson(i.getStringExtra("member"),typemember);
 
         mListView = (ListView)findViewById(R.id.lv_search);
         mListView.setAdapter(new ListSearchResultAdapter(getApplicationContext(),mSearchResult ));
@@ -124,7 +124,7 @@ public class SearchResultActivity extends AppCompatActivity {
 
 //                    BuildUrl buildUrl = new BuildUrl();
 //                    buildUrl.buildBaseUrl();
-                    if(tipe.equals("Group")) {
+                    if(mSearchResult.get(position).getTipe().equals("Group")) {
                         Map<String, String> dataCallMember = new HashMap<String, String>();
                         Log.d("id", Integer.toString(mSearchResult.get(position).getId()));
                         dataCallMember.put("id", Integer.toString(mSearchResult.get(position).getId()));
@@ -148,7 +148,7 @@ public class SearchResultActivity extends AppCompatActivity {
                                 intent.putExtra("username_soundcloud", url_soundcloud);
                                 intent.putExtra("username_reverbnation", url_reverbnation);
                                 Log.d("member", response.body().getMember().toString());
-                                Toast.makeText(SearchResultActivity.this, response.body().getMember().toString(), Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(SearchResultActivity.this, response.body().getMember().toString(), Toast.LENGTH_SHORT).show();
 //                pos = position;
 //                                intent.putExtra("posisi", position);
 //                                Log.d("pos", "" + position);
@@ -164,6 +164,7 @@ public class SearchResultActivity extends AppCompatActivity {
                             }
                         });
                     }
+                    else {
                         Intent intent = new Intent(getApplicationContext(), MusicianActivity.class);
                         intent.putExtra("id", mSearchResult.get(position).getId());
                         intent.putExtra("name", mSearchResult.get(position).getName());
@@ -180,7 +181,7 @@ public class SearchResultActivity extends AppCompatActivity {
                         Log.d("response", "" + mSearchResult.get(position).getDeskripsi());
                         Log.d("response", "id musisinya adalah " + mSearchResult.get(position).getId() + " dengan tipe " + mSearchResult.get(position).getTipe());
                         startActivity(intent);
-
+                    }
 
                 }
                 else {
@@ -207,7 +208,7 @@ public class SearchResultActivity extends AppCompatActivity {
                                     intent.putExtra("photo", photo);
                                     intent.putExtra("youtube_video", youtube_video);
                                     Log.d("member", response.body().getMember().toString());
-                                    Toast.makeText(SearchResultActivity.this, response.body().getMember().toString(), Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(SearchResultActivity.this, response.body().getMember().toString(), Toast.LENGTH_SHORT).show();
 //                pos = position;
 //                                intent.putExtra("posisi", position);
 //                                Log.d("pos", "" + position);
@@ -223,24 +224,25 @@ public class SearchResultActivity extends AppCompatActivity {
                                 }
                             });
                         }
+                    else {
 
-                        Intent intent = new Intent(getApplicationContext(), MusicianActivity.class);
-                        intent.putExtra("id", mSearchResult.get(position).getId());
-                        intent.putExtra("name", mSearchResult.get(position).getName());
-                        intent.putExtra("deskripsi", mSearchResult.get(position).getDeskripsi());
-                        intent.putExtra("genre", mSearchResult.get(position).getGenrenya());
-                        intent.putExtra("harga_sewa", mSearchResult.get(position).getHarga_sewa());
-                        intent.putExtra("kota", mSearchResult.get(position).getKota());
-                        intent.putExtra("tipe", mSearchResult.get(position).getTipe());
-                        intent.putExtra("photo", mSearchResult.get(position).getPhoto());
-                        intent.putExtra("youtube_video", mSearchResult.get(position).getYoutube_video());
+                            Intent intent = new Intent(getApplicationContext(), MusicianActivity.class);
+                            intent.putExtra("id", mSearchResult.get(position).getId());
+                            intent.putExtra("name", mSearchResult.get(position).getName());
+                            intent.putExtra("deskripsi", mSearchResult.get(position).getDeskripsi());
+                            intent.putExtra("genre", mSearchResult.get(position).getGenrenya());
+                            intent.putExtra("harga_sewa", mSearchResult.get(position).getHarga_sewa());
+                            intent.putExtra("kota", mSearchResult.get(position).getKota());
+                            intent.putExtra("tipe", mSearchResult.get(position).getTipe());
+                            intent.putExtra("photo", mSearchResult.get(position).getPhoto());
+                            intent.putExtra("youtube_video", mSearchResult.get(position).getYoutube_video());
 //                pos = position;
-                        intent.putExtra("posisi", position);
-                        Log.d("pos", "" + position);
-                        Log.d("response", "" + mSearchResult.get(position).getDeskripsi());
-                        Log.d("response", "id musisinya adalah " + mSearchResult.get(position).getId() + " dengan tipe " + mSearchResult.get(position).getTipe());
-                        startActivity(intent);
-
+                            intent.putExtra("posisi", position);
+                            Log.d("pos", "" + position);
+                            Log.d("response", "" + mSearchResult.get(position).getDeskripsi());
+                            Log.d("response", "id musisinya adalah " + mSearchResult.get(position).getId() + " dengan tipe " + mSearchResult.get(position).getTipe());
+                            startActivity(intent);
+                        }
                 }
             }
         });

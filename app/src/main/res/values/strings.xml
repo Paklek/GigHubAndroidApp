@@ -66,8 +66,9 @@
     <string name="available_balance">Available balance</string>
     <string name="the_amount_of_withdrawals">The amount of withdrawals</string>
     <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
-    <string name="video_is_not_available">Video is not avalailable</string>
+    <string name="video_is_not_available">No Video</string>
     <string name="write_a_review">Write a review to this musician</string>
     <string name="how_about_the_show">How about the show?</string>
     <string name="very_good">Very good!</string>
+    <string name="no_reviews">No reviews</string>
 </resources>
