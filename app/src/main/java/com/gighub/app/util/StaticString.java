@@ -44,6 +44,8 @@ public class StaticString {
     public static final String ROUTE_ORGANIZER_PROFILE = "mobile/organizerprofile";
     public static final String ROUTE_UPLOAD_GIG_PHOTO ="";
     public static final String ROUTE_CALL_MEMBER_GROUP ="mobile/organizer/membergroup";
+    public static final String ROUTE_SEND_REVIEW ="mobile/organizer/sendreview";
+    public static final String ROUTE_YOUR_REVIEW ="mobile/organizer/yourreview";
 
     public static final String API_CLOUDINARY = "cloudinary://627999879788938:Tfnf61ZtXn61Ct-Jbr_F__1zSJ8@dv5anayv1";
 

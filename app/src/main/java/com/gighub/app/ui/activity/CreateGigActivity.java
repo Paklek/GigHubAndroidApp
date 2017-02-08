@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
@@ -414,6 +415,9 @@ public class CreateGigActivity extends AppCompatActivity implements AdapterView.
         }
     }
     private LatLng latlng = new LatLng(0,0);
+    Uri uriGalery = null;
+    Map<String,String> responseCloudinary;
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -448,6 +452,8 @@ public class CreateGigActivity extends AppCompatActivity implements AdapterView.
 
     private void onCaptureImageResult(Intent data) {
         Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+//        responseCloudinary = new HashMap<>();
+//        uriGalery = data.getData();
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
         destination = new File(Environment.getExternalStorageDirectory(),
@@ -463,12 +469,19 @@ public class CreateGigActivity extends AppCompatActivity implements AdapterView.
         } catch (IOException e) {
             e.printStackTrace();
         }
+//        new CreateGigActivity.uploadImageAsync(Uri.parse(destination.toString())).execute();
+//        Bitmap bm=null;
+//        if (data != null) {
+//            try {
+//                thumbnail = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(),Uri.parse(destination.toString()));
+////                bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
         mImageViewGigPhoto.setImageBitmap(thumbnail);
 
     }
-
-    Uri uriGalery = null;
-    Map<String,String> responseCloudinary;
 
 //    private void uploadGigPhoto(){
 //        cloudinaryResponse = new Gson().fromJson(new Gson().toJson(responseCloudinary),CloudinaryResponse.class);
@@ -526,6 +539,7 @@ public class CreateGigActivity extends AppCompatActivity implements AdapterView.
         @Override
         protected Object doInBackground(Object[] params) {
             String url = StaticFunction.get(getApplicationContext()).getRealBaseURL(uri);
+//            String url = StaticFunction.get(getApplicationContext()).getRealBaseURL(Uri.parse(destination.toString()));
             try{
 //                responseCloudinary = new Cloudinary().uploader().upload(url, ObjectUtils.emptyMap());
                 CloudinaryUrl cloudinaryUrl =new CloudinaryUrl();

@@ -8,7 +8,7 @@
     <string name="welcome">Welcome to GigHub</string>
     <string name="welcome2">Discover and booking musicians in your town</string>
     <string name="discover">DISCOVER</string>
-    <string name="are_you_manager">Are you manager or musician?</string>
+    <string name="are_you_manager">Are you organizer or musician?</string>
     <string name="join">JOIN</string>
     <string name="already_have">Already have an account?</string>
     <string name="sign_in"> Sign In</string>
@@ -22,6 +22,7 @@
     <string name="when_is_event">When is event will be play?</string>
     <string name="starting_time">Starting time and duration?</string>
     <string name="send_req">Send Request</string>
+    <string name="send">Send</string>
     <string name="profile">PROFILE</string>
     <string name="gig_money">GIG MONEY</string>
     <string name="manager">MANAGER</string>
@@ -66,4 +67,7 @@
     <string name="the_amount_of_withdrawals">The amount of withdrawals</string>
     <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
     <string name="video_is_not_available">Video is not avalailable</string>
+    <string name="write_a_review">Write a review to this musician</string>
+    <string name="how_about_the_show">How about the show?</string>
+    <string name="very_good">Very good!</string>
 </resources>

@@ -8,7 +8,7 @@
     <string name="welcome">Selamat Datang di GigHub</string>
     <string name="welcome2">Temukan dan sewa musisi yang ada di kotamu</string>
     <string name="discover">Temukan</string>
-    <string name="are_you_manager">Kamu seorang manager atau musisi?</string>
+    <string name="are_you_manager">Kamu seorang organizer atau musisi?</string>
     <string name="join">Gabung</string>
     <string name="already_have">Sudah memiliki akun?</string>
     <string name="sign_in">Masuk</string>
@@ -22,6 +22,7 @@
     <string name="when_is_event">When is event will be play?</string>
     <string name="starting_time">Starting time and duration?</string>
     <string name="send_req">Send Request</string>
+    <string name="send">Kirim</string>
     <string name="profile">Profil</string>
     <string name="gig_money">GIG MONEY</string>
     <string name="manager">MANAGER</string>
@@ -66,4 +67,7 @@
     <string name="the_amount_of_withdrawals">Jumlah penarikan</string>
     <string name="error_player">Error inisialisasi YouTubePlayer (%1$s)</string>
     <string name="video_is_not_available">Video tidak tersedia</string>
+    <string name="write_a_review">berikan ulasan kepada musisi</string>
+    <string name="how_about_the_show">Bagaimana dengan pertunjukannya?</string>
+    <string name="very_good">Sangat bagus!</string>
 </resources>

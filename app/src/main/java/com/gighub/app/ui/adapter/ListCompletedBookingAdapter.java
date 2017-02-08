@@ -73,11 +73,11 @@ public class ListCompletedBookingAdapter extends BaseAdapter {
         holder.mTextViewHour.setText("Rp. "+mPenyewaan.get(position).getTotal_biaya());
 
         if (mStatus.equals("3") && mStatusRequest.equals("1")){
-            holder.mTextViewVerify.setText("Done");
+            holder.mTextViewVerify.setText("Done | wait to review");
             holder.mTextViewVerify.setTextColor(holder.mTextViewVerify.getResources().getColor(R.color.primaryOrange2));
         }
         else if (mStatus.equals("4") && mStatusRequest.equals("1")){
-            holder.mTextViewVerify.setText("Done, Your balance have been added");
+            holder.mTextViewVerify.setText("Done");
             holder.mTextViewVerify.setTextColor(holder.mTextViewVerify.getResources().getColor(R.color.green));
         }
 

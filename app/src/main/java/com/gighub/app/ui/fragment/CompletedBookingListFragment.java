@@ -1,21 +1,28 @@
 package com.gighub.app.ui.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import com.gighub.app.R;
 import com.gighub.app.model.Penyewaan;
 import com.gighub.app.model.PenyewaanResponse;
+import com.gighub.app.model.YourReview;
+import com.gighub.app.model.YourReviewResponse;
+import com.gighub.app.ui.activity.BookingDetailsActivity;
+import com.gighub.app.ui.activity.ReviewMusicianActivity;
 import com.gighub.app.ui.adapter.ListCompletedBookingAdapter;
 import com.gighub.app.ui.adapter.ListOnProccessBookingAdapter;
 import com.gighub.app.util.BuildUrl;
 import com.gighub.app.util.SessionManager;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,9 +41,10 @@ public class CompletedBookingListFragment extends Fragment {
     private List<Penyewaan> mPenyewaan;
     private SessionManager mSession;
     private BaseAdapter mAdapter;
-    private int mIdUser;
-    private String mTipeUser;
+    private int mIdUser, mHargaSewa, mSewaId, mTotal;
+    private String mTipeUser, mNamaMusisi, mNamaGig, mNamaUser, mLokasi, mWaktuMulai, mWaktuSelesai, mTypeGig, mTypeSewa, mPhotoGig, mPhotoMusisi, mStatus, mStatusRequest;
     private ListView mListView;
+    private YourReview mYourReview;
     public CompletedBookingListFragment() {
         // Required empty public constructor
     }
@@ -50,6 +58,7 @@ public class CompletedBookingListFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_completed_booking_list, container, false);
 
         mSession = new SessionManager(getActivity().getApplicationContext());
+        mYourReview = new YourReview();
 
         if(mSession.isLoggedIn()){
             if(mSession.checkUserType().equals("org")){
@@ -68,6 +77,89 @@ public class CompletedBookingListFragment extends Fragment {
 
         sendDataCompletedBook(mIdUser,mTipeUser);
 
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final Intent intent = new Intent(getActivity().getApplicationContext(), ReviewMusicianActivity.class);
+                mNamaMusisi = mPenyewaan.get(position).getName();
+                mNamaGig = mPenyewaan.get(position).getNama_gig();
+                mNamaUser = mPenyewaan.get(position).getFirst_name()+" "+mPenyewaan.get(position).getLast_name();
+                mLokasi = mPenyewaan.get(position).getLokasi();
+                mHargaSewa = mPenyewaan.get(position).getHarga_sewa();
+                mWaktuMulai = mPenyewaan.get(position).getTanggal_mulai();
+                mWaktuSelesai = mPenyewaan.get(position).getTanggal_selesai();
+                mTotal = mPenyewaan.get(position).getTotal_biaya();
+                mSewaId = mPenyewaan.get(position).getId();
+                mTypeSewa = mPenyewaan.get(position).getType_sewa();
+                mTypeGig = mPenyewaan.get(position).getType_gig();
+                mPhotoMusisi = mPenyewaan.get(position).getPhoto();
+                mPhotoGig = mPenyewaan.get(position).getPhoto_gig();
+                mStatus = mPenyewaan.get(position).getStatus();
+                mStatusRequest = mPenyewaan.get(position).getStatus_request();
+
+                if(mStatus.equals("4")){
+                    BuildUrl buildUrl = new BuildUrl();
+                    buildUrl.buildBaseUrl();
+                    Map <String, String> dataYourReview = new HashMap<String, String>();
+                    dataYourReview.put("sewa_id", Integer.toString(mPenyewaan.get(position).getId()));
+                    buildUrl.serviceGighub.sendDataYourReview(dataYourReview).enqueue(new Callback<YourReviewResponse>() {
+                        @Override
+                        public void onResponse(Call<YourReviewResponse> call, Response<YourReviewResponse> response) {
+
+                            intent.putExtra("yourreview",new Gson().toJson(response.body().getYourReview()));
+                            intent.putExtra("nama_musisi", mNamaMusisi);
+                            intent.putExtra("nama_gig", mNamaGig);
+                            intent.putExtra("nama_user", mNamaUser);
+                            intent.putExtra("lokasi", mLokasi);
+//                    intent.putExtra("harga", mPenyewaan.get(position).getHarga());
+                            intent.putExtra("harga_sewa", mHargaSewa);
+                            intent.putExtra("waktu_mulai", mWaktuMulai);
+                            intent.putExtra("waktu_selesai", mWaktuSelesai);
+                            intent.putExtra("total", mTotal);
+                            intent.putExtra("sewa_id", mSewaId);
+                            intent.putExtra("type_sewa", mTypeSewa);
+                            intent.putExtra("type_gig", mTypeGig);
+                            intent.putExtra("photo", mPhotoMusisi);
+                            intent.putExtra("photo_gig", mPhotoGig);
+                            intent.putExtra("status", mStatus);
+                            intent.putExtra("status_request", mStatusRequest);
+                            intent.putExtra("activity","onproccessbooking");
+
+                            startActivity(intent);
+                        }
+
+                        @Override
+                        public void onFailure(Call<YourReviewResponse> call, Throwable t) {
+
+                        }
+                    });
+                }
+
+                else {
+                    intent.putExtra("nama_musisi", mNamaMusisi);
+                    intent.putExtra("nama_gig", mNamaGig);
+                    intent.putExtra("nama_user", mNamaUser);
+                    intent.putExtra("lokasi", mLokasi);
+//                    intent.putExtra("harga", mPenyewaan.get(position).getHarga());
+                    intent.putExtra("harga_sewa", mHargaSewa);
+                    intent.putExtra("waktu_mulai", mWaktuMulai);
+                    intent.putExtra("waktu_selesai", mWaktuSelesai);
+                    intent.putExtra("total", mTotal);
+                    intent.putExtra("sewa_id", mSewaId);
+                    intent.putExtra("type_sewa", mTypeSewa);
+                    intent.putExtra("type_gig", mTypeGig);
+                    intent.putExtra("photo", mPhotoMusisi);
+                    intent.putExtra("photo_gig", mPhotoGig);
+                    intent.putExtra("status", mStatus);
+                    intent.putExtra("status_request", mStatusRequest);
+                    intent.putExtra("activity","onproccessbooking");
+                    startActivity(intent);
+
+                }
+
+            }
+        });
 
         return v;
     }

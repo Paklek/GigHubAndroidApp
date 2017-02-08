@@ -152,4 +152,10 @@ public interface ServiceGighub {
 
     @POST(StaticString.ROUTE_CALL_MEMBER_GROUP)
     Call<MemberResponse> sendCallMember (@Body Map <String, String> memberGroup);
+
+    @POST(StaticString.ROUTE_SEND_REVIEW)
+    Call<Response> sendDataReview (@Body Map <String, String> dataReview);
+
+    @POST(StaticString.ROUTE_YOUR_REVIEW)
+    Call<YourReviewResponse> sendDataYourReview (@Body Map <String, String> dataYourReview);
 }
