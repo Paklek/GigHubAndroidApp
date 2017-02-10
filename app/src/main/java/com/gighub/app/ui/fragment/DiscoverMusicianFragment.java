@@ -33,10 +33,12 @@ import com.gighub.app.model.MResponse;
 import com.gighub.app.model.MusicianModel;
 import com.gighub.app.model.MusicianResponse;
 import com.gighub.app.model.Musicians;
+import com.gighub.app.model.ResponseCallGenre;
 import com.gighub.app.model.ResponseMusician;
 import com.gighub.app.model.SearchResultResponse;
 import com.gighub.app.ui.activity.MainActivity;
 import com.gighub.app.ui.activity.SearchResultActivity;
+import com.gighub.app.ui.adapter.ListGenreAdapter;
 import com.gighub.app.util.BuildUrl;
 import com.gighub.app.util.SessionManager;
 import com.gighub.app.util.StaticFunction;
@@ -193,6 +195,8 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_discover_musician_main, container, false);
+
+//        BuildUrl buildUrl =
         mContext = inflater.getContext();
 
 //        mButtonDatePicker = (Button)view.findViewById(R.id.btn_date_search);
@@ -264,6 +268,30 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
         mSpinner2.setAdapter(adapter2);
         mSpinner2.setOnItemSelectedListener(this);
         mRadioButtonTipeAll.setChecked(true);
+
+
+//        buildUrl.serviceGighub.loadMusicianGenre().enqueue(new Callback<ResponseCallGenre>() {
+//            @Override
+//            public void onResponse(Call<ResponseCallGenre> call, Response<ResponseCallGenre> response) {
+//                Log.d("data log",response.code()+ new Gson().toJson(response.body().getGenreList()));
+//                if(response.code()==200){
+//                    if(response.body().getError()==0){
+//                        mListGenre = response.body().getGenreList();
+//                        mListGenreAdapter = new ListGenreAdapter(mListGenre);
+//
+//                        mRecyclerViewGenreDialog.setHasFixedSize(true);
+//                        mRecyclerViewGenreDialog.setLayoutManager(mLayoutManager);
+//                        mRecyclerViewGenreDialog.setAdapter(mListGenreAdapter);
+//                        mRecyclerViewGenreDialog.getAdapter().notifyDataSetChanged();
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResponseCallGenre> call, Throwable t) {
+//
+//            }
+//        });
 
         return view;
     }

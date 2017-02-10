@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteCantOpenDatabaseException;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -91,6 +92,7 @@ public class BookMusicianActivity extends AppCompatActivity implements AdapterVi
     private CloudinaryResponse cloudinaryResponse;
     private ImageView mImageViewGigPhoto;
     private File destination;
+    private boolean mFromCamera;
 
 
     private static final String TYPE_GEOCODE = "/geocode";
@@ -424,24 +426,57 @@ public class BookMusicianActivity extends AppCompatActivity implements AdapterVi
     }
 
     private void onCaptureImageResult(Intent data) {
+        mFromCamera = true;
         Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-        destination = new File(Environment.getExternalStorageDirectory(),
-                System.currentTimeMillis() + ".jpg");
-        FileOutputStream fo;
-        try {
-            destination.createNewFile();
-            fo = new FileOutputStream(destination);
-            fo.write(bytes.toByteArray());
-            fo.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+//        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+//        destination = new File(Environment.getExternalStorageDirectory(),
+//                System.currentTimeMillis() + ".jpg");
+//        FileOutputStream fo;
+//        try {
+//            destination.createNewFile();
+//            fo = new FileOutputStream(destination);
+//            fo.write(bytes.toByteArray());
+//            fo.close();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        responseCloudinary = new HashMap<>();
+        uriGalery = data.getData();
+
+        Uri tempUri = getImageUri(getApplicationContext(), thumbnail);
+        destination = new File(getRealPathFromURI(tempUri));
+
+        new BookMusicianActivity.uploadImageAsync(tempUri).execute();
         mImageViewGigPhoto.setImageBitmap(thumbnail);
 
+    }
+
+    public String getRealPathFromURI(Uri uri) {
+        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+        return cursor.getString(idx);
+    }
+
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+//        FileOutputStream fo;
+//        try {
+//            destination.createNewFile();
+//            fo = new FileOutputStream(destination);
+//            fo.write(bytes.toByteArray());
+//            fo.close();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        return Uri.parse(path);
     }
 
     private void onSelectFromGalleryResult(Intent data) {
@@ -510,13 +545,27 @@ public class BookMusicianActivity extends AppCompatActivity implements AdapterVi
         @Override
         protected Object doInBackground(Object[] params) {
             String url = StaticFunction.get(getApplicationContext()).getRealBaseURL(uri);
-            try{
-//                responseCloudinary = new Cloudinary().uploader().upload(url, ObjectUtils.emptyMap());
-                CloudinaryUrl cloudinaryUrl =new CloudinaryUrl();
-                cloudinaryUrl.buildCloudinaryUrl();
-                responseCloudinary = cloudinaryUrl.cloudinary.uploader().upload(url, ObjectUtils.emptyMap());
-            }catch(IOException e){
+            String url2 = getRealPathFromURI(uri);
 
+            if (!mFromCamera) {
+                try {
+//                responseCloudinary = new Cloudinary().uploader().upload(url, ObjectUtils.emptyMap());
+                    CloudinaryUrl cloudinaryUrl = new CloudinaryUrl();
+                    cloudinaryUrl.buildCloudinaryUrl();
+                    responseCloudinary = cloudinaryUrl.cloudinary.uploader().upload(url, ObjectUtils.emptyMap());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            else {
+                try {
+//                responseCloudinary = new Cloudinary().uploader().upload(url, ObjectUtils.emptyMap());
+                    CloudinaryUrl cloudinaryUrl = new CloudinaryUrl();
+                    cloudinaryUrl.buildCloudinaryUrl();
+                    responseCloudinary = cloudinaryUrl.cloudinary.uploader().upload(url2, ObjectUtils.emptyMap());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
             if(!responseCloudinary.isEmpty()){
                 // nanti dismiss loading disini (ProgressDialog)
