@@ -17,6 +17,7 @@ import com.gighub.app.R;
 import com.gighub.app.model.Member;
 import com.gighub.app.model.SearchResultModel;
 import com.gighub.app.ui.activity.BookMusicianActivity;
+import com.gighub.app.ui.activity.LoginAsOrganizerActivity;
 import com.gighub.app.ui.activity.YouTubeVideoActivity;
 import com.gighub.app.util.SessionManager;
 import com.gighub.app.util.YoutubeVideoConfig;
@@ -155,7 +156,9 @@ public class MusicianProfileFragment extends Fragment {
             public void onClick(View v) {
 
                 if(!mSession.isLoggedIn()){
-                    Toast.makeText(mContext, R.string.you_must_be_logged,Toast.LENGTH_LONG).show();
+//                    Toast.makeText(mContext, R.string.you_must_be_logged,Toast.LENGTH_LONG).show();
+                    Intent intent2 = new Intent(mContext, LoginAsOrganizerActivity.class);
+                    startActivity(intent2);
                 }
                 else {
 
