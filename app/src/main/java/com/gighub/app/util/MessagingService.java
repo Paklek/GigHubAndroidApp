@@ -16,6 +16,7 @@ import com.gighub.app.R;
 import com.gighub.app.model.PenyewaanResponse;
 import com.gighub.app.ui.activity.BookingListActivity;
 import com.gighub.app.ui.activity.MainActivity;
+import com.gighub.app.ui.activity.ReviewMusicianActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.google.gson.Gson;
@@ -51,6 +52,9 @@ public class MessagingService extends FirebaseMessagingService {
                 case "request":
                     targetActivity = BookingListActivity.class;
                     break;
+                 case "review":
+                     targetActivity = BookingListActivity.class;
+                     break;
             }
             pushNotification(remoteMessage);
         }

@@ -2,12 +2,14 @@ package com.gighub.app.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gighub.app.R;
@@ -20,6 +22,8 @@ import com.gighub.app.util.SessionManager;
 import com.gighub.app.util.StaticString;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
+
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,6 +40,7 @@ public class LoginAsMusicianActivity extends AppCompatActivity {
     private Button mButtonCancelLoginMusician, mButtonLoginLoginMusician;
     private SessionManager mSession;
     private Context mContext;
+    private TextView mTextViewRegister;
 
     public static final String PESANLOG = "pesanlog";
     public static final String FIRST_NAME = "fname";
@@ -52,6 +57,18 @@ public class LoginAsMusicianActivity extends AppCompatActivity {
 
         mButtonCancelLoginMusician = (Button)findViewById(R.id.btn_cancel_login_msc);
         mButtonLoginLoginMusician = (Button)findViewById(R.id.btn_login_login_msc);
+
+        mTextViewRegister = (TextView)findViewById(R.id.tv_register_login_msc);
+
+        mTextViewRegister.setPaintFlags(mTextViewRegister.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+
+        mTextViewRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),RegisterAsMusicianActivity.class);
+                startActivity(intent);
+            }
+        });
 
         mButtonLoginLoginMusician.setOnClickListener(new View.OnClickListener() {
             @Override

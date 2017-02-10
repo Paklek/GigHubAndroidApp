@@ -1,6 +1,7 @@
 package com.gighub.app.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gighub.app.R;
@@ -37,6 +39,7 @@ public class RegisterAsMusicianActivity extends AppCompatActivity {
     private CheckBox mCheckBoxAgree;
     private Button mButtonRegister, mButtonCancelRegister;
     private SessionManager mSession;
+    private TextView mTextViewLogin;
 
     public static final String PESANLOG = "pesanlog";
 
@@ -45,7 +48,7 @@ public class RegisterAsMusicianActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_as_musician);
 
-
+        mTextViewLogin = (TextView)findViewById(R.id.tv_login_register_msc);
         mCheckBoxAgree = (CheckBox)findViewById(R.id.cbx_agree_termcondition);
         mEditTextNameRegister = (EditText)findViewById(R.id.et_name_register_msc);
         mEditTextEmailRegister = (EditText)findViewById(R.id.et_email_register_msc);
@@ -54,6 +57,16 @@ public class RegisterAsMusicianActivity extends AppCompatActivity {
 
         mButtonRegister = (Button)findViewById(R.id.btn_register_register_msc);
         mButtonCancelRegister = (Button)findViewById(R.id.btn_cancel_register_msc);
+
+        mTextViewLogin.setPaintFlags(mTextViewLogin.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+
+        mTextViewLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),LoginAsMusicianActivity.class);
+                startActivity(intent);
+            }
+        });
 
 //        mButtonRegister.setFocusable(false);
 //        mButtonRegister.setEnabled(false);

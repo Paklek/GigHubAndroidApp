@@ -1,6 +1,7 @@
 package com.gighub.app.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gighub.app.R;
@@ -34,6 +36,7 @@ public class RegisterAsOrganizerActivity extends AppCompatActivity {
     private Button mButtonRegisterRegisterOrg, mButtonCancelRegisterOrg;
     private SessionManager mSession;
     private CheckBox mCheckBoxAgree;
+    private TextView mTextViewLogin;
 
     public static final String PESANLOG = "pesanlog";
 
@@ -42,6 +45,7 @@ public class RegisterAsOrganizerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_as_organizer);
 
+        mTextViewLogin = (TextView)findViewById(R.id.tv_login_register_org);
         mEditTextFirstNameRegisterOrg = (EditText)findViewById(R.id.et_first_name_register_org);
         mEditTextLastNameRegisterOrg = (EditText)findViewById(R.id.et_last_name_register_org);
         mEditTextEmailRegisterOrg = (EditText)findViewById(R.id.et_email_register_org);
@@ -51,6 +55,16 @@ public class RegisterAsOrganizerActivity extends AppCompatActivity {
 
         mButtonCancelRegisterOrg = (Button)findViewById(R.id.btn_cancel_register_org);
         mButtonRegisterRegisterOrg = (Button)findViewById(R.id.btn_register_register_org);
+
+        mTextViewLogin.setPaintFlags(mTextViewLogin.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+
+        mTextViewLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),LoginAsOrganizerActivity.class);
+                startActivity(intent);
+            }
+        });
 
         mCheckBoxAgree.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

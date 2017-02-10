@@ -3,12 +3,14 @@ package com.gighub.app.ui.activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gighub.app.R;
@@ -34,6 +36,7 @@ public class LoginAsOrganizerActivity extends AppCompatActivity {
     private Button mButtonCancelLoginOrganizer, mButtonLoginLoginOrganizer;
     private SessionManager mSession;
     private Context mContext;
+    private TextView mTextViewRegister;
 
     public final static String PESANLOG ="pesanlog";
 
@@ -48,6 +51,17 @@ public class LoginAsOrganizerActivity extends AppCompatActivity {
         mEditTextPasswordLoginOrganizer = (EditText)findViewById(R.id.et_password_login_org);
         mButtonCancelLoginOrganizer = (Button)findViewById(R.id.btn_cancel_login_org);
         mButtonLoginLoginOrganizer = (Button)findViewById(R.id.btn_login_login_org);
+        mTextViewRegister = (TextView)findViewById(R.id.tv_register_login_org);
+
+        mTextViewRegister.setPaintFlags(mTextViewRegister.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+
+        mTextViewRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext,RegisterAsOrganizerActivity.class);
+                startActivity(intent);
+            }
+        });
 
         mButtonLoginLoginOrganizer.setOnClickListener(new View.OnClickListener() {
             @Override
