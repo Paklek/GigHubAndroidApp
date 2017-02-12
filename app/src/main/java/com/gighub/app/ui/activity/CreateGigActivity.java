@@ -87,6 +87,7 @@ public class CreateGigActivity extends AppCompatActivity implements AdapterView.
     private ImageView mImageViewGigPhoto;
     private File destination;
     private boolean mFromCamera;
+    private ProgressDialog mProgressDialog;
 
     //    private static final String PLACES_API_BASE = "https://maps.googleapis.com/maps/api/place";
     //    private static final String TYPE_AUTOCOMPLETE = "/autocomplete";
@@ -110,6 +111,8 @@ public class CreateGigActivity extends AppCompatActivity implements AdapterView.
         mContext = getApplicationContext();
 
         mSession = new SessionManager(getApplicationContext());
+        mProgressDialog = new ProgressDialog(mContext);
+        mProgressDialog.setMessage("Loading...");
 
         mEditTextGigName = (EditText) findViewById(R.id.tv_nama_acara_creategigactivity);
         mAutoCompleteTextViewLocation = (EditText) findViewById(R.id.tv_location_creategigactivity);
@@ -241,6 +244,7 @@ public class CreateGigActivity extends AppCompatActivity implements AdapterView.
         mButtonCreateGig.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mProgressDialog.show();
                 insertGig();
             }
         });
@@ -280,17 +284,61 @@ public class CreateGigActivity extends AppCompatActivity implements AdapterView.
         buildUrl.serviceGighub.sendInsertDataGig(dataGig).enqueue(new Callback<GigResponse>() {
             @Override
             public void onResponse(Call<GigResponse> call, Response<GigResponse> response) {
-                Intent intent = new Intent(mContext, MainActivity.class);
+                if (response.body().getError()==0) {
+                    if (response.code()==200) {
+                        Intent intent = new Intent(mContext, MainActivity.class);
 //                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                Toast.makeText(CreateGigActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(CreateGigActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
 //                Log.d(CREATEBAND,"response " +response.code() +" "+ response.body().getMessage());
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                mContext.startActivity(intent);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        mProgressDialog.dismiss();
+                        mContext.startActivity(intent);
+                    }
+                    else {
+                        AlertDialog alertDialog = new AlertDialog.Builder(getApplicationContext())
+                                .setTitle("Connection Error")
+                                .setMessage(R.string.failed_try_again+" "+response.message()+" "+response.code())
+                                .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        finish();
+                                        System.exit(0);
+                                    }
+                                })
+                                .create();
+                        alertDialog.show();
+                    }
+                }
+                else {
+                    AlertDialog alertDialog = new AlertDialog.Builder(getApplicationContext())
+                            .setTitle("Connection Error")
+                            .setMessage(R.string.failed_try_again+" "+response.message()+" "+response.code())
+                            .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finish();
+                                    System.exit(0);
+                                }
+                            })
+                            .create();
+                    alertDialog.show();
+                }
             }
 
             @Override
             public void onFailure(Call<GigResponse> call, Throwable t) {
-
+                AlertDialog alertDialog = new AlertDialog.Builder(getApplicationContext())
+                        .setTitle("Connection Error")
+                        .setMessage(R.string.failed_try_again)
+                        .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                                System.exit(0);
+                            }
+                        })
+                        .create();
+                alertDialog.show();
             }
         });
     }

@@ -2,10 +2,12 @@ package com.gighub.app.ui.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.IntegerRes;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private String mName, mFirstName, mLastName, mEmail,mPhone,mGenre;
     private String mMusicianId,mOrganizerId, mTipeUser;
     private int mIdUser;
+    private ProgressDialog mProgressDialog;
 
     public static final String FIRST_NAME = "fname";
 
@@ -61,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
         mSession = new SessionManager(getApplicationContext());
 
         mSession.getSkipIntroStatus();
+        mProgressDialog = new ProgressDialog(getApplicationContext());
+        mProgressDialog.setMessage("Loading...");
 
         if(mSession.isSkipIntroStatus()){
 
@@ -227,7 +232,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.action_yourgigs:
-                Intent intent5 = new Intent(getApplicationContext(),YourGigActivity.class);
+                Intent intent5 = new Intent(MainActivity.this,YourGigActivity.class);
                 getYourGigs(intent5);
                 return true;
 
@@ -248,9 +253,6 @@ public class MainActivity extends AppCompatActivity {
 
                 }
 //                BuatProgressDialog();
-                StaticFunction staticFunction = new StaticFunction();
-                staticFunction.buildProgressDialog(this);
-//
                 Book(intent6,mIdUser,mTipeUser);
 //                onProccess(intent6,mIdUser,mTipeUser);
 //                startActivity(intent6);
@@ -261,7 +263,10 @@ public class MainActivity extends AppCompatActivity {
                 // User chose the "Favorite" action, mark the current item
                 // as a favorite...
                 final Intent intent7 = new Intent(getApplicationContext(),AccountActivity.class);
-
+                mProgressDialog = new ProgressDialog(MainActivity.this);
+                mProgressDialog.setMessage("Loading...");
+                mProgressDialog.setCanceledOnTouchOutside(false);
+                mProgressDialog.show();
                 if(mSession.isLoggedIn()){
                     if(mSession.checkUserType().equals("org")){
                         mFirstName = mSession.getUserDetails().getFirst_name();
@@ -294,20 +299,44 @@ public class MainActivity extends AppCompatActivity {
                         public void onResponse(Call<MusicianGenresResponse> call, Response<MusicianGenresResponse> response) {
                             if(response.code()==200){
                                 intent7.putExtra("musiciangenres",new Gson().toJson(response.body().getMusicianGenres()));
+                                mProgressDialog.dismiss();
                                 startActivity(intent7);
                             }
                             else {
-                                Toast.makeText(MainActivity.this,""+ response.code()+" "+response.message(), Toast.LENGTH_SHORT).show();
+                                mProgressDialog.dismiss();
+                                AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this)
+                                        .setTitle("Connection Error")
+                                        .setMessage(R.string.failed_try_again+" "+response.message()+" "+response.code())
+                                        .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+//                                                finish();
+//                                                System.exit(0);
+                                            }
+                                        })
+                                        .create();
+                                alertDialog.show();
                             }
                         }
 
                         @Override
                         public void onFailure(Call<MusicianGenresResponse> call, Throwable t) {
-
+                            mProgressDialog.dismiss();
+                            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this)
+                                    .setTitle("Connection Error")
+                                    .setMessage(R.string.failed_try_again)
+                                    .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                        }
+                                    })
+                                    .create();
+                            alertDialog.show();
                         }
                     });
                 }
                 else {
+                    mProgressDialog.dismiss();
                     startActivity(intent7);
                 }
                 return true;
@@ -325,20 +354,51 @@ public class MainActivity extends AppCompatActivity {
         BuildUrl buildUrl = new BuildUrl();
         buildUrl.buildBaseUrl();
 
+        mProgressDialog = new ProgressDialog(MainActivity.this);
+        mProgressDialog.setMessage("Loading...");
+        mProgressDialog.show();
+
         sendYourBandData.put("user_id",mMusicianId);
 
         buildUrl.serviceGighub.sendYourBands(sendYourBandData).enqueue(new Callback<YourBandResponse>() {
             @Override
             public void onResponse(Call<YourBandResponse> call, Response<YourBandResponse> response) {
-                i.putExtra("bands",new Gson().toJson(response.body().getGroupBands()));
-                Log.d("response",new Gson().toJson(response.body().getGroupBands()));
-                Log.d("response",new Gson().toJson(response.body()));
-                startActivity(i);
+                if (response.code()==200) {
+                    i.putExtra("bands", new Gson().toJson(response.body().getGroupBands()));
+                    Log.d("response", new Gson().toJson(response.body().getGroupBands()));
+                    Log.d("response", new Gson().toJson(response.body()));
+                    mProgressDialog.dismiss();
+                    startActivity(i);
+                }
+                else if (response.body().getGroupBands()==null){
+                    mProgressDialog.dismiss();
+//                    AlertDialog alertDialog = new AlertDialog.Builder(getApplicationContext())
+//                            .setTitle("Connection Error")
+//                            .setMessage(R.string.failed_try_again+" "+response.message()+" "+response.code())
+//                            .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    dialog.dismiss();
+//                                }
+//                            })
+//                            .create();
+//                    alertDialog.show();
+                    startActivity(i);
+                }
             }
 
             @Override
             public void onFailure(Call<YourBandResponse> call, Throwable t) {
-
+                AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("Connection Error")
+                        .setMessage(R.string.failed_try_again)
+                        .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        })
+                        .create();
+                alertDialog.show();
             }
         });
     }
@@ -349,6 +409,11 @@ public class MainActivity extends AppCompatActivity {
         BuildUrl buildUrl = new BuildUrl();
         buildUrl.buildBaseUrl();
 
+        mProgressDialog = new ProgressDialog(MainActivity.this);
+        mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.show();
+
         Log.d("response",mOrganizerId);
         Log.d("response",mSession.getUserDetails().getFirst_name());
 
@@ -357,10 +422,27 @@ public class MainActivity extends AppCompatActivity {
         buildUrl.serviceGighub.loadYourGig(organizerId).enqueue(new Callback<YourGigResponse>() {
             @Override
             public void onResponse(Call<YourGigResponse> call, Response<YourGigResponse> response) {
-                i.putExtra("yourgigs",new Gson().toJson(response.body().getYourgigs()));
-                Log.d("response",new Gson().toJson(response.body().getYourgigs()));
-                Log.d("response",new Gson().toJson(response.body()));
-                startActivity(i);
+                if (response.code()==200) {
+                    i.putExtra("yourgigs", new Gson().toJson(response.body().getYourgigs()));
+                    Log.d("response", new Gson().toJson(response.body().getYourgigs()));
+                    Log.d("response", new Gson().toJson(response.body()));
+                    mProgressDialog.dismiss();
+                    startActivity(i);
+                }
+                else {
+                    mProgressDialog.dismiss();
+                    AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this)
+                            .setTitle("Connection Error")
+                            .setMessage(R.string.failed_try_again+" "+response.message()+" "+response.code())
+                            .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .create();
+                    alertDialog.show();
+                }
             }
 
             @Override
@@ -368,6 +450,18 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("fail",t.getCause().getMessage());
                 Log.d("fail",t.getMessage());
                 Log.d("fail",t.getCause().getLocalizedMessage());
+                mProgressDialog.dismiss();
+                AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("Connection Error")
+                        .setMessage(R.string.failed_try_again)
+                        .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .create();
+                alertDialog.show();
             }
         });
     }
@@ -378,6 +472,11 @@ public class MainActivity extends AppCompatActivity {
         BuildUrl buildUrl = new BuildUrl();
         buildUrl.buildBaseUrl();
 
+        mProgressDialog = new ProgressDialog(MainActivity.this);
+        mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.show();
+
         idUser.put("tipe_user", tipeUser);
         idUser.put("user_id",Integer.toString(userId));
         buildUrl.serviceGighub.sendIdUserForBook(idUser).enqueue(new Callback<PenyewaanResponse>() {
@@ -386,9 +485,11 @@ public class MainActivity extends AppCompatActivity {
                 if(response.code()==200) {
                     i.putExtra("onreq", new Gson().toJson(response.body().getPenyewaanList()));
                     i.putExtra("onproc", new Gson().toJson(response.body().getPenyewaanList()));
+                    mProgressDialog.dismiss();
                     startActivity(i);
                 }
                 else {
+                    mProgressDialog.dismiss();
                     Log.d("response",response.message());
                     Toast.makeText(getApplicationContext(),"Booking list is empty",Toast.LENGTH_LONG).show();
                 }
@@ -397,6 +498,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<PenyewaanResponse> call, Throwable t) {
                 Log.d("fail",t.getCause().getMessage());
+                mProgressDialog.dismiss();
+                AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("Connection Error")
+                        .setMessage(R.string.failed_try_again)
+                        .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .create();
+                alertDialog.show();
             }
         });
 
@@ -446,19 +559,36 @@ public class MainActivity extends AppCompatActivity {
         BuildUrl buildUrl = new BuildUrl();
         buildUrl.buildBaseUrl();
 
+        mProgressDialog = new ProgressDialog(MainActivity.this);
+        mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.show();
+
         buildUrl.serviceGighub.loadMusicianGenre().enqueue(new Callback<ResponseCallGenre>() {
             @Override
             public void onResponse(Call<ResponseCallGenre> call, Response<ResponseCallGenre> response) {
                 if(response.code()==200){
                     Intent intent2 = new Intent(getApplicationContext(),CreateBandActivity.class);
                     intent2.putExtra("genres",new Gson().toJson(response.body().getGenreList()));
+                    mProgressDialog.dismiss();
                     startActivity(intent2);
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseCallGenre> call, Throwable t) {
-
+                mProgressDialog.dismiss();
+                AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("Connection Error")
+                        .setMessage(R.string.failed_try_again)
+                        .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .create();
+                alertDialog.show();
             }
         });
     }

@@ -4,14 +4,18 @@ package com.gighub.app.ui.fragment;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.internal.ParcelableSparseArray;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.os.ParcelableCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -69,10 +73,13 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
     Spinner mSpinner1;
     Spinner mSpinner2;
     private SessionManager mSession;
-    private String mKotaSearch, mGenreName;
+    private String mKotaSearch, mGenreName,mGenres;
     private String[] mListProvinsi ={"-", "Aceh", "Bali", "Banten", "Bengkulu", "Gorontalo", "Jakarta", "Jambi", "Jawa Barat", "Jawa Tengah", "Jawa Timur", "Kalimantan Barat", "Kalimantan Selatan", "Kalimantan Tengah", "Kalimantan Timur", "Kalimantan Utara", "Kepulauan Bangka Belitung", "Kepulauan Riau", "Lampung", "Maluku", "Maluku Utara", "Nusa Tenggara Barat", "Nusa Tenggara Timur", "Papua", "Papua Barat", "Riau", "Sulawesi Barat", "Sulawesi Selatan", "Sulawesi Tengah", "Sulawesi Tenggara", "Sulawesi Utara", "Sumatera Barat", "Sumatera Selatan", "Sumatera Utara", "Yogyakarta"};
+    private ProgressDialog mProgressDialog;
+//    private String mLoading;
 
     public final static int REQCODE = 1000;
+
 
     List<Genre> genreList = new ArrayList<>();
 
@@ -198,7 +205,81 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
 
 //        BuildUrl buildUrl =
         mContext = inflater.getContext();
+        mProgressDialog = new ProgressDialog(mContext);
+        mProgressDialog.setMessage("Loading...");
 
+        Intent intent = getActivity().getIntent();
+        mGenres = intent.getStringExtra("genres");
+
+        if(mGenres==null||mGenres.equals("")){
+
+            mProgressDialog.setCanceledOnTouchOutside(false);
+            mProgressDialog.show();
+            BuildUrl buildUrl = new BuildUrl();
+            buildUrl.buildBaseUrl();
+            buildUrl.serviceGighub.loadMusicianGenre().enqueue(new Callback<ResponseCallGenre>() {
+                @Override
+                public void onResponse(Call<ResponseCallGenre> call, Response<ResponseCallGenre> response) {
+                    Log.d("data log", response.code() + new Gson().toJson(response.body().getGenreList()));
+                    if (response.body().getError() == 0){
+                        if (response.code() == 200) {
+                            if (response.body().getError() == 0) {
+//                        mListGenre = response.body().getGenreList();
+                                mGenres = new Gson().toJson(response.body().getGenreList());
+                                mProgressDialog.dismiss();
+                            }
+                        }
+                        else {
+                            AlertDialog alertDialog = new AlertDialog.Builder(getActivity().getApplicationContext())
+                                    .setTitle("Connection Error")
+                                    .setMessage(R.string.failed_try_again+" "+response.message()+" "+response.code())
+                                    .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            getActivity().finish();
+                                            System.exit(0);
+                                        }
+                                    })
+                                    .create();
+                            alertDialog.show();
+                        }
+                    }
+                    else {
+                        AlertDialog alertDialog = new AlertDialog.Builder(getActivity().getApplicationContext())
+                                .setTitle("Connection Error")
+                                .setMessage(R.string.failed_try_again+" "+response.message()+" "+response.code())
+                                .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        getActivity().finish();
+                                        System.exit(0);
+                                    }
+                                })
+                                .create();
+                        alertDialog.show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseCallGenre> call, Throwable t) {
+                    AlertDialog alertDialog = new AlertDialog.Builder(getActivity().getApplicationContext())
+                            .setTitle("Connection Error")
+                            .setMessage(R.string.failed_try_again)
+                            .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    getActivity().finish();
+                                    System.exit(0);
+                                }
+                            })
+                            .create();
+                    alertDialog.show();
+                }
+            });
+        }
+
+
+//        mLoading = R.string.loading
 //        mButtonDatePicker = (Button)view.findViewById(R.id.btn_date_search);
         mSession = new SessionManager(getContext().getApplicationContext());
         mButtonSearch = (Button)view.findViewById(R.id.btn_search);
@@ -241,17 +322,23 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
         mButtonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                StaticFunction staticFunction = new StaticFunction();
-                staticFunction.buildProgressDialog(getContext());
+//                StaticFunction staticFunction = new StaticFunction();
+//                staticFunction.buildProgressDialog(getContext());
                 getSearchMusician();
             }
         });
+
+
 
         final Fragment this_fragment = this;
         mEditTextSelectGenre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("genres", mGenres);
+                Log.d("genres",bundle.toString());
                 DialogFragment dialogFragment = new DialogGenreFragment();
+                dialogFragment.setArguments(bundle);
                 dialogFragment.setTargetFragment(this_fragment,REQCODE);
                 dialogFragment.show(getFragmentManager(),"Isi");
             }
@@ -350,6 +437,9 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
         BuildUrl buildUrl = new BuildUrl();
         buildUrl.buildBaseUrl();
 
+        mProgressDialog.show();
+
+
         mKotaSearch = mSpinner2.getSelectedItem().toString();
         mGenreName = mEditTextSelectGenre.getText().toString();
 
@@ -392,6 +482,7 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
                             Log.d("kirim kota",mKotaSearch);
                             Log.d("response",new Gson().toJson(response.body()));
 //                            Log.d("musisi",new Gson().toJson(response.raw()));
+                            mProgressDialog.dismiss();
                             startActivity(i);
                         }
                     }
@@ -400,7 +491,7 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
 
                 @Override
                 public void onFailure(Call<SearchResultResponse> call, Throwable t) {
-
+                    mProgressDialog.dismiss();
                 }
             });
         }
@@ -418,6 +509,7 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
 //                            Log.d("kirim kota",mKotaSearch);
                             Log.d("response",new Gson().toJson(response.body()));
 //                            Log.d("musisi",new Gson().toJson(response.raw()));
+                            mProgressDialog.dismiss();
                             startActivity(i);
                         }
                     }
@@ -426,7 +518,7 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
 
                 @Override
                 public void onFailure(Call<SearchResultResponse> call, Throwable t) {
-
+                    mProgressDialog.dismiss();
                 }
             });
         }
@@ -444,6 +536,7 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
 //                            Log.d("kirim kota",mKotaSearch);
                             Log.d("response",new Gson().toJson(response.body()));
 //                            Log.d("musisi",new Gson().toJson(response.raw()));
+                            mProgressDialog.dismiss();
                             startActivity(i);
                         }
                     }
@@ -452,7 +545,7 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
 
                 @Override
                 public void onFailure(Call<SearchResultResponse> call, Throwable t) {
-
+                    mProgressDialog.dismiss();
                 }
             });
         }
@@ -469,6 +562,7 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
                             Log.d("kirim kota",mKotaSearch);
                             Log.d("response",new Gson().toJson(response.body()));
 //                            Log.d("musisi",new Gson().toJson(response.raw()));
+                            mProgressDialog.dismiss();
                             startActivity(i);
                         }
                     }
@@ -478,6 +572,7 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
                 @Override
                 public void onFailure(Call<SearchResultResponse> call, Throwable t) {
                     Log.d("response", t.getMessage());
+                    mProgressDialog.dismiss();
                     Toast.makeText(mContext,"Connection Fail. Check Your Connection",Toast.LENGTH_LONG).show();
                 }
             });
@@ -499,6 +594,7 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
                             Log.d("kirim kota",mKotaSearch);
                             Log.d("response",new Gson().toJson(response.body()));
 //                            Log.d("musisi",new Gson().toJson(response.raw()));
+                            mProgressDialog.dismiss();
                             startActivity(i);
                         }
                     }
@@ -508,6 +604,7 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
                 @Override
                 public void onFailure(Call<SearchResultResponse> call, Throwable t) {
                     Log.d("response", t.getMessage());
+                    mProgressDialog.dismiss();
                     Toast.makeText(mContext,"Connection Fail. Check Your Connection",Toast.LENGTH_LONG).show();
                 }
             });
@@ -527,6 +624,7 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
                             Log.d("kirim kota",mKotaSearch);
                             Log.d("response",new Gson().toJson(response.body()));
 //                            Log.d("musisi",new Gson().toJson(response.raw()));
+                            mProgressDialog.dismiss();
                             startActivity(i);
                         }
                     }
@@ -536,6 +634,7 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
                 @Override
                 public void onFailure(Call<SearchResultResponse> call, Throwable t) {
                     Log.d("response", t.getMessage());
+                    mProgressDialog.dismiss();
                     Toast.makeText(mContext,"Connection Fail. Check Your Connection",Toast.LENGTH_LONG).show();
                 }
             });
@@ -556,6 +655,7 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
                             Log.d("kirim kota",mKotaSearch);
                             Log.d("response",new Gson().toJson(response.body()));
 //                            Log.d("musisi",new Gson().toJson(response.raw()));
+                            mProgressDialog.dismiss();
                             startActivity(i);
                         }
                     }
@@ -565,6 +665,7 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
                 @Override
                 public void onFailure(Call<SearchResultResponse> call, Throwable t) {
                     Log.d("response", t.getMessage());
+                    mProgressDialog.dismiss();
                     Toast.makeText(mContext,"Connection Fail. Check Your Connection",Toast.LENGTH_LONG).show();
                 }
             });
@@ -585,6 +686,7 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
                             Log.d("kirim kota",mKotaSearch);
                             Log.d("response",new Gson().toJson(response.body()));
 //                            Log.d("musisi",new Gson().toJson(response.raw()));
+                            mProgressDialog.dismiss();
                             startActivity(i);
                         }
                     }
@@ -594,6 +696,7 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
                 @Override
                 public void onFailure(Call<SearchResultResponse> call, Throwable t) {
                     Log.d("response", t.getMessage());
+                    mProgressDialog.dismiss();
                     Toast.makeText(mContext,"Connection Fail. Check Your Connection",Toast.LENGTH_LONG).show();
                 }
             });
@@ -613,6 +716,7 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
                             Log.d("kirim kota",mKotaSearch);
                             Log.d("response",new Gson().toJson(response.body()));
 //                            Log.d("musisi",new Gson().toJson(response.raw()));
+                            mProgressDialog.dismiss();
                             startActivity(i);
                         }
                     }
@@ -622,6 +726,7 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
                 @Override
                 public void onFailure(Call<SearchResultResponse> call, Throwable t) {
                     Log.d("response", t.getMessage());
+                    mProgressDialog.dismiss();
                     Toast.makeText(mContext,"Connection Fail. Check Your Connection",Toast.LENGTH_LONG).show();
                 }
             });
@@ -641,6 +746,7 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
                             Log.d("kirim kota",mKotaSearch);
                             Log.d("response",new Gson().toJson(response.body()));
 //                            Log.d("musisi",new Gson().toJson(response.raw()));
+                            mProgressDialog.dismiss();
                             startActivity(i);
                         }
                     }
@@ -650,6 +756,7 @@ public class DiscoverMusicianFragment extends Fragment implements AdapterView.On
                 @Override
                 public void onFailure(Call<SearchResultResponse> call, Throwable t) {
                     Log.d("response", t.getMessage());
+                    mProgressDialog.dismiss();
                     Toast.makeText(mContext,"Connection Fail. Check Your Connection",Toast.LENGTH_LONG).show();
                 }
             });

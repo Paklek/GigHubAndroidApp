@@ -21,13 +21,17 @@ import android.widget.LinearLayout;
 
 import com.gighub.app.R;
 import com.gighub.app.model.Genre;
+import com.gighub.app.model.Member;
 import com.gighub.app.model.ResponseCallGenre;
 import com.gighub.app.model.RetrofitService;
+import com.gighub.app.model.SearchResultModel;
 import com.gighub.app.ui.activity.CreateBandActivity;
 import com.gighub.app.ui.adapter.ListGenreAdapter;
 import com.gighub.app.util.BuildUrl;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +49,7 @@ public class DialogGenreFragment extends DialogFragment {
     private List<Genre> mListGenre;
     private Button mButtonSelection;
     private RecyclerView.LayoutManager mLayoutManager;
-
+    private String mGenres;
     private ListGenreAdapter mListGenreAdapter;
 
     public DialogGenreFragment() {
@@ -69,6 +73,12 @@ public class DialogGenreFragment extends DialogFragment {
         // Inflate the layout for this fragment
         mButtonSelection = (Button)view.findViewById(R.id.btn_genre_select);
         mListGenre = new ArrayList<Genre>();
+        Bundle bundle = getArguments();
+        mGenres = bundle.getString("genres");
+
+        final Type type = new TypeToken<List<Genre>>(){}.getType();
+//        final Type typemember = new TypeToken<Member>(){}.getType();
+        mListGenre = new Gson().fromJson(mGenres,type);
 
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerViewGenreDialog = (RecyclerView)view.findViewById(R.id.rv_genre);
@@ -80,30 +90,30 @@ public class DialogGenreFragment extends DialogFragment {
         mRecyclerViewGenreDialog.setAdapter(mListGenreAdapter);
         mRecyclerViewGenreDialog.getAdapter().notifyDataSetChanged();
 
-        BuildUrl buildUrl = new BuildUrl();
-        buildUrl.buildBaseUrl();
-        buildUrl.serviceGighub.loadMusicianGenre().enqueue(new Callback<ResponseCallGenre>() {
-            @Override
-            public void onResponse(Call<ResponseCallGenre> call, Response<ResponseCallGenre> response) {
-                Log.d("data log",response.code()+ new Gson().toJson(response.body().getGenreList()));
-                if(response.code()==200){
-                    if(response.body().getError()==0){
-                        mListGenre = response.body().getGenreList();
-                        mListGenreAdapter = new ListGenreAdapter(mListGenre);
-
-                        mRecyclerViewGenreDialog.setHasFixedSize(true);
-                        mRecyclerViewGenreDialog.setLayoutManager(mLayoutManager);
-                        mRecyclerViewGenreDialog.setAdapter(mListGenreAdapter);
-                        mRecyclerViewGenreDialog.getAdapter().notifyDataSetChanged();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseCallGenre> call, Throwable t) {
-
-            }
-        });
+//        BuildUrl buildUrl = new BuildUrl();
+//        buildUrl.buildBaseUrl();
+//        buildUrl.serviceGighub.loadMusicianGenre().enqueue(new Callback<ResponseCallGenre>() {
+//            @Override
+//            public void onResponse(Call<ResponseCallGenre> call, Response<ResponseCallGenre> response) {
+//                Log.d("data log",response.code()+ new Gson().toJson(response.body().getGenreList()));
+//                if(response.code()==200){
+//                    if(response.body().getError()==0){
+//                        mListGenre = response.body().getGenreList();
+//                        mListGenreAdapter = new ListGenreAdapter(mListGenre);
+//
+//                        mRecyclerViewGenreDialog.setHasFixedSize(true);
+//                        mRecyclerViewGenreDialog.setLayoutManager(mLayoutManager);
+//                        mRecyclerViewGenreDialog.setAdapter(mListGenreAdapter);
+//                        mRecyclerViewGenreDialog.getAdapter().notifyDataSetChanged();
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResponseCallGenre> call, Throwable t) {
+//
+//            }
+//        });
 
 
 //        RetrofitService.getInstance().getApi().loadMusicianGenre().enqueue(new Callback<ResponseCallGenre>() {

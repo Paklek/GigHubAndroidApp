@@ -25,12 +25,12 @@ public class ListOnProccessBookingAdapter extends BaseAdapter {
     private String mStatus, mStatusRequest;
     private SessionManager mSession;
 
-    private static LayoutInflater inflater=null;
+//    private static LayoutInflater inflater=null;
 
     public ListOnProccessBookingAdapter(Context mContext, List<Penyewaan> mPenyewaan){
         this.mPenyewaan = mPenyewaan;
         this.mContext = mContext;
-        inflater = (LayoutInflater)mContext.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
+//        inflater = (LayoutInflater)mContext.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
 
     }
 
@@ -75,7 +75,7 @@ public class ListOnProccessBookingAdapter extends BaseAdapter {
         cloudinaryUrl.buildCloudinaryUrl();
 
         final View rowView;
-        rowView = inflater.inflate(R.layout.lv_on_proccess,null);
+        rowView = LayoutInflater.from(mContext).inflate(R.layout.lv_on_proccess,parent,false);
         holder.mTextViewName = (TextView)rowView.findViewById(R.id.tv_musician_name_onproccess);
         holder.mTextViewGenre = (TextView)rowView.findViewById(R.id.tv_musician_genres_onproccess);
         holder.mTextViewHour = (TextView)rowView.findViewById(R.id.tv_musician_hour_fee_onproccess);
