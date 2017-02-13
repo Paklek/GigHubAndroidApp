@@ -56,7 +56,7 @@
                     app:siBorderWidth="2dp"
                     app:siBorderColor="#ddd"
                     android:layout_margin="5dp"
-                    android:id="@+id/img1"/>
+                    android:id="@+id/img_musician_photo_bookmusicianactivity"/>
                 <TextView
                     android:id="@+id/tv_musician_name_bookingmusicianactivity"
                     android:layout_column="1"
@@ -244,7 +244,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:background="@drawable/button_border_black"
-                android:text="@string/send_req"/>
+                android:text="@string/next"/>
         </LinearLayout>
 
 

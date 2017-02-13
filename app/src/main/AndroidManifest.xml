@@ -99,7 +99,8 @@
         <activity android:name=".ui.activity.RemoveMemberMusicianActivity" />
         <activity android:name=".ui.activity.WithdrawalActivity" />
         <activity android:name=".ui.activity.YouTubeVideoActivity" />
-        <activity android:name=".ui.activity.ReviewMusicianActivity"></activity>
+        <activity android:name=".ui.activity.ReviewMusicianActivity" />
+        <activity android:name=".ui.activity.BookingMusicianDetails"></activity>
     </application>
 
 </manifest>

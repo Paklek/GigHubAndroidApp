@@ -51,6 +51,7 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -85,14 +86,15 @@ public class BookMusicianActivity extends AppCompatActivity implements AdapterVi
     private Button mButtonTanggalMulai, mButtonWaktuMulai,mButtonTanggalSelesai,mButtonWaktuSelesai, mButtonSendRequest,mButtonUploadGigPhoto;
     private TextView mTextViewName, mTextViewGenre, mTextViewHarga;
     private EditText mEditTextNamaGig,mEditTextLokasi, mEditTextDetails;
-    private String mName, mGenre,mHarga,mMulai,mSelesai,mTipe, mLat, mLng, mPilihanUser;
+    private String mName, mGenre,mMulai,mSelesai,mTipe, mLat, mLng, mPilihanUser,mPhoto,mHarga;
     private int pos=0, mYear,mMonth,mDay,mHour, mMinute, mUserId,mObjectId;
     private List<SearchResultModel> mSearchResultModel;
     private SessionManager mSession;
     private CloudinaryResponse cloudinaryResponse;
-    private ImageView mImageViewGigPhoto;
+    private ImageView mImageViewGigPhoto, mImageViewMusicianPhoto;
     private File destination;
     private boolean mFromCamera;
+    private ProgressDialog mProgressDialog;
 
 
     private static final String TYPE_GEOCODE = "/geocode";
@@ -110,6 +112,7 @@ public class BookMusicianActivity extends AppCompatActivity implements AdapterVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_musician);
 
+        mProgressDialog = new ProgressDialog(BookMusicianActivity.this);
         mSession = new SessionManager(getApplicationContext());
         mContext = getApplicationContext();
         mSearchResultModel = new ArrayList<SearchResultModel>();
@@ -121,6 +124,7 @@ public class BookMusicianActivity extends AppCompatActivity implements AdapterVi
         mTextViewGenre = (TextView)findViewById(R.id.tv_genre_bookmusicianactivity);
         mTextViewHarga = (TextView)findViewById(R.id.tv_harga_sewa_bookmusicianactivity);
         mImageViewGigPhoto = (ImageView)findViewById(R.id.img_photo_gig_bookmusicianactivity);
+        mImageViewMusicianPhoto = (ImageView)findViewById(R.id.img_musician_photo_bookmusicianactivity);
 
         mButtonTanggalMulai = (Button)findViewById(R.id.btn_date_waktu_mulai_bookmusicianactivity);
         mButtonWaktuMulai = (Button)findViewById(R.id.btn_time_waktu_mulai_bookmusicianactivity);
@@ -143,6 +147,7 @@ public class BookMusicianActivity extends AppCompatActivity implements AdapterVi
         mHarga = intent.getStringExtra("harga_sewa");
         mObjectId = intent.getIntExtra("id",0);
         mTipe = intent.getStringExtra("tipe");
+        mPhoto = intent.getStringExtra("photo");
 
         mUserId = mSession.getUserDetails().getId();
 
@@ -151,6 +156,12 @@ public class BookMusicianActivity extends AppCompatActivity implements AdapterVi
         mTextViewHarga.setText(mHarga);
 
         Log.d("name",mName);
+
+        CloudinaryUrl cloudinaryUrl = new CloudinaryUrl();
+        cloudinaryUrl.buildCloudinaryUrl();
+        if(mPhoto!=null && !mPhoto.equals("")) {
+            Picasso.with(mContext).load(cloudinaryUrl.cloudinary.url().format("jpg").generate(mPhoto)).into(mImageViewMusicianPhoto);
+        }
 
         mButtonUploadGigPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -276,58 +287,89 @@ public class BookMusicianActivity extends AppCompatActivity implements AdapterVi
         BuildUrl buildUrl = new BuildUrl();
         buildUrl.buildBaseUrl();
 
+        mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.show();
+
         mMulai = mButtonTanggalMulai.getText().toString()+" "+mButtonWaktuMulai.getText().toString();
         mSelesai = mButtonTanggalSelesai.getText().toString()+" "+mButtonWaktuSelesai.getText().toString();
 
         cloudinaryResponse = new Gson().fromJson(new Gson().toJson(responseCloudinary),CloudinaryResponse.class);
 
-        Map<String, String> bookData = new HashMap<>();
-        bookData.put("user_id",Integer.toString(mUserId));
-        bookData.put("tipe",mTipe);
-        bookData.put("object_id",Integer.toString(mObjectId));
-        bookData.put("nama_gig",mEditTextNamaGig.getText().toString());
-        bookData.put("lokasi", mEditTextLokasi.getText().toString());
+        Intent intent = new Intent(BookMusicianActivity.this,BookingMusicianDetails.class);
+        intent.putExtra("user_id",Integer.toString(mUserId));
+        intent.putExtra("tipe",mTipe);
+        intent.putExtra("object_id",Integer.toString(mObjectId));
+        intent.putExtra("nama_gig",mEditTextNamaGig.getText().toString());
+        intent.putExtra("lokasi", mEditTextLokasi.getText().toString());
+        intent.putExtra("name", mName);
+        intent.putExtra("harga_sewa", mHarga);
+        intent.putExtra("genre", mGenre);
+        intent.putExtra("photo", mPhoto);
         if(cloudinaryResponse!=null) {
             if (!cloudinaryResponse.getPublic_id().equals("") || cloudinaryResponse.getPublic_id() != null) {
-                bookData.put("photo_gig", cloudinaryResponse.getPublic_id());
+                intent.putExtra("photo_gig", cloudinaryResponse.getPublic_id());
             }
         }
         else {
-            bookData.put("photo_gig", "");
+            intent.putExtra("photo_gig", "");
         }
-        bookData.put("detail_lokasi",mEditTextDetails.getText().toString());
-        bookData.put("tanggal_mulai",mMulai);
-        bookData.put("tanggal_selesai",mSelesai);
-        bookData.put("lat",mLat);
-        bookData.put("lng",mLng);
+        intent.putExtra("detail_lokasi",mEditTextDetails.getText().toString());
+        intent.putExtra("tanggal_mulai",mMulai);
+        intent.putExtra("tanggal_selesai",mSelesai);
+        intent.putExtra("lat",mLat);
+        intent.putExtra("lng",mLng);
+        mProgressDialog.dismiss();
 
-        buildUrl.serviceGighub.sendBookData(bookData).enqueue(new Callback<Response>() {
-            @Override
-            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+        startActivity(intent);
 
-                if(response.code()==200) {
-                    Intent intent = new Intent(mContext, MainActivity.class);
-                    Toast.makeText(BookMusicianActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
-                    Log.d("response ", response.code() + " " + response.body().getMessage());
-                    Log.d("response ", response.code() + " " + response.message() +" "+response.code());
-
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    mContext.startActivity(intent);
-                }
-                else {
-                    Log.d("response ", response.code() + " " + response.body().getMessage() +" "+response.code());
-                    Log.d("Pesan Log : " , response.code()+" " + response.message());
-                    Toast.makeText(BookMusicianActivity.this, "Failed, Check Your Connection", Toast.LENGTH_LONG).show();
-
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<Response> call, Throwable t) {
-                Log.d("fail",t.getCause().getMessage());
-            }
-        });
+//        Map<String, String> bookData = new HashMap<>();
+//        bookData.put("user_id",Integer.toString(mUserId));
+//        bookData.put("tipe",mTipe);
+//        bookData.put("object_id",Integer.toString(mObjectId));
+//        bookData.put("nama_gig",mEditTextNamaGig.getText().toString());
+//        bookData.put("lokasi", mEditTextLokasi.getText().toString());
+//        if(cloudinaryResponse!=null) {
+//            if (!cloudinaryResponse.getPublic_id().equals("") || cloudinaryResponse.getPublic_id() != null) {
+//                bookData.put("photo_gig", cloudinaryResponse.getPublic_id());
+//            }
+//        }
+//        else {
+//            bookData.put("photo_gig", "");
+//        }
+//        bookData.put("detail_lokasi",mEditTextDetails.getText().toString());
+//        bookData.put("tanggal_mulai",mMulai);
+//        bookData.put("tanggal_selesai",mSelesai);
+//        bookData.put("lat",mLat);
+//        bookData.put("lng",mLng);
+//
+//        buildUrl.serviceGighub.sendBookData(bookData).enqueue(new Callback<Response>() {
+//            @Override
+//            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+//
+//                if(response.code()==200) {
+//                    Intent intent = new Intent(mContext, MainActivity.class);
+//                    Toast.makeText(BookMusicianActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
+//                    Log.d("response ", response.code() + " " + response.body().getMessage());
+//                    Log.d("response ", response.code() + " " + response.message() +" "+response.code());
+//
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                    mContext.startActivity(intent);
+//                }
+//                else {
+//                    Log.d("response ", response.code() + " " + response.body().getMessage() +" "+response.code());
+//                    Log.d("Pesan Log : " , response.code()+" " + response.message());
+//                    Toast.makeText(BookMusicianActivity.this, "Failed, Check Your Connection", Toast.LENGTH_LONG).show();
+//
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Response> call, Throwable t) {
+//                Log.d("fail",t.getCause().getMessage());
+//            }
+//        });
 
     }
 

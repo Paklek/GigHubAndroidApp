@@ -57,11 +57,12 @@ public class MusicianActivity extends AppCompatActivity {
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
     private ImageView mImageViewProfile;
-    private String mName, mPhoto, mTipeUser, mFirstName, mLastName, mEmail, mMusicianId, mOrganizerId;
+    private String mName, mPhoto, mTipeUser, mFirstName, mLastName, mEmail, mMusicianId, mOrganizerId, mHarga, mKota, mGigs;;
     private Context mContext;
     private SessionManager mSession;
     private int pos = 0, mIdUser;
     private List<SearchResultModel> mSearchResultModels;
+    private TextView mTextViewHarga, mTextViewKota, mTextViewGigs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +85,8 @@ public class MusicianActivity extends AppCompatActivity {
         mSearchResultModels = new ArrayList<SearchResultModel>();
 
         mImageViewProfile = (ImageView) findViewById(R.id.img_img_profile_musicianactivity);
-
+        mTextViewHarga = (TextView)findViewById(R.id.tv_harga_musicianactivity);
+        mTextViewKota = (TextView)findViewById(R.id.tv_kota_musicianactivity);
 
         Intent intent = getIntent();
         mName = intent.getStringExtra("name");
@@ -98,7 +100,11 @@ public class MusicianActivity extends AppCompatActivity {
         if (mPhoto != null && !mPhoto.equals("")) {
             Picasso.with(mContext).load(cloudinaryUrl.cloudinary.url().format("jpg").generate(mPhoto)).into(mImageViewProfile);
         }
-
+        mKota = intent.getStringExtra("kota");
+        mHarga = intent.getStringExtra("harga_sewa");
+//        mGigs =
+        mTextViewHarga.setText(mHarga+"/Hour");
+        mTextViewKota.setText(mKota);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
 

@@ -29,7 +29,7 @@ public class ListCompletedBookingAdapter extends BaseAdapter {
     public ListCompletedBookingAdapter(Context mContext, List<Penyewaan> mPenyewaan){
         this.mPenyewaan = mPenyewaan;
         this.mContext = mContext;
-        inflater = (LayoutInflater)mContext.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
+//        inflater = (LayoutInflater)mContext.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override

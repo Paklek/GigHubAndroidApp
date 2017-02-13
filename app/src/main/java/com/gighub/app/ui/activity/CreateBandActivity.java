@@ -299,6 +299,8 @@ public class CreateBandActivity extends AppCompatActivity {
 
     Map<String,String> dataBand = new HashMap<>();
 //    Map<String,String[]> dataArray = new HashMap<>();
+    Uri uriGalery = null;
+    Map<String,String> responseCloudinary;
 
 
     private void insertBand(){
@@ -568,8 +570,6 @@ public class CreateBandActivity extends AppCompatActivity {
         mPositionId = position.getId();
     }
 
-    Uri uriGalery = null;
-    Map<String,String> responseCloudinary;
 
 
     public class uploadImageAsync extends AsyncTask {

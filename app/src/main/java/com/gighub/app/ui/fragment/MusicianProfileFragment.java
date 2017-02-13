@@ -34,7 +34,7 @@ import java.util.List;
 public class MusicianProfileFragment extends Fragment {
 
     Context mContext;
-    private String mDescriptions, mGenre, mName,mHarga, mTipe, mYouTubeVideoUrl,mAnggota,mPosisi, mUrlWebsite, mUsernameSoundcloud, mUsernameReverbnation;
+    private String mDescriptions,mHarga, mGenre, mName, mTipe, mYouTubeVideoUrl,mAnggota,mPosisi, mUrlWebsite, mUsernameSoundcloud, mUsernameReverbnation,mPhoto;
     private int pos=0, mId;
     private TextView mTextViewMusicianDescriptions, mTextViewMusicianGenres, mTextViewTipeMusisi, mTextViewAnggota,mTextViewPosisi, mTextViewUrlWebsite, mTextViewUrlSoundCloud, mTextViewUrlReverbnation;
     private Button mButtonBookRequest, mButtonYouTubeVideo;
@@ -112,8 +112,10 @@ public class MusicianProfileFragment extends Fragment {
         pos = intent.getIntExtra("posisi",pos);
         mName = intent.getStringExtra("name");
         mHarga = intent.getStringExtra("harga_sewa");
+        Log.d("harga",mHarga);
         mTipe = intent.getStringExtra("tipe");
         mId = intent.getIntExtra("id",0);
+        mPhoto = intent.getStringExtra("photo");
         mYouTubeVideoUrl = intent.getStringExtra("youtube_video");
         if(mTipe.equals("Group")) {
             mAnggota = mMember.getAnggota();
@@ -142,6 +144,10 @@ public class MusicianProfileFragment extends Fragment {
         mTextViewAnggota.setText("Anggota : "+mAnggota);
         mTextViewPosisi.setText("Posisi : "+mPosisi);
 
+
+
+
+
         mButtonYouTubeVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -169,6 +175,7 @@ public class MusicianProfileFragment extends Fragment {
                     intent1.putExtra("name", mName);
                     intent1.putExtra("genre", mGenre);
                     intent1.putExtra("harga_sewa", mHarga);
+                    intent1.putExtra("photo", mPhoto);
                     intent1.putExtra("tipe", mTipe);
 //                intent1.putExtra("harga_sewa",mSearchResult.get(pos).getHarga_sewa());
 

@@ -84,9 +84,10 @@ public class SearchResultActivity extends AppCompatActivity {
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 final String name,deskripsi,genre,harga,kota,tipe,photo,youtube_video, url_website, url_soundcloud, url_reverbnation;
-                final int mId;
+                final int mId, mPos;
+                mPos = mListView.getSelectedItemPosition();
                 mId = mSearchResult.get(position).getId();
                 name = mSearchResult.get(position).getName();
                 deskripsi = mSearchResult.get(position).getDeskripsi();
@@ -136,6 +137,7 @@ public class SearchResultActivity extends AppCompatActivity {
 //                                intent.putExtra("anggotamember",mMember.getAnggota());
                                 intent.putExtra("member", new Gson().toJson(response.body().getMember()));
                                 intent.putExtra("id", mId);
+                                intent.putExtra("posisi", mPos);
                                 intent.putExtra("name", name);
                                 intent.putExtra("deskripsi", deskripsi);
                                 intent.putExtra("genre", genre);
@@ -167,6 +169,7 @@ public class SearchResultActivity extends AppCompatActivity {
                     else {
                         Intent intent = new Intent(getApplicationContext(), MusicianActivity.class);
                         intent.putExtra("id", mSearchResult.get(position).getId());
+                        intent.putExtra("posisi", mPos);
                         intent.putExtra("name", mSearchResult.get(position).getName());
                         intent.putExtra("deskripsi", mSearchResult.get(position).getDeskripsi());
                         intent.putExtra("genre", mSearchResult.get(position).getGenrenya());
@@ -176,8 +179,8 @@ public class SearchResultActivity extends AppCompatActivity {
                         intent.putExtra("photo", mSearchResult.get(position).getPhoto());
                         intent.putExtra("youtube_video", mSearchResult.get(position).getYoutube_video());
 //                pos = position;
-                        intent.putExtra("posisi", position);
-                        Log.d("pos", "" + position);
+//                        intent.putExtra("posisi", position);
+                        Log.d("pos", "" + mPos);
                         Log.d("response", "" + mSearchResult.get(position).getDeskripsi());
                         Log.d("response", "id musisinya adalah " + mSearchResult.get(position).getId() + " dengan tipe " + mSearchResult.get(position).getTipe());
                         startActivity(intent);
@@ -199,6 +202,7 @@ public class SearchResultActivity extends AppCompatActivity {
 //                                intent.putExtra("anggotamember",mMember.getAnggota());
                                     intent.putExtra("member", new Gson().toJson(response.body().getMember()));
                                     intent.putExtra("id", mId);
+                                    intent.putExtra("posisi", mPos);
                                     intent.putExtra("name", name);
                                     intent.putExtra("deskripsi", deskripsi);
                                     intent.putExtra("genre", genre);
@@ -228,6 +232,7 @@ public class SearchResultActivity extends AppCompatActivity {
 
                             Intent intent = new Intent(getApplicationContext(), MusicianActivity.class);
                             intent.putExtra("id", mSearchResult.get(position).getId());
+//                            intent.putExtra("posisi", mPos);
                             intent.putExtra("name", mSearchResult.get(position).getName());
                             intent.putExtra("deskripsi", mSearchResult.get(position).getDeskripsi());
                             intent.putExtra("genre", mSearchResult.get(position).getGenrenya());
@@ -237,8 +242,8 @@ public class SearchResultActivity extends AppCompatActivity {
                             intent.putExtra("photo", mSearchResult.get(position).getPhoto());
                             intent.putExtra("youtube_video", mSearchResult.get(position).getYoutube_video());
 //                pos = position;
-                            intent.putExtra("posisi", position);
-                            Log.d("pos", "" + position);
+                            intent.putExtra("posisi", mPos);
+                            Log.d("pos", "" + mPos);
                             Log.d("response", "" + mSearchResult.get(position).getDeskripsi());
                             Log.d("response", "id musisinya adalah " + mSearchResult.get(position).getId() + " dengan tipe " + mSearchResult.get(position).getTipe());
                             startActivity(intent);

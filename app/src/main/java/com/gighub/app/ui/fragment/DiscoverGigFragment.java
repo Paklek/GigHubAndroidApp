@@ -113,7 +113,7 @@ public class DiscoverGigFragment extends Fragment implements LocationListener {
         buildUrl.serviceGighub.loadGig().enqueue(new Callback<GigResponse>() {
             @Override
             public void onResponse(Call<GigResponse> call, Response<GigResponse> response) {
-                if (response.body().getError() == 0) {
+                if (response.code() == 200) {
                     mGig = response.body().getGigs();
                     mAdapter = new ListDiscoverGigAdapter(mGig);
                     mRecyclerView.setAdapter(mAdapter);
