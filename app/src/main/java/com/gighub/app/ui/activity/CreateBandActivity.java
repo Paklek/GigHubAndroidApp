@@ -470,7 +470,7 @@ public class CreateBandActivity extends AppCompatActivity {
         Bitmap bm=null;
         if (data != null) {
             try {
-                bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
+                bm = MediaStore.Images.Media.getBitmap(CreateBandActivity.this.getContentResolver(), data.getData());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -489,7 +489,7 @@ public class CreateBandActivity extends AppCompatActivity {
 //        destination = new File(Environment.getExternalStorageDirectory(),
 //                System.currentTimeMillis() + ".jpg");
         // CALL THIS METHOD TO GET THE URI FROM THE BITMAP
-        Uri tempUri = getImageUri(getApplicationContext(), thumbnail);
+        Uri tempUri = getImageUri(CreateBandActivity.this, thumbnail);
 
         // CALL THIS METHOD TO GET THE ACTUAL PATH
         destination = new File(getRealPathFromURI(tempUri));
@@ -598,7 +598,7 @@ public class CreateBandActivity extends AppCompatActivity {
 
         @Override
         protected Object doInBackground(Object[] params) {
-            String url = StaticFunction.get(getApplicationContext()).getRealBaseURL(uri);
+            String url = StaticFunction.get(CreateBandActivity.this).getRealBaseURL(uri);
             String url2 = getRealPathFromURI(uri);
 
             if (!mFromCamera) {
@@ -656,7 +656,7 @@ public class CreateBandActivity extends AppCompatActivity {
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                boolean result = Utility.checkPermission(mContext);
+                boolean result = Utility.checkPermission(CreateBandActivity.this);
                 if (items[which].equals("From Camera")){
                     mPilihanUser = "From Camera";
                     if(result){

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,9 +20,11 @@ import com.gighub.app.model.Position;
 import com.gighub.app.model.Response;
 import com.gighub.app.ui.adapter.ListAddPositionMusicianAdapter;
 import com.gighub.app.util.BuildUrl;
+import com.gighub.app.util.CloudinaryUrl;
 import com.gighub.app.util.SessionManager;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -43,6 +46,8 @@ public class AddPositionMusicianActivity extends AppCompatActivity {
     private Context mContext;
 //    private SessionManager mSession;
     private int mCalonId,mGrupBandId, mPositionId,mUserId, mAdminId;
+    private String mPhoto;
+    private ImageView mImageViewMusicianPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +69,8 @@ public class AddPositionMusicianActivity extends AppCompatActivity {
         mTextViewBasis = (TextView)findViewById(R.id.tv_basis_addpostitionmusician);
         mTextViewKota = (TextView)findViewById(R.id.tv_kota_addpostitionmusician);
 
+        mImageViewMusicianPhoto = (ImageView)findViewById(R.id.img_addpositionmusician);
+
         mButtonAdd = (Button)findViewById(R.id.btn_add_position_addpositionmusician);
 //        listAddPositionMusicianAdapter = new ListAddPositionMusicianAdapter(getApplicationContext(),mPositionList);
         mTextViewName.setText(intent.getStringExtra("name"));
@@ -73,6 +80,13 @@ public class AddPositionMusicianActivity extends AppCompatActivity {
         mGrupBandId = intent.getIntExtra("grupband_id",0);
         mUserId = mSession.getMusicianDetails().getId();
         mAdminId = intent.getIntExtra("admin_id",0);
+        mPhoto = intent.getStringExtra("photo");
+
+        CloudinaryUrl cloudinaryUrl = new CloudinaryUrl();
+        cloudinaryUrl.buildCloudinaryUrl();
+        if(mPhoto!=null && !mPhoto.equals("")) {
+            Picasso.with(mContext).load(cloudinaryUrl.cloudinary.url().format("jpg").generate(mPhoto)).into(mImageViewMusicianPhoto);
+        }
 
         mGridView.setAdapter(new ListAddPositionMusicianAdapter(mContext,mPositionList));
 

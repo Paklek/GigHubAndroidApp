@@ -111,7 +111,7 @@ public class CreateGigActivity extends AppCompatActivity implements AdapterView.
         mContext = getApplicationContext();
 
         mSession = new SessionManager(getApplicationContext());
-        mProgressDialog = new ProgressDialog(mContext);
+        mProgressDialog = new ProgressDialog(CreateGigActivity.this);
         mProgressDialog.setMessage("Loading...");
 
         mEditTextGigName = (EditText) findViewById(R.id.tv_nama_acara_creategigactivity);
@@ -295,7 +295,7 @@ public class CreateGigActivity extends AppCompatActivity implements AdapterView.
                         mContext.startActivity(intent);
                     }
                     else {
-                        AlertDialog alertDialog = new AlertDialog.Builder(getApplicationContext())
+                        AlertDialog alertDialog = new AlertDialog.Builder(CreateGigActivity.this)
                                 .setTitle("Connection Error")
                                 .setMessage(R.string.failed_try_again+" "+response.message()+" "+response.code())
                                 .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
@@ -310,7 +310,7 @@ public class CreateGigActivity extends AppCompatActivity implements AdapterView.
                     }
                 }
                 else {
-                    AlertDialog alertDialog = new AlertDialog.Builder(getApplicationContext())
+                    AlertDialog alertDialog = new AlertDialog.Builder(CreateGigActivity.this)
                             .setTitle("Connection Error")
                             .setMessage(R.string.failed_try_again+" "+response.message()+" "+response.code())
                             .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
@@ -327,7 +327,7 @@ public class CreateGigActivity extends AppCompatActivity implements AdapterView.
 
             @Override
             public void onFailure(Call<GigResponse> call, Throwable t) {
-                AlertDialog alertDialog = new AlertDialog.Builder(getApplicationContext())
+                AlertDialog alertDialog = new AlertDialog.Builder(CreateGigActivity.this)
                         .setTitle("Connection Error")
                         .setMessage(R.string.failed_try_again)
                         .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
@@ -510,7 +510,7 @@ public class CreateGigActivity extends AppCompatActivity implements AdapterView.
 //        destination = new File(Environment.getExternalStorageDirectory(),
 //                System.currentTimeMillis() + ".jpg");
         // CALL THIS METHOD TO GET THE URI FROM THE BITMAP
-        Uri tempUri = getImageUri(getApplicationContext(), thumbnail);
+        Uri tempUri = getImageUri(CreateGigActivity.this, thumbnail);
 
         // CALL THIS METHOD TO GET THE ACTUAL PATH
         destination = new File(getRealPathFromURI(tempUri));
@@ -584,7 +584,7 @@ public class CreateGigActivity extends AppCompatActivity implements AdapterView.
         Bitmap bm=null;
         if (data != null) {
             try {
-                bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
+                bm = MediaStore.Images.Media.getBitmap(CreateGigActivity.this.getContentResolver(), data.getData());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -620,7 +620,7 @@ public class CreateGigActivity extends AppCompatActivity implements AdapterView.
 
         @Override
         protected Object doInBackground(Object[] params) {
-            String url = StaticFunction.get(getApplicationContext()).getRealBaseURL(uri);
+            String url = StaticFunction.get(CreateGigActivity.this).getRealBaseURL(uri);
             String url2 = getRealPathFromURI(uri);
 
             if (!mFromCamera) {

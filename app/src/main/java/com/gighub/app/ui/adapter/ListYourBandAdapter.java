@@ -71,8 +71,10 @@ public class ListYourBandAdapter extends BaseAdapter {
 
 
         if(!mSession.getMusicianDetails().getPhoto().equals("") || !mYourBandList.get(position).getPhoto().equals("")) {
-            Picasso.with(mContext).load(cloudinaryUrl.cloudinary.url().format("jpg").generate(mYourBandList.get(position).getPhoto())).into(holder.mImageBand);
-            Picasso.with(mContext).load(cloudinaryUrl.cloudinary.url().format("jpg").generate(mSession.getMusicianDetails().getPhoto())).into(holder.mImageMusician);
+            Picasso.with(mContext).load(cloudinaryUrl.cloudinary.url().format("jpg").generate(mYourBandList.get(position).getPhoto())).into(holder.mImageMusician);
+        }
+        if(!mYourBandList.get(position).getCover().equals("") || mYourBandList.get(position).getCover()!=null) {
+            Picasso.with(mContext).load(cloudinaryUrl.cloudinary.url().format("jpg").generate(mYourBandList.get(position).getCover())).into(holder.mImageBand);
         }
         holder.mTextViewNamaBand.setText(mYourBandList.get(position).getNama_grupband());
         holder.mTextViewKota.setText(mYourBandList.get(position).getKota());

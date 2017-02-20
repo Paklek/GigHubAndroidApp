@@ -235,7 +235,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
                             startActivity(intent1);
                         }
                         else {
-                            AlertDialog alertDialog = new AlertDialog.Builder(getApplicationContext())
+                            AlertDialog alertDialog = new AlertDialog.Builder(BookingDetailsActivity.this)
                                     .setTitle("Connection Error")
                                     .setMessage(R.string.failed_try_again+" "+response.message()+" "+response.code())
                                     .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
@@ -252,7 +252,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<Response> call, Throwable t) {
-                        AlertDialog alertDialog = new AlertDialog.Builder(getApplicationContext())
+                        AlertDialog alertDialog = new AlertDialog.Builder(BookingDetailsActivity.this)
                                 .setTitle("Connection Error")
                                 .setMessage(R.string.failed_try_again)
                                 .setNeutralButton("Ok", new DialogInterface.OnClickListener() {

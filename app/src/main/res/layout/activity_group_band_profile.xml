@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:card_view="http://schemas.android.com/apk/res-auto"
 xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:app="http://schemas.android.com/tools"
 android:id="@+id/card_view"
@@ -17,7 +17,7 @@ android:layout_margin="7dp">
         <ImageView
             android:src="@android:drawable/ic_menu_gallery"
             android:background="@drawable/transparent_dark"
-            android:id="@+id/btn_img_cover_band_grupband_grupbandprofileactivity"
+            android:id="@+id/img_cover_band_grupband_grupbandprofileactivity"
             android:layout_width="match_parent"
             android:scaleType="centerCrop"
             android:fitsSystemWindows="true"
@@ -97,12 +97,87 @@ android:layout_margin="7dp">
         android:id="@+id/tv_deskripsi_grupbandprofileactivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="posisi"/>
+        android:text="posisi"
+        android:layout_marginBottom="20dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/primaryDark"/>
+    <LinearLayout
+        android:id="@+id/ll_edit_groupbandprofileactivity"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.design.widget.TextInputEditText
+                android:hint="Band Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.design.widget.TextInputEditText
+                android:hint="Genre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.design.widget.TextInputEditText
+                android:hint="Kota"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.design.widget.TextInputEditText
+                android:hint="Youtube Video"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.design.widget.TextInputEditText
+                android:hint="Website Url"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.design.widget.TextInputEditText
+                android:hint="Username Soundcloud"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.design.widget.TextInputEditText
+                android:hint="Username Reverbnation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn_edit_profile_group_groupbandactivity"
+        android:textColor="@color/colorAccent1"
+        android:text="EDIT PROFILE GROUP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_border_white"/>
 
     <Button
         android:id="@+id/btn_add_anggota_groupbandprofileactivity"
         android:layout_marginTop="20dp"
-        android:background="@drawable/button_border_black"
+        android:background="@drawable/button_border_white"
+        android:textColor="@color/colorAccent1"
         android:text="Add Musician to Group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -110,11 +185,12 @@ android:layout_margin="7dp">
     <Button
         android:id="@+id/btn_remove_anggota_groupbandprofileactivity"
         android:layout_marginTop="20dp"
-        android:background="@drawable/button_border_black"
+        android:background="@drawable/button_border_white_negative"
+        android:textColor="@color/colorAccent1"
         android:text="Remove Musician from Group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </android.support.v7.widget.LinearLayoutCompat>
 
 
-</android.support.v7.widget.CardView>
+</ScrollView>

@@ -67,6 +67,7 @@ import retrofit2.Response;
 public class ProfileActivity extends AppCompatActivity {
 
     private static final int REQ_CODE_RESULT_PHOTO = 10001;
+    private static final int REQ_CODE_RESULT_CAMERA =333;
     private Toolbar toolbar;
     private ListView mListView;
     private GridView mGridView;
@@ -672,7 +673,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         @Override
         protected Object doInBackground(Object[] params) {
-            String url = StaticFunction.get(getApplicationContext()).getRealBaseURL(uri);
+            String url = StaticFunction.get(ProfileActivity.this).getRealBaseURL(uri);
             String url2 = getRealPathFromURI(uri);
 
             if (!mFromCamera) {
@@ -759,7 +760,7 @@ public class ProfileActivity extends AppCompatActivity {
 //        destination = new File(Environment.getExternalStorageDirectory(),
 //                System.currentTimeMillis() + ".jpg");
         // CALL THIS METHOD TO GET THE URI FROM THE BITMAP
-        Uri tempUri = getImageUri(getApplicationContext(), thumbnail);
+        Uri tempUri = getImageUri(ProfileActivity.this, thumbnail);
 
         // CALL THIS METHOD TO GET THE ACTUAL PATH
         destination = new File(getRealPathFromURI(tempUri));

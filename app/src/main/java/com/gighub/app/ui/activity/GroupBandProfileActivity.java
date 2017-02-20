@@ -7,14 +7,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gighub.app.R;
 import com.gighub.app.model.MResponse;
 import com.gighub.app.util.BuildUrl;
+import com.gighub.app.util.CloudinaryUrl;
 import com.gighub.app.util.SessionManager;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,11 +31,13 @@ import retrofit2.Response;
 public class GroupBandProfileActivity extends AppCompatActivity {
 
     private TextView mTextViewAnggota, mTextViewPosisi, mTextViewNamaBand, mTextViewKota, mTextViewHarga, mTextTipe, mTextViewBasis, mTextViewDeskripsi;
-    private String mAnggota, mPosisi, mNamaGrupBand, mKota, mHarga, mTipe, mDeskripsi;
-    private Button mButtonAddAnggota, mButtonRemoveAnggota;
+    private String mAnggota, mPosisi, mNamaGrupBand, mKota, mHarga, mTipe, mDeskripsi, mPhoto,mCover;
+    private Button mButtonAddAnggota, mButtonRemoveAnggota,mButtonEditProfileGroupBand;
     private SessionManager mSession;
     private Context mContext;
     private int mGrupBandId, mAdminId;
+    private ImageView mImageViewPhotoGroupBand, mImageViewCoverGroupBand;
+    private LinearLayout mLinearLayoutEditGroupBand;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +49,9 @@ public class GroupBandProfileActivity extends AppCompatActivity {
         mContext = getApplicationContext();
         mSession = new SessionManager(mContext);
 
+        mLinearLayoutEditGroupBand = (LinearLayout)findViewById(R.id.ll_edit_groupbandprofileactivity);
+
+        mLinearLayoutEditGroupBand.setVisibility(View.GONE);
         mAnggota = intent.getStringExtra("anggota");
         mPosisi = intent.getStringExtra("posisi");
         mNamaGrupBand = intent.getStringExtra("nama_grupband");
@@ -51,6 +61,8 @@ public class GroupBandProfileActivity extends AppCompatActivity {
         mDeskripsi = intent.getStringExtra("deskripsi");
         mGrupBandId = intent.getIntExtra("grupband_id",0);
         mAdminId = intent.getIntExtra("admin_id",0);
+        mPhoto = intent.getStringExtra("photo");
+        mCover = intent.getStringExtra("cover");
 
         mTextViewAnggota = (TextView)findViewById(R.id.tv_anggota_grupbandprofileactivity);
         mTextViewPosisi = (TextView)findViewById(R.id.tv_posisi_grupbandprofileactivity);
@@ -60,6 +72,10 @@ public class GroupBandProfileActivity extends AppCompatActivity {
         mTextTipe = (TextView)findViewById(R.id.tv_genre_grupband_grupbandprofileactivity);
         mTextViewDeskripsi = (TextView)findViewById(R.id.tv_deskripsi_grupbandprofileactivity);
 
+        mImageViewPhotoGroupBand = (ImageView)findViewById(R.id.img_photo_grupband_grupbandprofileactivity);
+        mImageViewCoverGroupBand = (ImageView)findViewById(R.id.img_cover_band_grupband_grupbandprofileactivity);
+
+        mButtonEditProfileGroupBand = (Button)findViewById(R.id.btn_edit_profile_group_groupbandactivity);
         mButtonAddAnggota = (Button)findViewById(R.id.btn_add_anggota_groupbandprofileactivity);
         mButtonRemoveAnggota = (Button)findViewById(R.id.btn_remove_anggota_groupbandprofileactivity);
 
@@ -70,6 +86,17 @@ public class GroupBandProfileActivity extends AppCompatActivity {
         mTextViewAnggota.setText("Anggota : "+mAnggota);
         mTextViewPosisi.setText("Posisi : "+mPosisi);
         mTextViewDeskripsi.setText(mDeskripsi);
+
+        mButtonEditProfileGroupBand.setVisibility(View.GONE);
+
+        CloudinaryUrl cloudinaryUrl = new CloudinaryUrl();
+        cloudinaryUrl.buildCloudinaryUrl();
+        if(mPhoto!=null && !mPhoto.equals("")) {
+            Picasso.with(mContext).load(cloudinaryUrl.cloudinary.url().format("jpg").generate(mPhoto)).into(mImageViewPhotoGroupBand);
+        }
+        if(mCover!=null && !mCover.equals("")) {
+            Picasso.with(mContext).load(cloudinaryUrl.cloudinary.url().format("jpg").generate(mCover)).into(mImageViewCoverGroupBand);
+        }
 
         if(mAdminId!=mSession.getMusicianDetails().getId()){
             mButtonAddAnggota.setVisibility(View.GONE);

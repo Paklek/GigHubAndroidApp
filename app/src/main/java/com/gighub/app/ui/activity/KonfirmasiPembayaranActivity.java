@@ -321,7 +321,7 @@ public class KonfirmasiPembayaranActivity extends AppCompatActivity {
 
         @Override
         protected Object doInBackground(Object[] params) {
-            String url = StaticFunction.get(getApplicationContext()).getRealBaseURL(uri);
+            String url = StaticFunction.get(KonfirmasiPembayaranActivity.this).getRealBaseURL(uri);
             String url2 = getRealPathFromURI(uri);
 
             if (!mFromCamera) {
@@ -383,7 +383,7 @@ public class KonfirmasiPembayaranActivity extends AppCompatActivity {
         Bitmap bm=null;
         if (data != null) {
             try {
-                bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
+                bm = MediaStore.Images.Media.getBitmap(KonfirmasiPembayaranActivity.this.getContentResolver(), data.getData());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -402,7 +402,7 @@ public class KonfirmasiPembayaranActivity extends AppCompatActivity {
 //        destination = new File(Environment.getExternalStorageDirectory(),
 //                System.currentTimeMillis() + ".jpg");
         // CALL THIS METHOD TO GET THE URI FROM THE BITMAP
-        Uri tempUri = getImageUri(getApplicationContext(), thumbnail);
+        Uri tempUri = getImageUri(KonfirmasiPembayaranActivity.this, thumbnail);
 
         // CALL THIS METHOD TO GET THE ACTUAL PATH
         destination = new File(getRealPathFromURI(tempUri));

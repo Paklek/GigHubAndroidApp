@@ -57,6 +57,13 @@ public class ReviewMusicianActivity extends AppCompatActivity {
         mYourReview = new YourReview();
         final Type type = new TypeToken<YourReview>() {}.getType();
         mYourReview = new Gson().fromJson(intent.getStringExtra("yourreview"),type);
+
+        if(mYourReview!=null){
+            mPhotoUser = mYourReview.getPhoto();
+        }
+        else {
+            mPhotoUser = "";
+        }
         mSession = new SessionManager(getApplicationContext());
         mRatingBar = (RatingBar)findViewById(R.id.ratbar_reviewmusician);
         mTextViewMusicianName = (TextView)findViewById(R.id.tv_musician_name_reviewmusician);
@@ -72,7 +79,6 @@ public class ReviewMusicianActivity extends AppCompatActivity {
 
 //        Intent intent = getIntent();
         mPhotoMusisi = intent.getStringExtra("photo");
-        mPhotoUser = mYourReview.getPhoto();
         mMusicianName = intent.getStringExtra("nama_musisi");
         mSewaId = intent.getIntExtra("sewa_id",0);
         mOrganizerId = mSession.getUserDetails().getId();
@@ -85,11 +91,26 @@ public class ReviewMusicianActivity extends AppCompatActivity {
             mEditTextReview.setVisibility(View.GONE);
             mButtonSendReview.setVisibility(View.GONE);
             mTextViewRatingNumber.setVisibility(View.GONE);
-            mTextViewMessageReview.setText(mYourReview.getPesan());
-            mRatingBar.setRating(Float.parseFloat(mYourReview.getNilai()+".0"));
-            mRatingBar.setIsIndicator(true);
-            mTextViewNamaOrganizer.setText(mYourReview.getFirst_name()+" "+mYourReview.getLast_name());
-            mTextViewTanggalReview.setText(mYourReview.getCreated_at());
+
+            if(mYourReview!=null){
+                mTextViewMessageReview.setText(mYourReview.getPesan());
+                mRatingBar.setRating(Float.parseFloat(mYourReview.getNilai()+".0"));
+                mRatingBar.setIsIndicator(true);
+                mTextViewNamaOrganizer.setText(mYourReview.getFirst_name()+" "+mYourReview.getLast_name());
+                mTextViewTanggalReview.setText(mYourReview.getCreated_at());
+            }
+            else {
+                mTextViewMessageReview.setText("");
+//                mRatingBar.setRating(Float.parseFloat(mYourReview.getNilai()+".0"));
+                mRatingBar.setIsIndicator(false);
+                mTextViewNamaOrganizer.setText("");
+                mTextViewTanggalReview.setText("");
+            }
+//            mTextViewMessageReview.setText(mYourReview.getPesan());
+//            mRatingBar.setRating(Float.parseFloat(mYourReview.getNilai()+".0"));
+//            mRatingBar.setIsIndicator(true);
+//            mTextViewNamaOrganizer.setText(mYourReview.getFirst_name()+" "+mYourReview.getLast_name());
+//            mTextViewTanggalReview.setText(mYourReview.getCreated_at());
 //            mRatingBar.setBackgroundColor();
             if (mPhotoUser != null && !mPhotoUser.equals("")) {
                 Picasso.with(mContext).load(cloudinaryUrl.cloudinary.url().format("jpg").generate(mPhotoUser)).into(mImageViewUserReviewerPhoto);

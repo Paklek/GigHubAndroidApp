@@ -488,7 +488,7 @@ public class BookMusicianActivity extends AppCompatActivity implements AdapterVi
         responseCloudinary = new HashMap<>();
         uriGalery = data.getData();
 
-        Uri tempUri = getImageUri(getApplicationContext(), thumbnail);
+        Uri tempUri = getImageUri(BookMusicianActivity.this, thumbnail);
         destination = new File(getRealPathFromURI(tempUri));
 
         new BookMusicianActivity.uploadImageAsync(tempUri).execute();
@@ -506,7 +506,7 @@ public class BookMusicianActivity extends AppCompatActivity implements AdapterVi
     public Uri getImageUri(Context inContext, Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        String path = MediaStore.Images.Media.insertImage(BookMusicianActivity.this.getContentResolver(), inImage, "Title", null);
 //        FileOutputStream fo;
 //        try {
 //            destination.createNewFile();
@@ -533,7 +533,7 @@ public class BookMusicianActivity extends AppCompatActivity implements AdapterVi
         Bitmap bm=null;
         if (data != null) {
             try {
-                bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
+                bm = MediaStore.Images.Media.getBitmap(BookMusicianActivity.this.getContentResolver(), data.getData());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -586,7 +586,7 @@ public class BookMusicianActivity extends AppCompatActivity implements AdapterVi
 
         @Override
         protected Object doInBackground(Object[] params) {
-            String url = StaticFunction.get(getApplicationContext()).getRealBaseURL(uri);
+            String url = StaticFunction.get(BookMusicianActivity.this).getRealBaseURL(uri);
             String url2 = getRealPathFromURI(uri);
 
             if (!mFromCamera) {

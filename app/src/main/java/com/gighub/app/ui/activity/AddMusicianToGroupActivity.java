@@ -66,6 +66,7 @@ public class AddMusicianToGroupActivity extends AppCompatActivity {
                         Intent intent = new Intent(mContext, AddPositionMusicianActivity.class);
                         intent.putExtra("positions", new Gson().toJson(response.body().getPositions()));
                         intent.putExtra("name", mCalonAnggota.get(position).getName());
+                        intent.putExtra("photo", mCalonAnggota.get(position).getPhoto());
                         intent.putExtra("kota", mCalonAnggota.get(position).getKota());
                         intent.putExtra("basis", mCalonAnggota.get(position).getBasis());
                         intent.putExtra("calon_id", mCalonAnggota.get(position).getId());

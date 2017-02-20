@@ -1,6 +1,7 @@
 package com.gighub.app.ui.fragment;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import com.gighub.app.model.YourReview;
 import com.gighub.app.ui.adapter.ListReviewAdapter;
 import com.gighub.app.util.BuildUrl;
 import com.google.gson.Gson;
+import com.google.gson.internal.Primitives;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
@@ -42,6 +44,8 @@ public class MusicianReviewFragment extends Fragment {
     private int mMusicianId;
     private Context mContext;
     private LinearLayout mLinearLayoutNoReviews;
+    private ProgressDialog mProgressDialog;
+    private String mTipe;
 
     public MusicianReviewFragment() {
         // Required empty public constructor
@@ -54,10 +58,15 @@ public class MusicianReviewFragment extends Fragment {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_musician_review, container, false);
 
+
         mContext = getActivity().getApplicationContext();
+        mProgressDialog = new ProgressDialog(getActivity());
         final Intent intent = getActivity().getIntent();
 
+        mProgressDialog.setMessage("Load Reviews...");
+        mProgressDialog.setCanceledOnTouchOutside(false);
         mMusicianId = intent.getIntExtra("id",0);
+        mTipe = intent.getStringExtra("tipe");
 
         mReviews = new ArrayList<YourReview>();
         mSearchResult = new ArrayList<SearchResultModel>();
@@ -72,6 +81,7 @@ public class MusicianReviewFragment extends Fragment {
         buildUrl.buildBaseUrl();
         Map<String, String> dataForReviewer = new HashMap<>();
         dataForReviewer.put("musician_id",Integer.toString(mMusicianId));
+        dataForReviewer.put("tipe",mTipe);
         final Type type = new TypeToken<List<YourReview>>(){}.getType();
 
 
@@ -79,13 +89,18 @@ public class MusicianReviewFragment extends Fragment {
             @Override
             public void onResponse(Call<ListReviewerResponse> call, Response<ListReviewerResponse> response) {
                 if (response.body().getError()==0){
+                    mProgressDialog.show();
                     mReviews = response.body().getYourReviews();
                     if (mReviews.size()==0){
                         mLinearLayoutNoReviews.setVisibility(View.VISIBLE);
+                        mProgressDialog.dismiss();
                     }
                     else {
-                        mListView.setAdapter(new ListReviewAdapter(getActivity().getApplicationContext(), mReviews));
                         mLinearLayoutNoReviews.setVisibility(View.GONE);
+//                        for (int i =0 ; i< mReviews.size();i++) {
+                            mListView.setAdapter(new ListReviewAdapter(getActivity().getApplicationContext(), mReviews));
+//                        }
+                        mProgressDialog.dismiss();
                     }
                 }
             }
@@ -93,6 +108,7 @@ public class MusicianReviewFragment extends Fragment {
             @Override
             public void onFailure(Call<ListReviewerResponse> call, Throwable t) {
                 Toast.makeText(mContext, "Connection Fail. Check Your Connection", Toast.LENGTH_LONG).show();
+                mProgressDialog.dismiss();
             }
         });
 

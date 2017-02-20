@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gighub.app.R;
@@ -12,6 +13,7 @@ import com.gighub.app.model.MusicianModel;
 import com.gighub.app.model.YourBand;
 import com.gighub.app.util.CloudinaryUrl;
 import com.github.siyamed.shapeimageview.CircularImageView;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -60,11 +62,14 @@ public class ListAddMusicianToGroupAdapter extends BaseAdapter {
         holder.mTextViewHarga = (TextView)rowView.findViewById(R.id.musician_fee);
         holder.img=(CircularImageView) rowView.findViewById(R.id.img_musicianresult);
         holder.mTextViewMusicianGenres = (TextView)rowView.findViewById(R.id.musician_genres);
-
+//        holder.img = (CircularImageView) rowView.findViewById(R.id.img_musicianresult_addmusiciantogroup);
         holder.mTextViewName.setText(mCalonAnggota.get(position).getName());
         holder.mTextViewMusicianGenres.setText(mCalonAnggota.get(position).getTipe()+" "+mCalonAnggota.get(position).getBasis());
         holder.mTextViewHarga.setText(mCalonAnggota.get(position).getHarga_sewa());
 
+        if(mCalonAnggota.get(position).getPhoto()!=null && !mCalonAnggota.get(position).getPhoto().equals("")) {
+            Picasso.with(mContext).load(cloudinaryUrl.cloudinary.url().format("jpg").generate(mCalonAnggota.get(position).getPhoto())).into(holder.img);
+        }
 
         return rowView;
     }
