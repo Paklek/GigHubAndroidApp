@@ -26,6 +26,7 @@ import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,16 +38,16 @@ public class ReviewMusicianActivity extends AppCompatActivity {
 
     private RatingBar mRatingBar;
     private float mRating;
-    private TextView mTextViewMusicianName,mTextViewRatingNumber, mTextViewMessageReview, mTextViewNamaOrganizer, mTextViewTanggalReview;
+    private TextView mTextViewHowAboutTheShow ,mTextViewMusicianName,mTextViewRatingNumber, mTextViewMessageReview, mTextViewNamaOrganizer, mTextViewTanggalReview;
     private EditText mEditTextReview;
     private Button mButtonSendReview;
     private ImageView mImageViewMusicianPhoto, mImageViewUserReviewerPhoto;
-    private String mPhotoMusisi,mPhotoUser,mMusicianName,mStatus, mStatusRequest;
+    private String mPhotoMusisi,mPhotoUser,mMusicianName,mStatus, mStatusRequest,mNamaUser;
     private int mSewaId,mOrganizerId;
     private Context mContext;
     private SessionManager mSession;
     private LinearLayout mLinearLayoutReviewMessage;
-    private YourReview mYourReview;
+    private List<YourReview> mYourReview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +55,12 @@ public class ReviewMusicianActivity extends AppCompatActivity {
         setContentView(R.layout.activity_review_musician);
         mContext = getApplicationContext();
         Intent intent = getIntent();
-        mYourReview = new YourReview();
-        final Type type = new TypeToken<YourReview>() {}.getType();
+        mYourReview = new ArrayList<YourReview>();
+        final Type type = new TypeToken<List<YourReview>>() {}.getType();
         mYourReview = new Gson().fromJson(intent.getStringExtra("yourreview"),type);
 
-        if(mYourReview!=null){
-            mPhotoUser = mYourReview.getPhoto();
+        if(mYourReview.size()>0){
+            mPhotoUser = mYourReview.get(0).getPhoto();
         }
         else {
             mPhotoUser = "";
@@ -76,6 +77,7 @@ public class ReviewMusicianActivity extends AppCompatActivity {
         mTextViewMessageReview = (TextView)findViewById(R.id.tv_pesan_review_reviewmusician);
         mTextViewNamaOrganizer = (TextView)findViewById(R.id.tv_nama_reviewer_reviewmusician);
         mTextViewTanggalReview = (TextView)findViewById(R.id.tv_tanggal_review_reviewmusician);
+        mTextViewHowAboutTheShow = (TextView)findViewById(R.id.tv_how_about_the_show);
 
 //        Intent intent = getIntent();
         mPhotoMusisi = intent.getStringExtra("photo");
@@ -84,6 +86,7 @@ public class ReviewMusicianActivity extends AppCompatActivity {
         mOrganizerId = mSession.getUserDetails().getId();
         mStatus = intent.getStringExtra("status");
         mStatusRequest = intent.getStringExtra("status_request");
+        mNamaUser = intent.getStringExtra("nama_user");
 
         CloudinaryUrl cloudinaryUrl = new CloudinaryUrl();
         cloudinaryUrl.buildCloudinaryUrl();
@@ -92,19 +95,22 @@ public class ReviewMusicianActivity extends AppCompatActivity {
             mButtonSendReview.setVisibility(View.GONE);
             mTextViewRatingNumber.setVisibility(View.GONE);
 
-            if(mYourReview!=null){
-                mTextViewMessageReview.setText(mYourReview.getPesan());
-                mRatingBar.setRating(Float.parseFloat(mYourReview.getNilai()+".0"));
+            if(mYourReview.size()>0){
+//                mTextViewHowAboutTheShow.setVisibility(View.GONE);
+                mTextViewMessageReview.setText(mYourReview.get(0).getPesan());
+                mRatingBar.setRating(Float.parseFloat(mYourReview.get(0).getNilai()+".0"));
                 mRatingBar.setIsIndicator(true);
-                mTextViewNamaOrganizer.setText(mYourReview.getFirst_name()+" "+mYourReview.getLast_name());
-                mTextViewTanggalReview.setText(mYourReview.getCreated_at());
+                mTextViewNamaOrganizer.setText(mNamaUser);
+                mTextViewTanggalReview.setText(mYourReview.get(0).getCreated_at());
             }
             else {
-                mTextViewMessageReview.setText("");
+                mTextViewHowAboutTheShow.setText("No Review");
+                mTextViewMessageReview.setVisibility(View.GONE);
 //                mRatingBar.setRating(Float.parseFloat(mYourReview.getNilai()+".0"));
-                mRatingBar.setIsIndicator(false);
-                mTextViewNamaOrganizer.setText("");
-                mTextViewTanggalReview.setText("");
+                mRatingBar.setVisibility(View.GONE);
+                mTextViewNamaOrganizer.setVisibility(View.GONE);
+                mTextViewTanggalReview.setVisibility(View.GONE);
+                mLinearLayoutReviewMessage.setVisibility(View.GONE);
             }
 //            mTextViewMessageReview.setText(mYourReview.getPesan());
 //            mRatingBar.setRating(Float.parseFloat(mYourReview.getNilai()+".0"));

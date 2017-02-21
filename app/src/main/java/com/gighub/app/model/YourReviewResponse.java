@@ -1,16 +1,18 @@
 package com.gighub.app.model;
 
+import java.util.List;
+
 /**
  * Created by user on 08/02/2017.
  */
 public class YourReviewResponse extends Response {
-    private YourReview yourReview;
+    private List<YourReview> yourReviews;
 
-    public YourReview getYourReview() {
-        return yourReview;
+    public List<YourReview> getYourReviews() {
+        return yourReviews;
     }
 
-    public void setYourReview(YourReview yourReview) {
-        this.yourReview = yourReview;
+    public void setYourReviews(List<YourReview> yourReviews) {
+        this.yourReviews = yourReviews;
     }
 }

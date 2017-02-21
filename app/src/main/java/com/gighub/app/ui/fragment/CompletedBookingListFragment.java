@@ -4,6 +4,7 @@ package com.gighub.app.ui.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +45,7 @@ public class CompletedBookingListFragment extends Fragment {
     private int mIdUser, mHargaSewa, mSewaId, mTotal;
     private String mTipeUser, mNamaMusisi, mNamaGig, mNamaUser, mLokasi, mWaktuMulai, mWaktuSelesai, mTypeGig, mTypeSewa, mPhotoGig, mPhotoMusisi, mStatus, mStatusRequest;
     private ListView mListView;
-    private YourReview mYourReview;
+    private List<YourReview> mYourReview;
     public CompletedBookingListFragment() {
         // Required empty public constructor
     }
@@ -58,7 +59,7 @@ public class CompletedBookingListFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_completed_booking_list, container, false);
 
         mSession = new SessionManager(getActivity().getApplicationContext());
-        mYourReview = new YourReview();
+        mYourReview = new ArrayList<YourReview>();
 
         if(mSession.isLoggedIn()){
             if(mSession.checkUserType().equals("org")){
@@ -97,41 +98,44 @@ public class CompletedBookingListFragment extends Fragment {
                 mPhotoGig = mPenyewaan.get(position).getPhoto_gig();
                 mStatus = mPenyewaan.get(position).getStatus();
                 mStatusRequest = mPenyewaan.get(position).getStatus_request();
+                Log.d("sewa_id", Integer.toString(mSewaId));
 
                 if(mStatus.equals("4")&& (mTipeUser.equals("org") || mTipeUser.equals("msc"))){
                     BuildUrl buildUrl = new BuildUrl();
                     buildUrl.buildBaseUrl();
                     Map <String, String> dataYourReview = new HashMap<String, String>();
                     dataYourReview.put("sewa_id", Integer.toString(mPenyewaan.get(position).getId()));
+                    dataYourReview.put("type_sewa", mTypeSewa);
                     buildUrl.serviceGighub.sendDataYourReview(dataYourReview).enqueue(new Callback<YourReviewResponse>() {
                         @Override
                         public void onResponse(Call<YourReviewResponse> call, Response<YourReviewResponse> response) {
-
-                            intent.putExtra("yourreview",new Gson().toJson(response.body().getYourReview()));
-                            intent.putExtra("nama_musisi", mNamaMusisi);
-                            intent.putExtra("nama_gig", mNamaGig);
-                            intent.putExtra("nama_user", mNamaUser);
-                            intent.putExtra("lokasi", mLokasi);
+                            if(response.code()==200) {
+                                intent.putExtra("yourreview", new Gson().toJson(response.body().getYourReviews()));
+                                intent.putExtra("nama_musisi", mNamaMusisi);
+                                intent.putExtra("nama_gig", mNamaGig);
+                                intent.putExtra("nama_user", mNamaUser);
+                                intent.putExtra("lokasi", mLokasi);
 //                    intent.putExtra("harga", mPenyewaan.get(position).getHarga());
-                            intent.putExtra("harga_sewa", mHargaSewa);
-                            intent.putExtra("waktu_mulai", mWaktuMulai);
-                            intent.putExtra("waktu_selesai", mWaktuSelesai);
-                            intent.putExtra("total", mTotal);
-                            intent.putExtra("sewa_id", mSewaId);
-                            intent.putExtra("type_sewa", mTypeSewa);
-                            intent.putExtra("type_gig", mTypeGig);
-                            intent.putExtra("photo", mPhotoMusisi);
-                            intent.putExtra("photo_gig", mPhotoGig);
-                            intent.putExtra("status", mStatus);
-                            intent.putExtra("status_request", mStatusRequest);
-                            intent.putExtra("activity","onproccessbooking");
+                                intent.putExtra("harga_sewa", mHargaSewa);
+                                intent.putExtra("waktu_mulai", mWaktuMulai);
+                                intent.putExtra("waktu_selesai", mWaktuSelesai);
+                                intent.putExtra("total", mTotal);
+                                intent.putExtra("sewa_id", mSewaId);
+                                intent.putExtra("type_sewa", mTypeSewa);
+                                intent.putExtra("type_gig", mTypeGig);
+                                intent.putExtra("photo", mPhotoMusisi);
+                                intent.putExtra("photo_gig", mPhotoGig);
+                                intent.putExtra("status", mStatus);
+                                intent.putExtra("status_request", mStatusRequest);
+                                intent.putExtra("activity", "completedbooking");
 
-                            startActivity(intent);
+                                startActivity(intent);
+                            }
                         }
 
                         @Override
                         public void onFailure(Call<YourReviewResponse> call, Throwable t) {
-
+                            Log.d("onCompleted","Error");
                         }
                     });
                 }

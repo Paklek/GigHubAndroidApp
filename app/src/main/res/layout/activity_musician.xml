@@ -35,7 +35,6 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
                 android:background="@drawable/transparent_dark">
                 <LinearLayout
                     android:layout_gravity="start|left|bottom"
@@ -43,16 +42,18 @@
                     android:orientation="vertical"
                     android:layout_width="270dp"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="10dp">
+                    android:paddingLeft="30dp">
                     <TextView
                         android:id="@+id/tv_harga_musicianactivity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textStyle="bold"
                         android:text="Harga"/>
                     <TextView
                         android:id="@+id/tv_kota_musicianactivity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textStyle="bold"
                         android:text="kota"/>
                 </LinearLayout>
                 <LinearLayout
@@ -67,7 +68,9 @@
                         android:id="@+id/tv_total_gigs_musicianactivity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
+                        android:paddingRight="30dp"
+                        android:paddingBottom="10dp"
+                        android:textStyle="bold"
                         android:text="gigs"/>
                 </LinearLayout>
             </LinearLayout>

@@ -103,7 +103,7 @@ public class MusicianActivity extends AppCompatActivity {
         mKota = intent.getStringExtra("kota");
         mHarga = intent.getStringExtra("harga_sewa");
 //        mGigs =
-        mTextViewHarga.setText(mHarga+"/Hour");
+        mTextViewHarga.setText("Rp. "+mHarga+"/Hour");
         mTextViewKota.setText(mKota);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 

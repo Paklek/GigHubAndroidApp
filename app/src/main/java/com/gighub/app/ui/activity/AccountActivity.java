@@ -79,7 +79,7 @@ public class AccountActivity extends AppCompatActivity {
         mViewButtonLogout = (View)findViewById(R.id.btn_logout);
         mViewButtonProfile = (View)findViewById(R.id.btn_profile);
         mViewButtonGigMoney = (View)findViewById(R.id.btn_gig_money);
-        mViewButtonManager = (View)findViewById(R.id.btn_manager);
+//        mViewButtonManager = (View)findViewById(R.id.btn_manager);
 
         mButtonProfile = (Button)findViewById(R.id.btn_profile) ;
         mButtonGigMoney = (Button)findViewById(R.id.btn_gig_money);

@@ -7,6 +7,8 @@
 
 
 <LinearLayout
+    android:layout_gravity="center"
+    android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -15,6 +17,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     tools:context="com.gighub.app.ui.activity.ReviewMusicianActivity">
+
+    <!--<TextView-->
+        <!--android:id="@+id/tv_no_review_reviewmusicianactivity"-->
+        <!--android:gravity="center"-->
+        <!--android:text="No Reviews"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
+
 
     <com.github.siyamed.shapeimageview.CircularImageView
         android:id="@+id/img_photo_musician_reviewmusician"
@@ -34,6 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
+        android:id="@+id/tv_how_about_the_show"
         android:layout_gravity="center"
         android:textSize="12pt"
         android:layout_marginBottom="25dp"
