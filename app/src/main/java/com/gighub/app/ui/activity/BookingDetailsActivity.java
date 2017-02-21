@@ -34,7 +34,7 @@ import retrofit2.Callback;
 
 public class BookingDetailsActivity extends AppCompatActivity {
 
-    private Button mButtonConfirmPayment, mButtonConfirmRequest;
+    private Button mButtonConfirmPayment, mButtonConfirmRequest, mButtonDeclineRequest;
     private TextView mTextViewHour, mTextViewNamaGig, mTextViewNamaMusisi, mTextViewLocation, mTextViewHarga, mTextViewWaktuMulai, mTextViewWaktuSelesai, mTextViewTotal, mTextViewNamaPenyewa, mTextViewStatus;
     private SessionManager mSession;
     private int mSewaId,mMusicianId, mOrganizerId,mAdminId;
@@ -71,6 +71,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
 
         mButtonConfirmPayment = (Button)findViewById(R.id.btn_konfirmasi_pembayaran_bookingdetails);
         mButtonConfirmRequest = (Button)findViewById(R.id.btn_konfirmasi_permintaan_bookingdetails);
+        mButtonDeclineRequest = (Button)findViewById(R.id.btn_tolak_konfirmasi_bookingdetails);
 
         mSewaId = intent.getIntExtra("sewa_id",0);
         Log.d("sewa_id",Integer.toString(mSewaId));
@@ -86,6 +87,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
 
         mButtonConfirmRequest.setVisibility(View.GONE);
         mButtonConfirmPayment.setVisibility(View.GONE);
+        mButtonDeclineRequest.setVisibility(View.GONE);
 
         if(mSession.checkUserType().equals("org")){
             mOrganizerId = mSession.getUserDetails().getId();
@@ -100,33 +102,41 @@ public class BookingDetailsActivity extends AppCompatActivity {
         if (mSession.checkUserType().equals("org") && mTipeGig.equals("sewa") && mActivity.equals("onrequestbooking")){
             mButtonConfirmRequest.setVisibility(View.GONE);
             mButtonConfirmPayment.setVisibility(View.GONE);
+            mButtonDeclineRequest.setVisibility(View.GONE);
         }
         else if(mSession.checkUserType().equals("org") && mTipeGig.equals("post") && mActivity.equals("onrequestbooking")){
             mButtonConfirmRequest.setVisibility(View.VISIBLE);
+            mButtonDeclineRequest.setVisibility(View.VISIBLE);
             mButtonConfirmPayment.setVisibility(View.GONE);
         }
         else if(mSession.checkUserType().equals("msc") && mTipeGig.equals("sewa") && mActivity.equals("onrequestbooking") && (mAdminId==mMusicianId || mTipeSewa.equals("hiremusisi"))){
             mButtonConfirmRequest.setVisibility(View.VISIBLE);
+            mButtonDeclineRequest.setVisibility(View.VISIBLE);
             mButtonConfirmPayment.setVisibility(View.GONE);
         }
         else if(mSession.checkUserType().equals("msc") && mTipeGig.equals("post") && mActivity.equals("onrequestbooking")){
             mButtonConfirmRequest.setVisibility(View.GONE);
+            mButtonDeclineRequest.setVisibility(View.GONE);
             mButtonConfirmPayment.setVisibility(View.GONE);
         }
         else if (mSession.checkUserType().equals("org") && mTipeGig.equals("sewa") && mActivity.equals("onproccessbooking") && mStatus.equals("0")){
             mButtonConfirmRequest.setVisibility(View.GONE);
+            mButtonDeclineRequest.setVisibility(View.GONE);
             mButtonConfirmPayment.setVisibility(View.VISIBLE);
         }
         else if(mSession.checkUserType().equals("org") && mTipeGig.equals("post") && mActivity.equals("onproccessbooking")){
             mButtonConfirmRequest.setVisibility(View.GONE);
+            mButtonDeclineRequest.setVisibility(View.GONE);
             mButtonConfirmPayment.setVisibility(View.VISIBLE);
         }
         else if(mSession.checkUserType().equals("msc") && mTipeGig.equals("sewa") && mActivity.equals("onproccessbooking")){
             mButtonConfirmRequest.setVisibility(View.GONE);
+            mButtonDeclineRequest.setVisibility(View.GONE);
             mButtonConfirmPayment.setVisibility(View.GONE);
         }
         else if(mSession.checkUserType().equals("msc") && mTipeGig.equals("post") && mActivity.equals("onproccessbooking")){
             mButtonConfirmRequest.setVisibility(View.GONE);
+            mButtonDeclineRequest.setVisibility(View.GONE);
             mButtonConfirmPayment.setVisibility(View.GONE);
         }
 
@@ -266,6 +276,38 @@ public class BookingDetailsActivity extends AppCompatActivity {
                         alertDialog.show();
                     }
                 });
+            }
+        });
+
+        final Map <String, String> dataForDecilne = new HashMap<>();
+        mButtonDeclineRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BuildUrl buildUrl = new BuildUrl();
+                buildUrl.buildBaseUrl();
+
+                dataForDecilne.put("sewa_id",Integer.toString(mSewaId));
+                buildUrl.serviceGighub.sendSewaIdForDeclineBook(dataForDecilne).enqueue(new Callback<Response>() {
+                    @Override
+                    public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+                        if(response.code()==200){
+                            if (response.body().getError()==0){
+                                Intent intent2 = new Intent(BookingDetailsActivity.this, MainActivity.class);
+                                Toast.makeText(BookingDetailsActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                                Log.d("response ", response.code() + " " + response.body().getMessage());
+                                intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+                                startActivity(intent2);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Response> call, Throwable t) {
+
+                    }
+                });
+
             }
         });
 

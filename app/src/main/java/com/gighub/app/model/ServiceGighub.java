@@ -161,4 +161,10 @@ public interface ServiceGighub {
 
     @POST(StaticString.ROUTE_YOUR_REVIEWER)
     Call<ListReviewerResponse> sendReviewerData (@Body Map<String, String> dataReviewer);
+
+    @POST(StaticString.ROUTE_DECLINE_BOOK_REQUEST)
+    Call<Response> sendSewaIdForDeclineBook (@Body Map<String, String> dataDecline);
+
+    @POST(StaticString.ROUTE_DECLINE_GIG_REQUEST)
+    Call<Response> sendSewaIdForDeclineGig (@Body Map<String, String> dataDecline);
 }

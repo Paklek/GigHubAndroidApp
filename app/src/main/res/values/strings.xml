@@ -73,4 +73,7 @@
     <string name="no_reviews">No reviews</string>
     <string name="dont_have_an_account">Do not have an account?</string>
     <string name="loading">Loading&#8230;</string>
+    <string name="confirm_request">Confirm Request</string>
+    <string name="confirm_payment">Confirm Payment</string>
+    <string name="decline_request">Decline Request</string>
 </resources>

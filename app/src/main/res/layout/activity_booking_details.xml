@@ -262,22 +262,34 @@ android:layout_margin="7dp">
         </LinearLayout>
 
         <Button
-            android:background="@drawable/button_border_black"
+            android:background="@drawable/button_border_white"
+            android:textColor="@color/colorAccent1"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="20dp"
             android:id="@+id/btn_konfirmasi_pembayaran_bookingdetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Confirm Payment"/>
+            android:text="@string/confirm_payment"/>
 
         <Button
-            android:background="@drawable/button_border_black"
+            android:background="@drawable/button_border_white"
+            android:textColor="@color/colorAccent1"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="20dp"
             android:id="@+id/btn_konfirmasi_permintaan_bookingdetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Confirm Request"/>
+            android:text="@string/confirm_request"/>
+
+        <Button
+            android:background="@drawable/button_border_white_negative"
+            android:textColor="@color/colorAccent1"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/btn_tolak_konfirmasi_bookingdetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/decline_request"/>
 
     </LinearLayout>
 

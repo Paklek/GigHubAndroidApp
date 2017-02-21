@@ -73,4 +73,7 @@
     <string name="no_reviews">Tidak ada ulasan</string>
     <string name="dont_have_an_account">Belum punya akun?</string>
     <string name="loading">Memuat&#8230;</string>
+    <string name="confirm_request">Terima Permintaan</string>
+    <string name="confirm_payment">Konfirmasi Pembayaran</string>
+    <string name="decline_request">Tolak Permintaan</string>
 </resources>

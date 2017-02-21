@@ -168,11 +168,11 @@ public class AccountActivity extends AppCompatActivity {
             mButtonLogout.setVisibility(mViewButtonLogout.GONE);
             mButtonProfile.setVisibility(mViewButtonProfile.GONE);
             mViewButtonGigMoney.setVisibility(mViewButtonGigMoney.GONE);
-            mViewButtonManager.setVisibility(mViewButtonManager.GONE);
+//            mViewButtonManager.setVisibility(mViewButtonManager.GONE);
         }
         if (mSession.checkUserType().equals("org")){
             mViewButtonGigMoney.setVisibility(View.GONE);
-            mViewButtonManager.setVisibility(View.GONE);
+//            mViewButtonManager.setVisibility(View.GONE);
         }
         else if(mSession.checkUserType().equals("msc")){
             mButtonGigMoney.setVisibility(View.VISIBLE);
