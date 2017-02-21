@@ -65,6 +65,11 @@ public class GroupBandActivity extends AppCompatActivity {
                 intent1.putExtra("tipe", mListGroupBand.get(position).getTipe());
                 intent1.putExtra("deskripsi",mListGroupBand.get(position).getDeskripsi());
                 intent1.putExtra("nama_grupband", mListGroupBand.get(position).getNama_grupband());
+                intent1.putExtra("youtube_url", mListGroupBand.get(position).getYoutube_video());
+                intent1.putExtra("website_url", mListGroupBand.get(position).getUrl_website());
+                intent1.putExtra("username_soundcloud", mListGroupBand.get(position).getUsername_soundcloud());
+                intent1.putExtra("username_reverbnation", mListGroupBand.get(position).getUsername_reverbnation());
+                intent1.putExtra("basis", mListGroupBand.get(position).getBasis());
                 startActivity(intent1);
             }
         });

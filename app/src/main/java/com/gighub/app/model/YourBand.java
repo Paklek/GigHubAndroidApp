@@ -14,6 +14,7 @@ public class YourBand {
     private String nama_grupband;
     private String deskripsi;
     private String kota;
+    private String basis;
     private String photo;
     private String cover;
     private int harga;
@@ -168,5 +169,13 @@ public class YourBand {
 
     public void setGrupband_id(int grupband_id) {
         this.grupband_id = grupband_id;
+    }
+
+    public String getBasis() {
+        return basis;
+    }
+
+    public void setBasis(String basis) {
+        this.basis = basis;
     }
 }

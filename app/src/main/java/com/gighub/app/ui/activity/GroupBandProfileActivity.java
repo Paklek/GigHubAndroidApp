@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gighub.app.R;
+import com.gighub.app.model.GroupBand;
+import com.gighub.app.model.GrupBandResponse;
 import com.gighub.app.model.MResponse;
 import com.gighub.app.util.BuildUrl;
 import com.gighub.app.util.CloudinaryUrl;
@@ -31,8 +34,9 @@ import retrofit2.Response;
 public class GroupBandProfileActivity extends AppCompatActivity {
 
     private TextView mTextViewAnggota, mTextViewPosisi, mTextViewNamaBand, mTextViewKota, mTextViewHarga, mTextTipe, mTextViewBasis, mTextViewDeskripsi;
-    private String mAnggota, mPosisi, mNamaGrupBand, mKota, mHarga, mTipe, mDeskripsi, mPhoto,mCover;
-    private Button mButtonAddAnggota, mButtonRemoveAnggota,mButtonEditProfileGroupBand;
+    private String mBasis, mAnggota, mPosisi, mNamaGrupBand, mKota, mHarga, mTipe, mDeskripsi, mPhoto,mCover, mYoutubeUrl, mWebsiteUrl, mUsernameSoundcloud, mUsernameReverbnation;
+    private Button mButtonAddAnggota, mButtonRemoveAnggota,mButtonEditProfileGroupBand, mButtonSaveProfileGroup;
+    private EditText mEditTextHargaBand,mEditTextBasisGroup, mEditTextNamaBand, mEditTextDescriptions,mEditTextKota,mEditTextYoutubeUrl, mEditTextWebsiteUrl, mEditTextUsernameSoundCloud, mEditTextReverbnation;
     private SessionManager mSession;
     private Context mContext;
     private int mGrupBandId, mAdminId;
@@ -63,6 +67,11 @@ public class GroupBandProfileActivity extends AppCompatActivity {
         mAdminId = intent.getIntExtra("admin_id",0);
         mPhoto = intent.getStringExtra("photo");
         mCover = intent.getStringExtra("cover");
+        mYoutubeUrl = intent.getStringExtra("youtube_url");
+        mWebsiteUrl = intent.getStringExtra("website_url");
+        mUsernameSoundcloud = intent.getStringExtra("username_soundcloud");
+        mUsernameReverbnation = intent.getStringExtra("username_reverbnation");
+        mBasis = intent.getStringExtra("basis");
 
         mTextViewAnggota = (TextView)findViewById(R.id.tv_anggota_grupbandprofileactivity);
         mTextViewPosisi = (TextView)findViewById(R.id.tv_posisi_grupbandprofileactivity);
@@ -72,23 +81,93 @@ public class GroupBandProfileActivity extends AppCompatActivity {
         mTextTipe = (TextView)findViewById(R.id.tv_genre_grupband_grupbandprofileactivity);
         mTextViewDeskripsi = (TextView)findViewById(R.id.tv_deskripsi_grupbandprofileactivity);
 
+        mEditTextNamaBand = (EditText)findViewById(R.id.et_nama_band_groupbandactivity);
+        mEditTextDescriptions = (EditText)findViewById(R.id.et_descriptions_band_groupbandactivity);
+        mEditTextBasisGroup = (EditText)findViewById(R.id.et_basis_group_groupbandactivity);
+        mEditTextKota = (EditText)findViewById(R.id.et_kota_band_groupbandactivity);
+        mEditTextYoutubeUrl = (EditText)findViewById(R.id.et_youtube_url_groupbandactivity);
+        mEditTextWebsiteUrl = (EditText)findViewById(R.id.et_website_url_groupbandactivity);
+        mEditTextUsernameSoundCloud = (EditText)findViewById(R.id.et_username_soundcloud_groupbandactivity);
+        mEditTextReverbnation = (EditText)findViewById(R.id.et_username_reverbnation_groupbandactivity);
+        mEditTextHargaBand = (EditText)findViewById(R.id.et_harga_band_groupbandactivity);
+
         mImageViewPhotoGroupBand = (ImageView)findViewById(R.id.img_photo_grupband_grupbandprofileactivity);
         mImageViewCoverGroupBand = (ImageView)findViewById(R.id.img_cover_band_grupband_grupbandprofileactivity);
 
         mButtonEditProfileGroupBand = (Button)findViewById(R.id.btn_edit_profile_group_groupbandactivity);
+        mButtonSaveProfileGroup = (Button)findViewById(R.id.btn_save_profile_group_groupbandactivity);
         mButtonAddAnggota = (Button)findViewById(R.id.btn_add_anggota_groupbandprofileactivity);
         mButtonRemoveAnggota = (Button)findViewById(R.id.btn_remove_anggota_groupbandprofileactivity);
 
         mTextViewNamaBand.setText(mNamaGrupBand);
         mTextViewHarga.setText("Rp."+mHarga);
         mTextViewKota.setText(mKota);
-        mTextTipe.setText(mTipe);
+        mTextTipe.setText(mTipe+" "+mBasis);
         mTextViewAnggota.setText("Anggota : "+mAnggota);
         mTextViewPosisi.setText("Posisi : "+mPosisi);
         mTextViewDeskripsi.setText(mDeskripsi);
 
-        mButtonEditProfileGroupBand.setVisibility(View.GONE);
+        mButtonSaveProfileGroup.setVisibility(View.GONE);
 
+        mButtonEditProfileGroupBand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mButtonSaveProfileGroup.setVisibility(View.VISIBLE);
+                mLinearLayoutEditGroupBand.setVisibility(View.VISIBLE);
+                mEditTextNamaBand.setText(mNamaGrupBand);
+                mEditTextHargaBand.setText(mHarga);
+                mEditTextDescriptions.setText(mDeskripsi);
+                mEditTextKota.setText(mKota);
+                mEditTextYoutubeUrl.setText(mYoutubeUrl);
+                mEditTextWebsiteUrl.setText(mWebsiteUrl);
+                mEditTextUsernameSoundCloud.setText(mUsernameSoundcloud);
+                mEditTextReverbnation.setText(mUsernameReverbnation);
+                mEditTextBasisGroup.setText(mBasis);
+                mButtonEditProfileGroupBand.setVisibility(View.GONE);
+            }
+        });
+
+        final Map<String, String> dataUpdateBand = new HashMap<>();
+        mButtonSaveProfileGroup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                BuildUrl buildUrl = new BuildUrl();
+                buildUrl.buildBaseUrl();
+                dataUpdateBand.put("id",Integer.toString(mGrupBandId));
+                dataUpdateBand.put("nama_grupband", mEditTextNamaBand.getText().toString());
+                dataUpdateBand.put("harga", mEditTextHargaBand.getText().toString());
+                dataUpdateBand.put("deskripsi", mEditTextDescriptions.getText().toString());
+                dataUpdateBand.put("kota", mEditTextKota.getText().toString());
+                dataUpdateBand.put("youtube_video", mEditTextYoutubeUrl.getText().toString());
+                dataUpdateBand.put("url_website", mEditTextWebsiteUrl.getText().toString());
+                dataUpdateBand.put("username_soundcloud", mEditTextUsernameSoundCloud.getText().toString());
+                dataUpdateBand.put("username_reverbnation", mEditTextReverbnation.getText().toString());
+                dataUpdateBand.put("basis", mEditTextBasisGroup.getText().toString());
+                buildUrl.serviceGighub.sendIdBandForUpdate(dataUpdateBand).enqueue(new Callback<GrupBandResponse>() {
+                    @Override
+                    public void onResponse(Call<GrupBandResponse> call, Response<GrupBandResponse> response) {
+                        if(response.code()==200) {
+                            Intent intent = new Intent(GroupBandProfileActivity.this, MainActivity.class);
+                            Toast.makeText(GroupBandProfileActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                            Log.d("response ", response.code() + " " + response.body().getMessage());
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+                            startActivity(intent);
+                        }
+                        else {
+                            Toast.makeText(GroupBandProfileActivity.this, "error ", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<GrupBandResponse> call, Throwable t) {
+
+                    }
+                });
+
+            }
+        });
         CloudinaryUrl cloudinaryUrl = new CloudinaryUrl();
         cloudinaryUrl.buildCloudinaryUrl();
         if(mPhoto!=null && !mPhoto.equals("")) {
@@ -100,6 +179,9 @@ public class GroupBandProfileActivity extends AppCompatActivity {
 
         if(mAdminId!=mSession.getMusicianDetails().getId()){
             mButtonAddAnggota.setVisibility(View.GONE);
+            mButtonEditProfileGroupBand.setVisibility(View.GONE);
+            mButtonSaveProfileGroup.setVisibility(View.GONE);
+            mButtonRemoveAnggota.setVisibility(View.GONE);
         }
 
 

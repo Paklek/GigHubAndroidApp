@@ -76,4 +76,6 @@
     <string name="confirm_request">Confirm Request</string>
     <string name="confirm_payment">Confirm Payment</string>
     <string name="decline_request">Decline Request</string>
+    <string name="save">Save</string>
+    <string name="city">City</string>
 </resources>

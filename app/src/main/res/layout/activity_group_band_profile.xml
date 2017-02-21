@@ -109,10 +109,20 @@ android:layout_margin="7dp">
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/et_nama_band_groupbandactivity"
+            android:hint="Band Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <android.support.design.widget.TextInputEditText
-                android:hint="Band Name"
+                android:id="@+id/et_harga_band_groupbandactivity"
+                android:hint="Price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </android.support.design.widget.TextInputLayout>
@@ -120,7 +130,8 @@ android:layout_margin="7dp">
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <android.support.design.widget.TextInputEditText
-                android:hint="Genre"
+                android:id="@+id/et_descriptions_band_groupbandactivity"
+                android:hint="Descriptions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </android.support.design.widget.TextInputLayout>
@@ -128,7 +139,8 @@ android:layout_margin="7dp">
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <android.support.design.widget.TextInputEditText
-                android:hint="Kota"
+                android:id="@+id/et_basis_group_groupbandactivity"
+                android:hint="Basic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </android.support.design.widget.TextInputLayout>
@@ -136,6 +148,16 @@ android:layout_margin="7dp">
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/et_kota_band_groupbandactivity"
+                android:hint="@string/city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/et_youtube_url_groupbandactivity"
                 android:hint="Youtube Video"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -144,6 +166,7 @@ android:layout_margin="7dp">
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/et_website_url_groupbandactivity"
                 android:hint="Website Url"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -152,6 +175,7 @@ android:layout_margin="7dp">
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/et_username_soundcloud_groupbandactivity"
                 android:hint="Username Soundcloud"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -160,6 +184,7 @@ android:layout_margin="7dp">
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/et_username_reverbnation_groupbandactivity"
                 android:hint="Username Reverbnation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -169,6 +194,13 @@ android:layout_margin="7dp">
         android:id="@+id/btn_edit_profile_group_groupbandactivity"
         android:textColor="@color/colorAccent1"
         android:text="EDIT PROFILE GROUP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_border_white"/>
+    <Button
+        android:id="@+id/btn_save_profile_group_groupbandactivity"
+        android:textColor="@color/colorAccent1"
+        android:text="@string/save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/button_border_white"/>

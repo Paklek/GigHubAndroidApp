@@ -76,4 +76,6 @@
     <string name="confirm_request">Terima Permintaan</string>
     <string name="confirm_payment">Konfirmasi Pembayaran</string>
     <string name="decline_request">Tolak Permintaan</string>
+    <string name="save">Simpan</string>
+    <string name="city">Kota</string>
 </resources>

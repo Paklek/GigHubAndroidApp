@@ -167,4 +167,7 @@ public interface ServiceGighub {
 
     @POST(StaticString.ROUTE_DECLINE_GIG_REQUEST)
     Call<Response> sendSewaIdForDeclineGig (@Body Map<String, String> dataDecline);
+
+    @POST(StaticString.ROUTE_UPDATE_PROFILE_BAND)
+    Call<GrupBandResponse> sendIdBandForUpdate (@Body Map<String, String> dataUpdateBand);
 }

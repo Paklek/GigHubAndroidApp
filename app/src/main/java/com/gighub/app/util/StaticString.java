@@ -50,6 +50,7 @@ public class StaticString {
     public static final String ROUTE_YOUR_REVIEWER ="mobile/musician/reviewer";
     public static final String ROUTE_DECLINE_BOOK_REQUEST ="mobile/musician/declinebookrequest";
     public static final String ROUTE_DECLINE_GIG_REQUEST ="mobile/organizer/declinegigrequest";
+    public static final String ROUTE_UPDATE_PROFILE_BAND ="mobile/musician/updateprofileband";
 
 
     public static final String API_CLOUDINARY = "cloudinary://627999879788938:Tfnf61ZtXn61Ct-Jbr_F__1zSJ8@dv5anayv1";

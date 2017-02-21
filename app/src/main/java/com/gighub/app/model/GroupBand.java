@@ -15,6 +15,7 @@ public class GroupBand {
     private String kota;
     private String photo;
     private String cover;
+    private String basis;
     private int harga;
     private String youtube_video;
     private String url_website;
@@ -134,6 +135,14 @@ public class GroupBand {
 
     public void setTipe(String tipe) {
         this.tipe = tipe;
+    }
+
+    public String getBasis() {
+        return basis;
+    }
+
+    public void setBasis(String basis) {
+        this.basis = basis;
     }
 
     private enum aktif{
